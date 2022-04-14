@@ -1,0 +1,26 @@
+.login{
+    
+
+}
+
+.login-form{
+    padding: 10px;
+    border-style: solid;
+    border-color: blue;
+}
+
+.content-container{
+    display: flex;
+    margin: auto;
+    width: 50%;
+    align-items: center;
+    
+}
+
+.registration{
+    margin: 10px;
+}
+
+.header{
+    text-align: center;
+}
