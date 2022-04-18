@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<!--Später als OnePage auslegen -->
+
+<head>
+    <link rel="stylesheet" href="../css/teststyle.css"> <!-- correct href after converting to jsp! -->
+    <!--<base href="${pageContext.request.requestURI}" /> -->
+    <!-- Uncomment after converting to jsp! -->
+    <meta charset="utf-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <header> Social Sport</header>
+
+    <main>
+
+        <article>
+            <h2>Bench Press</h2>
+            <!-- Uebung 1 (Spaeter sollen dynamisch immer weitere Uebungen 
+                    hinzugefuegt werden koennen. Jede Uebung neue table oder neuer article?)-->
+            <table>
+                <!-- Soll der Button der den Satz als fertig kennzeichnet teil der Tabelle
+                    oder nicht? -->
+                <tr>
+                        <th>Satz</th>
+                        <th>Beim letzten Mal</th>
+                        <th>KG</th>
+                        <th>Wiederholungen</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>120 x 5</td>
+                    <td>BLANK</td>
+                    <td>BLANK</td>
+                    <td>&check;</td>
+                </tr>
+            </table>
+        </article>
+        <p><button> Satz hinzuf&uuml;gen</button></p> <!-- Soll eine Zeile zur Uebung hinzufügen
+                                                        Es soll unter jeder Uebung solch ein Button existieren -->
+        <p><button>&Uuml;bung hinzuf&uuml;gen</button></p>
+        <p><button>Workout abbrechen</button></p>
+
+    </main>
+
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Training</li>
+            <li>Leaderboard</li>
+        </ul>
+    </nav>
+
+
+
+</body>
+
+</html>
