@@ -1,1 +1,1 @@
-# socailSport
+# socialSport
