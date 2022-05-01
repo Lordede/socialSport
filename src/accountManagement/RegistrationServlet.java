@@ -3,6 +3,9 @@ package accountManagement;
 import java.io.IOException;
 import java.util.Enumeration;
 
+import jakarta.activation.DataSource;
+import jakarta.annotation.Resource;
+import jakarta.resource.cci.Connection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,31 +19,30 @@ import jakarta.servlet.http.HttpServletResponse;
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	// Verbindung zur Datenbank deklarieren
+
+
+
 	public RegistrationServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	/*
+	 * doGet ist hier verboten
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		response.sendError(HttpServletResponse.SC_FORBIDDEN);
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		
+		// Als erstes werden alle vorhergesehenen Paramter extrahiert.
+
 		final Enumeration<String> formInputs = request.getParameterNames();
 		final String eMail = request.getParameter("email");
 		final String userName = request.getParameter("userName");
@@ -48,6 +50,10 @@ public class RegistrationServlet extends HttpServlet {
 		final String lastName = request.getParameter("lastName");
 		final String password = request.getParameter("password");
 		boolean errorFound = false;
+
+		
+		// Überprüfung ob eines der übergebenen Paramter entweder NULL oder Leer ist.
+		
 		while (formInputs.hasMoreElements()) {
 			String inputName = (String) formInputs.nextElement();
 			String inputValue = request.getParameter(inputName);
@@ -59,9 +65,18 @@ public class RegistrationServlet extends HttpServlet {
 
 		if (!errorFound) // debugging
 		{
-			System.out.println(" RegistrationServlet: baaasst schooo");
-			System.out.println("RegistrationServlet: " + eMail + " " + userName + " " + firstName + " " + lastName + " " + password);
-			response.sendRedirect("html/registrationSuccsess.html");
+			
+			
+			
+
+			
+			
+			
+			
+//			System.out.println(" RegistrationServlet: baaasst schooo");
+//			System.out.println("RegistrationServlet: " + eMail + " " + userName + " " + firstName + " " + lastName + " "
+//					+ password);
+//			response.sendRedirect("html/registrationSuccsess.html");
 
 		}
 
