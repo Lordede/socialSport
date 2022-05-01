@@ -1,11 +1,13 @@
 package accountManagement;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.Enumeration;
 
-import jakarta.activation.DataSource;
+import javax.sql.DataSource;
+
 import jakarta.annotation.Resource;
-import jakarta.resource.cci.Connection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,7 +22,8 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Verbindung zur Datenbank deklarieren
-
+	@Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
+	private DataSource ds;
 
 
 	public RegistrationServlet() {
@@ -65,6 +68,27 @@ public class RegistrationServlet extends HttpServlet {
 
 		if (!errorFound) // debugging
 		{
+			String[] generatedKeys = new String[] {"id"}; //id generation -> in Datenbank kein "auto_incemrent"?
+			
+			// Verbindung zur Datenbank aufbauen
+			
+			try ( 	Connection con = ds.getConnection();
+					PreparedStatement pstmt = con.prepareStatement(
+							"INSERT INTO users (email,username,firstname, lastname, pwd) VALUES(?,?,?,?,?)")){
+				
+				
+				//Datenbank Operationen
+				pstmt.setString(1, eMail);
+				pstmt.setString(2, userName);
+				pstmt.setString(3, firstName);
+				pstmt.setString(4, lastName);
+				pstmt.setString(5, password); //TODO: Sollte nicht im Klartext in der Datenbank liegen -> Hashen
+				pstmt.executeUpdate();
+				
+			} catch (Exception ex) {
+				// TODO Auto-generated catch block
+				throw new ServletException(ex.getMessage());
+			}
 			
 			
 			
