@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Registatration_Servlet
@@ -46,13 +47,25 @@ public class RegistrationServlet extends HttpServlet {
 		
 		// Als erstes werden alle vorhergesehenen Paramter extrahiert.
 
+		RegistrationFormBean form = new RegistrationFormBean();
+		HttpSession session = request.getSession();
+		
+		
 		final Enumeration<String> formInputs = request.getParameterNames();
 		final String eMail = request.getParameter("email");
+		form.seteMail(eMail);
 		final String userName = request.getParameter("userName");
+		form.setUserName(userName);
 		final String firstName = request.getParameter("firstName");
+		form.setFirstName(firstName);
 		final String lastName = request.getParameter("lastName");
+		form.setLastName(lastName);
 		final String password = request.getParameter("password");
+		//passwort nicht in SessionBean abspeichern?
 		boolean errorFound = false;
+		
+		session.setAttribute("form", form); //Bean in Session abspeichern
+		
 
 		
 		// Überprüfung ob eines der übergebenen Paramter entweder NULL oder Leer ist.
@@ -84,18 +97,14 @@ public class RegistrationServlet extends HttpServlet {
 				pstmt.setString(4, lastName);
 				pstmt.setString(5, password); //TODO: Sollte nicht im Klartext in der Datenbank liegen -> Hashen
 				pstmt.executeUpdate();
+				response.sendRedirect("html/registrationSuccsess.jsp");
 				
 			} catch (Exception ex) {
 				// TODO Auto-generated catch block
 				throw new ServletException(ex.getMessage());
 			}
 			
-			
-			
-
-			
-			
-			
+// Übrig von Debugging:
 			
 //			System.out.println(" RegistrationServlet: baaasst schooo");
 //			System.out.println("RegistrationServlet: " + eMail + " " + userName + " " + firstName + " " + lastName + " "
