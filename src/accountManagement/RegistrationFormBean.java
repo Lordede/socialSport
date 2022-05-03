@@ -1,17 +1,16 @@
 package accountManagement;
 
-public class RegistrationFormBean implements java.io.Serializable {
 
-	private String eMail;
-	private String userName;
-	private String firstName;
-	private String lastName;
-	private String password; // Wird das benötigt, obwohl das Passwort nie angezeigt wird / werden kann?
+public class RegistrationFormBean implements java.io.Serializable {
 	
+	private int 	id;
+	private String 	eMail;
+	private String 	userName;
+	private String 	firstName;
+	private String 	lastName;
+	private String 	password; // Wird das benötigt, obwohl das Passwort nie angezeigt wird / werden kann?
+
 	public RegistrationFormBean() {
-		
-		
-		
 	
 	}
 
@@ -53,6 +52,14 @@ public class RegistrationFormBean implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getId() {		
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

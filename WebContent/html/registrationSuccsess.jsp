@@ -1,9 +1,5 @@
 <
-<!-- 
-*
-*	TODO:	Zu JSP Konvertieren, bei der die übertragenen Daten (bis auf Passwort) angezeigt werden
-*
-* -->
+
 
 
 <!DOCTYPE html>
@@ -18,17 +14,17 @@
 	<h1>Der Registriervorgang war erfolgreich!</h1>
 	<main>
 		<ul>
-			<li>UserID: ${sessionScope.email} </li>
-			<li>eMail:</li>
-			<li>Username:</li>
-			<li>Vorname:</li>
-			<li>Nachname:</li>
+			<li>UserID:  	${form.id}		</li> <!-- TODO: Fix Bug: Gibt immer 0 aus? -->
+			<li>e-Mail: 	${form.eMail}	</li>
+			<li>Username: 	${form.userName}</li>
+			<li>Vorname: 	${form.firstName}</li>
+			<li>Nachname:	${form.lastName}</li>
 		</ul>
 	</main>
 	<nav>
 		<ul>
 			<li><a href="../html/login.html"> Zur&uuml;ck zum Login</a></li>
-			<!-- TODO: Link muss nach konvertierung zu jsp angebpasst werden  -->
+			
 		</ul>
 	</nav>
 </body>

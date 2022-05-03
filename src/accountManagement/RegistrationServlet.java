@@ -3,6 +3,7 @@ package accountManagement;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Enumeration;
 
 import javax.sql.DataSource;
@@ -31,23 +32,24 @@ public class RegistrationServlet extends HttpServlet {
 		super();
 	}
 
-	/*
-	 * doGet ist hier verboten
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) // doGet ist hier verboten
 			throws ServletException, IOException {
 
 		response.sendError(HttpServletResponse.SC_FORBIDDEN);
 
 	}
 
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		
 		// Als erstes werden alle vorhergesehenen Paramter extrahiert.
 
-		RegistrationFormBean form = new RegistrationFormBean();
+		
+		RegistrationFormBean form = new RegistrationFormBean(); //Erstellung der Bean
 		HttpSession session = request.getSession();
 		
 		
@@ -100,16 +102,35 @@ public class RegistrationServlet extends HttpServlet {
 				response.sendRedirect("html/registrationSuccsess.jsp");
 				
 			} catch (Exception ex) {
-				// TODO Auto-generated catch block
+				
+				throw new ServletException(ex.getMessage());
+//				if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfügbarer E-Mail oder Username
+//																	// Wäre es möglich bei der Eingabe schon die Verfügbarkeit zu testen?
+//				}
+			}
+			
+			try(Connection con = ds.getConnection();		// Querry erstellen
+				PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")
+				){
+
+				pstmt.setString(1, form.getUserName());		// id anhand der Email holen
+				pstmt.executeUpdate();
+				
+				try(ResultSet rs = pstmt.executeQuery()){ 	// Result auslesen
+					form.setId(rs.getInt("id"));			// id in Bean schreiben
+					
+				}
+				
+				
+			}
+			
+			catch (Exception ex) {
 				throw new ServletException(ex.getMessage());
 			}
 			
-// Übrig von Debugging:
 			
-//			System.out.println(" RegistrationServlet: baaasst schooo");
-//			System.out.println("RegistrationServlet: " + eMail + " " + userName + " " + firstName + " " + lastName + " "
-//					+ password);
-//			response.sendRedirect("html/registrationSuccsess.html");
+			
+
 
 		}
 
