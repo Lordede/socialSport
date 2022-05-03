@@ -1,6 +1,8 @@
 package accountManagement;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,11 +29,9 @@ public class RegistrationServlet extends HttpServlet {
 	@Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
 	private DataSource ds;
 
-
 	public RegistrationServlet() {
 		super();
 	}
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) // doGet ist hier verboten
 			throws ServletException, IOException {
@@ -40,19 +40,14 @@ public class RegistrationServlet extends HttpServlet {
 
 	}
 
-	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
 		// Als erstes werden alle vorhergesehenen Paramter extrahiert.
 
-		
-		RegistrationFormBean form = new RegistrationFormBean(); //Erstellung der Bean
+		RegistrationFormBean form = new RegistrationFormBean(); // Erstellung der Bean
 		HttpSession session = request.getSession();
-		
-		
+
 		final Enumeration<String> formInputs = request.getParameterNames();
 		final String eMail = request.getParameter("email");
 		form.seteMail(eMail);
@@ -62,16 +57,16 @@ public class RegistrationServlet extends HttpServlet {
 		form.setFirstName(firstName);
 		final String lastName = request.getParameter("lastName");
 		form.setLastName(lastName);
-		final String password = request.getParameter("password");
-		//passwort nicht in SessionBean abspeichern?
+		
+		final String password = hashPassword(request.getParameter("password"));	//Passwort gehashed abspeichern 
+		//final String password = request.getParameter("password"); 			//Passwort im Klartext speichern
+		// passwort nicht in SessionBean abspeichern?
 		boolean errorFound = false;
-		
-		session.setAttribute("form", form); //Bean in Session abspeichern
-		
 
-		
+		session.setAttribute("form", form); // Bean in Session abspeichern
+
 		// Überprüfung ob eines der übergebenen Paramter entweder NULL oder Leer ist.
-		
+
 		while (formInputs.hasMoreElements()) {
 			String inputName = (String) formInputs.nextElement();
 			String inputValue = request.getParameter(inputName);
@@ -83,56 +78,77 @@ public class RegistrationServlet extends HttpServlet {
 
 		if (!errorFound) // debugging
 		{
-			String[] generatedKeys = new String[] {"id"}; //id generation -> in Datenbank kein "auto_incemrent"?
-			
+			String[] generatedKeys = new String[] { "id" }; // id generation -> in Datenbank kein "auto_incemrent"?
+
 			// Verbindung zur Datenbank aufbauen
-			
-			try ( 	Connection con = ds.getConnection();
+
+			try (Connection con = ds.getConnection();
 					PreparedStatement pstmt = con.prepareStatement(
-							"INSERT INTO users (email,username,firstname, lastname, pwd) VALUES(?,?,?,?,?)")){
-				
-				
-				//Datenbank Operationen
+							"INSERT INTO users (email,username,firstname, lastname, pwd) VALUES(?,?,?,?,?)")) {
+
+				// Datenbank Operationen
 				pstmt.setString(1, eMail);
 				pstmt.setString(2, userName);
 				pstmt.setString(3, firstName);
 				pstmt.setString(4, lastName);
-				pstmt.setString(5, password); //TODO: Sollte nicht im Klartext in der Datenbank liegen -> Hashen
+				pstmt.setString(5, password); // TODO: Sollte nicht im Klartext in der Datenbank liegen -> Hashen
 				pstmt.executeUpdate();
 				response.sendRedirect("html/registrationSuccsess.jsp");
-				
+
 			} catch (Exception ex) {
-				
+
 				throw new ServletException(ex.getMessage());
 //				if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfügbarer E-Mail oder Username
 //																	// Wäre es möglich bei der Eingabe schon die Verfügbarkeit zu testen?
 //				}
 			}
-			
-			try(Connection con = ds.getConnection();		// Querry erstellen
-				PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")
-				){
 
-				pstmt.setString(1, form.getUserName());		// id anhand der Email holen
+			try (Connection con = ds.getConnection(); // Querry erstellen
+					PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")) {
+
+				pstmt.setString(1, form.getUserName()); // id anhand der Email holen
 				pstmt.executeUpdate();
-				
-				try(ResultSet rs = pstmt.executeQuery()){ 	// Result auslesen
-					form.setId(rs.getInt("id"));			// id in Bean schreiben
-					
+
+				try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
+					form.setId(rs.getInt("id")); // id in Bean schreiben
+
 				}
-				
-				
+
 			}
-			
+
 			catch (Exception ex) {
 				throw new ServletException(ex.getMessage());
 			}
-			
-			
-			
-
 
 		}
 
 	}
+
+	public String hashPassword(String passwordToHash) {
+		String generatedPassword = null;
+
+		try {
+			// Create MessageDigest instance for MD5
+			MessageDigest md = MessageDigest.getInstance("MD5");
+
+			// Add password bytes to digest
+			md.update(passwordToHash.getBytes());
+
+			// Get the hash's bytes
+			byte[] bytes = md.digest();
+
+			// This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+
+			// Get complete hashed password in hex format
+			generatedPassword = sb.toString(); // Danach "generantedPassword" in die Datenbank schieben.
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return generatedPassword;
+	}
+
 }
