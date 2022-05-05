@@ -57,9 +57,10 @@ public class RegistrationServlet extends HttpServlet {
 		form.setFirstName(firstName);
 		final String lastName = request.getParameter("lastName");
 		form.setLastName(lastName);
-		
-		final String password = hashPassword(request.getParameter("password"));	//Passwort gehashed abspeichern 
-		//final String password = request.getParameter("password"); 			//Passwort im Klartext speichern
+
+		final String password = hashPassword(request.getParameter("password")); // Passwort als hash abspeichern
+		// final String password = request.getParameter("password"); //Passwort im
+		// Klartext speichern
 		// passwort nicht in SessionBean abspeichern?
 		boolean errorFound = false;
 
@@ -76,55 +77,18 @@ public class RegistrationServlet extends HttpServlet {
 			}
 		}
 
-		if (!errorFound) // debugging
+		if (!errorFound)
 		{
-			String[] generatedKeys = new String[] { "id" }; // id generation -> in Datenbank kein "auto_incemrent"?
 
-			// Verbindung zur Datenbank aufbauen
-
-			try (Connection con = ds.getConnection();
-					PreparedStatement pstmt = con.prepareStatement(
-							"INSERT INTO users (email,username,firstname, lastname, pwd) VALUES(?,?,?,?,?)")) {
-
-				// Datenbank Operationen
-				pstmt.setString(1, eMail);
-				pstmt.setString(2, userName);
-				pstmt.setString(3, firstName);
-				pstmt.setString(4, lastName);
-				pstmt.setString(5, password); // TODO: Sollte nicht im Klartext in der Datenbank liegen -> Hashen
-				pstmt.executeUpdate();
-				response.sendRedirect("html/registrationSuccsess.jsp");
-
-			} catch (Exception ex) {
-
-				throw new ServletException(ex.getMessage());
-//				if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfügbarer E-Mail oder Username
-//																	// Wäre es möglich bei der Eingabe schon die Verfügbarkeit zu testen?
-//				}
-			}
-
-			try (Connection con = ds.getConnection(); // Querry erstellen
-					PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")) {
-
-				pstmt.setString(1, form.getUserName()); // id anhand der Email holen
-				pstmt.executeUpdate();
-
-				try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
-					form.setId(rs.getInt("id")); // id in Bean schreiben
-
-				}
-
-			}
-
-			catch (Exception ex) {
-				throw new ServletException(ex.getMessage());
-			}
-
+			createNewUser(eMail, userName, firstName, lastName, password);
+			form.setId(getUserId(form.getUserName()));
+			response.sendRedirect("html/registrationSuccsess.jsp");
+			
 		}
 
 	}
 
-	public String hashPassword(String passwordToHash) {
+	public String hashPassword(String passwordToHash) { // Funktion zum hashen von Passwörtern
 		String generatedPassword = null;
 
 		try {
@@ -144,11 +108,60 @@ public class RegistrationServlet extends HttpServlet {
 			}
 
 			// Get complete hashed password in hex format
-			generatedPassword = sb.toString(); // Danach "generantedPassword" in die Datenbank schieben.
+			generatedPassword = sb.toString();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		return generatedPassword;
 	}
 
+	public int getUserId(String username) throws ServletException {
+
+		try (Connection con = ds.getConnection(); // Querry erstellen
+				PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")) {
+
+			pstmt.setString(1, username); // id anhand des username holen
+			
+			int id = 0;
+			
+			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
+				if (rs.next()) {
+				id = (rs.getInt("id")); // id in Bean schreiben
+				System.out.println(id);
+				}
+				return id;
+			}
+		}
+
+		catch (Exception ex) {
+			throw new ServletException(ex.getMessage());
+		}
+	}
+	
+	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password ) throws ServletException {
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(
+						"INSERT INTO users (email,username,firstname, lastname, pwd) VALUES(?,?,?,?,?)")) {
+
+			// Datenbank Operationen
+			pstmt.setString(1, eMail);
+			pstmt.setString(2, userName);
+			pstmt.setString(3, firstName);
+			pstmt.setString(4, lastName);
+			pstmt.setString(5, password); // TODO: Sollte nicht im Klartext in der Datenbank liegen -> Hashen
+			pstmt.executeUpdate();
+			
+
+		} catch (Exception ex) {
+
+			throw new ServletException(ex.getMessage());
+//			if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfügbarer E-Mail oder Username
+//																// Wäre es möglich bei der Eingabe schon die Verfügbarkeit zu testen?
+//			}
+		}
+		
+		
+	}
+	
+	
 }
