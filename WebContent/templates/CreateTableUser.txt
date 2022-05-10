@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS users (
     username varchar(255) UNIQUE,
     firstname varchar(255),
     lastname varchar(255),
-    pwd varchar(255)
+    pwd varchar(255),
+    penis
 );
