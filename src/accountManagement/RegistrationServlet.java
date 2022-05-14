@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Registatration_Servlet
+ * @author Cem Hubertus Lukas
  */
 @WebServlet("/registrationServlet")
 public class RegistrationServlet extends HttpServlet {
@@ -59,9 +59,6 @@ public class RegistrationServlet extends HttpServlet {
 		form.setLastName(lastName);
 
 		final String password = hashPassword(request.getParameter("password")); // Passwort als hash abspeichern
-		// final String password = request.getParameter("password"); //Passwort im
-		// Klartext speichern
-		// passwort nicht in SessionBean abspeichern?
 		boolean errorFound = false;
 
 		session.setAttribute("form", form); // Bean in Session abspeichern
@@ -80,14 +77,18 @@ public class RegistrationServlet extends HttpServlet {
 		if (!errorFound)
 		{
 
-			createNewUser(eMail, userName, firstName, lastName, password);
-			form.setId(getUserId(form.getUserName()));
-			response.sendRedirect("html/registrationSuccsess.jsp");
+			createNewUser(eMail, userName, firstName, lastName, password); 	// User in Datenbank schreiben
+			form.setId(getUserId(form.getUserName()));						// generierte id aus Datenbank auslesen
+			response.sendRedirect("html/registrationSuccsess.jsp");			// Ausgabe in jsp
 			
 		}
 
 	}
 
+	/**
+	 *@author: https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+	 * 
+	 */
 	public String hashPassword(String passwordToHash) { // Funktion zum hashen von Passwörtern
 		String generatedPassword = null;
 
@@ -115,7 +116,10 @@ public class RegistrationServlet extends HttpServlet {
 		return generatedPassword;
 	}
 
-	public int getUserId(String username) throws ServletException {
+	/**
+	 * @author Hubertus Seitz
+	 */
+	public int getUserId(String username) throws ServletException { // Funktion zum auslesen der id eines Users
 
 		try (Connection con = ds.getConnection(); // Querry erstellen
 				PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")) {
@@ -125,7 +129,7 @@ public class RegistrationServlet extends HttpServlet {
 			int id = 0;
 			
 			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
-				if (rs.next()) {
+				if (rs.next()) { // Anscheinend ganz wichtig
 				id = (rs.getInt("id")); // id in Bean schreiben
 				System.out.println(id);
 				}
@@ -138,7 +142,11 @@ public class RegistrationServlet extends HttpServlet {
 		}
 	}
 	
-	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password ) throws ServletException {
+	/**
+	 * @author Hubertus Seitz
+	 */
+	
+	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password ) throws ServletException { // Funktion zum anlegen eines Users
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
 						"INSERT INTO users (email,username,firstname, lastname, pwd) VALUES(?,?,?,?,?)")) {
