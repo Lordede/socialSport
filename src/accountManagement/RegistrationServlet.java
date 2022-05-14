@@ -9,6 +9,7 @@ import java.util.Enumeration;
 import javax.sql.DataSource;
 
 import jakarta.annotation.Resource;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
  * @author Cem Hubertus Lukas
  */
 @WebServlet("/registrationServlet")
+@SessionScoped
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -60,6 +62,7 @@ public class RegistrationServlet extends HttpServlet {
 		boolean errorFound = false;
 
 		session.setAttribute("form", form); // Bean in Session abspeichern
+											// TODO: Macht man das tatsächlich so oder besser in der Bean mit @SessionScoped?
 
 		// Überprüfung ob eines der übergebenen Paramter entweder NULL oder Leer ist.
 
@@ -72,12 +75,13 @@ public class RegistrationServlet extends HttpServlet {
 			}
 		}
 
+		
 		if (!errorFound)
 		{
 
 			createNewUser(eMail, userName, firstName, lastName, password); 	// User in Datenbank schreiben
 			form.setId(getUserId(form.getUserName()));						// generierte id aus Datenbank auslesen
-			response.sendRedirect("html/registrationSuccsess.jsp");			// Ausgabe in jsp
+			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect richtig, da auf DB schreibend zugegriffen wird.
 			
 		}
 
