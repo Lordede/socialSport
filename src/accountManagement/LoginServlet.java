@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class LoginServlet
+ * @author Hubertus Seitz
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -25,8 +26,12 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println( "LoginServlet: " + request.getParameter("userName").toString() + " " + request.getParameter("password").toString() );
+		
+		final String username = request.getParameter("userName");
+		String passwortUebergeben = request.getParameter("password");
+		final String password = HashPassword.hashPassword(passwortUebergeben);
+		
+		
 		response.sendRedirect("html/trainingsmenu.html"); //TODO: Dummy redirect
 	}
 

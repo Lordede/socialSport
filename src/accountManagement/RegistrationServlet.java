@@ -1,8 +1,6 @@
 package accountManagement;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,7 +56,7 @@ public class RegistrationServlet extends HttpServlet {
 		final String lastName = request.getParameter("lastName");
 		form.setLastName(lastName);
 
-		final String password = hashPassword(request.getParameter("password")); // Passwort als hash abspeichern
+		final String password = HashPassword.hashPassword(request.getParameter("password")); // Passwort als hash abspeichern
 		boolean errorFound = false;
 
 		session.setAttribute("form", form); // Bean in Session abspeichern
@@ -85,36 +83,7 @@ public class RegistrationServlet extends HttpServlet {
 
 	}
 
-	/**
-	 *@author: https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
-	 * 
-	 */
-	public String hashPassword(String passwordToHash) { // Funktion zum hashen von Passwörtern
-		String generatedPassword = null;
 
-		try {
-			// Create MessageDigest instance for MD5
-			MessageDigest md = MessageDigest.getInstance("MD5");
-
-			// Add password bytes to digest
-			md.update(passwordToHash.getBytes());
-
-			// Get the hash's bytes
-			byte[] bytes = md.digest();
-
-			// This bytes[] has bytes in decimal format. Convert it to hexadecimal format
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < bytes.length; i++) {
-				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-			}
-
-			// Get complete hashed password in hex format
-			generatedPassword = sb.toString();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return generatedPassword;
-	}
 
 	/**
 	 * @author Hubertus Seitz
@@ -156,7 +125,7 @@ public class RegistrationServlet extends HttpServlet {
 			pstmt.setString(2, userName);
 			pstmt.setString(3, firstName);
 			pstmt.setString(4, lastName);
-			pstmt.setString(5, password); // TODO: Sollte nicht im Klartext in der Datenbank liegen -> Hashen
+			pstmt.setString(5, password);
 			pstmt.executeUpdate();
 			
 
