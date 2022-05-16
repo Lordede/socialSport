@@ -1,16 +1,16 @@
-package trainingControl;
+package beans;
 
 import java.io.Serializable;
 import java.util.List;
 
 //Erstellt von Cem Durmus
-public class Training_Bean implements Serializable 
+public class TrainingBean implements Serializable 
 {
 	private static final long serialVersionID = 1L;
 	
 	private Long id;
 	private String name;
-	private List<Exercise_Bean> exercise;
+	private List<ExerciseBean> exercises;
 	private double points;
 	
 	public Long getId() {
@@ -25,11 +25,11 @@ public class Training_Bean implements Serializable
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Exercise_Bean> getExercise() {
-		return exercise;
+	public List<ExerciseBean> getExercise() {
+		return exercises;
 	}
-	public void setExercise(List<Exercise_Bean> exercise) {
-		this.exercise = exercise;
+	public void setExercise(List<ExerciseBean> exercise) {
+		this.exercises = exercise;
 	}
 	public double getPoints() {
 		return points;

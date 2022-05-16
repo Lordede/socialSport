@@ -8,12 +8,14 @@ import java.sql.ResultSet;
 import javax.sql.DataSource;
 
 import beans.TrainingsplanBean;
+import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 //von Lukas Edmüller
 
@@ -42,8 +44,12 @@ public class TrainingPlanServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		Long id = Long.parseLong(request.getParameter("id"));
-		TrainingsplanBean trainingPlan = read(id);
+    	
+    	//Long id = Long.parseLong(request.getParameter("id"));
+		HttpSession session = request.getSession();
+		UserBean userBean = (UserBean) session.getAttribute("userData");
+    	
+		TrainingsplanBean trainingPlan = read(userBean.getId());
 	}
 
 	/**
@@ -54,6 +60,8 @@ public class TrainingPlanServlet extends HttpServlet {
 		TrainingsplanBean trainingPlan = new TrainingsplanBean();
 		trainingPlan.setId(Long.parseLong(request.getParameter("id")));
 		trainingPlan.setName(request.getParameter("name"));
+		
+		// TODO: DB anlegen und anschließend mit Schleife in Funktion Trainings anheften
 		//trainingPlan.setTrainingList();
 		
 		// WIE MIT LISTE VORGEHEN???		
@@ -72,7 +80,7 @@ public class TrainingPlanServlet extends HttpServlet {
 		trainingPlan.setName(request.getParameter("name"));
 		//trainingPlan.setTrainingList();
 		
-		// WIE MIT LISTE VORGEHEN???	
+		
 		
 		update(trainingPlan);
 		
@@ -116,7 +124,7 @@ public class TrainingPlanServlet extends HttpServlet {
 		TrainingsplanBean form = new TrainingsplanBean();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainingplans WHERE id = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainingplans WHERE userId = ?")){
 			
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){

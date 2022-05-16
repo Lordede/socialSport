@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
-import Training.SatzBean;
 import beans.SetBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
@@ -16,13 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 //von Lukas Edmüller
 
 /**
  * Servlet implementation class SatzServlet
  */
-@WebServlet("/SatzServlet")
+@WebServlet("/SetServlet")
 public class SetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,10 +42,11 @@ public class SetServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		Long id = Long.parseLong(request.getParameter("id"));
-		SatzBean set = read(id);
+		//Long id = Long.parseLong(request.getParameter("id"));
+		HttpSession session = request.getSession();
+		UserBean userBean = (UserBean) session.getAttribute("userData");
+		SetBean set = read(userBean.getId());
 	}
 
 	/**
@@ -53,10 +54,10 @@ public class SetServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		SatzBean set = new SatzBean();
-		set.setId(Long.parseLong(request.getParameter("id")));
-		set.setWhd(Integer.parseInt(request.getParameter("reps")));
-		set.setKg(Integer.parseInt(request.getParameter("weight")));
+		SetBean set = new SetBean();
+		
+		set.setRep(Integer.parseInt(request.getParameter("rep")));
+		set.setKg(Double.parseDouble(request.getParameter("kg")));
 				
 		create(set);
 		
@@ -68,10 +69,11 @@ public class SetServlet extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		SatzBean set = new SatzBean();
+		SetBean set = new SetBean();
+		
 		set.setId(Long.parseLong(request.getParameter("id")));
-		set.setWhd(Integer.parseInt(request.getParameter("reps")));
-		set.setKg(Integer.parseInt(request.getParameter("weight")));
+		set.setRep(Integer.parseInt(request.getParameter("rep")));
+		set.setKg(Double.parseDouble(request.getParameter("kg")));
 				
 		update(set);
 		
@@ -83,7 +85,7 @@ public class SetServlet extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Long id = Long.parseLong(request.getParameter("id")) ;
+		Long id = Long.parseLong(request.getParameter("id"));
 		delete(id);
 	}
 	
@@ -97,13 +99,13 @@ public class SetServlet extends HttpServlet {
 		}
 	}
 	
-	private void update(SatzBean form) throws ServletException{
+	private void update(SetBean form) throws ServletException{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
 					"UPDATE sets " 
-					+ "SET reps = ?, weight = ?"
+					+ "SET rep = ?, kg = ?"
 					+ "WHERE id = ?")){
-			pstmt.setInt(1, form.getWhd());
+			pstmt.setInt(1, form.getRep());
 			pstmt.setDouble(2, form.getKg());
 			pstmt.setLong(3, form.getId());
 		} catch (Exception ex) {
@@ -111,17 +113,17 @@ public class SetServlet extends HttpServlet {
 		}
 	}
 	
-	private SatzBean read(Long id) throws ServletException{
-		SatzBean form = new SatzBean();
+	private SetBean read(Long id) throws ServletException{
+		SetBean form = new SetBean();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE id = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE userId = ?")){
 			
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs != null && rs.next()) {
-					form.setWhd(rs.getInt("reps"));
-					form.setKg(rs.getInt("weight"));
+					form.setRep(rs.getInt("rep"));
+					form.setKg(rs.getDouble("kg"));
 					
 				}
 			}
@@ -131,13 +133,13 @@ public class SetServlet extends HttpServlet {
 		return form;
 	}
 	
-	private void create(SatzBean form) throws ServletException{
+	private void create(SetBean form) throws ServletException{
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sets"
-														+ "(reps, weight) "
+														+ "(rep, kg) "
 														+ "VALUES (?, ?)", generatedKeys)){
-			pstmt.setInt(1, form.getWhd());
+			pstmt.setInt(1, form.getRep());
 			pstmt.setDouble(2, form.getKg());
 			
 			pstmt.executeUpdate();

@@ -1,15 +1,15 @@
-package trainingControl;
+package beans;
 //Erstellt von Cem Durmus
 import java.io.Serializable;
 import java.util.List;
 import java.awt.Image;
 
-public class Exercise_Bean 
+public class ExerciseBean 
 {
 	private static final long serialVersionID = 1L;
 	
-	private Integer id;//long ggf
-	private List<String> set;
+	private Long id;//long ggf
+	private List<SetBean> sets;
 	private String name; 
 	private enum MuscleGroup 
 	{
@@ -21,17 +21,18 @@ public class Exercise_Bean
 		SCHULTERMUSKULATUR;
 	}
 	private Image exerciseImage;
-	public Integer getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<String> getSet() {
-		return set;
+	public List<SetBean> getSets() {
+		return sets;
 	}
-	public void setSet(List<String> set) {
-		this.set = set;
+	public void setSets(List<SetBean> sets) {
+		this.sets = sets;
 	}
 	public String getName() {
 		return name;
@@ -45,5 +46,6 @@ public class Exercise_Bean
 	public void setExerciseImage(Image exerciseImage) {
 		this.exerciseImage = exerciseImage;
 	}
+	
 	
 }

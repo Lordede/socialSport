@@ -1,23 +1,22 @@
-package accountManagement;
+package beans;
 
 import java.io.Serializable;
 import java.util.List;
 import java.awt.Image;
 //Erstellt von Cem Durmus
-public class User_Bean implements Serializable 
+public class UserBean implements Serializable 
 {
 	private static final long serialVersionID = 1L;
 	
 	private Long id;
 	private List<String> trainingsplan;
 	private String username;
-	private String firstname;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	private String eMail;
 	private String password;
 	private Image profilePicture;
 	private boolean isAdmin;
-	
 	public Long getId() {
 		return id;
 	}
@@ -36,17 +35,17 @@ public class User_Bean implements Serializable
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String geteMail() {
 		return eMail;
@@ -72,4 +71,5 @@ public class User_Bean implements Serializable
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-}
+}	
+	
