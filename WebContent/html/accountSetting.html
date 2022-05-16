@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--Um hier reinzukommen erst Passwort abfrage-->
+<html lang="de">
+    <head>
+        <title>
+            Profil Bearbeiten
+        </title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Ihre one stop Sport Plattform">
+        <meta name="keywords" content="Sport, Gym, social media, sports">
+        <meta name="author" content="Cem Durmus">
+    </head>
+    <body>
+        <header>
+            <h1>Profil Bearbeiten</h1>
+        </header>
+        <article>
+            <h2>Bearbeiten Sie Ihr Profil hier</h2>
+            <div class="profile_image">
+                <img src="" alt="Profil Picture">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <p> Profilbild ändern: 
+                        <input type="image"
+                         name="bild"
+                         accept="image/*"
+                         formaction="./src/accountManagement/User_Picture_UpdateServlet"
+                         formmethod="post">
+                    </p>
+                    <p>
+                    	<button type="submit"
+                     	 name="Bestätigen"
+                       	 formaction="./src/accountManagement/User_Management_Servlet" 
+                    	 formmethod="post">
+                     </button>
+                    </p>
+                </form>
+            </div>
+            <div class="userName">
+                <form action="User_Servlet" method="post">
+                    <p>Benutzername: 
+                        <input type="text" 
+                        size="30" 
+                        maxlength="35">
+                    </p>
+                    <p>
+                    	<button type="submit"
+                     	 name="Bestätigen"
+                       	 formaction="./src/accountManagement/User_Username_UpdateServlet" 
+                    	 formmethod="post">
+                     </button>
+                    </p>
+                </form>
+            </div>
+            <div>
+            	<form action="User_Servlet" method="post">
+                    <p>Vorname: 
+                        <input type="text" 
+                        size="30" 
+                        maxlength="35">
+                    </p>
+                    <p>Nachname:
+                    	<input type="text"
+                    	size="30"
+                    	maxlenght="35">
+                    </p>
+                    <p>
+                    	<button type="submit"
+                     	 name="Bestätigen"
+                       	 formaction="./src/accountManagement/User_Names_UpdateServlet" 
+                    	 formmethod="post">
+                     </button>
+                    </p>
+                </form>
+            </div>
+            <div>
+            	<form action="User_Servlet" method="post">
+                    <p>Passwort: 
+                        <input type="password" 
+                        size="30" 
+                        maxlength="35">
+                    </p>
+                    <p>
+                    	<button type="submit"
+                     	 name="Bestätigen"
+                       	 formaction="./src/accountManagement/User_Password_UpdateServlet" 
+                    	 formmethod="post">
+                     </button>
+                    </p>
+                </form>
+            </div>
+            <div>
+            	<form action="User_Servlet" method="post">
+                    <p>E-Mail: 
+                        <input type="email" 
+                        size="30" 
+                        maxlength="35">
+                    </p>
+                    <p>
+                    	<button type="submit"
+                     	 name="Bestätigen"
+                       	 formaction="./src/accountManagement/User_Email_UpdateServlet" 
+                    	 formmethod="post">
+                     </button>
+                    </p>
+                </form>
+            </div>
+        </article>
+        <footer>
+            <!--Generische Navigationsleiste-->
+        </footer>
+    </body>
+</html>
