@@ -1,4 +1,4 @@
-package accountManagement;
+package servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
+import beans.RegistrationFormBean;
+import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -15,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import utilities.HashPassword;
 
 /**
  * Servlet implementation class LoginServlet
@@ -24,6 +27,7 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	@Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
 	private DataSource ds;
@@ -42,13 +46,10 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		final String username = request.getParameter("userName");
-		String passwortUebergeben = request.getParameter("password");
-		final String password = HashPassword.hashPassword(passwortUebergeben); // TODO: wie könnte man das durch
-																				// Methodenverkettung in einer Zeile																				// erledigen?
+		final String password = HashPassword.hashPassword(request.getParameter("password"));																		// erledigen?
 		if (UserExists(username, password)) {
-
 			
-			RegistrationFormBean userData = readUserData(username, password); //UserData Anhand der von Username und Passwort auslesen
+			UserBean userData = readUserData(username, password); //UserData Anhand der von Username und Passwort auslesen
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("userData", userData); 						//UserData in Session Scope hinterlegen
@@ -73,13 +74,8 @@ public class LoginServlet extends HttpServlet {
 			pstmt.setString(2, password);
 
 			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
-				if (rs.next()) {
-					return true; 	// Wenn Result nicht leer ist, gibt es die username pwd Kombination und er login
-									// ist erfolgreich!
-				} else {
-					return false;
+				return rs.next();
 				}
-			}
 		}
 
 		catch (Exception ex) {
@@ -87,9 +83,9 @@ public class LoginServlet extends HttpServlet {
 		}
 	}
 
-	private RegistrationFormBean readUserData(String username, String password) throws ServletException {
+	private UserBean readUserData(String username, String password) throws ServletException {
 		
-		RegistrationFormBean userData = new RegistrationFormBean();
+		UserBean userData = new UserBean();
 		
 		try (Connection con = ds.getConnection(); // Querry erstellen
 				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM users WHERE username = ? AND pwd = ?")) {
@@ -99,11 +95,11 @@ public class LoginServlet extends HttpServlet {
 
 			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
 				if (rs.next()) {
-					userData.setId(rs.getInt("id"));
+					userData.setId(rs.getLong("id"));
 					userData.seteMail(rs.getString("email"));
-					userData.setUserName(rs.getString("username"));
-					userData.setLastName(rs.getString("lastname"));
-					userData.setFirstName(rs.getString("firstname"));
+					userData.setUsername(rs.getString("username"));
+					userData.setLastname(rs.getString("lastname"));
+					userData.setFirstname(rs.getString("firstname"));
 					userData.setPassword(rs.getString("pwd"));
 			}
 				return userData;

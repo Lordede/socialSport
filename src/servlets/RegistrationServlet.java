@@ -1,4 +1,4 @@
-package accountManagement;
+package servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,6 +8,7 @@ import java.util.Enumeration;
 
 import javax.sql.DataSource;
 
+import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import utilities.HashPassword;
 
 /**
  * @author Cem Hubertus Lukas
@@ -45,18 +47,20 @@ public class RegistrationServlet extends HttpServlet {
 
 		// Als erstes werden alle vorhergesehenen Paramter extrahiert.
 
-		RegistrationFormBean form = new RegistrationFormBean(); // Erstellung der Bean
+		UserBean form = new UserBean(); // Erstellung der Bean
 		HttpSession session = request.getSession();
 
 		final Enumeration<String> formInputs = request.getParameterNames();
 		final String eMail = request.getParameter("email");
 		form.seteMail(eMail);
-		final String userName = request.getParameter("userName");
-		form.setUserName(userName);
-		final String firstName = request.getParameter("firstName");
-		form.setFirstName(firstName);
-		final String lastName = request.getParameter("lastName");
-		form.setLastName(lastName);
+		final String userName = request.getParameter("username");
+		form.setUsername(userName);
+		final String firstName = request.getParameter("firstname");
+		form.setFirstname(firstName);
+		final String lastName = request.getParameter("lastname");
+		form.setLastname(lastName);
+		//final String password = request.getParameter("password");
+		//form.setPassword(password);
 
 		final String password = HashPassword.hashPassword(request.getParameter("password")); // Passwort als hash abspeichern
 		boolean errorFound = false;
@@ -80,7 +84,7 @@ public class RegistrationServlet extends HttpServlet {
 		{
 
 			createNewUser(eMail, userName, firstName, lastName, password); 	// User in Datenbank schreiben
-			form.setId(getUserId(form.getUserName()));						// generierte id aus Datenbank auslesen
+			form.setId(getUserId(form.getUsername()));						// generierte id aus Datenbank auslesen
 			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect richtig, da auf DB schreibend zugegriffen wird.
 			
 		}
@@ -92,18 +96,18 @@ public class RegistrationServlet extends HttpServlet {
 	/**
 	 * @author Hubertus Seitz
 	 */
-	public int getUserId(String username) throws ServletException { // Funktion zum auslesen der id eines Users
+	public Long getUserId(String username) throws ServletException { // Funktion zum auslesen der id eines Users
 
 		try (Connection con = ds.getConnection(); // Querry erstellen
 				PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")) {
 
 			pstmt.setString(1, username); // id anhand des username holen
 			
-			int id = 0;
+			Long id = 0L;
 			
 			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
 				if (rs.next()) { // Anscheinend ganz wichtig
-				id = (rs.getInt("id")); // id in Bean schreiben
+				id = (rs.getLong("id")); // id in Bean schreiben
 				System.out.println(id);
 				}
 				return id;

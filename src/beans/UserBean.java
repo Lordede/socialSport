@@ -1,10 +1,10 @@
-package accountManagement;
+package beans;
 
 import java.io.Serializable;
 import java.util.List;
 import java.awt.Image;
 //Erstellt von Cem Durmus
-public class User_Bean implements Serializable 
+public class UserBean implements Serializable 
 {
 	private static final long serialVersionID = 1L;
 	
