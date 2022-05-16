@@ -55,10 +55,10 @@ public class RegistrationServlet extends HttpServlet {
 		form.seteMail(eMail);
 		final String userName = request.getParameter("username");
 		form.setUsername(userName);
-		final String firstName = request.getParameter("firstname");
-		form.setFirstname(firstName);
-		final String lastName = request.getParameter("lastname");
-		form.setLastname(lastName);
+		final String firstName = request.getParameter("firstName");
+		form.setFirstName(firstName);
+		final String lastName = request.getParameter("lastName");
+		form.setLastName(lastName);
 		//final String password = request.getParameter("password");
 		//form.setPassword(password);
 
