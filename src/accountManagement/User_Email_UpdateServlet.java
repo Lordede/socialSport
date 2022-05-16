@@ -31,8 +31,9 @@ public class User_Email_UpdateServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    @Resource(lookup="java:/MySqlThidbDS")
-    private DataSource ds;
+ 
+ 	@Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
+ 	private DataSource ds;
     private String eMail;
 
 	/**

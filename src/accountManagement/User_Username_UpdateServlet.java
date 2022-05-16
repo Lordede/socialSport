@@ -30,8 +30,8 @@ public class User_Username_UpdateServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    @Resource(lookup="java:/MySqlThidbDS")
-    private DataSource ds;
+    @Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
+ 	private DataSource ds;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

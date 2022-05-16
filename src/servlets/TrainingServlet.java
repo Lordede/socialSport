@@ -7,14 +7,13 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
-import beans.SetBean;
-import beans.TrainingBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import trainingControl.Training_Bean;
 
 //von Lukas Edmüller
 
@@ -44,7 +43,7 @@ public class TrainingServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		Long id = Long.parseLong(request.getParameter("id"));
-		TrainingBean training = read(id);
+		Training_Bean training = read(id);
 	}
 
 	/**
@@ -52,7 +51,7 @@ public class TrainingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		TrainingBean training = new TrainingBean();
+		Training_Bean training = new Training_Bean();
 		training.setId(Long.parseLong(request.getParameter("id")));
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
@@ -67,7 +66,7 @@ public class TrainingServlet extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		TrainingBean training = new TrainingBean();
+		Training_Bean training = new Training_Bean();
 		training.setId(Long.parseLong(request.getParameter("id")));
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
@@ -96,7 +95,7 @@ public class TrainingServlet extends HttpServlet {
 		}
 	}
 	
-	private void update(TrainingBean form) throws ServletException{
+	private void update(Training_Bean form) throws ServletException{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
 					"UPDATE trainings " 
@@ -110,8 +109,8 @@ public class TrainingServlet extends HttpServlet {
 		}
 	}
 	
-	private TrainingBean read(Long id) throws ServletException{
-		TrainingBean form = new TrainingBean();
+	private Training_Bean read(Long id) throws ServletException{
+		Training_Bean form = new Training_Bean();
 		
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE id = ?")){
@@ -130,7 +129,7 @@ public class TrainingServlet extends HttpServlet {
 		return form;
 	}
 	
-	private void create(TrainingBean form) throws ServletException{
+	private void create(Training_Bean form) throws ServletException{
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"

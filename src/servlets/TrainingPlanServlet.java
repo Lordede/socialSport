@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
-import beans.SetBean;
-import beans.TrainingBean;
 import beans.TrainingsplanBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;

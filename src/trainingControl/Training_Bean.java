@@ -8,15 +8,15 @@ public class Training_Bean implements Serializable
 {
 	private static final long serialVersionID = 1L;
 	
-	private Integer id;
+	private Long id;
 	private String name;
 	private List<Exercise_Bean> exercise;
-	private Integer points;
+	private double points;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -31,10 +31,10 @@ public class Training_Bean implements Serializable
 	public void setExercise(List<Exercise_Bean> exercise) {
 		this.exercise = exercise;
 	}
-	public Integer getPoints() {
+	public double getPoints() {
 		return points;
 	}
-	public void setPoints(Integer points) {
+	public void setPoints(double points) {
 		this.points = points;
 	}
 	

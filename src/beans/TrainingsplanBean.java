@@ -2,12 +2,14 @@ package beans;
 
 import java.io.Serializable;
 import java.util.List;
+
+import trainingControl.Training_Bean;
 //Erstellt von Lukas Edmüller
 public class TrainingsplanBean implements Serializable {
 	
 	private Long id;
 	private String name;
-	private List<TrainingBean> trainingList;
+	private List<Training_Bean> trainingList;
 	
 	public Long getId() {
 		return id;
@@ -21,10 +23,10 @@ public class TrainingsplanBean implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<TrainingBean> getTrainingList() {
+	public List<Training_Bean> getTrainingList() {
 		return trainingList;
 	}
-	public void setTrainingList(List<TrainingBean> trainingList) {
+	public void setTrainingList(List<Training_Bean> trainingList) {
 		this.trainingList = trainingList;
 	}
 	
