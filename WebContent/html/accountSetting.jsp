@@ -18,25 +18,26 @@
             <h2>Bearbeiten Sie Ihr Profil hier</h2>
             <div class="profile_image">
                 <img src="" alt="Profil Picture">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <p> Profilbild ändern: 
+                <form action="../UserUpdateServlet" method="post" enctype="multipart/form-data">
+                    <p> Profilbild �ndern: 
                         <input type="image"
-                         name="bild"
+                         name="changeImage"
                          accept="image/*"
-                         formaction="./src/accountManagement/User_Picture_UpdateServlet"
+                         formaction="../UserUpdateServlet"
                          formmethod="post">
                     </p>
                     <p>
                     	<button type="submit"
-                     	 name="Bestätigen"
-                       	 formaction="./src/accountManagement/User_Management_Servlet" 
+                     	 name="changeImage"
+                       	 formaction="../UserUpdateServlet" 
                     	 formmethod="post">
                      </button>
                     </p>
                 </form>
             </div>
             <div class="userName">
-                <form action="User_Servlet" method="post">
+                <form action="UserUpdateServlet method="post">
+                	<p>Aktueller Benutzername:</p>${userData.username}
                     <p>Benutzername: 
                         <input type="text" 
                         size="30" 
@@ -44,15 +45,16 @@
                     </p>
                     <p>
                     	<button type="submit"
-                     	 name="Bestätigen"
-                       	 formaction="./src/accountManagement/User_Username_UpdateServlet" 
+                     	 name="changeUsername"
+                       	 formaction="../UserUpdateServlet" 
                     	 formmethod="post">
                      </button>
                     </p>
                 </form>
             </div>
             <div>
-            	<form action="User_Servlet" method="post">
+            	<form action="UserUpdateServlet" method="post">
+            		<p>Aktueller Name:</p>${userData.firstName} ${userData.lastName}
                     <p>Vorname: 
                         <input type="text" 
                         size="30" 
@@ -61,19 +63,19 @@
                     <p>Nachname:
                     	<input type="text"
                     	size="30"
-                    	maxlenght="35">
+                    	maxlength="35">
                     </p>
                     <p>
                     	<button type="submit"
-                     	 name="Bestätigen"
-                       	 formaction="./src/accountManagement/User_Names_UpdateServlet" 
+                     	 name="changeNames"
+                       	 formaction="../UserUpdateServlet" 
                     	 formmethod="post">
                      </button>
                     </p>
                 </form>
             </div>
             <div>
-            	<form action="User_Servlet" method="post">
+            	<form action="UserUpdateServlet" method="post">
                     <p>Passwort: 
                         <input type="password" 
                         size="30" 
@@ -81,15 +83,15 @@
                     </p>
                     <p>
                     	<button type="submit"
-                     	 name="Bestätigen"
-                       	 formaction="./src/accountManagement/User_Password_UpdateServlet" 
+                     	 name="changePassword"
+                       	 formaction="../UserUpdateServlet" 
                     	 formmethod="post">
                      </button>
                     </p>
                 </form>
             </div>
             <div>
-            	<form action="User_Servlet" method="post">
+            	<form action="UserUpdateServlet" method="post">
                     <p>E-Mail: 
                         <input type="email" 
                         size="30" 
@@ -97,12 +99,21 @@
                     </p>
                     <p>
                     	<button type="submit"
-                     	 name="Bestätigen"
-                       	 formaction="./src/accountManagement/User_Email_UpdateServlet" 
+                     	 name="changeMail"
+                       	 formaction="../UserUpdateServlet" 
                     	 formmethod="post">
                      </button>
                     </p>
                 </form>
+            </div>
+             <div>
+            	<p>
+                   <button type="submit"
+                    name="deleteUser"
+                    formaction="../UserUpdateServlet" 
+                   	formmethod="post">
+                    </button>
+                    </p>
             </div>
         </article>
         <footer>

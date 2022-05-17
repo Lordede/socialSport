@@ -51,7 +51,7 @@ public class ExerciseServlet extends HttpServlet {
 		
 		// TODO: Wie Enum übergeben
 				
-		create(training);
+		//create(training);
 		
 		doGet(request, response);
 	}
