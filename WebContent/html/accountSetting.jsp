@@ -55,11 +55,11 @@
             <div>
             	<form action="UserUpdateServlet" method="post">
             		<p>Aktueller Name:</p>${userData.firstName} ${userData.lastName}
-                    <p>Vorname: 
+                    <label>Vorname: 
                         <input type="text" 
                         size="30" 
                         maxlength="35">
-                    </p>
+                    </label>
                     <p>Nachname:
                     	<input type="text"
                     	size="30"

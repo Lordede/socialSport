@@ -119,8 +119,7 @@ public class UserUpdateServlet extends HttpServlet {
 																		+ "WHERE id = ?"))
 		{	
 			
-			statementName.setString(1, user.getUsername());
-			System.out.println(user.getUsername());
+			statementName.setString(1, newName);
 			statementName.setLong(2, user.getId());
 			statementName.executeUpdate();
 		}	
