@@ -17,6 +17,7 @@ public class UserBean implements Serializable
 	private String password;
 	private Image profilePicture;
 	private boolean isAdmin;
+	
 	public Long getId() {
 		return id;
 	}

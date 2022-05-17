@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.awt.Image;
 
-public class ExerciseBean 
+public class ExerciseBean implements Serializable
 {
 	private static final long serialVersionID = 1L;
 	
-	private Long id;//long ggf
+	private Long id;
 	private List<SetBean> sets;
 	private String name; 
 	private enum MuscleGroup 
