@@ -17,97 +17,61 @@
         </header>
         <article>
             <h2>Bearbeiten Sie Ihr Profil hier</h2>
-<!--             <div class="profile_image"> -->
-<!--                 <img src="" alt="Profil Picture"> -->
-<!--                 <form action="../UserUpdateServlet" method="post" enctype="multipart/form-data"> -->
-<!--                     <p> Profilbild ändern:  -->
-<!--                         <input type="image" -->
-<!--                          name="changeImage" -->
-<!--                          accept="image/*" -->
-<!--                          formaction="../UserUpdateServlet" -->
-<!--                          formmethod="post"> -->
-<!--                     </p> -->
-<!--                     <p> -->
-<!--                     	<button type="submit" -->
-<!--                      	 name="changeImage" -->
-<!--                        	 formaction="../UserUpdateServlet"  -->
-<!--                     	 formmethod="post"> -->
-<!--                      </button> -->
-<!--                     </p> -->
-<!--                 </form> -->
-<!--             </div> -->
+            <div class="profile_image">
+                <img src="" alt="Profil Picture">
+                <form action="../UserUpdateServlet" method="post" enctype="multipart/form-data">
+                    <p> Profilbild ändern: </p>
+                        <input type="image"
+                         name="changeImage"
+                         accept="image/*"
+                         formaction="../UserUpdateServlet"
+                         formmethod="post">
+                    	<button type="submit"
+                     	 name="changeImage"
+                     	 value="changeImage"
+                       	 formaction="../UserUpdateServlet" 
+                    	 formmethod="post">
+                    	 Bild ändern
+                     </button>
+                </form>
+            </div>
             <div class="userName">														
                 <form class="ChangeUsername" action="../UserUpdateServlet" method="post">
                 <p>Ihr aktueller Username ist:</p><p>${userData.username}</p>
         		<input type="text" name="changeUsername" size="30" maxlength="35"><br> 
-        		<input type="submit" value="changeUsername" size="30" > 
-				
+        		<Button type="submit" value="changeUsername" >Benutzernamen ändern</Button>
                 </form>
-             	</div> 
-<!--             </div> -->
-<!--             <div> -->
-<!--             	<form action="UserUpdateServlet" method="post"> -->
-<%--             		<p>Aktueller Name:</p>${userData.firstName} ${userData.lastName} --%>
-<!--                     <label>Vorname:  -->
-<!--                         <input type="text"  -->
-<!--                         size="30"  -->
-<!--                         maxlength="35"> -->
-<!--                     </label> -->
-<!--                     <p>Nachname: -->
-<!--                     	<input type="text" -->
-<!--                     	size="30" -->
-<!--                     	maxlength="35"> -->
-<!--                     </p> -->
-<!--                     <p> -->
-<!--                     	<button type="submit" -->
-<!--                      	 name="changeNames" -->
-<!--                        	 formaction="../UserUpdateServlet"  -->
-<!--                     	 formmethod="post"> -->
-<!--                      </button> -->
-<!--                     </p> -->
-<!--                 </form> -->
-<!--             </div> -->
-<!--             <div> -->
-<!--             	<form action="UserUpdateServlet" method="post"> -->
-<!--                     <p>Passwort:  -->
-<!--                         <input type="password"  -->
-<!--                         size="30"  -->
-<!--                         maxlength="35"> -->
-<!--                     </p> -->
-<!--                     <p> -->
-<!--                     	<button type="submit" -->
-<!--                      	 name="changePassword" -->
-<!--                        	 formaction="../UserUpdateServlet"  -->
-<!--                     	 formmethod="post"> -->
-<!--                      </button> -->
-<!--                     </p> -->
-<!--                 </form> -->
-<!--             </div> -->
-<!--             <div> -->
-<!--             	<form action="UserUpdateServlet" method="post"> -->
-<!--                     <p>E-Mail:  -->
-<!--                         <input type="email"  -->
-<!--                         size="30"  -->
-<!--                         maxlength="35"> -->
-<!--                     </p> -->
-<!--                     <p> -->
-<!--                     	<button type="submit" -->
-<!--                      	 name="changeMail" -->
-<!--                        	 formaction="../UserUpdateServlet"  -->
-<!--                     	 formmethod="post"> -->
-<!--                      </button> -->
-<!--                     </p> -->
-<!--                 </form> -->
-<!--             </div> -->
-<!--              <div> -->
-<!--             	<p> -->
-<!--                    <button type="submit" -->
-<!--                     name="deleteUser" -->
-<!--                     formaction="../UserUpdateServlet"  -->
-<!--                    	formmethod="post"> -->
-<!--                     </button> -->
-<!--                     </p> -->
-<!--             </div> -->
+             </div> 
+            <div>
+            	<form action="../UserUpdateServlet" method="post">
+                    <label for="changeFirstName"> Vorname: ${userData.firstName} </label><br>
+                    <input type="text" size="30" name="changeFirstName" maxlength="35"><br>
+                    <label for="changeLastName">Nachname: ${userData.lastName}</label><br>
+                    <input type="text" size="30" name="changeLastName" maxlength="35"><br>
+                    <Button type="submit"> <!-- formaction="../UserUpdateServlet" formmethod="post"df -->
+                    	 Namen ändern
+                     </Button>
+                </form>
+            </div>
+            <div>
+            	<form action="../UserUpdateServlet" method="post">
+                    <label for="password">Passwort: </label><br>
+                    <input type="password" name="password" size="30" maxlength="35"><br>
+                    <Button type="submit" name="password" value="password" formaction="../UserUpdateServlet" formmethod="post"> Passwort ändern</Button>
+                </form>
+            </div>
+            <div>
+            	<form action="../UserUpdateServlet" method="post">
+          			<label for="changeMail"> E-Mail: ${userData.eMail}</label><br>
+                    <input type="email" name="changeMail" size="30" maxlength="35"><br>
+                    <Button type="submit" value="changeMail" > <!-- formaction="../UserUpdateServlet" formmethod="post"> --> E-Mail ändern </Button>
+                </form>
+            </div>
+             <div>
+                <form action="../UserUpdateServlet" method="post">
+                   <Button type="submit" name="deleteUser" formaction="../UserUpdateServlet" formmethod="post">Benutzer löschen </Button>
+                </form>
+            </div>
         </article>
         <footer>
             <!--Generische Navigationsleiste-->

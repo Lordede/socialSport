@@ -1,5 +1,6 @@
 package servlets;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -66,25 +67,31 @@ public class UserUpdateServlet extends HttpServlet {
 			switch(buttonName) 
 			{
 			case "changeMail":
-				updateEmail(user);
+				updateEmail(user, request.getParameter("changeMail"));
 				break;
-			case "changeNames":
-				updateNames(user);
+			case "changeFirstName":
+				System.out.println(request.getParameter("changeFirstName"));
+				updateFirstName(user, request.getParameter("changeFirstName"));
+				
+				break;
+			case "changeLastName":
+				updateLastName(user, request.getParameter("changeLastName"));
 				break;
 			case "changeUsername":
 				updateUsername(user,request.getParameter("changeUsername"));
 				break;
-			case "changePassword":
-				updatePassword(user);
+			case "password":
+				updatePassword(user, request.getParameter("password"));
 				break;
 			case "changeImage":
 				updateImage(user);
 				break;
 			case "deleteUser":
 				deleteUser(user);
+				response.sendRedirect("html/accountDeletion.jsp");
 				break;
 			default:
-				continue;
+				break;
 			}
 		}
 		response.sendRedirect("html/accountDataChanged.jsp");
@@ -95,13 +102,15 @@ public class UserUpdateServlet extends HttpServlet {
 		
 	}
 
-	public void updateEmail(UserBean user) throws ServletException
+	public void updateEmail(UserBean user, String eMail) throws ServletException
 	{
 		try (Connection con = ds.getConnection();
-				PreparedStatement statementName = con.prepareStatement("UPDATE users SET eMail=? WHERE id = ?"))
+				PreparedStatement statementName = con.prepareStatement("UPDATE users "
+																		+ "SET email = ? "
+																		+ "WHERE id = ?"))
 		{
 			user.getId();
-			statementName.setString(1, user.geteMail());
+			statementName.setString(1, eMail);
 			statementName.setLong(2, user.getId());
 			statementName.executeUpdate();
 		}	
@@ -118,8 +127,8 @@ public class UserUpdateServlet extends HttpServlet {
 																		+ "SET username = ? "
 																		+ "WHERE id = ?"))
 		{	
-			
 			statementName.setString(1, newName);
+			System.out.println(newName);
 			statementName.setLong(2, user.getId());
 			statementName.executeUpdate();
 		}	
@@ -130,14 +139,32 @@ public class UserUpdateServlet extends HttpServlet {
 	}
 	
 	
-	private void updateNames(UserBean user) throws ServletException
+	private void updateFirstName(UserBean user, String firstName) throws ServletException
 	{
 		try (Connection con = ds.getConnection();
-				PreparedStatement statementNames = con.prepareStatement("UPDATE users SET firstname = ?, lastname = ? WHERE id = ?"))
+				PreparedStatement statementNames = con.prepareStatement("UPDATE users "
+																		+ "SET firstname = ? "
+																		+ "WHERE id = ?"))
 		{
-			statementNames.setString(1, user.getFirstName());
-			statementNames.setString(2, user.getLastName());
-			statementNames.setLong(3, user.getId());
+			statementNames.setString(1, firstName);
+			System.out.println(firstName);
+			statementNames.setLong(2, user.getId());
+		}	
+		catch (Exception exception)
+		{
+			throw new ServletException(exception.getMessage());
+		}
+	}
+	
+	private void updateLastName(UserBean user, String lastName) throws ServletException
+	{
+		try (Connection con = ds.getConnection();
+				PreparedStatement statementNames = con.prepareStatement("UPDATE users "
+																		+ "SET lastname = ? "
+																		+ "WHERE id = ?"))
+		{
+			statementNames.setString(1, lastName);
+			statementNames.setLong(2, user.getId());
 		}	
 		catch (Exception exception)
 		{
@@ -146,10 +173,10 @@ public class UserUpdateServlet extends HttpServlet {
 	}
 	
 
-	private void updatePassword(UserBean user) throws ServletException
+	private void updatePassword(UserBean user, String password) throws ServletException
 	{
 		try (Connection conDs = ds.getConnection();
-				PreparedStatement statementEmail = conDs.prepareStatement("UPDATE users SET password = ? WHERE id = ?"))
+				PreparedStatement statementEmail = conDs.prepareStatement("UPDATE users SET pwd = ? WHERE id = ?"))
 		{
 			statementEmail.setString(1, HashPassword.hashPassword(user.getPassword()));//hash methode
 			statementEmail.setLong(2, user.getId());
