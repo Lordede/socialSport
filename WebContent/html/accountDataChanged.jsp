@@ -28,9 +28,9 @@
             </div>
             <div>
             	<form action="User_Servlet" method="post">
-                    <p>Vorname: 
+                    <p>Vorname: ${userData.firstName}
                     </p>
-                    <p>Nachname:
+                    <p>Nachname: ${userData.lastName}
                     </p>
                 </form>
             </div>
@@ -42,7 +42,7 @@
             </div>
             <div>
             	<form action="User_Servlet" method="post">
-                    <p>E-Mail: 
+                    <p>E-Mail: ${userData.eMail}
                     </p>
                 </form>
             </div>
