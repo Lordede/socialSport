@@ -9,9 +9,7 @@
         
         
         
-        <script>
-        function
-        </script>
+        <script type="text/javascript" src="authentication.js" ></script>
     </head>
     <body>
         <header>
