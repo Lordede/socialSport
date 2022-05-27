@@ -12,7 +12,9 @@
         <meta name="author" content="Cem Durmus">
     </head>
     <body>
+    
         <header>
+        	<noscript> <h1> Bitte aktivieren Sie Javascript, da die Website sonst nicht funktioniert! </h1> </noscript>
             <h1>Profil Bearbeiten</h1>
         </header>
         <article>
