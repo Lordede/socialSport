@@ -6,10 +6,9 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of your Training and the leaderbord">
         <meta name="keywords" content="Training Sport Leaderboard">
+        <base href="${pageContext.request.requestURI}" />
+        <script type="text/javascript" src="../JavaScript/authenticationCheck.js" ></script>
         
-        
-        
-        <script type="text/javascript" src="authentication.js" ></script>
     </head>
     <body>
         <header>
@@ -51,5 +50,9 @@
                 </tfoot>
             </table>
         </article>
+        <script> // TODO: Fragen ob das i.o ist.
+        var userData = "${userData}"
+        	authenticationCheck(userData)
+        </script>
     </body>
 </html>
