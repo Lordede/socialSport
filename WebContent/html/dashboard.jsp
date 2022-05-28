@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
+    	<base href="${pageContext.request.requestURI}" />
         <title>Dashboard</title>
-        <meta charset="uft-8">
+        <meta charset="utf-8">
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of your Training and the leaderbord">
         <meta name="keywords" content="Training Sport Leaderboard">
-        <base href="${pageContext.request.requestURI}" />
+        
         <script type="text/javascript" src="../JavaScript/authenticationCheck.js" ></script>
         
     </head>
@@ -15,10 +16,7 @@
         <noscript> <h1> Bitte aktivieren Sie Javascript, da die Website sonst nicht funktioniert! </h1> </noscript>
             <h1><strong>Dashboard: </strong></h1>
             <input type="search" 
-            name="suche"
-            
-            formaction="get"
-            formmethod="">
+            name="suche">
         </header>
         <nav>
             <ul>
@@ -52,7 +50,7 @@
         </article>
         <script> // TODO: Fragen ob das i.o ist.
         var userData = "${userData}"
-        	authenticationCheck(userData)
+        	authenticationCheck(userData) // Wenn der User nicht eingloggt ist wird der Inhalt der Website entfernt und der Nutzer daz
         </script>
     </body>
 </html>
