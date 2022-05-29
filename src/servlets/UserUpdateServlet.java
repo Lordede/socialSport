@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import utilities.HashPassword;
-
+//Cem Durmus
 /**
  * Servlet implementation class User_UpdateServlet
  */
@@ -74,7 +74,7 @@ public class UserUpdateServlet extends HttpServlet {
 				updateFirstName(user, request.getParameter("changeFirstName"));
 				
 				break;
-			case "changeLastName":
+			case "changeLastName": // TODO : namen bitte zum laufen kriegen du kek
 				updateLastName(user, request.getParameter("changeLastName"));
 				break;
 			case "changeUsername":

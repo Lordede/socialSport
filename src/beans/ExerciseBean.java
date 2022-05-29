@@ -9,17 +9,19 @@ public class ExerciseBean
 	private static final long serialVersionID = 1L;
 	
 	private Long id;//long ggf
-	private List<SetBean> sets;
-	private String name; 
-	private enum MuscleGroup 
-	{
-		BEINMUSKULATUR,
-		ARMMUSKULATUR,
-		RUECKMUSKULATUR,
-		BRUSTMUSKULATUR,
-		BAUCHMUSKULATUR,
-		SCHULTERMUSKULATUR;
-	}
+//	private List<SetBean> sets;
+	private String name;
+	//private double point;
+	private String muscleGroup;
+//	private enum MuscleGroup 
+//	{
+//		BEINMUSKULATUR,
+//		ARMMUSKULATUR,
+//		RUECKMUSKULATUR,
+//		BRUSTMUSKULATUR,
+//		BAUCHMUSKULATUR,
+//		SCHULTERMUSKULATUR;
+//	}
 	private Image exerciseImage;
 	
 	public Long getId() {
@@ -28,12 +30,12 @@ public class ExerciseBean
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<SetBean> getSets() {
-		return sets;
-	}
-	public void setSets(List<SetBean> sets) {
-		this.sets = sets;
-	}
+//	public List<SetBean> getSets() {
+//		return sets;
+//	}
+//	public void setSets(List<SetBean> sets) {
+//		this.sets = sets;
+//	}
 	public String getName() {
 		return name;
 	}
@@ -47,5 +49,17 @@ public class ExerciseBean
 		this.exerciseImage = exerciseImage;
 	}
 	
+//	public double getPoint() {
+//		return point;
+//	}
+//	public void setPoint(double point) {
+//		this.point = point;
+//	}
+	public String getMuscleGroup() {
+		return muscleGroup;
+	}
+	public void setMuscleGroup(String muscleGroup) {
+		this.muscleGroup = muscleGroup;
+	}
 	
 }

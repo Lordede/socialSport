@@ -19,7 +19,7 @@
             <h2>Bearbeiten Sie Ihr Profil hier</h2>
             <div class="profile_image">
                 <img src="" alt="Profil Picture">
-                <form action="../UserUpdateServlet" method="post" enctype="multipart/form-data">
+                <form action="../UserUpdateServlet" method="post" enctype="multipart/form-data" accept-charset="utf-8">
                     <p> Profilbild ändern: </p>
                         <input type="image"
                          name="changeImage"
@@ -36,14 +36,14 @@
                 </form>
             </div>
             <div class="userName">														
-                <form class="ChangeUsername" action="../UserUpdateServlet" method="post">
+                <form class="ChangeUsername" action="../UserUpdateServlet" method="post" accept-charset="utf-8">
                 <p>Ihr aktueller Username ist:</p><p>${userData.username}</p>
         		<input type="text" name="changeUsername" size="30" maxlength="35"><br> 
         		<Button type="submit" value="changeUsername" >Benutzernamen ändern</Button>
                 </form>
              </div> 
             <div>
-            	<form action="../UserUpdateServlet" method="post">
+            	<form action="../UserUpdateServlet" method="post" accept-charset="utf-8">
                     <label for="changeFirstName"> Vorname: ${userData.firstName} </label><br>
                     <input type="text" size="30" name="changeFirstName" maxlength="35"><br>
                     <label for="changeLastName">Nachname: ${userData.lastName}</label><br>
@@ -54,14 +54,14 @@
                 </form>
             </div>
             <div>
-            	<form action="../UserUpdateServlet" method="post">
+            	<form action="../UserUpdateServlet" method="post" accept-charset="utf-8">
                     <label for="password">Passwort: </label><br>
                     <input type="password" name="password" size="30" maxlength="35"><br>
                     <Button type="submit" name="password" value="password" formaction="../UserUpdateServlet" formmethod="post"> Passwort ändern</Button>
                 </form>
             </div>
             <div>
-            	<form action="../UserUpdateServlet" method="post">
+            	<form action="../UserUpdateServlet" method="post" accept-charset="utf-8">
           			<label for="changeMail"> E-Mail: ${userData.eMail}</label><br>
                     <input type="email" name="changeMail" size="30" maxlength="35"><br>
                     <Button type="submit" value="changeMail" > <!-- formaction="../UserUpdateServlet" formmethod="post"> --> E-Mail ändern </Button>
