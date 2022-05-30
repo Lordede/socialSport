@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -22,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Servlet implementation class TrainingServlet
  */
-@WebServlet("/TrainingServlet")
+@WebServlet("/TrainingPlanServlet")
 public class TrainingPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,7 +51,10 @@ public class TrainingPlanServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
     	
-		TrainingsplanBean trainingPlan = read(userBean.getId());
+		List<TrainingsplanBean> trainingplans = search(userBean.getId());
+		
+		//TODO: read muss über id erfolgen
+		//TODO: search muss über exerciseId erfolgen
 	}
 
 	/**
@@ -58,8 +63,10 @@ public class TrainingPlanServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		TrainingsplanBean trainingPlan = new TrainingsplanBean();
-		trainingPlan.setId(Long.parseLong(request.getParameter("id")));
+		//trainingPlan.setId(Long.parseLong(request.getParameter("id")));
 		trainingPlan.setName(request.getParameter("name"));
+		trainingPlan.setUserId(Long.parseLong(request.getParameter("userId")));
+		
 		
 		// TODO: DB anlegen und anschließend mit Schleife in Funktion Trainings anheften
 		//trainingPlan.setTrainingList();
@@ -98,7 +105,7 @@ public class TrainingPlanServlet extends HttpServlet {
 	
 	private void delete(Long id) throws ServletException{
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("DELETE FROM trainingsplans WHERE id = ?")){
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM trainingsplan WHERE id = ?")){
 			pstmt.setLong(1, id);
 			pstmt.executeUpdate();
 		} catch (Exception ex) {
@@ -109,7 +116,7 @@ public class TrainingPlanServlet extends HttpServlet {
 	private void update(TrainingsplanBean form) throws ServletException{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"UPDATE trainingplans " 
+					"UPDATE trainingsplan " 
 					+ "SET name = ?"
 					+ "WHERE id = ?")){ 
 			pstmt.setString(1, form.getName());
@@ -124,12 +131,14 @@ public class TrainingPlanServlet extends HttpServlet {
 		TrainingsplanBean form = new TrainingsplanBean();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainingplans WHERE userId = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainingsplan WHERE userId = ?")){
 			
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs != null && rs.next()) {
 					form.setName(rs.getString("name"));
+					form.setId(rs.getLong("id"));
+					form.setUserId(rs.getLong("userId"));
 					//form.setPoints(rs.getDouble("points"));
 					
 				}
@@ -140,14 +149,44 @@ public class TrainingPlanServlet extends HttpServlet {
 		return form;
 	}
 	
+	private List<TrainingsplanBean> search(Long userId) throws ServletException{
+		List<TrainingsplanBean> trainingplans = new ArrayList<TrainingsplanBean>();
+		
+		try(Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainingsplan WHERE userId = ?")){
+			
+			pstmt.setLong(0, userId);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					TrainingsplanBean trainingsplan = new TrainingsplanBean();
+					
+					Long id = Long.valueOf(rs.getLong("id"));
+					String name = rs.getString("name");
+					
+					trainingsplan.setId(id);
+					trainingsplan.setName(name);
+					trainingsplan.setUserId(userId);
+					
+					trainingplans.add(trainingsplan);
+				}
+			}
+			
+		}catch (Exception ex) {
+			throw new ServletException(ex.getMessage());
+		}
+		
+		return trainingplans;
+	}
+	
 	private void create(TrainingsplanBean form) throws ServletException{
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainingplans"
-														+ "(name, points) "
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainingsplan"
+														+ "(name, userId) "
 														+ "VALUES (?, ?)", generatedKeys)){
 			pstmt.setString(1, form.getName());
-			//pstmt.setDouble(2, form.getPoints());
+			pstmt.setLong(2, form.getUserId());
+			//pstmt.setDouble(2, 0);
 			
 			pstmt.executeUpdate();
 			
