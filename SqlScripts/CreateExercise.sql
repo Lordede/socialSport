@@ -5,5 +5,4 @@ CREATE Table exercises(
     trainingId int NOT NULL,
     exerciseImage MEDIUMBLOB,
     PRIMARY KEY (id),
-    FOREIGN KEY (trainingId) REFERENCES trainings(id)
    )
