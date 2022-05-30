@@ -54,7 +54,7 @@ public class SetServlet extends HttpServlet {
 		//Long id = Long.parseLong(request.getParameter("id"));
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
-TrainingsplanTrainingSetServletFunction
+		
 		//SetBean set = read(userBean.getId());
 		
 		//TODO: read muss über id erfolgen
@@ -71,7 +71,8 @@ TrainingsplanTrainingSetServletFunction
 		
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
-		set.setExersiceId(Long.parseLong(request.getParameter("exerciseId")));
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
+		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 				
 		create(set);
 		
@@ -88,6 +89,8 @@ TrainingsplanTrainingSetServletFunction
 		set.setId(Long.parseLong(request.getParameter("id")));
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
+		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 				
 		update(set);
 		
@@ -138,7 +141,8 @@ TrainingsplanTrainingSetServletFunction
 				if(rs != null && rs.next()) {
 					form.setRep(rs.getInt("rep"));
 					form.setKg(rs.getDouble("kg"));
-					form.setExersiceId(rs.getLong("exerciseId"));
+					form.setExerciseId(rs.getLong("exerciseId"));
+					form.setTrainingId(rs.getLong("trainingId"));
 					
 				}
 			}
@@ -162,12 +166,14 @@ TrainingsplanTrainingSetServletFunction
 					Long id = Long.valueOf(rs.getLong("id"));
 					double kg = Double.valueOf(rs.getDouble("kg"));
 					int rep = Integer.valueOf(rs.getInt("rep"));
+					Long trainingId = Long.valueOf(rs.getLong("trainingId"));
 					
 					
 					set.setId(id);
 					set.setKg(kg);
 					set.setRep(rep);
-					set.setExersiceId(exerciseId);
+					set.setExerciseId(exerciseId);
+					set.setTrainingId(trainingId);
 					
 					sets.add(set);
 				}
@@ -184,11 +190,12 @@ TrainingsplanTrainingSetServletFunction
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sets"
-														+ "(rep, kg, exerciseId) "
-														+ "VALUES (?, ?, ?)", generatedKeys)){
+														+ "(rep, kg, exerciseId, trainingId) "
+														+ "VALUES (?, ?, ?, ?)", generatedKeys)){
 			pstmt.setInt(1, form.getRep());
 			pstmt.setDouble(2, form.getKg());
-			pstmt.setLong(3, form.getExersiceId());
+			pstmt.setLong(3, form.getExerciseId());
+			pstmt.setLong(4, form.getTrainingId());
 			
 			pstmt.executeUpdate();
 			
