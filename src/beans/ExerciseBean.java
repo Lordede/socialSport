@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.awt.Image;
 
-public class ExerciseBean 
+public class ExerciseBean implements Serializable
 {
 	private static final long serialVersionID = 1L;
 	
@@ -22,6 +22,7 @@ public class ExerciseBean
 //		BAUCHMUSKULATUR,
 //		SCHULTERMUSKULATUR;
 //	}
+
 	private Image exerciseImage;
 	
 	public Long getId() {
