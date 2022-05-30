@@ -6,8 +6,10 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="chose your training">
         <meta name="keywords" content="Training Sport Workout">
+        <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
     </head>
     <body>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
         <header>
             <h1><strong>Training: </strong></h1>
             <input type="search" 
