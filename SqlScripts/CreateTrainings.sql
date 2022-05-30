@@ -4,5 +4,5 @@ CREATE Table trainings(
     points decimal(10,2) Not Null,
     userId int NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (userId) REFERENCES user(id)
+    FOREIGN KEY (userId) REFERENCES users(id)
    )
