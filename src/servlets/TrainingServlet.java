@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//von Lukas Edmüller
 
 /**
  * Servlet implementation class TrainingServlet
@@ -53,10 +52,10 @@ public class TrainingServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		//TrainingBean training = read(userBean.getId());
-		
-		//TODO: read muss über TrainingId erfolgen
-		//TODO: search muss über trainingsplanId erfolgen
-		
+	
+		//TODO: read muss ï¿½ber TrainingId erfolgen
+		//TODO: search muss ï¿½ber trainingsplanId erfolgen
+
 	}
 
 	/**
@@ -70,8 +69,8 @@ public class TrainingServlet extends HttpServlet {
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
 		training.setTrainingsPlanId(Long.parseLong(request.getParameter("trainingsplanId")));
 				
-		create(training);
-		
+		addExercise(training);
+		request.setAttribute("training", training);
 		doGet(request, response);
 	}
 
@@ -86,7 +85,7 @@ public class TrainingServlet extends HttpServlet {
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
 				
 		update(training);
-		
+		request.setAttribute("training", training);
 		doGet(request, response);
 	}
 

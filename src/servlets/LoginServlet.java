@@ -96,10 +96,12 @@ public class LoginServlet extends HttpServlet {
 			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
 				if (rs.next()) {
 					userData.setId(rs.getLong("id"));
+					
 					userData.seteMail(rs.getString("email"));
 					userData.setUsername(rs.getString("username"));
-					userData.setLastname(rs.getString("lastname"));
-					userData.setFirstname(rs.getString("firstname"));
+					userData.setLastName(rs.getString("lastname"));
+					userData.setFirstName(rs.getString("firstname"));
+					System.out.print(userData.getFirstName());
 					userData.setPassword(rs.getString("pwd"));
 			}
 				return userData;

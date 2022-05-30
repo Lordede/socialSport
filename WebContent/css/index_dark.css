@@ -1,3 +1,4 @@
+/* Cem Durmus */
 .font_t
 {
     font-family: 'Montserrat', sans-serif;
@@ -7,25 +8,32 @@ body
     background-color: rgb(20, 5, 4);
     font-family: 'Montserrat', sans-serif;
     color: aliceblue;
+    
 }
 .drei_box
 {
     float : left;
     width: 33%;
-    margin-right: 3,33333%;
     padding: 5px;
+    padding-left: 3.33%;
     box-sizing: border-box;
+    
 }
 .zwei_box
 {
     float:left;
     width: auto;
-    margin-right: 7%;
+    margin-left: 5%;
     padding: 5;
     box-sizing:border-box;
 }
 h1
 {
+    text-align: center;
+}
+h2
+{
+	clear:left;
     text-align: center;
 }
 .text_block

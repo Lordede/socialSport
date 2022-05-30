@@ -11,7 +11,6 @@ public class SetBean implements Serializable {
 	private Long id;
 	private double kg;
 	private int rep;
-	private Long exersiceId;
 	
 	public Long getExersiceId() {
 		return exersiceId;
@@ -39,6 +38,12 @@ public class SetBean implements Serializable {
 	}
 	public void setRep(int rep) {
 		this.rep = rep;
+	}
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
 	}
 	
 	

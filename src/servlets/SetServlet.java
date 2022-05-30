@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//von Lukas Edmüller
+//von Lukas EdmÃ¼ller
 
 /**
  * Servlet implementation class SatzServlet
@@ -40,7 +40,12 @@ public class SetServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    SetBean set = new SetBean();
+    
+    public SetBean getSet() 
+	{
+		return this.set;
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -49,11 +54,13 @@ public class SetServlet extends HttpServlet {
 		//Long id = Long.parseLong(request.getParameter("id"));
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
+TrainingsplanTrainingSetServletFunction
 		//SetBean set = read(userBean.getId());
 		
-		//TODO: read muss über id erfolgen
-		//TODO: search muss über exerciseId erfolgen
+		//TODO: read muss Ã¼ber id erfolgen
+		//TODO: search muss Ã¼ber exerciseId erfolgen
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

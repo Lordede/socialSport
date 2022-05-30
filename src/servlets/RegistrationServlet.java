@@ -53,7 +53,7 @@ public class RegistrationServlet extends HttpServlet {
 		final Enumeration<String> formInputs = request.getParameterNames();
 		final String eMail = request.getParameter("email");
 		form.seteMail(eMail);
-		final String userName = request.getParameter("username");
+		final String userName = request.getParameter("userName");
 		form.setUsername(userName);
 		final String firstName = request.getParameter("firstName");
 		form.setFirstName(firstName);
@@ -126,7 +126,7 @@ public class RegistrationServlet extends HttpServlet {
 	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password ) throws ServletException { // Funktion zum anlegen eines Users
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
-						"INSERT INTO users (email,username,firstname, lastname, pwd) VALUES(?,?,?,?,?)")) {
+						"INSERT INTO users (email,username,firstName, lastname, pwd) VALUES(?,?,?,?,?)")) {
 
 			// Datenbank Operationen
 			pstmt.setString(1, eMail);
