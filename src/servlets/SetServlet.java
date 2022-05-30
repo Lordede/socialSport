@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import beans.SetBean;
+import beans.TrainingsplanBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -17,7 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//von Lukas Edm�ller
+//von Lukas Edmüller
 
 /**
  * Servlet implementation class SatzServlet
@@ -51,7 +54,11 @@ public class SetServlet extends HttpServlet {
 		//Long id = Long.parseLong(request.getParameter("id"));
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
-		set = read(userBean.getId());
+TrainingsplanTrainingSetServletFunction
+		//SetBean set = read(userBean.getId());
+		
+		//TODO: read muss über id erfolgen
+		//TODO: search muss über exerciseId erfolgen
 	}
 	
 
@@ -64,6 +71,7 @@ public class SetServlet extends HttpServlet {
 		
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
+		set.setExersiceId(Long.parseLong(request.getParameter("exerciseId")));
 				
 		create(set);
 		
@@ -123,13 +131,14 @@ public class SetServlet extends HttpServlet {
 		SetBean form = new SetBean();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE userId = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE id = ?")){
 			
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs != null && rs.next()) {
 					form.setRep(rs.getInt("rep"));
 					form.setKg(rs.getDouble("kg"));
+					form.setExersiceId(rs.getLong("exerciseId"));
 					
 				}
 			}
@@ -139,14 +148,47 @@ public class SetServlet extends HttpServlet {
 		return form;
 	}
 	
+	private List<SetBean> search(Long exerciseId) throws ServletException{
+		List<SetBean> sets = new ArrayList<SetBean>();
+		
+		try(Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE exerciseId = ?")){
+			
+			pstmt.setLong(0, exerciseId);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					SetBean set = new SetBean();
+					
+					Long id = Long.valueOf(rs.getLong("id"));
+					double kg = Double.valueOf(rs.getDouble("kg"));
+					int rep = Integer.valueOf(rs.getInt("rep"));
+					
+					
+					set.setId(id);
+					set.setKg(kg);
+					set.setRep(rep);
+					set.setExersiceId(exerciseId);
+					
+					sets.add(set);
+				}
+			}
+			
+		}catch (Exception ex) {
+			throw new ServletException(ex.getMessage());
+		}
+		
+		return sets;
+	}
+	
 	private void create(SetBean form) throws ServletException{
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sets"
-														+ "(rep, kg) "
-														+ "VALUES (?, ?)", generatedKeys)){
+														+ "(rep, kg, exerciseId) "
+														+ "VALUES (?, ?, ?)", generatedKeys)){
 			pstmt.setInt(1, form.getRep());
 			pstmt.setDouble(2, form.getKg());
+			pstmt.setLong(3, form.getExersiceId());
 			
 			pstmt.executeUpdate();
 			

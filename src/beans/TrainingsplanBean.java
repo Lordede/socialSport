@@ -7,8 +7,15 @@ public class TrainingsplanBean implements Serializable {
 	
 	private Long id;
 	private String name;
+	private Long userId;
 	private List<TrainingBean> trainings;
 	
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -21,6 +28,7 @@ public class TrainingsplanBean implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public List<TrainingBean> getTrainingList() {
 		return trainings;
 	}

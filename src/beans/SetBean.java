@@ -11,8 +11,13 @@ public class SetBean implements Serializable {
 	private Long id;
 	private double kg;
 	private int rep;
-	private int points;
 	
+	public Long getExersiceId() {
+		return exersiceId;
+	}
+	public void setExersiceId(Long exersiceId) {
+		this.exersiceId = exersiceId;
+	}
 	public SetBean() {
 		super();
 	}
