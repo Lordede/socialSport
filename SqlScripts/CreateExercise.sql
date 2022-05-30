@@ -3,6 +3,7 @@ CREATE Table exercises(
     name varchar(255) NOT NULL,
     musclegroup varchar(255),
     trainingId int NOT NULL,
+    exerciseImage MEDIUMBLOB,
     PRIMARY KEY (id),
     FOREIGN KEY (trainingId) REFERENCES trainings(id)
    )
