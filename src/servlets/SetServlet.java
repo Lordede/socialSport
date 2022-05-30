@@ -37,7 +37,12 @@ public class SetServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    SetBean set = new SetBean();
+    
+    public SetBean getSet() 
+	{
+		return this.set;
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,8 +51,9 @@ public class SetServlet extends HttpServlet {
 		//Long id = Long.parseLong(request.getParameter("id"));
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
-		SetBean set = read(userBean.getId());
+		set = read(userBean.getId());
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

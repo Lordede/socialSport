@@ -16,7 +16,7 @@
 		<ul>
 			<li>UserID:  	${form.id}		</li> <!-- TODO: Fix Bug: Gibt immer 0 aus? -->
 			<li>e-Mail: 	${form.eMail}	</li>
-			<li>Username: 	${form.userName}</li>
+			<li>Username: 	${form.username}</li>
 			<li>Vorname: 	${form.firstName}</li>
 			<li>Nachname:	${form.lastName}</li>
 		</ul>

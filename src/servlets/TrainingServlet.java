@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//von Lukas Edmüller
 
 /**
  * Servlet implementation class TrainingServlet
@@ -49,7 +48,9 @@ public class TrainingServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
+		if (userBean==null) response.sendRedirect("login.html");
 		TrainingBean training = read(userBean.getId());
+		request.setAttribute("training", training);
 	}
 
 	/**
@@ -62,8 +63,8 @@ public class TrainingServlet extends HttpServlet {
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
 				
-		create(training);
-		
+		addExercise(training);
+		request.setAttribute("training", training);
 		doGet(request, response);
 	}
 
@@ -78,7 +79,7 @@ public class TrainingServlet extends HttpServlet {
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
 				
 		update(training);
-		
+		request.setAttribute("training", training);
 		doGet(request, response);
 	}
 
@@ -135,7 +136,7 @@ public class TrainingServlet extends HttpServlet {
 		return form;
 	}
 	
-	private void create(TrainingBean form) throws ServletException{
+	private void addExercise(TrainingBean form) throws ServletException{ //create
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"
