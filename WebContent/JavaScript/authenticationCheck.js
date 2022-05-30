@@ -4,10 +4,10 @@ function authenticationCheck(userData){
 	
 	
 	
-	if (userData === "") { //wird noch nicht richtig ausgewertet
+	if (userData === "") { // Kann man das so auswerten?
 		
 		alert("Bitte einloggen!")
-		window.location.replace("login.html");   
+		window.location.replace("login.html")   
 	}
 	else{
 		console.log("UserData wurde gefunden!")

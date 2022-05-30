@@ -7,11 +7,12 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of your Training and the leaderbord">
         <meta name="keywords" content="Training Sport Leaderboard">
-        
-        <script type="text/javascript" src="../JavaScript/authenticationCheck.js" ></script>
-        
+           
     </head>
     <body>
+    
+    <%@ include file="fragments/authenticationCheck.jspf" %>
+    
         <header>
         <noscript> <h1> Bitte aktivieren Sie Javascript, da die Website sonst nicht funktioniert! </h1> </noscript>
             <h1><strong>Dashboard: </strong></h1>
@@ -48,9 +49,8 @@
                 </tfoot>
             </table>
         </article>
-        <script> // TODO: Fragen ob das i.o ist.
-        var userData = "${userData}"
-        	authenticationCheck(userData) // Wenn der User nicht eingloggt ist wird der Inhalt der Website entfernt und der Nutzer daz
-        </script>
+        
+        
+        
     </body>
 </html>

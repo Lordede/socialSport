@@ -1,16 +1,14 @@
-<
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <!-- Basis für relative Verweise -> Basis = Speicherort -->
 <base href="${pageContext.request.requestURI}" />
 <meta charset="utf-8">
+
 <title>Registriervorgang erfolgreich!</title>
 </head>
 <body>
+<%@ include file="fragments/authenticationCheck.jspf" %>
 	<header>
 		<noscript>
 			<h1>Bitte aktivieren Sie Javascript, da die Website sonst nicht
@@ -34,4 +32,5 @@
 		</ul>
 	</nav>
 </body>
+
 </html>
