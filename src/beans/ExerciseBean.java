@@ -24,14 +24,7 @@ public class ExerciseBean implements Serializable
 //	}
 
 	private Image exerciseImage;
-	private Long trainingId;
 	
-	public Long getTrainingId() {
-		return trainingId;
-	}
-	public void setTrainingId(Long trainingId) {
-		this.trainingId = trainingId;
-	}
 	public Long getId() {
 		return id;
 	}

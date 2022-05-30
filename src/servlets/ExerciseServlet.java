@@ -60,7 +60,6 @@ public class ExerciseServlet extends HttpServlet {
 		ExerciseBean exerciseBean = new ExerciseBean();
 		exerciseBean.setName(request.getParameter("exerciseName"));
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
-		exerciseBean.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		createExcercise(exerciseBean);
@@ -151,7 +150,6 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
-					exercise.setTrainingId(rs.getLong("trainingId"));
 					exercises.add(exercise);
 				}
 			}
@@ -176,7 +174,6 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
-					exercise.setTrainingId(rs.getLong("trainingId"));
 					
 //					List<SetBean> setList = new LinkedList<>();
 //					
@@ -227,7 +224,6 @@ public class ExerciseServlet extends HttpServlet {
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
-			stmtExercise.setLong(3, exercise.getTrainingId());
 			stmtExercise.executeUpdate();
 			//stmtExercise.setLong(3, exercise.getTrainigsId);
 			
