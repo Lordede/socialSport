@@ -44,9 +44,9 @@ public class ExerciseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		UserBean userBean = (UserBean) session.getAttribute("userData");
-		
-		ExerciseBean exerciseBean = initializeExercise(userBean.getId());
+		//UserBean userBean = (UserBean) session.getAttribute("userData");
+		List<ExerciseBean> exercises = search(request.getParameter("searchName"));
+		ExerciseBean exerciseBean = findExercise(request.getParameter("name"), exercises);
 		session.setAttribute("exercise", exerciseBean);
 	}
 
@@ -237,5 +237,48 @@ public class ExerciseServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
+	private List<ExerciseBean> search(String exerciseName) throws ServletException
+	{
+		exerciseName = (exerciseName == null || exerciseName == "") ? "%" : "%" + exerciseName + "%";
+		List<ExerciseBean> exercises = new LinkedList<>();
+		
+		try (Connection con = ds.getConnection();
+				PreparedStatement search = con.prepareStatement("SELECT * FROM exercises WHERE name LIKE ?")) 
+		{
+			search.setString(1, exerciseName);
+			try (ResultSet result = search.executeQuery())
+			{
+				while (result.next()) 
+				{
+					ExerciseBean exercise = new ExerciseBean();
+					exercise.setId(result.getLong("id"));
+					exercise.setName(result.getString("name"));
+					exercise.setMuscleGroup(result.getString("muscleGroup"));
+					exercises.add(exercise);
+				}
+				return exercises;
+			}
+			
+		}
+		catch (Exception ex) 
+		{
+			throw new ServletException(ex.getMessage()); 
+		}
+	}
 	
+	private ExerciseBean findExercise(String name, List<ExerciseBean> exercises) 
+	{
+		ExerciseBean retExercise = new ExerciseBean();
+		for(ExerciseBean exercise : exercises) 
+		{
+			if(name.equals(exercise.getName())) 
+			{
+				retExercise.setId(exercise.getId());
+				retExercise.setName(exercise.getName());
+				retExercise.setExerciseImage(exercise.getExerciseImage());
+				retExercise.setMuscleGroup(exercise.getMuscleGroup());
+			}
+		}
+		return retExercise;
+	}
 }
