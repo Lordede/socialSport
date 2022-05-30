@@ -17,7 +17,7 @@
         </header>
         <article>
             <h2>Ãœbung erstellen: </h2>
-            <form class="ChangeUsername" action="../ExerciseServlet" method="post" accept-charset="utf-8">
+            <form class="ChangeUsername" action="../ExerciseServlet" method="post" enctype="multipart/form-data" accept-charset="utf-8">
             <div class="name">														
                 <p>Name der Ãœbung:</p>
         		<input type="text" name="exerciseName" size="30" maxlength="35"><br>
@@ -36,8 +36,22 @@
             <input type="checkbox" name="muscleGroup" value="Bauchmuskulatur" id="c5">
             <label for="c5">Bauchmuskulatur</label>
             </fieldset>
+            <input type="file"
+                         name="exerciseImage"
+                         accept="image/*"
+                         formaction="../ExerciseServlet"
+                         formmethod="post">
             </div>
             <Button type="submit">Ãœbung Erstellen</Button>
+            <p> Profilbild ändern: </p>
+                        
+<!--                     	<button type="submit" -->
+<!--                      	 name="changeImage" -->
+<!--                      	 value="changeImage" -->
+<!--                        	 formaction="../ExerciseServlet"  -->
+<!--                     	 formmethod="post"> -->
+<!--                     	 Bild ändern -->
+<!--                      </button> -->
     	</Form>
     	<div>
     	<table>
@@ -62,6 +76,11 @@
     		<input type="text" name="exerciseName" size="3" maxlength="3"><br>
     		<Button type="submit" value="createSet" >Satz erstellen</Button>
     		</form>
+    		</div>
+    		<div>
+    		<form action="../ExerciseServlet" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                    
+                </form>
     		</div>
         </article>
         <footer>

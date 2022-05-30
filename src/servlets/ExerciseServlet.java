@@ -10,21 +10,23 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import beans.ExerciseBean;
-import beans.SetBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 //Cem Durmus
 /**
  * Servlet implementation class ExerciseServlet
  */
 @WebServlet("/ExerciseServlet")
+@MultipartConfig
 public class ExerciseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,6 +49,7 @@ public class ExerciseServlet extends HttpServlet {
 		//UserBean userBean = (UserBean) session.getAttribute("userData");
 		List<ExerciseBean> exercises = search(request.getParameter("searchName"));
 		ExerciseBean exerciseBean = findExercise(request.getParameter("name"), exercises);
+		
 		session.setAttribute("exercise", exerciseBean);
 	}
 
@@ -62,8 +65,12 @@ public class ExerciseServlet extends HttpServlet {
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
-		createExcercise(exerciseBean);
+		Part filepart = request.getPart("exerciseImage");
+		exerciseBean.setExerciseImage(filepart.getSubmittedFileName());
+		createExcercise(exerciseBean, filepart);
 		session.setAttribute("excercise", exerciseBean);
+		RequestDispatcher disp = request.getRequestDispatcher("./html/success.jsp");
+		disp.forward(request, response);
 		//create(training);
 		
 		//doGet(request, response);
@@ -76,7 +83,7 @@ public class ExerciseServlet extends HttpServlet {
 		//ExerciseBean exercise = new ExerciseBean();
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
-		ExerciseBean exercise = initializeExercise(userBean.getId());
+		ExerciseBean exercise = initializeExercise(userBean.getId(), response);
 		updateExercise(exercise);
 		session.setAttribute("excercise", exercise);
 		//update()
@@ -161,7 +168,7 @@ public class ExerciseServlet extends HttpServlet {
 		return exercises;
 	}
 	
-	private ExerciseBean initializeExercise(Long id) throws ServletException{
+	private ExerciseBean initializeExercise(Long id, HttpServletResponse response) throws ServletException{
 		ExerciseBean exercise = new ExerciseBean();
 		
 		try(Connection con = ds.getConnection();
@@ -170,6 +177,7 @@ public class ExerciseServlet extends HttpServlet {
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs != null && rs.next()) {
+					
 					
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
@@ -200,15 +208,16 @@ public class ExerciseServlet extends HttpServlet {
 		return exercise;
 	}
 	
-	private void createExcercise(ExerciseBean exercise) throws ServletException{
+	private void createExcercise(ExerciseBean exercise, Part filepart) throws ServletException{
 		String[] generatedKeys = new String[] {"id"};
+		
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
-														+ "(name, muscleGroup)"
-														+ "VALUES (?, ?)", generatedKeys))
+														+ "(name, muscleGroup, exerciseImage)"
+														+ "VALUES (?, ?, ?)", generatedKeys))
 		{
 			LinkedList<ExerciseBean> exercises = getListOfExercises();
-			System.out.println("---------------------"+exercises.size()+"----------");
+			//System.out.println("---------------------"+exercises.size()+"----------");
 			for(ExerciseBean checkExer: exercises)
 			{
 				if (checkExer.getName().toLowerCase()
@@ -224,6 +233,7 @@ public class ExerciseServlet extends HttpServlet {
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
+			stmtExercise.setBinaryStream(3, filepart.getInputStream());
 			stmtExercise.executeUpdate();
 			//stmtExercise.setLong(3, exercise.getTrainigsId);
 			
