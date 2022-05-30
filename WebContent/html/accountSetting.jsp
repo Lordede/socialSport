@@ -12,6 +12,7 @@
         <meta name="author" content="Cem Durmus">
     </head>
     <body>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
     
         <header>
         	<noscript> <h1> Bitte aktivieren Sie Javascript, da die Website sonst nicht funktioniert! </h1> </noscript>

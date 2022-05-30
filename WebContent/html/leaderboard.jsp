@@ -6,8 +6,11 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="leaderboard">
         <meta name="keywords" content="best leader leaderboard">
+        <!-- Basis für relative Verweise -> Basis = Speicherort -->
+		<base href="${pageContext.request.requestURI}" />
     </head>
     <body>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
         <header>
             <h1><strong>Leaderboard: </strong></h1>
             <input type="search" 

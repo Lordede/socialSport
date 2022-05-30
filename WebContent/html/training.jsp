@@ -3,17 +3,22 @@
 
 <head>
 <link rel="stylesheet" href="../css/uebungen.css">
-<!-- href nach konvertierung zu jsp anpassen -->
-<!--<base href="${pageContext.request.requestURI}" /> -->
-<!-- Nach konvertierung zu jsp => uncomment -->
+
+<base href="${pageContext.request.requestURI}" />
+
 <meta charset="utf-8">
 <title>Ãœbungen</title>
 </head>
 
 <body>
+	<%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
 	<header>
-	 <noscript> <h1> Bitte aktivieren Sie Javascript, da die Website sonst nicht funktioniert! </h1> </noscript>
-	 Social Sport</header>
+		<noscript>
+			<h1>Bitte aktivieren Sie Javascript, da die Website sonst nicht
+				funktioniert!</h1>
+		</noscript>
+		Social Sport
+	</header>
 
 	<main>
 		<!--TODO: Logik hinzufuegen-->
