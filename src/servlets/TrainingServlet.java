@@ -67,9 +67,9 @@ public class TrainingServlet extends HttpServlet {
 		
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
-		training.setTrainingsPlanId(Long.parseLong(request.getParameter("trainingsplanId")));
+		training.setUserId(Long.parseLong(request.getParameter("userId")));
 				
-		addExercise(training);
+		create(training);
 		request.setAttribute("training", training);
 		doGet(request, response);
 	}
@@ -134,7 +134,7 @@ public class TrainingServlet extends HttpServlet {
 					form.setName(rs.getString("name"));
 					form.setId(rs.getLong("id"));
 					form.setPoints(rs.getDouble("points"));
-					form.setTrainingsPlanId(rs.getLong("trainingsplanId"));
+					form.setUserId(rs.getLong("userId"));
 					
 				}
 			}
@@ -144,13 +144,13 @@ public class TrainingServlet extends HttpServlet {
 		return form;
 	}
 	
-	private List<TrainingBean> search(Long trainingsplanId) throws ServletException{
+	private List<TrainingBean> search(Long userId) throws ServletException{
 		List<TrainingBean> trainings = new ArrayList<TrainingBean>();
 		
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE userId = ?")){
 			
-			pstmt.setLong(0, trainingsplanId);
+			pstmt.setLong(0, userId);
 			
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
@@ -162,7 +162,7 @@ public class TrainingServlet extends HttpServlet {
 					
 					training.setId(id);
 					training.setName(name);
-					training.setTrainingsPlanId(trainingsplanId);
+					training.setUserId(userId);
 					
 					trainings.add(training);
 				}
@@ -179,11 +179,11 @@ public class TrainingServlet extends HttpServlet {
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"
-														+ "(name, points, trainingsplanId) "
+														+ "(name, points, userId) "
 														+ "VALUES (?, ?, ?)", generatedKeys)){
 			pstmt.setString(1, form.getName());
 			pstmt.setDouble(2, form.getPoints());
-			pstmt.setLong(3, form.getTrainingsPlanId());
+			pstmt.setLong(3, form.getUserId());
 			
 			pstmt.executeUpdate();
 			

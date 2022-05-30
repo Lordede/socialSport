@@ -11,17 +11,15 @@ public class TrainingBean implements Serializable
 	private String name;
 	private List<ExerciseBean> exercises;
 	private double points;
-	private Long trainingsPlanId;
+	private Long userId;
 	
 	
-	
-	public Long getTrainingsPlanId() {
-		return trainingsPlanId;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setTrainingsPlanId(Long trainingsPlanId) {
-		this.trainingsPlanId = trainingsPlanId;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	
 	public Long getId() {
 		return id;
 	}
