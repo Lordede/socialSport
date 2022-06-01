@@ -5,3 +5,4 @@ CREATE Table trainingsplan(
     PRIMARY KEY (id),
     FOREIGN KEY (userId) REFERENCES users(id)
    )
+   

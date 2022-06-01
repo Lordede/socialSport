@@ -17,8 +17,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-//Created by Cem inspired by Volker Stiehl
-//special thanks to hubertus seitz and not to Lukas edmüller what a morone
+//Created by Cem inspired by Volker Stiehl <3
+//special thanks to hubertus seitz and not to Lukas edmüller what a morone 
+// hahaha  ~H
 /**
  * Servlet implementation class BildServlet
  */
@@ -27,20 +28,16 @@ public class BildServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
 	private DataSource ds;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+  
     public BildServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+
 		request.setCharacterEncoding("UTF-8");
 		Long id = Long.valueOf(request.getParameter("id"));
 		try (Connection con = ds.getConnection();

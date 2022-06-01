@@ -85,7 +85,7 @@ public class ExerciseServlet extends HttpServlet {
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		ExerciseBean exercise = initializeExercise(userBean.getId(), response);
 		updateExercise(exercise);
-		session.setAttribute("excercise", exercise);
+		session.setAttribute("excercise", exercise); //TODO: warum das?
 		//update()
 	}
 	

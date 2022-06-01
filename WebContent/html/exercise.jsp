@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!--Um hier reinzukommen erst Passwort abfrage-->
 <html lang="de">
     <head>
     <base href="${pageContext.request.requestURI}"  /> <!-- Ganz wichtig damit die jsp auch logisch da liegt wo sie isch im Dateisystem befindet -->
            <title>
-            Ãœbung
+            Üœbung
         </title>
         <meta charset="UTF-8">
         <meta name="description" content="Ihre one stop Sport Plattform">
@@ -12,23 +11,24 @@
         <meta name="author" content="Cem Durmus">
     </head>
     <body>
+<%--    <%@ include file="fragments/authenticationCheck.jspf"%>  //Uncomment after merging LoginWall2.0 --%> 
         <header>
             <h1>Profil Bearbeiten</h1>
         </header>
         <article>
-            <h2>Ãœbung erstellen: </h2>
+            <h2>Übung erstellen: </h2>
             <form class="ChangeUsername" action="../ExerciseServlet" method="post" enctype="multipart/form-data" accept-charset="utf-8">
             <div class="name">														
-                <p>Name der Ãœbung:</p>
+                <p>Name der Üœbung:</p>
         		<input type="text" name="exerciseName" size="30" maxlength="35"><br>
              </div> 
             <div>
             <fieldset>
-            <legend>Muskelgruppe wÃ¤hlen: </legend>
+            <legend>Muskelgruppe wählen: </legend>
             <input type="checkbox" name="muscleGroup" value="Beinmuskulatur" id="c1">
             <label for="c1">Beinmuskulatur</label>
             <input type="checkbox" name="muscleGroup" value="RÃ¼ckenmuskulatur" id="c2">
-            <label for="c2">RÃ¼ckenmuskulatur</label>
+            <label for="c2">Rückenmuskulatur</label>
             <input type="checkbox" name="muscleGroup" value="Armmuskulatur" id="c3">
             <label for="c3">Armmuskulatur</label>
             <input type="checkbox" name="muscleGroup" value="Brustmuskulatur" id="c4">
@@ -42,7 +42,7 @@
                          formaction="../ExerciseServlet"
                          formmethod="post">
             </div>
-            <Button type="submit">Ãœbung Erstellen</Button>
+            <Button type="submit">Übung Erstellen</Button>
             <p> Profilbild ändern: </p>
                         
 <!--                     	<button type="submit" -->

@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
  * Servlet implementation class TrainingServlet
  */
 @WebServlet("/TrainingServlet")
-public class TrainingPlanServlet extends HttpServlet {
+public class Debrecated_TrainingPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	// Verbindung zur Datenbank deklarieren
@@ -33,7 +33,7 @@ public class TrainingPlanServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TrainingPlanServlet() {
+    public Debrecated_TrainingPlanServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

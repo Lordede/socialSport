@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
-import beans.RegistrationFormBean;
+
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;

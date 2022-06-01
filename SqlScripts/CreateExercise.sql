@@ -4,6 +4,6 @@ CREATE Table exercises(
     musclegroupId int,
     trainingId int NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (trainingId) REFERENCES trainings(id)
+    FOREIGN KEY (trainingId) REFERENCES trainings(id),
     FOREIGN KEY (musclegroupId) REFERENCES musclegroups(id)
    )

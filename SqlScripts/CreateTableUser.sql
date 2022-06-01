@@ -1,5 +1,3 @@
-// Einfachst mögliche Tabelle zum testen.
-
 CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email varchar(255) UNIQUE,
@@ -7,4 +5,5 @@ CREATE TABLE IF NOT EXISTS users (
     firstname varchar(255),
     lastname varchar(255),
     pwd varchar(255),
+    isAdmin boolean
 );
