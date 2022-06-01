@@ -10,7 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import beans.SetBean;
-import beans.TrainingsplanBean;
+import beans.TrainingExerciseSetJoinBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -55,7 +55,9 @@ public class SetServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		
-		//SetBean set = read(userBean.getId());
+		List<TrainingExerciseSetJoinBean> sets = getSets(userBean.getId());
+		
+		
 		
 		//TODO: read muss über id erfolgen
 		//TODO: search muss über exerciseId erfolgen
@@ -129,7 +131,7 @@ public class SetServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-	
+		
 	private SetBean read(Long id) throws ServletException{
 		SetBean form = new SetBean();
 		
@@ -150,6 +152,57 @@ public class SetServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 		return form;
+	}
+
+	private List<TrainingExerciseSetJoinBean> getSets(Long userId) throws ServletException{
+		List<TrainingExerciseSetJoinBean> joinBeans = new ArrayList<TrainingExerciseSetJoinBean>();
+		
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("SELECT sets.id, kg, rep, exerciseId, exercises.name AS exerciseName, muscleGroup, exerciseImage, trainingId, trainings.name as trainingName, points, userId\r\n"
+						+ "FROM sets\r\n"
+						+ "JOIN exercises ON sets.exerciseId = exercises.id\r\n"
+						+ "JOIN trainings ON sets.trainingId = trainings.id\r\n"
+						+ "WHERE userId = ?")){
+				
+				pstmt.setLong(1, userId);
+				try(ResultSet rs = pstmt.executeQuery()){
+					while(rs.next()) {
+						TrainingExerciseSetJoinBean joinBean = new TrainingExerciseSetJoinBean();
+						
+						Long id = Long.valueOf(rs.getLong("id"));
+						double kg = Double.valueOf(rs.getDouble("kg"));
+						int rep = Integer.valueOf(rs.getInt("rep"));
+						Long exerciseId = Long.valueOf(rs.getLong("exerciseId"));
+						String exerciseName = rs.getString("exerciseName");
+						String muscleGroup = rs.getString("muscleGroup");
+						String exerciseImage = rs.getString("exerciseImage");
+						Long trainingId = Long.valueOf(rs.getLong("trainingId"));
+						String trainingName = rs.getString("trainingName");
+						double points = Double.valueOf(rs.getDouble("points"));
+						
+						
+						
+						joinBean.setId(id);
+						joinBean.setKg(kg);
+						joinBean.setRep(rep);
+						joinBean.setExerciseId(exerciseId);
+						joinBean.setExerciseName(exerciseName);
+						joinBean.setMuscleGroup(muscleGroup);
+						joinBean.setExerciseImage(exerciseImage);
+						joinBean.setTrainingId(trainingId);
+						joinBean.setTrainingName(trainingName);
+						joinBean.setPoints(points);
+						joinBean.setUserId(userId);
+						
+						joinBeans.add(joinBean);
+					}
+				}
+				
+			}catch (Exception ex) {
+				throw new ServletException(ex.getMessage());
+			}
+		
+		return joinBeans;
 	}
 	
 	private List<SetBean> search(Long exerciseId) throws ServletException{
