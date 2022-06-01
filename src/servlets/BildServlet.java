@@ -40,55 +40,94 @@ public class BildServlet extends HttpServlet {
         
     }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
-		request.setCharacterEncoding("UTF-8");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Servlet zum Auslesen eines Bildes aus einer DB und Rückgabe als binärer Datenstrom
+		request.setCharacterEncoding("UTF-8");	// In diesem Format erwartet das Servlet jetzt die Formulardaten
 		Long id = Long.valueOf(request.getParameter("id"));
+		 
+		if(id == null) {
+			System.out.println("ID ist NULL!");
+		}
+
+		
+		// DB-Zugriff
 		try (Connection con = ds.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT exerciseImage FROM exercises Where id = ?")) 
-		{
-			stmt.setLong(1, id);
-			try (ResultSet rs = stmt.executeQuery())
-			{
-				if (rs != null && rs.next()) 
-				{
+			 PreparedStatement pstmt = con.prepareStatement("SELECT exerciseImage FROM exercises Where id = ?") ) {
+			pstmt.setLong(1, id);
+			try (ResultSet rs = pstmt.executeQuery()) {
+			
+				if (rs != null && rs.next()) {
 					Blob bild = rs.getBlob("exerciseImage");
 					response.reset();
 					long length = bild.length();
-					response.setHeader("Content-Length", String.valueOf(length));
+					response.setHeader("Content-Length",String.valueOf(length));
 					
-					try (InputStream in = bild.getBinaryStream())
-					{
+					try (InputStream in = bild.getBinaryStream()) {
 						final int bufferSize = 256;
 						byte[] buffer = new byte[bufferSize];
 						
 						ServletOutputStream out = response.getOutputStream();
-						while ((length = in.read()) != -1) 
-						{
+						while ((length = in.read(buffer)) != -1) {
 							out.write(buffer,0,(int) length);
 						}
 						out.flush();
 					}
-					catch(Exception ex) 
-					{
-						throw new ServletException("1    "+ex.getMessage());
-					}
-				} 
+				}
 			}
-			catch(Exception ex) 
-			{
-				throw new ServletException("  2   "+ex.getMessage());
-			}
-//			RequestDispatcher disp = request.getRequestDispatcher("html/success.jsp");
-//			disp.forward(request, response);
-		}
-		catch (Exception ex) 
-		{
-			throw new ServletException(" ---- 3 ----"+ex.getMessage());
+		} catch (Exception ex) {
+			throw new ServletException(ex.getMessage());
 		}
 	}
+
+	
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//
+//		request.setCharacterEncoding("UTF-8");
+//		Long id = Long.valueOf(request.getParameter("id"));
+//		try (Connection con = ds.getConnection();
+//				PreparedStatement stmt = con.prepareStatement("SELECT exerciseImage FROM exercises Where id = ?")) 
+//		{
+//			stmt.setLong(1, id);
+//			try (ResultSet rs = stmt.executeQuery())
+//			{
+//				if (rs != null && rs.next()) 
+//				{
+//					Blob bild = rs.getBlob("exerciseImage");
+//					response.reset();
+//					long length = bild.length();
+//					response.setHeader("Content-Length", String.valueOf(length));
+//					
+//					try (InputStream in = bild.getBinaryStream())
+//					{
+//						final int bufferSize = 256;
+//						byte[] buffer = new byte[bufferSize];
+//						
+//						ServletOutputStream out = response.getOutputStream();
+//						while ((length = in.read()) != -1) 
+//						{
+//							out.write(buffer,0,(int) length);
+//						}
+//						out.flush();
+//					}
+//					catch(Exception ex) 
+//					{
+//						throw new ServletException("1    "+ex.getMessage());
+//					}
+//				} 
+//			}
+//			catch(Exception ex) 
+//			{
+//				throw new ServletException("  2   "+ex.getMessage());
+//			}
+////			RequestDispatcher disp = request.getRequestDispatcher("html/success.jsp");
+////			disp.forward(request, response);
+//		}
+//		catch (Exception ex) 
+//		{
+//			throw new ServletException(" ---- 3 ----"+ex.getMessage());
+//		}
+//	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -12,7 +12,7 @@
 	<div>
 	<h1>${exercise.name}</h1><br>
 	<h2>${exercise.muscleGroup}</h2><br>
-	<br><img src="../BildServlet?id=${exercise.id}">
+	<br><img src="${pageContext.request.contextPath}/BildServlet?id=${exercise.id}">
 	</div>
 	
 </body>
