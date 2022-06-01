@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="${pageContext.request.requestURI}" />
+        <meta charset="UTF-8">
+        <meta name="description" content="Speichern Sie Ihre Traings hier">
+        <meta name="keywords" content="Sport, Training, Sommerfigur, Trainingserfolg">
+        <meta name="author" content="Cem Durmus">
+        <script type="text/javascript" src="../JavaScript/TriggerExerciseAdditon.js" defer></script>
+    </head>
+
+    <body>
+        <header id="sucheStarten">
+            <form class="addExercise">
+                <button id="addButton" type="submit" name="addExercise" value="clickme">Übung hinzufügen</button>
+            </form>
+            <script type="text/javascript">
+                let addButton = document.getElementById("addButton");
+                addButton.addEventListener('click', event => {toggleExerciseSearchbar()});
+            </script>
+        </header>
+        <article id="exerciseContainer">
+
+        </article>
+        <footer>
+        </footer>
+    </body>
+</html>
