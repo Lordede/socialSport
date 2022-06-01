@@ -65,12 +65,13 @@ public class ExerciseServlet extends HttpServlet {
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
-		Part filepart = request.getPart("exerciseImage");
+		Part filepart = request.getPart("image");
 		exerciseBean.setExerciseImage(filepart.getSubmittedFileName());
 		createExcercise(exerciseBean, filepart);
-		session.setAttribute("excercise", exerciseBean);
-		RequestDispatcher disp = request.getRequestDispatcher("./html/success.jsp");
-		disp.forward(request, response);
+		session.setAttribute("exercise", exerciseBean);
+//		RequestDispatcher disp = request.getRequestDispatcher("html/success.jsp");
+//		disp.forward(request, response);
+		response.sendRedirect("html/success.jsp");
 		//create(training);
 		
 		//doGet(request, response);
@@ -213,8 +214,8 @@ public class ExerciseServlet extends HttpServlet {
 		
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
-														+ "(name, muscleGroup, exerciseImage)"
-														+ "VALUES (?, ?, ?)", generatedKeys))
+														+ "(name, muscleGroup, exerciseImage, filename)"
+														+ "VALUES (?, ?, ?, ?)", generatedKeys))
 		{
 			LinkedList<ExerciseBean> exercises = getListOfExercises();
 			//System.out.println("---------------------"+exercises.size()+"----------");
@@ -233,6 +234,7 @@ public class ExerciseServlet extends HttpServlet {
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
+			stmtExercise.setString(4, exercise.getExerciseImage());
 			stmtExercise.setBinaryStream(3, filepart.getInputStream());
 			stmtExercise.executeUpdate();
 			//stmtExercise.setLong(3, exercise.getTrainigsId);

@@ -36,11 +36,12 @@
             <input type="checkbox" name="muscleGroup" value="Bauchmuskulatur" id="c5">
             <label for="c5">Bauchmuskulatur</label>
             </fieldset>
-            <input type="file"
-                         name="exerciseImage"
-                         accept="image/*"
-                         formaction="../ExerciseServlet"
-                         formmethod="post">
+            <input id="image" 
+            type="file"
+            name="image"
+            accept="image/*"
+            formaction="../ExerciseServlet"
+            formmethod="post">
             </div>
             <Button type="submit">Übung Erstellen</Button>
             <p> Profilbild ändern: </p>

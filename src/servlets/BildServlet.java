@@ -13,6 +13,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +25,11 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet implementation class BildServlet
  */
 @WebServlet("/BildServlet")
+@MultipartConfig(
+		maxFileSize=1024*1024*10,
+		maxRequestSize=1024*1024*10*10,
+		location= "/tmp",
+		fileSizeThreshold=1024*1024)
 public class BildServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
@@ -41,7 +47,7 @@ public class BildServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Long id = Long.valueOf(request.getParameter("id"));
 		try (Connection con = ds.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT file FROM exercises Where id = ?")) 
+				PreparedStatement stmt = con.prepareStatement("SELECT exerciseImage FROM exercises Where id = ?")) 
 		{
 			stmt.setLong(1, id);
 			try (ResultSet rs = stmt.executeQuery())
@@ -65,14 +71,22 @@ public class BildServlet extends HttpServlet {
 						}
 						out.flush();
 					}
-				}
+					catch(Exception ex) 
+					{
+						throw new ServletException("1    "+ex.getMessage());
+					}
+				} 
 			}
-			RequestDispatcher disp = request.getRequestDispatcher("html/success.jsp");
-			disp.forward(request, response);
+			catch(Exception ex) 
+			{
+				throw new ServletException("  2   "+ex.getMessage());
+			}
+//			RequestDispatcher disp = request.getRequestDispatcher("html/success.jsp");
+//			disp.forward(request, response);
 		}
 		catch (Exception ex) 
 		{
-			throw new ServletException(ex.getMessage());
+			throw new ServletException(" ---- 3 ----"+ex.getMessage());
 		}
 	}
 
