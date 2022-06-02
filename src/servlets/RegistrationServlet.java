@@ -127,7 +127,7 @@ public class RegistrationServlet extends HttpServlet {
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
 						"INSERT INTO users (email,username,firstName, lastname, pwd) VALUES(?,?,?,?,?)")) {
-
+			
 			// Datenbank Operationen
 			pstmt.setString(1, eMail);
 			pstmt.setString(2, userName);

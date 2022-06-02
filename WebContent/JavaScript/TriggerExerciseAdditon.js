@@ -8,20 +8,21 @@ function toggleExerciseSearchbar()
 {
     var insertableSearchbar = document.createElement('input');
     insertableSearchbar.setAttribute("id", "searchBar");
-    insertableSearchbar.setAttribute("type", "search");
+    insertableSearchbar.setAttribute("type", "text");
    // insertableSearchbar.setAttribute("click", showExercises);
     var parentElement = document.getElementById("toggleExerciseAddition");
-    var exerciseBox = showExercises;
+   
     parentElement.appendChild(insertableSearchbar);
-    parentElement.appendChild(exerciseBox);
-    console.log("funktioniert");
+    // showExercises;
+    //console.log("funktioniert 22");
 }
 
 function showExercises()
 {
     var exerciseInsert = document.createElement('div');
     exerciseInsert.setAttribute("id", "boxOfExercises");
-    exerciseInsert.innerHTML = CreateExercise.insertExercise();
-    return exerciseInsert;
+    parentElement.appendChild(insertableSearchbar);
+    // exerciseInsert.innerHTML = CreateExercise.insertExercise();
+    // return exerciseInsert;
     
 }

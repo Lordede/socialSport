@@ -7,36 +7,35 @@
         <meta name="keywords" content="Sport, Training, Sommerfigur, Trainingserfolg">
         <meta name="author" content="Cem Durmus">
         
-        <script type="text/javascript"  src="../JavaScript/TriggerExerciseAdditon.js" defer>
-        document.addEventListener("DOMContentLoaded", init);
-        function init()
-        {
-        	var element = document.getElementById("searchBar2");
-        	var button = document.getElementById("addButton");
-        	button.addEventListener('click', toggleExerciseSearchbar);
-        	
-        }
-        </script>
+        <script src="../JavaScript/TriggerExerciseAdditon.js" type="text/javascript"></script>
     </head>
 
     <body>
-        <header id="sucheStarten">
+        <header>
             <div id="toggleExerciseAddition">
                 <form class="addExercise">
-                    <button class="addButton" type="submit" name="addExercise" value="clickme" onclick="toggleExerciseSearchbar">Übung hinzufügen</button>
+                    <button id="addButton" type="submit">Übung hinzufügen</button>
                 </form>
+                <script>
+                    document.addEventListener("DOMContentLoaded", init);
+                    
+                    function init()
+                    {
+                        var button = document.getElementById("addButton");
+                        document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
+                        // button.addEventListener('click', toggleExerciseSearchbar);
+                        console.log("html spricht an");
+                    }
+                </script>
             </div>
         </header>
         <main>
-        <div id="exerciseContainer">
+        	<div id="exerciseContainer">
     
-        </div>
+        	</div>
         </main>
         <footer>
         </footer>
-        <script src="../JavaScript/TriggerExerciseAdditon.js">
-            var button = document.querySelector(".addButton");
-            button.addEventListener('click', toggleExerciseSearchbar);
-        </script>
+<!--         <script src="../JavaScript/TriggerExerciseAdditon.js">var button = document.querySelector(".addButton");button.addEventListener('click', toggleExerciseSearchbar);</script> -->
     </body>
 </html>
