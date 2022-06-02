@@ -9,15 +9,17 @@ function toggleExerciseSearchbar()
     var insertableSearchbar = document.createElement('input');
     insertableSearchbar.setAttribute("id", "searchBar");
     insertableSearchbar.setAttribute("type", "search");
-    insertableSearchbar.setAttribute("onkeydown", showExercises());
-    var parentElement = document.getElementById("sucheStarten");
+    insertableSearchbar.setAttribute("click", showExercises);
+    var parentElement = document.getElementById("searchBar2");
     parentElement.appendChild(insertableSearchbar);
+    console.log("funktioniert");
 }
 
 function showExercises()
 {
     var exerciseInsert = document.createElement('div');
-    insertableSearchbar.setAttribute("id", "boxOfExercises");
+    exerciseInsert.setAttribute("id", "boxOfExercises");
+    exerciseInsert.innerHTML = CreateExercise.insertExercise();
     var parent = document.getElementById("exerciseContainer");
     parent.appendChild(exerciseInsert);
     

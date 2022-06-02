@@ -13,7 +13,7 @@ function insertExercise()
     insertableBlock.setAttribute("id", "exercise" + counter(counter))
     insertableBlock.innerHTML = '<h2>' + exerciseName + '</h2>' +
                                 '<h3>'+'('+ muscleGroup +')'+'</h3>' +
-                               loadTable();
+                               loadTable;
     parent.appendChild(insertableBlock);
                                 
                                 
