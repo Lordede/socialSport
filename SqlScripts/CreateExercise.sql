@@ -3,5 +3,6 @@ CREATE Table exercises(
     name varchar(255) NOT NULL,
     muscleGroup varchar(255),
     exerciseImage MEDIUMBLOB,
+    filename varchar(255),
     PRIMARY KEY (id)
    )
