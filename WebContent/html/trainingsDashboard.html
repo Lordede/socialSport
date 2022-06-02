@@ -13,7 +13,7 @@
         {
         	var element = document.getElementById("searchBar2");
         	var button = document.getElementById("addButton");
-        	button.addEventListener('click', toggleExerciseSearchbar)
+        	button.addEventListener('click', toggleExerciseSearchbar);
         	
         }
         </script>
@@ -21,19 +21,22 @@
 
     <body>
         <header id="sucheStarten">
-            <form class="addExercise">
-                <button id="addButton" type="submit" name="addExercise" value="clickme">Übung hinzufügen</button>
-            </form>
-            <div id="searchBar2">
-            	
+            <div id="toggleExerciseAddition">
+                <form class="addExercise">
+                    <button class="addButton" type="submit" name="addExercise" value="clickme" onclick="toggleExerciseSearchbar">Übung hinzufügen</button>
+                </form>
             </div>
         </header>
-        <article>
+        <main>
         <div id="exerciseContainer">
-        
+    
         </div>
-        </article>
+        </main>
         <footer>
         </footer>
+        <script src="../JavaScript/TriggerExerciseAdditon.js">
+            var button = document.querySelector(".addButton");
+            button.addEventListener('click', toggleExerciseSearchbar);
+        </script>
     </body>
 </html>
