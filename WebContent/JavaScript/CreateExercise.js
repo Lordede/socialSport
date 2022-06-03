@@ -52,3 +52,28 @@ function counter(counter)
     counter++;
 }
 
+function addExercise(){
+
+    var article = document.createElement("article")
+    var h2 = document.createElement("h2")
+    var table = document.createElement("table")
+    var tr = document.createElement("tr")
+    var th = document.createElement("th")
+    var td = document.createElement("td")
+    
+    //Innerhalb von Exercises einen neuen <article> anlegen
+    exercises.appendChild(article)
+    article.setAttribute("class", "exercise elements")
+    
+    //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
+    article.appendChild(h2)
+    h2.innerText = "Test" // Muss man noch schaun, wie man da drauf zugreifen kann
+    
+    //Innerhalb der neuen <h2> einen <table> anlegen
+    h2.appendChild(table)
+    table.setAttribute("class", "exerciseTable")
+    
+    //geht das so einfach? -> Wäre schön da das ja eh nur statisch ist
+    table.innerHTML=("<tr><th>Satz</th><th>KG</th><th>Wiederholungen</th></tr>")
+  
+    }
