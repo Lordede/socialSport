@@ -8,14 +8,19 @@
         <meta name="author" content="Cem Durmus">
         
         <script type="text/javascript"  src="../JavaScript/TriggerExerciseAdditon.js" defer>
+
         document.addEventListener("DOMContentLoaded", init);
+        
         function init()
         {
-        	var element = document.getElementById("searchBar2");
-        	var button = document.getElementById("addButton");
-        	button.addEventListener('click', toggleExerciseSearchbar)
+        	var searchDefinedExercises = document.getElementById("searchDefinedExercises")
+        	
+            searchDefinedExercises.addEventListener("focus", showDefinedExercises())
+            searchDefinedExercises.addEventListener("keydown", getDefinedExercises())
+            searchDefinedExercises.addEventListener("blur", clearDefinedExercises)
         	
         }
+        
         </script>
     </head>
 
@@ -24,9 +29,11 @@
             <form class="addExercise">
                 <button id="addButton" type="submit" name="addExercise" value="clickme">Übung hinzufügen</button>
             </form>
-            <div id="searchBar2">
-            	
+            
+            <div id="ExerciseDropdown">
+                <button id="searchDefinedExercises">Hinzufügen</button>
             </div>
+            
         </header>
         <article>
         <div id="exerciseContainer">
