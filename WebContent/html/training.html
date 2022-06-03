@@ -4,7 +4,7 @@
     <meta name="author" content="Hubertus Seitz">
 
 <head>
-    <link rel="stylesheet" href="../css/uebungen.css"> <!-- href nach konvertierung zu jsp anpassen -->
+    
     <!--<base href="${pageContext.request.requestURI}" /> -->
     <!-- Nach konvertierung zu jsp => uncomment -->
     <meta charset="utf-8">
@@ -12,19 +12,34 @@
     <link rel="stylesheet" href="../css/training.css">
 
     <script>
-        document.addEventListener("DOMContentLoaded", init())
+    
+    function addExercise(name){
 
-        function init(){
-            var dropdownInhalte = document.getElementById(Uebungen)
+        var article = document.createElement("article")
+        var h2 = document.createElement("h2")
+        var table = document.createElement("table")
+        var tr = document.createElement("tr")
+        var th = document.createElement("th")
+        var td = document.createElement("td")
+        
+        //Innerhalb von Exercises einen neuen <article> anlegen
+        exercises.appendChild(article)
+        article.setAttribute("class", "exercise elements")
+        
+        //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
+        article.appendChild(h2)
+        h2.innerText = name // Muss man noch schaun, wie man da drauf zugreifen kann
+        
+        //Innerhalb der neuen <h2> einen <table> anlegen
+        h2.appendChild(table)
+        table.setAttribute("class", "exerciseTable")
+        
+        //geht das so einfach? -> Wäre schön da das ja eh nur statisch ist
+        table.innerHTML=("<tr><th>Satz</th><th>KG</th><th>Wiederholungen</th></tr>")
+      
         }
-
-        function getExercises(){
-
-            
-
-        }
-
     </script>
+
 
 
 
@@ -107,13 +122,27 @@
                 </form>	
     </aside>
 
-    <div class="clear"></div>
+     <div class="clear"></div> 
 
-    <div>
-        <p><button class="button" id="cancelWorkout">Workout abbrechen</button></p>
+    <div id="buttons">
+        <button class="button" id="cancelWorkout">Workout abbrechen</button>
+        <button class="button" id="test">Test</button>
     </div>
 
-    <footer>Hier generischen Footer einfügen</footer> <!--Hier generischen Footer einfügen-->
+    <footer>Hier generischen Footer einfügen</footer> <!--Hier generischen Footer einfügen -->
 </body>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", init())
+
+    function init(){
+
+        var testbutton = document.getElementById("test")
+        testbutton.addEventListener("click", addExercise("Test"))
+    }
+
+       
+</script>
 
 </html>
