@@ -76,33 +76,42 @@ function addExercise(){
     var satztd    =  document.createElement("td");
     var kgtd      =  document.createElement("td");
     var whdtd     =  document.createElement("td");
+    var checktd   =  document.createElement("td")
     satztd.innerHTML = counter; 
     counter++;
     
+    //Feld um Gewicht einzutragen
     var kg = document.createElement("input");
     kg.setAttribute("placeholder", "Gewicht");
     kgtd.appendChild(kg);
 
+    //Feld um whd einzutragen
     var whd = document.createElement("input");
     whd.setAttribute("placeholder","Wiederholungen");
     whdtd.appendChild(whd);
 
+    //Button um Set abzuschließen
+    var check = document.createElement("input");
+    check.setAttribute("type", "checkbox");
+    //check.setAttribute("checked", "off");
+    checktd.appendChild(check);
+
     tr.appendChild(satztd);
     tr.appendChild(kgtd);
     tr.appendChild(whdtd);
+    tr.appendChild(checktd);
 
     var setButton = document.createElement("button");
     setButton.setAttribute("class", "button setbutton");
     setButton.innerHTML = "Set hinzufügen";
 
-    article.appendChild(setButton);
-
+    article.appendChild(setButton); //
     }
 
     // Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
     function addSet(){
 
-        
+
         
 
     }
