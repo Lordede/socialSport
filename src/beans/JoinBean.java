@@ -1,8 +1,8 @@
 package beans;
 
 import java.io.Serializable;
-
-public class TrainingExerciseSetJoinBean implements Serializable{
+// von Lukas Edmüller
+public class JoinBean implements Serializable{
 
 	private static final long serialVersionID = 1L;
 	
