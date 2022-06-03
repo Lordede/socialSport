@@ -43,37 +43,66 @@ function loadTable() //Content injetion
     parent.appendChild('exercise');
 } 
 
-function fillSet(setData)
-{
-
-}
-function counter(counter)
-{
-    counter++;
-}
+// author: Hubertus
 
 function addExercise(){
 
-    var article = document.createElement("article")
-    var h2 = document.createElement("h2")
-    var table = document.createElement("table")
-    var tr = document.createElement("tr")
-    var th = document.createElement("th")
-    var td = document.createElement("td")
+    var article = document.createElement("article");
+    var h2 = document.createElement("h2");
+    var table = document.createElement("table");
+    var tr = document.createElement("tr");
+    var th = document.createElement("th");
+    var td = document.createElement("td");
+
+    var counter = 1;
     
     //Innerhalb von Exercises einen neuen <article> anlegen
-    exercises.appendChild(article)
-    article.setAttribute("class", "exercise elements")
+    exercises.appendChild(article);
+    article.setAttribute("class", "exercise elements");
     
     //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
-    article.appendChild(h2)
-    h2.innerText = "Test" // Muss man noch schaun, wie man da drauf zugreifen kann
+    article.appendChild(h2);
+    h2.innerText = "Test" // TODO: Hier muss 
     
     //Innerhalb der neuen <h2> einen <table> anlegen
-    h2.appendChild(table)
-    table.setAttribute("class", "exerciseTable")
+    h2.appendChild(table);
+    table.setAttribute("class", "exerciseTable");
     
-    //geht das so einfach? -> Wäre schön da das ja eh nur statisch ist
-    table.innerHTML=("<tr><th>Satz</th><th>KG</th><th>Wiederholungen</th></tr>")
-  
+    //Statisch die Headzeile einfügen
+    table.innerHTML=("<tr><th>Satz</th><th>KG</th><th>Wiederholungen</th></tr>");
+
+    //Leere Zeile für  den ersten Set einfügen
+    table.appendChild(tr);
+    var satztd    =  document.createElement("td");
+    var kgtd      =  document.createElement("td");
+    var whdtd     =  document.createElement("td");
+    satztd.innerHTML = counter; 
+    counter++;
+    
+    var kg = document.createElement("input");
+    kg.setAttribute("placeholder", "Gewicht");
+    kgtd.appendChild(kg);
+
+    var whd = document.createElement("input");
+    whd.setAttribute("placeholder","Wiederholungen");
+    whdtd.appendChild(whd);
+
+    tr.appendChild(satztd);
+    tr.appendChild(kgtd);
+    tr.appendChild(whdtd);
+
+    var setButton = document.createElement("button");
+    setButton.setAttribute("class", "button setbutton");
+    setButton.innerHTML = "Set hinzufügen";
+
+    article.appendChild(setButton);
+
+    }
+
+    // Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
+    function addSet(){
+
+        
+        
+
     }
