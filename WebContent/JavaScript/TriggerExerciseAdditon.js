@@ -10,7 +10,7 @@ function toggleExerciseSearchbar()
     insertableSearchbar.setAttribute("id", "searchBar");
     insertableSearchbar.setAttribute("type", "text");
    // insertableSearchbar.setAttribute("click", showExercises);
-    var parentElement = document.getElementById("toggleExerciseAddition");
+    var parentElement = document.getElementById("addExercise");
    
     parentElement.appendChild(insertableSearchbar);
     // showExercises;
