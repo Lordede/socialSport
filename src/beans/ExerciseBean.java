@@ -1,6 +1,7 @@
 package beans;
 //Erstellt von Cem Durmus
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.awt.Image;
 
@@ -24,7 +25,15 @@ public class ExerciseBean implements Serializable
 //	}
 
 	private Image exerciseImage;
+	private Date creationDate;
 	
+	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	public Long getId() {
 		return id;
 	}

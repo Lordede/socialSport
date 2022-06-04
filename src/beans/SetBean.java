@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class SetBean implements Serializable {
 	
@@ -13,8 +14,14 @@ public class SetBean implements Serializable {
 	private int rep;
 	private Long exerciseId;
 	private Long trainingId;
+	private Date creationDate;
 	
-	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	public Long getExerciseId() {
 		return exerciseId;
 	}

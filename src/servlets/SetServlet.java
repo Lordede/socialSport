@@ -5,12 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import beans.SetBean;
-import beans.TrainingsplanBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -73,6 +73,7 @@ public class SetServlet extends HttpServlet {
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
 		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
 		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
+		set.setCreationDate(new Date());
 				
 		create(set);
 		
@@ -143,6 +144,7 @@ public class SetServlet extends HttpServlet {
 					form.setKg(rs.getDouble("kg"));
 					form.setExerciseId(rs.getLong("exerciseId"));
 					form.setTrainingId(rs.getLong("trainingId"));
+					form.setCreationDate(rs.getDate("creationDate"));
 					
 				}
 			}
@@ -167,6 +169,7 @@ public class SetServlet extends HttpServlet {
 					double kg = Double.valueOf(rs.getDouble("kg"));
 					int rep = Integer.valueOf(rs.getInt("rep"));
 					Long trainingId = Long.valueOf(rs.getLong("trainingId"));
+					Date creationDate = rs.getDate("creationDate");
 					
 					
 					set.setId(id);
@@ -190,12 +193,13 @@ public class SetServlet extends HttpServlet {
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sets"
-														+ "(rep, kg, exerciseId, trainingId) "
-														+ "VALUES (?, ?, ?, ?)", generatedKeys)){
+														+ "(rep, kg, exerciseId, trainingId, creationDate) "
+														+ "VALUES (?, ?, ?, ?, ?)", generatedKeys)){
 			pstmt.setInt(1, form.getRep());
 			pstmt.setDouble(2, form.getKg());
 			pstmt.setLong(3, form.getExerciseId());
 			pstmt.setLong(4, form.getTrainingId());
+			pstmt.setDate(5, (java.sql.Date) form.getCreationDate());
 			
 			pstmt.executeUpdate();
 			

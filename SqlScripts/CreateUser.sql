@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS users (
     lastname varchar(255),
     pwd varchar(255),
     isAdmin boolean,
+    creationDate datetime NOT NULL,
     profilePicture MEDIUMBLOB
 );

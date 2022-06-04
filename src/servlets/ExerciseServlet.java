@@ -4,16 +4,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import beans.ExerciseBean;
-import beans.SetBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -60,6 +58,7 @@ public class ExerciseServlet extends HttpServlet {
 		ExerciseBean exerciseBean = new ExerciseBean();
 		exerciseBean.setName(request.getParameter("exerciseName"));
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
+		exerciseBean.setCreationDate(new Date());
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		createExcercise(exerciseBean);
@@ -150,6 +149,7 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
+					exercise.setCreationDate(rs.getDate("creationDate"));
 					exercises.add(exercise);
 				}
 			}
@@ -174,6 +174,7 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
+					exercise.setCreationDate(rs.getDate("creationDate"));
 					
 //					List<SetBean> setList = new LinkedList<>();
 //					
@@ -204,8 +205,8 @@ public class ExerciseServlet extends HttpServlet {
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
-														+ "(name, muscleGroup, trainingId)"
-														+ "VALUES (?, ?, ?)", generatedKeys))
+														+ "(name, muscleGroup, trainingId, creationDate)"
+														+ "VALUES (?, ?, ?, ?)", generatedKeys))
 		{
 			LinkedList<ExerciseBean> exercises = getListOfExercises();
 			System.out.println("---------------------"+exercises.size()+"----------");
@@ -224,6 +225,7 @@ public class ExerciseServlet extends HttpServlet {
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
+			stmtExercise.setDate(3, (java.sql.Date) exercise.getCreationDate());
 			stmtExercise.executeUpdate();
 			//stmtExercise.setLong(3, exercise.getTrainigsId);
 			

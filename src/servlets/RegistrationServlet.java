@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.Enumeration;
 
 import javax.sql.DataSource;
@@ -59,6 +60,8 @@ public class RegistrationServlet extends HttpServlet {
 		form.setFirstName(firstName);
 		final String lastName = request.getParameter("lastName");
 		form.setLastName(lastName);
+		final Date creationDate = new Date();
+		form.setCreationDate(creationDate);
 		//final String password = request.getParameter("password");
 		//form.setPassword(password);
 
@@ -83,7 +86,7 @@ public class RegistrationServlet extends HttpServlet {
 		if (!errorFound)
 		{
 
-			createNewUser(eMail, userName, firstName, lastName, password); 	// User in Datenbank schreiben
+			createNewUser(eMail, userName, firstName, lastName, password, creationDate); 	// User in Datenbank schreiben
 			form.setId(getUserId(form.getUsername()));						// generierte id aus Datenbank auslesen
 			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect richtig, da auf DB schreibend zugegriffen wird.
 			
@@ -123,10 +126,10 @@ public class RegistrationServlet extends HttpServlet {
 	 * @author Hubertus Seitz
 	 */
 	
-	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password ) throws ServletException { // Funktion zum anlegen eines Users
+	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password, Date creationDate ) throws ServletException { // Funktion zum anlegen eines Users
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
-						"INSERT INTO users (email,username,firstName, lastname, pwd) VALUES(?,?,?,?,?)")) {
+						"INSERT INTO users (email,username,firstName, lastname, pwd, creationDate) VALUES(?,?,?,?,?,?)")) {
 
 			// Datenbank Operationen
 			pstmt.setString(1, eMail);
@@ -134,6 +137,7 @@ public class RegistrationServlet extends HttpServlet {
 			pstmt.setString(3, firstName);
 			pstmt.setString(4, lastName);
 			pstmt.setString(5, password);
+			pstmt.setString(6, creationDate.toString());
 			pstmt.executeUpdate();
 			
 
