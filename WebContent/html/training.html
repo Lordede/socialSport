@@ -32,13 +32,13 @@
         <!--TODO: Logik hinzufuegen-->
     
         <article class ="exercise elements">
-            <h2>Bench Press</h2>
+            <h2 class = "ExerciseHeadline">Bench Press</h2>
             <!-- Uebung 1 (Spaeter sollen dynamisch immer weitere Uebungen 
                  hinzugefuegt werden koennen. Jede Uebung neue table oder neuer article?)-->
             <table class="exerciseTable">
                 <!-- Soll der Button der den Satz als fertig kennzeichnet teil der Tabelle sein
                      oder nicht? -->
-                <tr>
+                <tr class = "headLineTable">
                     <th>Satz</th>
                     <th>KG</th>
                     <th>Wiederholungen</th>
@@ -102,12 +102,18 @@
 
     <script>
 
-        document.addEventListener("DOMContentLoaded", init)
+        document.addEventListener("DOMContentLoaded", init);
        
            function init(){
        
-               var testbutton = document.getElementById("test")
-               testbutton.addEventListener('click', addExercise) // man darf keinen scheiss Paramter übergeben
+               var testbutton = document.getElementById("test");
+               testbutton.addEventListener("click", addExercise); //KEINE "()"" bei Methode und bei CallBack darf kein Paramter haben!
+
+               var addSetButton = document.getElementsByClassName("addSet");    // Alle "SetButton" überwachen
+
+               for(var i=0; i<addSetButton.length; i++){                        // Alle "SetButton" mit EventListener überwachen
+                   addSetButton[i].addEventListener("click", addSet)
+               }
                
            }          
        </script>
