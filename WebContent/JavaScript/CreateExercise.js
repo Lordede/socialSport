@@ -13,8 +13,6 @@ function addExercise() {
     var th = document.createElement("th");
     var td = document.createElement("td");
 
-    var counter = 1; // TODO: darüber wirklich die Anazhl der Sätze tracken?
-
     //Innerhalb von Exercises einen neuen <article> anlegen
     exercises.appendChild(article);
     article.setAttribute("class", "exercise elements");
@@ -71,10 +69,11 @@ function getExerciseReference() {
     */
 
 }
-function addSet(callingExercise) {
+function addSet(callingTable) {
     var tr = document.createElement("tr");
+    var numberOfChildren = callingTable.children.length;
 
-    callingExercise.appendChild(tr);
+    callingTable.appendChild(tr);
 
     //Erstellung der Table Data Elemente
     var satztd = document.createElement("td");
@@ -83,7 +82,7 @@ function addSet(callingExercise) {
     var checktd = document.createElement("td");
 
 
-    satztd.innerHTML = "#"; //TODO: Satznummer hinzufügen!
+    satztd.innerHTML = numberOfChildren;  //TODO: Satznummer hinzufügen!
 
     //Feld um Gewicht einzutragen
     var kg = document.createElement("input");
