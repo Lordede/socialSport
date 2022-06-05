@@ -40,8 +40,8 @@ header {
 }
 
 #buttons {
-    float: right;
-    margin: 2cm;
+    float: left;
+    margin-left: 1cm;
 }
 
 #resultList {
@@ -51,14 +51,13 @@ header {
 
 }
 
-/* #addButton{
-    float: left;
-} */
+
 #cancelWorkout {
     background-color: #ef3506;
 }
-
-
+h2{
+    padding: 5px;
+}
 .button {
 
     margin: 5px;
@@ -80,6 +79,7 @@ header {
     border-collapse: collapse;
     background-color: #b3cde5;
     border-radius: 10px;
+    font-size: 120%;
 
 }
 
@@ -101,7 +101,6 @@ th {
     text-align: left;
     border-style: hidden;
 
-
 }
 
 td {
@@ -118,8 +117,7 @@ td {
 
 .button.addSet {
 
-    margin-left: 2.5cm;
-
+    width: 100%; /* -> 100% of article  */
 }
 
 footer {

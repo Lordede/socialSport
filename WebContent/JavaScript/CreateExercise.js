@@ -19,12 +19,12 @@ function addExercise() {
 
     //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
     article.appendChild(h2);
-    h2.innerText = "Test" // TODO: Dynamisch richtigen Namen einfügen
+    h2.innerText = new Date().getTime(); // TODO: Dynamisch richtigen Namen einfügen
     article.setAttribute("name", h2.innerHTML)
     h2.setAttribute("class", "ExerciseHeadline");
 
     //Innerhalb der neuen <h2> einen <table> anlegen
-    h2.appendChild(table);
+    article.appendChild(table);
     table.setAttribute("class", "exerciseTable");
 
     //Statisch die Headzeile einfügen
@@ -55,8 +55,8 @@ function getExerciseReference() {
     var callingTable = document.getElementsByName(NameOfcallingExercise); //Liste der Übungen mit dem Namen
     var callingTable = callingTable[0];// Verweis auf Article          //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
 
-    var callingTable = callingTable.children[0]; // -> h2!
-    var callingTable = callingTable.children[0]; // -> table!
+    //var callingTable = callingTable.children[0]; // -> h2!
+    var callingTable = callingTable.children[1]; // -> table!
 
     addSet(callingTable)
 
@@ -82,7 +82,7 @@ function addSet(callingTable) {
     var checktd = document.createElement("td");
 
 
-    satztd.innerHTML = numberOfChildren;  //TODO: Satznummer hinzufügen!
+    satztd.innerHTML = numberOfChildren; 
 
     //Feld um Gewicht einzutragen
     var kg = document.createElement("input");
