@@ -32,49 +32,19 @@ function addExercise() {
     //Statisch die Headzeile einfügen
     table.innerHTML = ("<tr class =\"headLineTable\"><th>Satz</th><th>KG</th><th>Wiederholungen</th></tr>");
 
-    //Leere Zeile für  den ersten Set einfügen
-    table.appendChild(tr);
-    var satztd = document.createElement("td");
-    var kgtd = document.createElement("td");
-    var whdtd = document.createElement("td");
-    var checktd = document.createElement("td");
-    satztd.innerHTML = "#"; //TODO: Satznummer hinzufügen!
-
-    //Feld um Gewicht einzutragen
-    var kg = document.createElement("input");
-    kg.setAttribute("placeholder", "Gewicht");
-    kgtd.appendChild(kg);
-
-    //Feld um whd einzutragen
-    var whd = document.createElement("input");
-    whd.setAttribute("placeholder", "Wiederholungen");
-    whdtd.appendChild(whd);
-
-    //Button um Set abzuschließen
-    var check = document.createElement("input");
-    check.setAttribute("type", "checkbox");
-    //check.setAttribute("checked", "off");
-    checktd.appendChild(check);
-
-    tr.appendChild(satztd);
-    tr.appendChild(kgtd);
-    tr.appendChild(whdtd);
-    tr.appendChild(checktd);
-
     var setButton = document.createElement("button");
     setButton.setAttribute("class", "button addSet");
     setButton.innerHTML = "Satz hinzufügen";
+    article.appendChild(setButton);
 
+    addSet(table)
 
-    article.appendChild(setButton); //
-    //setButton.setAttribute("name", setButton.parentNode) 
     init(); // Damit auch ein EventListener auf dem neuen Button gesetzt wird
 }
 
 // Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
-function addSet() {
+function getExerciseReference() {
 
-    console.log("CallingButton: " + this.parentNode.getAttribute("name")); // Kann man so feststellen, von welchem Button die Methode aufgerufden wurde?
     let NameOfcallingExercise = this.parentNode.getAttribute("name");      // Name der Übung
 
     /*
@@ -84,16 +54,24 @@ function addSet() {
     ---
     */
 
-    var callingExercise = document.getElementsByName(NameOfcallingExercise); //Liste der Übungen mit dem Namen
-    var callingExercise = callingExercise[0];// Verweis auf Article          //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
+    var callingTable = document.getElementsByName(NameOfcallingExercise); //Liste der Übungen mit dem Namen
+    var callingTable = callingTable[0];// Verweis auf Article          //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
 
-    var callingExercise = callingExercise.children[0]; // -> h2!
-    var callingExercise = callingExercise.children[0]; // -> table!
+    var callingTable = callingTable.children[0]; // -> h2!
+    var callingTable = callingTable.children[0]; // -> table!
+
+    addSet(callingTable)
+
+  
+
+    article.appendChild(setButton); //
 
     /*
     ---
     */
 
+}
+function addSet(callingExercise) {
     var tr = document.createElement("tr");
 
     callingExercise.appendChild(tr);
@@ -127,3 +105,4 @@ function addSet() {
     tr.appendChild(whdtd);
     tr.appendChild(checktd);
 }
+
