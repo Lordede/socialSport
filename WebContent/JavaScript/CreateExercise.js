@@ -87,12 +87,14 @@ function addSet(callingExercise) {
 
     //Feld um Gewicht einzutragen
     var kg = document.createElement("input");
+    kg.setAttribute("type", "number")
     kg.setAttribute("placeholder", "Gewicht");
     kgtd.appendChild(kg);
 
     //Feld um whd einzutragen
     var whd = document.createElement("input");
     whd.setAttribute("placeholder", "Wiederholungen");
+    whd.setAttribute("type", "number")
     whdtd.appendChild(whd);
 
     //Button um Set abzuschließen
