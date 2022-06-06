@@ -1,54 +1,109 @@
-/*Creates the exercise with table dynamically */
-function insertExercise()
-{
-    var counter = 1;
-    var insertableBlock;
-    var setData = "${set}";
-    var exerciseName = "${exercise.name}";
-    var muscleGroup = "${exercise.muscleGroup"
-    var img = "${exercise.img}"
-    var parent = document.getElementById("exerciseContainer");
+"use strict";
+// author: Hubertus
 
-    insertableBlock = document.createElement('div');
-    insertableBlock.setAttribute("id", "exercise" + counter(counter))
-    insertableBlock.innerHTML = '<h2>' + exerciseName + '</h2>' +
-                                '<h3>'+'('+ muscleGroup +')'+'</h3>' +
-                               loadTable;
-    parent.appendChild(insertableBlock);
-                                
-                                
+/*
+addExercise fügt eine neue Übung ein, bei der man dann x belibige Setze trainieren kann
+*/
+function addExercise() {
+
+    var article = document.createElement("article");
+    var h2 = document.createElement("h2");
+    var table = document.createElement("table");
+    var tr = document.createElement("tr");
+    var th = document.createElement("th");
+    var td = document.createElement("td");
+
+    //Innerhalb von Exercises einen neuen <article> anlegen
+    exercises.appendChild(article);
+    article.setAttribute("class", "exercise elements");
+
+    //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
+    article.appendChild(h2);
+    h2.innerText = new Date().getTime(); // TODO: Dynamisch richtigen Namen einfügen
+    article.setAttribute("name", h2.innerHTML)
+    h2.setAttribute("class", "ExerciseHeadline");
+
+    //Innerhalb der neuen <h2> einen <table> anlegen
+    article.appendChild(table);
+    table.setAttribute("class", "exerciseTable");
+
+    //Statisch die Headzeile einfügen
+    table.innerHTML = ("<tr class =\"headLineTable\"><th>Satz</th><th>KG</th><th>Wiederholungen</th></tr>");
+
+    var setButton = document.createElement("button");
+    setButton.setAttribute("class", "button addSet");
+    setButton.innerHTML = "Satz hinzufügen";
+    article.appendChild(setButton);
+
+    addSet(table)
+
+    init(); // Damit auch ein EventListener auf dem neuen Button gesetzt wird
 }
-var setData = []; //Daten vom Set
 
-function loadTable() //Content injetion
-{
-    var counter = 3;
-    var exerciseTable = document.createElement('table');
-    var parent = document.getElementById('exercise');
+// Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
+function getExerciseReference() {
 
-    exerciseTable.setAttribute("id","exerciseTable" + counter(counter)); //get specific Table
-    let dataHtml = ''; //append html data as string
+    let NameOfcallingExercise = this.parentNode.getAttribute("name");      // Name der Übung
 
-    window.onload = () =>  //initialisierung des windowobjects wobei die tableData (aus html) geladen wird
-    
-    {
-        loadTableData(setData);
-    }
-    
-    for (let set of setData)
-    {
-        dataHtml += '<tr><td>${set.no}</td><td>${set.rep}</td><td>${set.kg}</tr>';
-    }
-    tableBody.innerHTML = dataHtml; //initialisierung default Belegung DOM
-    parent.appendChild('exercise');
-} 
+    /*
+    Das Nachfolgende muss irgendwie auch eleganter gehen aber für den Moment funktioniert es
 
-function fillSet(setData)
-{
+    INFO: Über das Attribut "name" des jeweiligen Article weiß der Button wo er das Set hinzufügen soll! 
+    ---
+    */
+
+    var callingTable = document.getElementsByName(NameOfcallingExercise); //Liste der Übungen mit dem Namen
+    var callingTable = callingTable[0];// Verweis auf Article          //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
+
+    //var callingTable = callingTable.children[0]; // -> h2!
+    var callingTable = callingTable.children[1]; // -> table!
+
+    addSet(callingTable)
+
+  
+
+    article.appendChild(setButton); //
+
+    /*
+    ---
+    */
 
 }
-function counter(counter)
-{
-    counter++;
+function addSet(callingTable) {
+    var tr = document.createElement("tr");
+    var numberOfChildren = callingTable.children.length;
+
+    callingTable.appendChild(tr);
+
+    //Erstellung der Table Data Elemente
+    var satztd = document.createElement("td");
+    var kgtd = document.createElement("td");
+    var whdtd = document.createElement("td");
+    var checktd = document.createElement("td");
+
+
+    satztd.innerHTML = numberOfChildren; 
+
+    //Feld um Gewicht einzutragen
+    var kg = document.createElement("input");
+    kg.setAttribute("type", "number")
+    kg.setAttribute("placeholder", "Gewicht");
+    kgtd.appendChild(kg);
+
+    //Feld um whd einzutragen
+    var whd = document.createElement("input");
+    whd.setAttribute("placeholder", "Wiederholungen");
+    whd.setAttribute("type", "number")
+    whdtd.appendChild(whd);
+
+    //Button um Set abzuschließen
+    var check = document.createElement("input");
+    check.setAttribute("type", "checkbox");
+    checktd.appendChild(check);
+
+    tr.appendChild(satztd);
+    tr.appendChild(kgtd);
+    tr.appendChild(whdtd);
+    tr.appendChild(checktd);
 }
 
