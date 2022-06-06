@@ -4,7 +4,7 @@
 /*
 addExercise fügt eine neue Übung ein, bei der man dann x belibige Setze trainieren kann
 */
-function addExercise() {
+function addExercise(exercise) {
 
     var article = document.createElement("article");
     var h2 = document.createElement("h2");
@@ -19,7 +19,7 @@ function addExercise() {
 
     //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
     article.appendChild(h2);
-    h2.innerText = new Date().getTime(); // TODO: Dynamisch richtigen Namen einfügen
+    h2.innerText = exercise.name; // TODO: Dynamisch richtigen Namen einfügen
     article.setAttribute("name", h2.innerHTML)
     h2.setAttribute("class", "ExerciseHeadline");
 
@@ -106,4 +106,6 @@ function addSet(callingTable) {
     tr.appendChild(whdtd);
     tr.appendChild(checktd);
 }
+
+
 
