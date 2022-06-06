@@ -6,8 +6,10 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of your Training and the leaderbord">
         <meta name="keywords" content="Training Sport Leaderboard">
+        <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
     </head>
     <body>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
         <header>
             <h1><strong>Dashboard: </strong></h1>
             <input type="search" 
@@ -46,6 +48,11 @@
                     </tr>
                 </tfoot>
             </table>
+            
+            <form action="../SetServlet" method="get">
+            <input type=number>
+            <input type=submit>
+            </form>
         </article>
     </body>
 </html>

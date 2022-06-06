@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import beans.SetBean;
+import beans.TrainingBean;
+import beans.ExerciseBean;
+import beans.JoinBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -37,12 +42,7 @@ public class SetServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    SetBean set = new SetBean();
     
-    public SetBean getSet() 
-	{
-		return this.set;
-	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -50,8 +50,15 @@ public class SetServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		//Long id = Long.parseLong(request.getParameter("id"));
 		HttpSession session = request.getSession();
-		UserBean userBean = (UserBean) session.getAttribute("userData");
-		set = read(userBean.getId());
+		ExerciseBean exercise = (ExerciseBean)session.getAttribute("exercise");
+		TrainingBean training = (TrainingBean)session.getAttribute("training");
+		
+		List<SetBean>sets = readSets(exercise.getId(), training.getId());
+		
+		session.setAttribute("sets", sets);
+				
+		//TODO: read muss über id erfolgen
+		//TODO: search muss über exerciseId erfolgen
 	}
 	
 
@@ -64,6 +71,8 @@ public class SetServlet extends HttpServlet {
 		
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
+		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 				
 		create(set);
 		
@@ -80,6 +89,8 @@ public class SetServlet extends HttpServlet {
 		set.setId(Long.parseLong(request.getParameter("id")));
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
+		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 				
 		update(set);
 		
@@ -118,18 +129,20 @@ public class SetServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-	
+		
 	private SetBean read(Long id) throws ServletException{
 		SetBean form = new SetBean();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE userId = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE id = ?")){
 			
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs != null && rs.next()) {
 					form.setRep(rs.getInt("rep"));
 					form.setKg(rs.getDouble("kg"));
+					form.setExerciseId(rs.getLong("exerciseId"));
+					form.setTrainingId(rs.getLong("trainingId"));
 					
 				}
 			}
@@ -138,15 +151,54 @@ public class SetServlet extends HttpServlet {
 		}
 		return form;
 	}
+
+	
+	
+	private List<SetBean> readSets(Long exerciseId, Long trainingIdInput) throws ServletException{
+		List<SetBean> sets = new ArrayList<SetBean>();
+		
+		try(Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE exerciseId = ? AND trainingId = ?")){
+			
+			pstmt.setLong(1, exerciseId);
+			pstmt.setLong(2, trainingIdInput);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					SetBean set = new SetBean();
+					
+					Long id = Long.valueOf(rs.getLong("id"));
+					double kg = Double.valueOf(rs.getDouble("kg"));
+					int rep = Integer.valueOf(rs.getInt("rep"));
+					Long trainingId = Long.valueOf(rs.getLong("trainingId"));
+					
+					
+					set.setId(id);
+					set.setKg(kg);
+					set.setRep(rep);
+					set.setExerciseId(exerciseId);
+					set.setTrainingId(trainingId);
+					
+					sets.add(set);
+				}
+			}
+			
+		}catch (Exception ex) {
+			throw new ServletException(ex.getMessage());
+		}
+		
+		return sets;
+	}
 	
 	private void create(SetBean form) throws ServletException{
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sets"
-														+ "(rep, kg) "
-														+ "VALUES (?, ?)", generatedKeys)){
+														+ "(rep, kg, exerciseId, trainingId) "
+														+ "VALUES (?, ?, ?, ?)", generatedKeys)){
 			pstmt.setInt(1, form.getRep());
 			pstmt.setDouble(2, form.getKg());
+			pstmt.setLong(3, form.getExerciseId());
+			pstmt.setLong(4, form.getTrainingId());
 			
 			pstmt.executeUpdate();
 			

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="author" content="Hubertus Seitz">
-    <!--<base href="${pageContext.request.requestURI}" /> -->
-    <!-- Nach konvertierung zu jsp => uncomment -->
+    <link rel="stylesheet" href="../css/uebungen.css"> <!-- href nach konvertierung zu jsp anpassen -->
+	<base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
     <meta charset="utf-8">
     <title>Training</title>
     <link rel="stylesheet" href="../css/training.css">
@@ -14,6 +13,7 @@
 </head>
 
 <body>
+	<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
     <header> Social Sport</header>
 
     <nav id="navbar" class="navbar">

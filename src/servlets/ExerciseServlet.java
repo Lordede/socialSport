@@ -267,7 +267,7 @@ public class ExerciseServlet extends HttpServlet {
 			for(ExerciseBean checkExer: exercises)
 			{
 				if (checkExer.getName().toLowerCase()
-						.equals(exercise.getName().toLowerCase())) throw new ServletException("Übung exsistiert bereits");
+						.equals(exercise.getName().toLowerCase())) throw new ServletException("ï¿½bung exsistiert bereits");
 				String[] splittedName = exercise.getName().split(" ");
 				String result ="";
 				for(String s : splittedName)
@@ -275,7 +275,7 @@ public class ExerciseServlet extends HttpServlet {
 					result += s;
 				}
 				if(result.toLowerCase()
-						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("Übung exsistiert bereits");
+						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("ï¿½bung exsistiert bereits");
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
