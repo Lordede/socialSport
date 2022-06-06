@@ -48,6 +48,11 @@
                     </tr>
                 </tfoot>
             </table>
+            
+            <form action="../SetServlet" method="get">
+            <input type=number>
+            <input type=submit>
+            </form>
         </article>
     </body>
 </html>
