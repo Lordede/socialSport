@@ -1,7 +1,7 @@
 package beans;
 
 
-public class RegistrationFormBean implements java.io.Serializable {
+public class Debrecated_RegistrationFormBean implements java.io.Serializable {
 	
 	private Long 	id;
 	private String 	eMail;
@@ -10,7 +10,7 @@ public class RegistrationFormBean implements java.io.Serializable {
 	private String 	lastName;
 	private String 	password; //TODO: Wird das benötigt, obwohl das Passwort nie angezeigt wird / werden kann?
 
-	public RegistrationFormBean() {
+	public Debrecated_RegistrationFormBean() {
 	
 	}
 

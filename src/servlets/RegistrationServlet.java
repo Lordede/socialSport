@@ -46,7 +46,7 @@ public class RegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Als erstes werden alle vorhergesehenen Paramter extrahiert.
-
+		request.setCharacterEncoding("UTF-8");
 		UserBean form = new UserBean(); // Erstellung der Bean
 		HttpSession session = request.getSession();
 
@@ -84,8 +84,8 @@ public class RegistrationServlet extends HttpServlet {
 		{
 
 			createNewUser(eMail, userName, firstName, lastName, password); 	// User in Datenbank schreiben
-			form.setId(getUserId(form.getUsername()));						// generierte id aus Datenbank auslesen
-			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect richtig, da auf DB schreibend zugegriffen wird.
+			form.setId(getUserId(form.getUsername()));						// TODO: Besser generierte id aus Datenbank auslesen
+			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect, da auf DB schreibend zugegriffen wird.
 			
 		}
 
@@ -127,7 +127,7 @@ public class RegistrationServlet extends HttpServlet {
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
 						"INSERT INTO users (email,username,firstName, lastname, pwd) VALUES(?,?,?,?,?)")) {
-
+			
 			// Datenbank Operationen
 			pstmt.setString(1, eMail);
 			pstmt.setString(2, userName);

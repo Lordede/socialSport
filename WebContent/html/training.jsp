@@ -1,61 +1,119 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <link rel="stylesheet" href="../css/uebungen.css"> <!-- href nach konvertierung zu jsp anpassen -->
-	<base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+	<base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
     <meta charset="utf-8">
-    <title>&Uumlbungen</title>
+    <title>Training</title>
+    <link rel="stylesheet" href="../css/training.css">
+
+    <script src="../JavaScript/CreateExercise.js"></script>
+    <script src="../JavaScript/TriggerExerciseAdditon.js" type="text/javascript"></script>
+
 </head>
 
 <body>
-	<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
+	<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
     <header> Social Sport</header>
 
-    <main>
-        <!--TODO: Logik hinzufuegen-->
+    <nav id="navbar" class="navbar">
+        <!--TODO: Links hinzufuegen-->
+        <ul class="navbar">
+            <li class="navbar">Home</li>
+            <li class="navbar">Training</li>
+            <li class="navbar">Leaderboard</li>
+        </ul>
+    </nav>
 
-        <article>
-            <h2>Bench Press</h2>
-            <!-- Uebung 1 (Spaeter sollen dynamisch immer weitere Uebungen 
-                 hinzugefuegt werden koennen. Jede Uebung neue table oder neuer article?)-->
-            <table>
-                <!-- Soll der Button der den Satz als fertig kennzeichnet teil der Tabelle sein
-                     oder nicht? -->
-                <tr>
+
+    <main id="exercises">
+        <!--TODO: Logik hinzufuegen-->
+    
+        <!--<article class ="exercise elements">
+            <h2 class = "ExerciseHeadline">Bench Press</h2>
+            <table class="exerciseTable">
+                <tr class = "headLineTable">
                     <th>Satz</th>
-                    <th>Beim letzten Mal</th>
                     <th>KG</th>
                     <th>Wiederholungen</th>
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>120 x 5</td>
+                    <td>BLANK</td>
+                    <td>BLANK</td>
+                    <td>&check;</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>BLANK</td>
+                    <td>BLANK</td>
+                    <td>&check;</td>
+                </tr>
+                <tr>
+                    <td>3</td>
                     <td>BLANK</td>
                     <td>BLANK</td>
                     <td>&check;</td>
                 </tr>
             </table>
-        </article>
-        <p><button> Satz hinzuf&uuml;gen</button></p>
-        <!-- Soll eine Zeile zur Uebung hinzufügen
-               ->Es soll unter jeder Uebung solch ein Button existieren -->
-        <p><button>&Uuml;bung hinzuf&uuml;gen</button></p>
-        <p><button>Workout abbrechen</button></p>
-
+            <p><button class="button addSet"> Satz hinzuf&uuml;gen</button></p>
+        </article>-->
+        		
     </main>
+ 
 
-    <nav>
-        <!--TODO: Links hinzufuegen-->
-        <ul>
-            <li>Home</li>
-            <li>Training</li>
-            <li>Leaderboard</li>
-        </ul>
-    </nav>
+    <aside id="searchContainer" class="elements">
+       <div id="toggleExerciseAddition">
+            <input type="hidden" id="searchBar">
+            <button id="addButton" value="addButton">Übung hinzufügen</button>
+            <template id="searchResults">
+                <div>
+                    <div class="searchExerciseName" exercise-name></div>
+                    <div class="searchMuscleGroup" exercise-group></div>
+                </div>
+            </template>
+           <div id="searchResultContainer"></div>
+            <script>
+                var button = document.getElementById("addButton");
+                document.addEventListener("DOMContentLoaded", init);
 
+                function init() {
+                    //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
+                    button.addEventListener('click', toggleExerciseSearchbar);
+                    // document.ElementByName('addButton').submit();
+                    console.log("html spricht an");
+                }
 
+            </script>
+        </div>
+    </aside>
 
+     <div class="clear"></div> 
+
+    <div id="buttons">
+        <button class="button" id="cancelWorkout">Workout abbrechen</button>
+        <button class="button" id="test">Testübung hinzufügen</button>
+    </div>
+
+    <footer>Hier generischen Footer einfügen</footer> <!--Hier generischen Footer einfügen -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", init);
+       
+           function init(){
+       
+               var testbutton = document.getElementById("test");
+//                testbutton.addEventListener("click", addExercise); //KEINE "()"" bei Methode und bei CallBack darf kein Paramter haben!
+
+               var addSetButton = document.getElementsByClassName("addSet");    // Alle "SetButton" überwachen
+
+               for(var i=0; i<addSetButton.length; i++){                        // Alle "SetButton" mit EventListener überwachen
+                   addSetButton[i].addEventListener("click", getExerciseReference)
+               }
+               
+           }          
+       </script>
 </body>
 
 </html>
