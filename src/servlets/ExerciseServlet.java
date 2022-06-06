@@ -1,9 +1,12 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +15,6 @@ import javax.sql.DataSource;
 import beans.ExerciseBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+
 //Cem Durmus
 /**
  * Servlet implementation class ExerciseServlet
@@ -51,10 +54,44 @@ public class ExerciseServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		//UserBean userBean = (UserBean) session.getAttribute("userData");
-		List<ExerciseBean> exercises = search(request.getParameter("searchName"));
-		ExerciseBean exerciseBean = findExercise(request.getParameter("name"), exercises);
+		Enumeration<String> params = request.getParameterNames();
+		while(params.hasMoreElements()) 
+		{
+			String paramNames = params.nextElement();
+			System.out.println(paramNames);
+			switch(paramNames) 
+			{
+			case "addButton":
+				ArrayList<ExerciseBean> exercises = getListOfExercises();
+				String jsonExercises = convertListToJson(getListOfExercises());
+				response.getWriter().write(jsonExercises);
+				System.out.println(jsonExercises);
+				break;
+			case "exerciseInputField":
+				ArrayList<ExerciseBean> exercisesSearched = search(request.getParameter("exerciseInputField"));
+				String jsonSearch = convertListToJson(exercisesSearched);
+				response.getWriter().write(jsonSearch);
+				break;
+			}
+		}
 		
-		session.setAttribute("exercise", exerciseBean);
+	
+		
+//		PrintWriter out = response.getWriter();
+//		response.setContentType("application/json");
+//		response.setCharacterEncoding("UTF-8");
+//		out.print(convertListToJson());
+//		out.flush();
+		
+		
+		
+		
+		
+		
+		
+//		ExerciseBean exerciseBean = findExercise(request.getParameter("name"), exercises1);
+//		
+//		session.setAttribute("exercise", exerciseBean);
 	}
 
 	/**
@@ -73,6 +110,9 @@ public class ExerciseServlet extends HttpServlet {
 		exerciseBean.setExerciseImage(filepart.getSubmittedFileName());
 		createExcercise(exerciseBean, filepart);
 		session.setAttribute("exercise", exerciseBean);
+		//alarm
+		//String jsonExercises = convertListToJson();***
+		//session.setAttribute("exercisesJson", jsonExercises);**
 //		RequestDispatcher disp = request.getRequestDispatcher("html/success.jsp");
 //		disp.forward(request, response);
 		response.sendRedirect("html/success.jsp");
@@ -148,9 +188,9 @@ public class ExerciseServlet extends HttpServlet {
 		}
 	}
 	
-	private LinkedList<ExerciseBean> getListOfExercises() throws ServletException
+	private ArrayList<ExerciseBean> getListOfExercises() throws ServletException
 	{
-		LinkedList<ExerciseBean> exercises = new LinkedList<>();
+		ArrayList<ExerciseBean> exercises = new ArrayList<>();
 		
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM exercises")){
@@ -161,6 +201,7 @@ public class ExerciseServlet extends HttpServlet {
 					ExerciseBean exercise = new ExerciseBean();
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
+					exercise.setExerciseImage(rs.getString("filename"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
 					exercises.add(exercise);
 				}
@@ -221,7 +262,7 @@ public class ExerciseServlet extends HttpServlet {
 														+ "(name, muscleGroup, exerciseImage, filename)"
 														+ "VALUES (?, ?, ?, ?)", generatedKeys))
 		{
-			LinkedList<ExerciseBean> exercises = getListOfExercises();
+			ArrayList<ExerciseBean> exercises = getListOfExercises();
 			//System.out.println("---------------------"+exercises.size()+"----------");
 			for(ExerciseBean checkExer: exercises)
 			{
@@ -253,10 +294,10 @@ public class ExerciseServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-	private List<ExerciseBean> search(String exerciseName) throws ServletException
+	private ArrayList<ExerciseBean> search(String exerciseName) throws ServletException
 	{
 		exerciseName = (exerciseName == null || exerciseName == "") ? "%" : "%" + exerciseName + "%";
-		List<ExerciseBean> exercises = new LinkedList<>();
+		ArrayList<ExerciseBean> exercises = new ArrayList<>();
 		
 		try (Connection con = ds.getConnection();
 				PreparedStatement search = con.prepareStatement("SELECT * FROM exercises WHERE name LIKE ?")) 
@@ -296,5 +337,30 @@ public class ExerciseServlet extends HttpServlet {
 			}
 		}
 		return retExercise;
+	}
+	
+	private String convertListToJson(ArrayList<ExerciseBean> arr) 
+	{
+		StringBuilder jsonString = new StringBuilder();
+		ArrayList<ExerciseBean> exercises = arr;
+		
+		jsonString.append("[");
+		for(int i = 0;i < exercises.size(); i++) 
+		{			
+			jsonString.append("{");
+			jsonString.append("\"name\":");
+			jsonString.append("\""+exercises.get(i).getName()+"\",");
+			jsonString.append("\"muscleGroup\":");
+			jsonString.append("\""+exercises.get(i).getMuscleGroup()+"\"");
+			if( i+1 == exercises.size()) 
+			{
+				jsonString.append("}");
+			} else {
+				jsonString.append("},");
+				}
+		}
+		jsonString.append("]");
+		
+		return jsonString.toString();
 	}
 }
