@@ -9,11 +9,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import beans.ExerciseBean;
 import beans.SetBean;
 import beans.TrainingBean;
-import beans.ExerciseBean;
-import beans.JoinBean;
-import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -76,6 +76,7 @@ function extractExercises(jsonString)
         
     const searchResults = document.getElementById("searchResults");
     const toggleContainer = document.getElementById("searchResultContainer");
+    toggleContainer.style.display = "block";
     toggleContainer.innerHTML = "";
     exercisesArrayList.forEach(exercise => {
         const result = searchResults.content.cloneNode(true).children[0];
@@ -100,7 +101,7 @@ function onExerciseClick(exercise)
 	
     var insertableSearchbar = document.getElementById("searchBar");
     insertableSearchbar.setAttribute("type", "hidden");
-    console.log(exercise.name);
-    var exercise123 = this.exercise
+    var searchItems = document.getElementById("searchResultContainer");
+    searchItems.style.display = "none";
 }
 

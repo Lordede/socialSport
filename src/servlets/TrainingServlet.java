@@ -5,12 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import beans.ExerciseBean;
 import beans.TrainingBean;
-import beans.TrainingsplanBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -48,9 +49,26 @@ public class TrainingServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
     	//Long id = Long.parseLong(request.getParameter("id"));
+    	Enumeration<String> params = request.getParameterNames();
+		while(params.hasMoreElements()) 
+		{
+			String paramNames = params.nextElement();
+			System.out.println(paramNames);
+			switch(paramNames) 
+			{
+			case "loadTrainings":
+				HttpSession session = request.getSession();
+				ArrayList<TrainingBean> allTrainings = listAllTrainings();
+				String json = convertListToJson(allTrainings);
+				response.getWriter().write(json);
+				break;
+			case "exerciseInputField":
+				
+				break;
+			
+			}
+		}
 		
-		HttpSession session = request.getSession();
-		UserBean userBean = (UserBean) session.getAttribute("userData");
 		//TrainingBean training = read(userBean.getId());
 	
 		//TODO: read muss �ber TrainingId erfolgen
@@ -64,13 +82,10 @@ public class TrainingServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		TrainingBean training = new TrainingBean();
-		
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
-		training.setUserId(Long.parseLong(request.getParameter("userId")));
-				
 		create(training);
-		request.setAttribute("training", training);
+		request.getSession().setAttribute("training", training);
 		doGet(request, response);
 	}
 
@@ -148,9 +163,9 @@ public class TrainingServlet extends HttpServlet {
 		List<TrainingBean> trainings = new ArrayList<TrainingBean>();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE userId = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE = ?")){
 			
-			pstmt.setLong(0, userId);
+		
 			
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
@@ -162,7 +177,37 @@ public class TrainingServlet extends HttpServlet {
 					
 					training.setId(id);
 					training.setName(name);
-					training.setUserId(userId);
+					training.setPoints(points);
+					
+					trainings.add(training);
+				}
+			}
+			
+		}catch (Exception ex) {
+			throw new ServletException(ex.getMessage());
+		}
+		
+		return trainings;
+	}
+	
+	private ArrayList<TrainingBean> listAllTrainings() throws ServletException{
+		ArrayList<TrainingBean> trainings = new ArrayList<TrainingBean>();
+		
+		try(Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings")){
+			
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					TrainingBean training = new TrainingBean();
+					
+					Long id = Long.valueOf(rs.getLong("id"));
+					String name = rs.getString("name");
+					double points = Double.valueOf(rs.getDouble("points"));
+					
+					training.setId(id);
+					training.setName(name);
+					training.setPoints(points);
 					
 					trainings.add(training);
 				}
@@ -179,11 +224,10 @@ public class TrainingServlet extends HttpServlet {
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"
-														+ "(name, points, userId) "
-														+ "VALUES (?, ?, ?)", generatedKeys)){
+														+ "(name, points) "
+														+ "VALUES (?, ?)", generatedKeys)){
 			pstmt.setString(1, form.getName());
 			pstmt.setDouble(2, form.getPoints());
-			pstmt.setLong(3, form.getUserId());
 			
 			pstmt.executeUpdate();
 			
@@ -197,4 +241,28 @@ public class TrainingServlet extends HttpServlet {
 		}
 	}
 
+	private String convertListToJson(ArrayList<TrainingBean> arr) 
+	{
+		StringBuilder jsonString = new StringBuilder();
+		ArrayList<TrainingBean> exercises = arr;
+		
+		jsonString.append("[");
+		for(int i = 0;i < exercises.size(); i++) 
+		{			
+			jsonString.append("{");
+			jsonString.append("\"name\":");
+			jsonString.append("\""+exercises.get(i).getName()+"\",");
+			jsonString.append("\"muscleGroup\":");
+			jsonString.append("\""+exercises.get(i).getPoints()+"\"");
+			if( i+1 == exercises.size()) 
+			{
+				jsonString.append("}");
+			} else {
+				jsonString.append("},");
+				}
+		}
+		jsonString.append("]");
+		
+		return jsonString.toString();
+	}
 }

@@ -7,6 +7,7 @@
         <meta name="description" content="chose your training">
         <meta name="keywords" content="Training Sport Workout">
         <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+        <script src="../JavaScript/TrainingsManagement.js" type="text/javascript"></script>
     </head>
     <body>
     <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
@@ -25,6 +26,23 @@
             </ul>
         </nav>
         <article>
+            <div id="training">
+                <div id="addNewTraining">
+                    <button id="loadTrainings">Traings laden</button>
+                    <button id="addTraining">Training hinzufügen</button>
+                    <label id="nameOfTrainingLabel" hidden="hidden">Name des Traings</label>
+                    <input id="nameOfTrainingInput" type="hidden">
+                    <button id="sendTraining" hidden="hidden">Training erstllen</button>
+                </div>
+                <div id="searchPastTrainings">
+                    <label id ="searchBarTrainingLabel">Übung Suchen</label>
+                    <input id="searchBarTraining" type="search">
+                    <template>
+                        <div id="name"></div>
+                    </template>
+                </div>
+                <div id="trainingsContainer"></div>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -51,6 +69,19 @@
                     formmethod="post">
                     Neues Training
             </button>
+            <script>
+                let searchTraining = document.getElementById("searchPastTrainings")
+                let loadAllTrainings = document.getElementById("loadTrainings");
+                let createTraining = document.getElementById("addNewTraining");
+                document.addEventListener("DOMContentLoaded", init);
+
+                function init() {
+                    loadAllTrainings.addEventListener("click", readPastTrainings);
+                    //searchTraining.addEventListener("input", searchTraining);
+                    createTraining.addEventListener("click", hideSearch);
+                    console.log("html spricht an");
+                }
+            </script>
         </article>
     </body>
 </html>
