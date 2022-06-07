@@ -20,7 +20,7 @@ function emailAvailable(){
 
 
         xmlhttp.addEventListener("load", function(){    //Ausführen einer anonymen Funktion, sobald eine Antwort vom Server gekommen ist
-        var availability = xmlhttp.response;        // JSON to JS Object!
+        var availability = xmlhttp.response;            // JSON to JS Object!
         
             if(availability.email === "true"){
                 
@@ -48,6 +48,31 @@ function emailAvailable(){
 
 function usernameAvailable(){
 
-    console.log("USERNAME: Change!");
+    var searchURL = "../CheckAvailabilityServlet"; //TODO: Hinzufügen
+    var username = document.getElementById("usernameInput").value;
+    
+    if(username != null && username.length>0){
+        searchURL += "?username=" + encodeURIComponent(username); //Erstellung des Querry Strings
+    }
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.responseType = "json";
+
+
+        xmlhttp.addEventListener("load", function(){    //Ausführen einer anonymen Funktion, sobald eine Antwort vom Server gekommen ist
+        var availability = xmlhttp.response;            // JSON to JS Object!
+        
+            if(availability.username === "true"){
+                
+                console.log("username: Verfügabr!")
+            }
+            else{
+                console.log("username: NICHT Verfügbar!");
+            
+            }
+
+        });
+
+        xmlhttp.open("GET", searchURL, true)
+        xmlhttp.send(); //setRequestHeader() nur bei Post benötigt
 
 }

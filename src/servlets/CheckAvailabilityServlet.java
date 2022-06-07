@@ -41,12 +41,12 @@ public class CheckAvailabilityServlet extends HttpServlet {
 		
 		AvailabilityBean availability = new AvailabilityBean();
 
+		
+		//email Teil
 		if (email != null) {			
 			if(getEmailAvailability(email)) {				// true == email available
 				availability.setEmail(true);
-				request.setAttribute("availability", availability);
-				
-				
+				request.setAttribute("availability", availability);				
 			}
 			else {
 				request.setAttribute("availability", availability);
@@ -56,16 +56,20 @@ public class CheckAvailabilityServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}
-		if (username != null || username.length() > 0) {
+		
+		
+		//username Teil
+		if (username != null) {
 			if(getUsernameAvailability(username)) {			// true == username available
 				availability.setUsername(true);
 				request.setAttribute("availability", availability);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("html/availabilityAusgabe.jsp");
-				dispatcher.forward(request, response);
+
 			}
 			else {
 				request.setAttribute("availability", availability);
 			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("html/availabilityAusgabe.jsp");
+			dispatcher.forward(request, response);
 			return;
 		}
 
@@ -84,7 +88,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
 			pstmt.setString(1, email);
 
 			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
-				if (rs.next()) { // Anscheinend ganz wichtig
+				if (rs.next()) {
 					return false;
 				}
 				return true;
