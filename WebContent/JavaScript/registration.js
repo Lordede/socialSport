@@ -8,8 +8,6 @@
 
 
 function emailAvailable(){
-
-    console.log("EMAIL: Change!");
     
     var searchURL = "../CheckAvailabilityServlet"; //TODO: Hinzufügen
     var email = document.getElementById("emailInput").value;
@@ -23,13 +21,14 @@ function emailAvailable(){
 
         xmlhttp.addEventListener("load", function(){    //Ausführen einer anonymen Funktion, sobald eine Antwort vom Server gekommen ist
         var availability = xmlhttp.response;        // JSON to JS Object!
-            if(availability == null || availability.length == 0){
-                console.log("NICHT Verfügbar!");
-                console.log(availability);
+        
+            if(availability.email === "true"){
+                
+                console.log("E-Mail: Verfügabr!")
             }
             else{
-                console.log("Verfügabr!")
-                console.log(availability);
+                console.log("E-Mail: NICHT Verfügbar!");
+            
             }
 
         });
