@@ -10,7 +10,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import beans.TrainingBean;
-import beans.TrainingsplanBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -37,14 +36,14 @@ public class TrainingServlet extends HttpServlet {
      */
     public TrainingServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
     	//Long id = Long.parseLong(request.getParameter("id"));
@@ -62,7 +61,7 @@ public class TrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		TrainingBean training = new TrainingBean();
 		
 		training.setName(request.getParameter("name"));
@@ -78,7 +77,7 @@ public class TrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		TrainingBean training = new TrainingBean();
 		training.setId(Long.parseLong(request.getParameter("id")));
 		training.setName(request.getParameter("name"));
@@ -93,7 +92,7 @@ public class TrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		Long id = Long.parseLong(request.getParameter("id")) ;
 		delete(id);
 	}
