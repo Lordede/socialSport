@@ -97,17 +97,11 @@
                 function init() {
 
                     var button = document.getElementById("addButton");
-                        document.addEventListener("DOMContentLoaded", init);
 
                     //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
                     button.addEventListener('click', toggleExerciseSearchbar);
                     // document.ElementByName('addButton').submit();
                     console.log("html spricht an");
-
-                    var testbutton = document.getElementById("test");
-                    //                testbutton.addEventListener("click", addExercise); 	//KEINE "()"" bei Methode und bei CallBack darf kein Paramter haben!
-
-                    var addSetButton = document.getElementsByClassName("addSet");    		// Alle "SetButton" überwachen
 
                     for (var i = 0; i < addSetButton.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
                         addSetButton[i].addEventListener("click", getExerciseReference)
