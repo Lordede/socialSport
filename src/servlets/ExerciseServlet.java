@@ -5,10 +5,10 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -104,6 +104,7 @@ public class ExerciseServlet extends HttpServlet {
 		ExerciseBean exerciseBean = new ExerciseBean();
 		exerciseBean.setName(request.getParameter("exerciseName"));
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
+		exerciseBean.setCreationDate(new Date());
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		Part filepart = request.getPart("image");
@@ -203,6 +204,7 @@ public class ExerciseServlet extends HttpServlet {
 					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setExerciseImage(rs.getString("filename"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
+					exercise.setCreationDate(rs.getDate("creationDate"));
 					exercises.add(exercise);
 				}
 			}
@@ -228,6 +230,7 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
+					exercise.setCreationDate(rs.getDate("creationDate"));
 					
 //					List<SetBean> setList = new LinkedList<>();
 //					
@@ -259,8 +262,8 @@ public class ExerciseServlet extends HttpServlet {
 		
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
-														+ "(name, muscleGroup, exerciseImage, filename)"
-														+ "VALUES (?, ?, ?, ?)", generatedKeys))
+														+ "(name, muscleGroup, creationDate, exerciseImage, filename)"
+														+ "VALUES (?, ?, ?, ?, ?)", generatedKeys))
 		{
 			ArrayList<ExerciseBean> exercises = getListOfExercises();
 			//System.out.println("---------------------"+exercises.size()+"----------");
@@ -279,8 +282,9 @@ public class ExerciseServlet extends HttpServlet {
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
+			stmtExercise.setDate(3, (java.sql.Date) exercise.getCreationDate());
 			stmtExercise.setString(4, exercise.getExerciseImage());
-			stmtExercise.setBinaryStream(3, filepart.getInputStream());
+			stmtExercise.setBinaryStream(5, filepart.getInputStream());
 			stmtExercise.executeUpdate();
 			//stmtExercise.setLong(3, exercise.getTrainigsId);
 			
