@@ -47,7 +47,7 @@ public class RegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Als erstes werden alle vorhergesehenen Paramter extrahiert.
-
+		request.setCharacterEncoding("UTF-8");
 		UserBean form = new UserBean(); // Erstellung der Bean
 		HttpSession session = request.getSession();
 
@@ -69,9 +69,9 @@ public class RegistrationServlet extends HttpServlet {
 		boolean errorFound = false;
 
 		session.setAttribute("form", form); // Bean in Session abspeichern
-											// TODO: Macht man das tatsächlich so oder besser in der Bean mit @SessionScoped?
+											// TODO: Macht man das tatsï¿½chlich so oder besser in der Bean mit @SessionScoped?
 
-		// Überprüfung ob eines der übergebenen Paramter entweder NULL oder Leer ist.
+		// ï¿½berprï¿½fung ob eines der ï¿½bergebenen Paramter entweder NULL oder Leer ist.
 
 		while (formInputs.hasMoreElements()) {
 			String inputName = (String) formInputs.nextElement();
@@ -144,8 +144,8 @@ public class RegistrationServlet extends HttpServlet {
 		} catch (Exception ex) {
 
 			throw new ServletException(ex.getMessage());
-//			if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfügbarer E-Mail oder Username
-//																// Wäre es möglich bei der Eingabe schon die Verfügbarkeit zu testen?
+//			if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfï¿½gbarer E-Mail oder Username
+//																// Wï¿½re es mï¿½glich bei der Eingabe schon die Verfï¿½gbarkeit zu testen?
 //			}
 		}
 		

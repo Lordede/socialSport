@@ -11,6 +11,9 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import beans.SetBean;
+import beans.TrainingBean;
+import beans.ExerciseBean;
+import beans.JoinBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -20,7 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//von Lukas Edmüller
+//von Lukas Edm�ller
 
 /**
  * Servlet implementation class SatzServlet
@@ -40,12 +43,7 @@ public class SetServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    SetBean set = new SetBean();
     
-    public SetBean getSet() 
-	{
-		return this.set;
-	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -53,10 +51,13 @@ public class SetServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		//Long id = Long.parseLong(request.getParameter("id"));
 		HttpSession session = request.getSession();
-		UserBean userBean = (UserBean) session.getAttribute("userData");
+		ExerciseBean exercise = (ExerciseBean)session.getAttribute("exercise");
+		TrainingBean training = (TrainingBean)session.getAttribute("training");
 		
-		//SetBean set = read(userBean.getId());
+		List<SetBean>sets = readSets(exercise.getId(), training.getId());
 		
+		session.setAttribute("sets", sets);
+				
 		//TODO: read muss über id erfolgen
 		//TODO: search muss über exerciseId erfolgen
 	}
@@ -130,7 +131,7 @@ public class SetServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-	
+		
 	private SetBean read(Long id) throws ServletException{
 		SetBean form = new SetBean();
 		
@@ -153,14 +154,17 @@ public class SetServlet extends HttpServlet {
 		}
 		return form;
 	}
+
 	
-	private List<SetBean> search(Long exerciseId) throws ServletException{
+	
+	private List<SetBean> readSets(Long exerciseId, Long trainingIdInput) throws ServletException{
 		List<SetBean> sets = new ArrayList<SetBean>();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE exerciseId = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM sets WHERE exerciseId = ? AND trainingId = ?")){
 			
-			pstmt.setLong(0, exerciseId);
+			pstmt.setLong(1, exerciseId);
+			pstmt.setLong(2, trainingIdInput);
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					SetBean set = new SetBean();

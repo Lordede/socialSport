@@ -2,6 +2,7 @@ package beans;
 //Erstellt von Cem Durmus
 import java.io.Serializable;
 import java.util.Date;
+import java.sql.Blob;
 import java.util.List;
 import java.awt.Image;
 
@@ -24,8 +25,8 @@ public class ExerciseBean implements Serializable
 //		SCHULTERMUSKULATUR;
 //	}
 
-	private Image exerciseImage;
 	private Date creationDate;
+	private String exerciseImage;
 	
 	
 	public Date getCreationDate() {
@@ -52,10 +53,10 @@ public class ExerciseBean implements Serializable
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Image getExerciseImage() {
+	public String getExerciseImage() {
 		return exerciseImage;
 	}
-	public void setExerciseImage(Image exerciseImage) {
+	public void setExerciseImage(String exerciseImage) {
 		this.exerciseImage = exerciseImage;
 	}
 	

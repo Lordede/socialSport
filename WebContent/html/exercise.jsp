@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<!--Um hier reinzukommen erst Passwort abfrage-->
 <html lang="de">
 <head>
 <base href="${pageContext.request.requestURI}" />
-<!-- Basis für relative Verweise -> Basis = Speicherort -->
+<!-- Basis fï¿½r relative Verweise -> Basis = Speicherort -->
 <title>Ãœbung</title>
 <meta charset="UTF-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
@@ -12,7 +11,7 @@
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>
-	<%-- Überprüfung, ob User eingeloggt ist --%>
+	<%-- ï¿½berprï¿½fung, ob User eingeloggt ist --%>
 	<header>
 		<h1>Profil Bearbeiten</h1>
 	</header>
@@ -44,7 +43,7 @@
 		<div>
 			<table>
 				<tr>
-					<th>Name der Übung</th>
+					<th>Name der ï¿½bung</th>
 					<th>Muskelgruppe</th>
 				</tr>
 				<tr>
