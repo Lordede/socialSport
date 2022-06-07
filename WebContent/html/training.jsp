@@ -16,7 +16,7 @@
 </head>
 <noscript><h1>BITTE JAVASCRIPT AKTIEREN!</h1></noscript>
 <body>
-   <!--  <%@ include file="fragments/authenticationCheck.jspf" %>  -->
+   <!--  <%@ include file="fragments/authenticationCheck.jspf" %> //TODO: uncomment  --> 
         <%-- Überprüfung, ob der User eingeloggt ist --%>
             <header> Social Sport</header>
 
