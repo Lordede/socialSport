@@ -1,5 +1,6 @@
 package beans;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 //Erstellt von Cem Durmus
@@ -12,8 +13,14 @@ public class TrainingBean implements Serializable
 	private List<ExerciseBean> exercises;
 	private double points;
 	private Long userId;
+	private Date creationDate;
 	
-	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	public Long getUserId() {
 		return userId;
 	}

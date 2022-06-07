@@ -4,5 +4,6 @@ CREATE Table exercises(
     muscleGroup varchar(255),
     exerciseImage MEDIUMBLOB,
     filename varchar(255),
+    creationDate datetime NOT NULL,
     PRIMARY KEY (id)
    )

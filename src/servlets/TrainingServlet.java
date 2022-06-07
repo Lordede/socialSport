@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -67,6 +68,7 @@ public class TrainingServlet extends HttpServlet {
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
 		training.setUserId(Long.parseLong(request.getParameter("userId")));
+		training.setCreationDate(new Date());
 				
 		create(training);
 		request.setAttribute("training", training);
@@ -134,6 +136,7 @@ public class TrainingServlet extends HttpServlet {
 					form.setId(rs.getLong("id"));
 					form.setPoints(rs.getDouble("points"));
 					form.setUserId(rs.getLong("userId"));
+					form.setCreationDate(rs.getDate("creationDate"));
 					
 				}
 			}
@@ -155,13 +158,15 @@ public class TrainingServlet extends HttpServlet {
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
 					
-					Long id = Long.valueOf(rs.getLong("id"));
+					Long id = rs.getLong("id");
 					String name = rs.getString("name");
-					double points = Double.valueOf(rs.getDouble("points"));
+					double points = rs.getDouble("points");
+					Date creationDate = rs.getDate("creationDate");
 					
 					training.setId(id);
 					training.setName(name);
 					training.setUserId(userId);
+					training.setCreationDate(creationDate);
 					
 					trainings.add(training);
 				}
@@ -178,11 +183,12 @@ public class TrainingServlet extends HttpServlet {
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"
-														+ "(name, points, userId) "
-														+ "VALUES (?, ?, ?)", generatedKeys)){
+														+ "(name, points, userId, creationDate) "
+														+ "VALUES (?, ?, ?, ?)", generatedKeys)){
 			pstmt.setString(1, form.getName());
 			pstmt.setDouble(2, form.getPoints());
 			pstmt.setLong(3, form.getUserId());
+			pstmt.setDate(4, (java.sql.Date) form.getCreationDate());
 			
 			pstmt.executeUpdate();
 			
