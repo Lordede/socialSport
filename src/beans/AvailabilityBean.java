@@ -1,3 +1,5 @@
+//@author Hubertus Seitz
+
 package beans;
 
 import java.io.Serializable;
