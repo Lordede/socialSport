@@ -1,138 +1,114 @@
 /* Hubertus Seitz */
 
 body {
-    /* background-color: #15395c; */
-
+  /* background-color: #15395c; */
 }
 
 header {
-    color: Black;
-    font-size: 300%;
-    width: 50%;
-    padding: 10px;
-    margin: auto;
-    text-align: center;
+  color: Black;
+  font-size: 300%;
+  width: 50%;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
 }
 
 .elements {
-
-    background-color: #8db4d8;
-
+  background-color: #8db4d8;
 }
 
 #searchContainer {
-    float: right;
-    border-style: hidden;
-    width: auto;
-    height: auto;
-    margin: 10px;
+  float: right;
+  border-style: hidden;
+  width: auto;
+  height: auto;
+  margin: 10px;
 
-    border-radius: 10px;
-    padding: 5px;
-
-
+  border-radius: 10px;
+  padding: 5px;
 }
 
 #exercises {
-    float: left;
-    width: auto;
-
+  float: left;
+  width: auto;
 }
 
 #buttons {
-    float: left;
-    margin-left: 1cm;
+  float: left;
+  margin-left: 1cm;
 }
 
 #resultList {
-    float: right;
-    margin: 5px;
-
-
+  float: right;
+  margin: 5px;
 }
-
 
 #cancelWorkout {
-    background-color: #ef3506;
+  background-color: #ef3506;
 }
-h2{
-    padding: 5px;
+h2 {
+  padding: 5px;
 }
 .button {
-
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: lightgreen;
-    border: none;
-    cursor: pointer;
-
-
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: lightgreen;
+  border: none;
+  cursor: pointer;
 }
 
-
-
 .exerciseTable {
-
-    padding: 10px;
-    border-style: solid 5px black;
-    border-collapse: collapse;
-    background-color: #b3cde5;
-    border-radius: 10px;
-    font-size: 120%;
-
+  padding: 10px;
+  border-style: solid 5px black;
+  border-collapse: collapse;
+  background-color: #b3cde5;
+  border-radius: 10px;
+  font-size: 120%;
 }
 
 .exercise {
-
-    width: auto;
-    width: auto;
-    border-radius: 25px;
-    margin: 1cm;
-    padding: 1cm;
-
-
-
+  width: auto;
+  width: auto;
+  border-radius: 25px;
+  margin: 1cm;
+  padding: 1cm;
 }
 
-
 th {
-    padding: 15px;
-    text-align: left;
-    border-style: hidden;
-
+  padding: 15px;
+  text-align: left;
+  border-style: hidden;
 }
 
 td {
-
-    padding: 15px;
-    text-align: left;
-    border-style: hidden;
-
+  padding: 15px;
+  text-align: left;
+  border-style: hidden;
 }
 
 .clear {
-    clear: both;
+  clear: both;
 }
 
 .button.addSet {
-
-    width: 100%; /* -> 100% of article  */
+  width: 100%; /* -> 100% of article  */
 }
 
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 /* Nur zum testen!*/
 td:hover {
-    background-color: rgba(0, 128, 0, 0.425);
+  background-color: rgba(0, 128, 0, 0.425);
 }
 
 tr:hover {
-    background-color: lightgreen;
+  background-color: lightgreen;
 }
+

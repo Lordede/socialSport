@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <title>Training</title>
     <link rel="stylesheet" href="../css/training.css">
+    <link rel="stylesheet" href="../css/navbar.css">
 
     <script src="../JavaScript/CreateExercise.js"></script>
     <script src="../JavaScript/TriggerExerciseAdditon.js" type="text/javascript"></script>
@@ -14,16 +15,26 @@
 
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
+	<nav>
+    		<ul>
+                <li><a href="./dashboard.jsp">Dashboard</a></li>
+                <li><a class="active"  href="./training.jsp">Training</a></li>
+                <li><a href="./leaderboard.jsp">Leaderboard</a></li>
+                <li><a href="./accountSetting.jsp">Account Settings</a></li>
+                <li><a href="./exercise.jsp">Übung erstellen</a></li>
+  				<li style="float:right"><a class="active" href="#about">Logout</a></li>
+			</ul> 
+    	</nav>
     <header> Social Sport</header>
 
-    <nav id="navbar" class="navbar">
-        <!--TODO: Links hinzufuegen-->
+    <!-- <nav id="navbar" class="navbar">
+        LINKS EINFÜGEN
         <ul class="navbar">
             <li class="navbar">Home</li>
             <li class="navbar">Training</li>
             <li class="navbar">Leaderboard</li>
         </ul>
-    </nav>
+    </nav> -->
 
 
     <main id="exercises">

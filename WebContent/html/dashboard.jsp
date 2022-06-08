@@ -6,10 +6,25 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of your Training and the leaderbord">
         <meta name="keywords" content="Training Sport Leaderboard">
-        <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+<!--         https://stackoverflow.com/questions/20490848/servlet-not-redirected-to-page-showing-non-styled-page -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/navbar.css" />
+        <base href="${pageContext.request.requestURI}" /> <!-- Basis fï¿½r relative Verweise -> Basis = Speicherort -->
     </head>
     <body>
-    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- ï¿½berprï¿½fung, ob User eingeloggt ist --%>
+    <!--Lukas EdmÃ¼ller
+        Navbar 
+        https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
+    	<nav>
+    		<ul>
+                <li><a class="active" href="./dashboard.jsp">Dashboard</a></li>
+                <li><a href="./training.jsp">Training</a></li>
+                <li><a href="./leaderboard.jsp">Leaderboard</a></li>
+                <li><a href="./accountSetting.jsp">Account Settings</a></li>
+                <li><a href="./exercise.jsp">Ãœbung erstellen</a></li>
+  				<li style="float:right"><a class="active" href="#about">Logout</a></li>
+			</ul> 
+    	</nav>
         <header>
             <h1><strong>Dashboard: </strong></h1>
             <input type="search" 
@@ -18,7 +33,7 @@
             formaction="get"
             formmethod="">
         </header>
-        <nav>
+        <!-- <nav>
             <ul>
                 <li><a href="./dashboard.html">Dashboard</a></li>
                 <li><a href="./training.html">Training</a></li>
@@ -26,7 +41,7 @@
                 <li><a href="./accountSetting.jsp">Account Settings</a></li>
                 <li><a href="./html/exercise.html">Ãœbung erstellen</a></li>
             </ul>
-        </nav>
+        </nav> -->
         <article>
             <table>
                 <thead>
