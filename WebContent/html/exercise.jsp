@@ -60,7 +60,6 @@
             formaction="../ExerciseServlet"
             formmethod="post">
             </div>
-			</div>
 			<Button type="submit">Übung Erstellen</Button>
 		</Form>
 		<div>

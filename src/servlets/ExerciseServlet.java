@@ -1,14 +1,13 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
