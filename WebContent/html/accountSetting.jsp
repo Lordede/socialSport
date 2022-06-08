@@ -11,10 +11,24 @@
 <meta name="description" content="Ihre one stop Sport Plattform">
 <meta name="keywords" content="Sport, Gym, social media, sports">
 <meta name="author" content="Cem Durmus">
+<link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>
 	<%-- �berpr�fung, ob User eingeloggt ist --%>
+	<!--Lukas Edmüller
+        Navbar 
+        https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
+    	<nav>
+    		<ul>
+                <li><a href="./dashboard.jsp">Dashboard</a></li>
+                <li><a href="./training.jsp">Training</a></li>
+                <li><a href="./leaderboard.jsp">Leaderboard</a></li>
+                <li><a class="active" href="./accountSetting.jsp">Account Settings</a></li>
+                <li><a href="./exercise.jsp">Übung erstellen</a></li>
+  				<li style="float:right"><a class="active" href="#about">Logout</a></li>
+			</ul> 
+    	</nav>
 	<header>
 		<h1>Profil Bearbeiten</h1>
 	</header>

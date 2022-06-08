@@ -60,7 +60,9 @@ public class RegistrationServlet extends HttpServlet {
 		form.setFirstName(firstName);
 		final String lastName = request.getParameter("lastName");
 		form.setLastName(lastName);
-		final Date creationDate = new Date();
+		
+		//https://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
+		final java.sql.Date creationDate = new java.sql.Date(new java.util.Date().getTime());
 		form.setCreationDate(creationDate);
 		//final String password = request.getParameter("password");
 		//form.setPassword(password);
@@ -82,7 +84,6 @@ public class RegistrationServlet extends HttpServlet {
 			}
 		}
 
-		
 		if (!errorFound)
 		{
 

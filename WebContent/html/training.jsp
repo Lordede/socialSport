@@ -3,12 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/uebungen.css"> <!-- href nach konvertierung zu jsp anpassen -->
     <base href="${pageContext.request.requestURI}" /> 
   	
     <title>Training</title>
     <link rel="stylesheet" href="../css/training.css">
+    <link rel="stylesheet" href="../css/navbar.css">
 
     <script src="../JavaScript/CreateExercise.js"></script>
     <script src="../JavaScript/TriggerExerciseAdditon.js" type="text/javascript"></script>
@@ -16,24 +18,36 @@
 </head>
 <noscript><h1>BITTE JAVASCRIPT AKTIEREN!</h1></noscript>
 <body>
-   <!--  <%@ include file="fragments/authenticationCheck.jspf" %> //TODO: uncomment  --> 
-        <%-- Überprüfung, ob der User eingeloggt ist --%>
-            <header> Social Sport</header>
+	<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
+    <!--Lukas Edmüller
+        Navbar 
+        https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
+	<nav>
+    		<ul>
+                <li><a href="./dashboard.jsp">Dashboard</a></li>
+                <li><a class="active"  href="./training.jsp">Training</a></li>
+                <li><a href="./leaderboard.jsp">Leaderboard</a></li>
+                <li><a href="./accountSetting.jsp">Account Settings</a></li>
+                <li><a href="./exercise.jsp">Übung erstellen</a></li>
+  				<li style="float:right"><a class="active" href="#about">Logout</a></li>
+			</ul> 
+    	</nav>
+    <header> Social Sport</header>
 
-            <nav id="navbar" class="navbar">
-                <!--TODO: Links hinzufuegen-->
-                <ul class="navbar">
-                    <li class="navbar">Home</li>
-                    <li class="navbar">Training</li>
-                    <li class="navbar">Leaderboard</li>
-                </ul>
-            </nav>
+    <!-- <nav id="navbar" class="navbar">
+        LINKS EINFÜGEN
+        <ul class="navbar">
+            <li class="navbar">Home</li>
+            <li class="navbar">Training</li>
+            <li class="navbar">Leaderboard</li>
+        </ul>
+    </nav> -->
 
 
-            <main id="exercises">
-                <!--TODO: Logik hinzufuegen-->
-
-                <!--<article class ="exercise elements">
+    <main id="exercises">
+        <!--TODO: Logik hinzufuegen-->
+    
+        <!--<article class ="exercise elements">
             <h2 class = "ExerciseHeadline">Bench Press</h2>
             <table class="exerciseTable">
                 <tr class = "headLineTable">
