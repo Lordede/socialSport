@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userData", userData); 						//UserData in Session Scope hinterlegen
 			
 			//forward to HomePage
-			RequestDispatcher disp = request.getRequestDispatcher("html/dashboard.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("html/index.jsp");
 			disp.forward(request, response);
 		}
 		else {

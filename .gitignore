@@ -1,5 +1,4 @@
 
 SqlScripts/CreateTableUser.sql
 SqlScripts/CreateTableUser.sql
-build/classes/servlets/RegistrationServlet.class
-build/classes/servlets/RegistrationServlet.class
+*.class

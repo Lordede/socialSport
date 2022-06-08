@@ -7,6 +7,7 @@ addExercise fügt eine neue Übung ein, bei der man dann x belibige Setze traini
 function addExercise(exercise) {
 
     var article = document.createElement("article");
+    article.setAttribute("id", exercise.id);
     var h2 = document.createElement("h2");
     var table = document.createElement("table");
     var tr = document.createElement("tr");
@@ -19,7 +20,7 @@ function addExercise(exercise) {
 
     //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
     article.appendChild(h2);
-    h2.innerText = exercise.name; // TODO: Dynamisch richtigen Namen einfügen
+    h2.innerText = exercise.name;// TODO: Dynamisch richtigen Namen einfügen
     article.setAttribute("name", h2.innerHTML)
     h2.setAttribute("class", "ExerciseHeadline");
 

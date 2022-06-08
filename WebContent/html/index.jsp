@@ -1,10 +1,10 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <!-- Erstellt von Cem Durmus -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet.css">
-<link rel="stylesheet" href="../css/index_dark.css">
-<html>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index_dark.css">
     <head>
         <title>
             Social Sport
@@ -13,10 +13,20 @@
         <meta name="description" content="Ihre one stop Sport Plattform">
         <meta name="keywords" content="Sport, Gym, social media, sports">
         <meta name="author" content="Cem Durmus">
+        <base href="${pageContext.request.requestURI}" />
     </head>
     <body class="font_t">
         <header>
             <h1>Social Sport</h1>
+            <nav>
+            <ul>
+                <li><a href="./dashboard.html">Dashboard</a></li>
+                <li><a href="./trainingsmenu.jsp">Training</a></li>
+                <li><a href="./leaderboard.jsp">Leaderboard</a></li>
+                <li><a href="./accountSetting.jsp">Account Settings</a></li>
+                <li><a href="./exercise.jsp">Übung erstellen</a></li>
+            </ul>
+            </nav>
         </header>
         <article>
             <h1>Willkommen auf ihrer one stop Sport Plattform</h1>

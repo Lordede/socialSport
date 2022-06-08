@@ -10,11 +10,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import beans.ExerciseBean;
 import beans.SetBean;
 import beans.TrainingBean;
-import beans.ExerciseBean;
-import beans.JoinBean;
-import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -69,10 +67,12 @@ public class SetServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		SetBean set = new SetBean();
-		
+		HttpSession session = request.getSession();
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
-		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
+		ExerciseBean exercise = (ExerciseBean) session.getAttribute("exercise");
+		set.setExerciseId(exercise.getId());
+		TrainingBean training = (TrainingBean) session.getAttribute("training");
 		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 		set.setCreationDate(new Date());
 				
