@@ -15,6 +15,9 @@
 
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
+    <!--Lukas Edmüller
+        Navbar 
+        https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
 	<nav>
     		<ul>
                 <li><a href="./dashboard.jsp">Dashboard</a></li>
