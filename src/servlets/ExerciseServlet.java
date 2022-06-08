@@ -44,14 +44,14 @@ public class ExerciseServlet extends HttpServlet {
      */
     public ExerciseServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		HttpSession session = request.getSession();
 		//UserBean userBean = (UserBean) session.getAttribute("userData");
 		Enumeration<String> params = request.getParameterNames();
@@ -98,7 +98,7 @@ public class ExerciseServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 //		RequestDispatcher rd = request.getRequestDispatcher("SetServlet");
 //		rd.forward(request, response);
 		ExerciseBean exerciseBean = new ExerciseBean();

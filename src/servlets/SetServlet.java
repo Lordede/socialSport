@@ -41,7 +41,7 @@ public class SetServlet extends HttpServlet {
      */
     public SetServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
     
 	/**
@@ -67,7 +67,7 @@ public class SetServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		SetBean set = new SetBean();
 		
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
@@ -85,7 +85,7 @@ public class SetServlet extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		SetBean set = new SetBean();
 		
 		set.setId(Long.parseLong(request.getParameter("id")));
@@ -103,7 +103,7 @@ public class SetServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		Long id = Long.parseLong(request.getParameter("id"));
 		delete(id);
 	}

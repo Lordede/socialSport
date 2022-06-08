@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="../css/registration.css" />
         <title>Registration</title>
+        <script src="../JavaScript/registration.js"></script>
     </head>
     <body>
 
@@ -13,10 +14,10 @@
 
         <div class="registration-container">
             <form class="form" action="../registrationServlet" method="post">
-            	<label for="email">Email:</label><br>
-                <input type="email" name="email" size="30" maxlength="35"><br>
+            	<label for="email" >Email:</label><br>
+                <input type="email" name="email" size="30" maxlength="35" id="emailInput"><span id="emailcheck"></span><br>
                 <label for="userName">Benutzername:</label><br>
-                <input type="text" name="userName" size="30" maxlength="35"><br>
+                <input type="text" name="userName" size="30" maxlength="35" minlength="2" id="usernameInput"><span id="usernamecheck"></span><br>
                 <label for="lastName" >Nachname:</label><br>
                 <input type="text" name="lastName" size="30" maxlength="35"><br>
                 <label for="firstName">Vorname:</label><br>
@@ -26,5 +27,18 @@
                 <input type="submit" value="Bestätigen" size="30">
             </form>
         </div>
+        <script>
+
+document.addEventListener("DOMContentLoaded", init);
+       
+       function init(){
+
+        var emailInput = document.getElementById("emailInput");
+        emailInput.addEventListener("keyup", emailAvailable);
+
+        var usernameInput = document.getElementById("usernameInput");
+        usernameInput.addEventListener("keyup", usernameAvailable);
+       }
+        </script>
     </body>
 </html>
