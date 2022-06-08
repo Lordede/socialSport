@@ -106,7 +106,7 @@ public class TrainingServlet extends HttpServlet {
 		UserBean user = (UserBean) session.getAttribute("userData");
 		System.out.print(user.getId());
 		training.setUserId(user.getId());
-		training.setCreationDate(new Date());		
+		training.setCreationDate(new java.sql.Date(new java.util.Date().getTime()));
 		create(training);
 		session.setAttribute("training", training);
 		response.getWriter().write("hasi");
@@ -227,7 +227,7 @@ public class TrainingServlet extends HttpServlet {
 					Long id = rs.getLong("id");
 					String name = rs.getString("name");
 					double points = rs.getDouble("points");
-					Date creationDate = rs.getDate("creationDate");
+					java.sql.Date creationDate = rs.getDate("creationDate");
 					Long userId = rs.getLong("userId");
 					
 					training.setId(id);

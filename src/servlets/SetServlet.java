@@ -74,7 +74,7 @@ public class SetServlet extends HttpServlet {
 		set.setExerciseId(exercise.getId());
 		TrainingBean training = (TrainingBean) session.getAttribute("training");
 		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
-		set.setCreationDate(new Date());
+		set.setCreationDate(new java.sql.Date(new java.util.Date().getTime()));
 				
 		create(set);
 		

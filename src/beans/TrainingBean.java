@@ -1,6 +1,6 @@
 package beans;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 //Erstellt von Cem Durmus
