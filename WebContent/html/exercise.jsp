@@ -34,7 +34,7 @@
 	<article>
 		<h2>Übung erstellen:</h2>
 		<form class="ChangeUsername" action="../ExerciseServlet" method="post"
-			accept-charset="utf-8">
+			accept-charset="utf-8" enctype="multipart/form-data">
 			<div class="name">
 				<p>Name der Übung:</p>
 				<input type="text" name="exerciseName" size="30" maxlength="35"><br>
@@ -60,7 +60,6 @@
             formaction="../ExerciseServlet"
             formmethod="post">
             </div>
-			</div>
 			<Button type="submit">Übung Erstellen</Button>
 		</Form>
 		<div>

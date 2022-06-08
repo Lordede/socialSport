@@ -1,14 +1,13 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
-import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
@@ -90,9 +89,9 @@ public class ExerciseServlet extends HttpServlet {
 		ExerciseBean exerciseBean = new ExerciseBean();
 		exerciseBean.setName(request.getParameter("exerciseName"));
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
-		exerciseBean.setCreationDate(new Date());
+//		java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+//		exerciseBean.setCreationDate(sqlDate);
 		HttpSession session = request.getSession();
-		UserBean userBean = (UserBean) session.getAttribute("userData");
 		Part filepart = request.getPart("image");
 		exerciseBean.setExerciseImage(filepart.getSubmittedFileName());
 		createExcercise(exerciseBean, filepart);
@@ -167,7 +166,7 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					exercise.setExerciseImage(rs.getString("filename"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
-					exercise.setCreationDate(rs.getDate("creationDate"));
+					//exercise.setCreationDate(rs.getDate("creationDate"));
 					exercises.add(exercise);
 				}
 			}
@@ -190,7 +189,7 @@ public class ExerciseServlet extends HttpServlet {
 				if(rs != null && rs.next()) {
 					exercise.setName(rs.getString("name"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
-					exercise.setCreationDate(rs.getDate("creationDate"));
+					//exercise.setCreationDate(rs.getDate("creationDate"));
 				}
 			}
 		} catch (Exception ex) {
@@ -204,7 +203,7 @@ public class ExerciseServlet extends HttpServlet {
 		
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
-														+ "(name, muscleGroup, creationDate, exerciseImage, filename)"
+														+ "(name, muscleGroup, exerciseImage, filename)"
 														+ "VALUES (?, ?, ?, ?, ?)", generatedKeys))
 		{
 			ArrayList<ExerciseBean> exercises = getListOfExercises();
@@ -212,7 +211,7 @@ public class ExerciseServlet extends HttpServlet {
 			for(ExerciseBean checkExer: exercises)
 			{
 				if (checkExer.getName().toLowerCase()
-						.equals(exercise.getName().toLowerCase())) throw new ServletException("�bung exsistiert bereits");
+						.equals(exercise.getName().toLowerCase())) throw new ServletException("Übung exsistiert bereits");
 				String[] splittedName = exercise.getName().split(" ");
 				String result ="";
 				for(String s : splittedName)
@@ -220,13 +219,15 @@ public class ExerciseServlet extends HttpServlet {
 					result += s;
 				}
 				if(result.toLowerCase()
-						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("�bung exsistiert bereits");
+						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("Übung exsistiert bereits");
 			}
+			
+			
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
-			stmtExercise.setDate(3, (java.sql.Date) exercise.getCreationDate());
-			stmtExercise.setString(4, exercise.getExerciseImage());
-			stmtExercise.setBinaryStream(5, filepart.getInputStream());
+			//stmtExercise.setDate(3, (java.sql.Date) exercise.getCreationDate());
+			stmtExercise.setString(3, exercise.getExerciseImage());
+			stmtExercise.setBinaryStream(4, filepart.getInputStream());
 			stmtExercise.executeUpdate();
 			
 			try(ResultSet rs = stmtExercise.getGeneratedKeys()){
@@ -268,7 +269,7 @@ public class ExerciseServlet extends HttpServlet {
 		}
 	}
 	
-	private ExerciseBean findExercise(String name, List<ExerciseBean> exercises) 
+	private ExerciseBean findExercise(String name, ArrayList<ExerciseBean> exercises) 
 	{
 		ExerciseBean retExercise = new ExerciseBean();
 		for(ExerciseBean exercise : exercises) 

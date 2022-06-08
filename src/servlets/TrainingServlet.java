@@ -101,19 +101,14 @@ public class TrainingServlet extends HttpServlet {
 		
 		TrainingBean training = new TrainingBean();
 		HttpSession session = request.getSession();
-		int counter = 0;
-		if(counter > 0) 
-		{
-			session.removeAttribute("training");
-		}
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
-		training.setUserId(Long.parseLong(request.getParameter("userId")));
-		training.setCreationDate(new Date());
-				
+		UserBean user = (UserBean) session.getAttribute("userData");
+		System.out.print(user.getId());
+		training.setUserId(user.getId());
+		training.setCreationDate(new Date());		
 		create(training);
 		session.setAttribute("training", training);
-		counter++;
 		response.getWriter().write("hasi");
 		//response.sendRedirect("html/training.jsp");
 		//doGet(request, response);

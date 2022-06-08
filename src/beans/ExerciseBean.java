@@ -25,16 +25,9 @@ public class ExerciseBean implements Serializable
 //		SCHULTERMUSKULATUR;
 //	}
 
-	private Date creationDate;
+
 	private String exerciseImage;
 	
-	
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
 	public Long getId() {
 		return id;
 	}
