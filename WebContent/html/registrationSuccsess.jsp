@@ -1,16 +1,13 @@
-<
-
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+<base href="${pageContext.request.requestURI}" /> <!-- Basis fÃ¼r relative Verweise -> Basis = Speicherort -->
 <meta charset="utf-8">
 <title>Registriervorgang erfolgreich!</title>
 </head>
 <body>
-<%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
 	<h1>Der Registriervorgang war erfolgreich!</h1>
 	<main>
 		<ul>

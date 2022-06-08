@@ -1,3 +1,5 @@
+//Hubertus Seitz
+
 "use strict"
 
 function authenticationCheck(userData){
