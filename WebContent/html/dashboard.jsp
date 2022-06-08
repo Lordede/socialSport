@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="de">
     <head>
@@ -6,10 +7,10 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of your Training and the leaderbord">
         <meta name="keywords" content="Training Sport Leaderboard">
-        <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+        <base href="${pageContext.request.requestURI}" /> <!-- Basis fï¿½r relative Verweise -> Basis = Speicherort -->
     </head>
     <body>
-    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- ï¿½berprï¿½fung, ob User eingeloggt ist --%>
         <header>
             <h1><strong>Dashboard: </strong></h1>
             <input type="search" 

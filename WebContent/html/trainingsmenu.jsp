@@ -1,6 +1,8 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="de">
     <head>
+    
         <title>Dashboard</title>
         <meta charset="utf-8">
         <meta name="author" content="Cem Durmus">
@@ -10,7 +12,7 @@
         <script src="../JavaScript/TrainingsManagement.js" type="text/javascript"></script>
     </head>
     <body>
-    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- ÃberprÃ¼fung, ob User eingeloggt ist --%>
         <header>
             <h1><strong>Training: </strong></h1>
             <input type="search" 
@@ -27,21 +29,21 @@
         </nav>
         <article>
             <div id="training">
-                <div id="addNewTraining">
-                    <button id="loadTrainings">Traings laden</button>
-                    <button id="addTraining">Training hinzufügen</button>
+                <div id="addTraining">
+                    <button id="loadTrainings">Trainings laden</button>
+                    <button id="addNewTraining">Training hinzufügen</button>
                     <label id="nameOfTrainingLabel" hidden="hidden">Name des Traings</label>
                     <input id="nameOfTrainingInput" type="hidden">
-                    <button id="sendTraining" hidden="hidden">Training erstllen</button>
+                    <button id="sendTraining" hidden="hidden">Training erstellen</button>
                 </div>
                 <div id="searchPastTrainings">
                     <label id ="searchBarTrainingLabel">Übung Suchen</label>
                     <input id="searchBarTraining" type="search">
-                    <template>
-                        <div id="name"></div>
+                    <template class="searchResults">
+                        <div class="trainingsName"></div>
                     </template>
                 </div>
-                <div id="trainingsContainer"></div>
+                <div class="trainingsContainer"></div>
             </div>
             <table>
                 <thead>
@@ -70,14 +72,14 @@
                     Neues Training
             </button>
             <script>
-                let searchTraining = document.getElementById("searchPastTrainings")
+                let searchTrainingInput = document.getElementById("searchPastTrainings")
                 let loadAllTrainings = document.getElementById("loadTrainings");
                 let createTraining = document.getElementById("addNewTraining");
                 document.addEventListener("DOMContentLoaded", init);
 
                 function init() {
                     loadAllTrainings.addEventListener("click", readPastTrainings);
-                    //searchTraining.addEventListener("input", searchTraining);
+                    //searchTrainingInput.addEventListener("input", searchTraining);
                     createTraining.addEventListener("click", hideSearch);
                     console.log("html spricht an");
                 }

@@ -1,9 +1,10 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <!--Um hier reinzukommen erst Passwort abfrage-->
 <html lang="de">
 <head>
 <base href="${pageContext.request.requestURI}" />
-<!-- Basis für relative Verweise -> Basis = Speicherort -->
+<!-- Basis fï¿½r relative Verweise -> Basis = Speicherort -->
 <title>Profil Bearbeiten</title>
 <meta charset="UTF-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
@@ -12,7 +13,7 @@
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>
-	<%-- Überprüfung, ob User eingeloggt ist --%>
+	<%-- ï¿½berprï¿½fung, ob User eingeloggt ist --%>
 	<header>
 		<h1>Profil Bearbeiten</h1>
 	</header>
@@ -22,12 +23,12 @@
 			<img src="" alt="Profil Picture">
 			<form action="../UserUpdateServlet" method="post"
 				enctype="multipart/form-data" accept-charset="utf-8">
-				<p>Profilbild ändern:</p>
+				<p>Profilbild Ã¤ndern:</p>
 				<input type="image" name="changeImage" accept="image/*"
 					formaction="../UserUpdateServlet" formmethod="post">
 				<button type="submit" name="changeImage" value="changeImage"
 					formaction="../UserUpdateServlet" formmethod="post">Bild
-					ändern</button>
+					ï¿½ndern</button>
 			</form>
 		</div>
 		<div class="userName">
@@ -37,7 +38,7 @@
 				<p>${userData.username}</p>
 				<input type="text" name="changeUsername" size="30" maxlength="35"><br>
 				<Button type="submit" value="changeUsername">Benutzernamen
-					ändern</Button>
+					ï¿½ndern</Button>
 			</form>
 		</div>
 		<div>
@@ -50,7 +51,7 @@
 					name="changeLastName" maxlength="35"><br>
 				<Button type="submit">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"df -->
-					Namen ändern
+					Namen ï¿½ndern
 				</Button>
 			</form>
 		</div>
@@ -61,7 +62,7 @@
 					type="password" name="password" size="30" maxlength="35"><br>
 				<Button type="submit" name="password" value="password"
 					formaction="../UserUpdateServlet" formmethod="post">
-					Passwort ändern</Button>
+					Passwort ï¿½ndern</Button>
 			</form>
 		</div>
 		<div>
@@ -71,7 +72,7 @@
 				<input type="email" name="changeMail" size="30" maxlength="35"><br>
 				<Button type="submit" value="changeMail">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"> -->
-					E-Mail ändern
+					E-Mail ï¿½ndern
 				</Button>
 			</form>
 		</div>
@@ -79,7 +80,7 @@
 			<form action="../UserUpdateServlet" method="post">
 				<Button type="submit" name="deleteUser"
 					formaction="../UserUpdateServlet" formmethod="post">Benutzer
-					löschen</Button>
+					lï¿½schen</Button>
 			</form>
 		</div>
 	</article>

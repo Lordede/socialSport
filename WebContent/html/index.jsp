@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <!-- Erstellt von Cem Durmus -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +25,7 @@
                 <li><a href="./trainingsmenu.jsp">Training</a></li>
                 <li><a href="./leaderboard.jsp">Leaderboard</a></li>
                 <li><a href="./accountSetting.jsp">Account Settings</a></li>
-                <li><a href="./exercise.jsp">ܜbung erstellen</a></li>
+                <li><a href="./exercise.jsp">Übung erstellen</a></li>
             </ul>
             </nav>
         </header>

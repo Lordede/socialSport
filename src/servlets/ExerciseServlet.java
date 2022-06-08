@@ -53,6 +53,7 @@ public class ExerciseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		int sessionCounter = 0;
 		//UserBean userBean = (UserBean) session.getAttribute("userData");
 		Enumeration<String> params = request.getParameterNames();
 		while(params.hasMoreElements()) 
@@ -72,6 +73,15 @@ public class ExerciseServlet extends HttpServlet {
 				String jsonSearch = convertListToJson(exercisesSearched);
 				response.getWriter().write(jsonSearch);
 				break;
+			case "selectedExercise":
+				ExerciseBean exercise = (ExerciseBean) initializeExercise
+				(Long.parseLong(request.getParameter("selectedExercise")), response);
+				if(sessionCounter > 0) 
+				{
+					session.removeAttribute("exercise");
+				}
+				session.setAttribute("exercise", exercise);
+				sessionCounter++;
 			}
 		}
 		
@@ -351,7 +361,9 @@ public class ExerciseServlet extends HttpServlet {
 			jsonString.append("\"name\":");
 			jsonString.append("\""+exercises.get(i).getName()+"\",");
 			jsonString.append("\"muscleGroup\":");
-			jsonString.append("\""+exercises.get(i).getMuscleGroup()+"\"");
+			jsonString.append("\""+exercises.get(i).getMuscleGroup()+"\",");
+			jsonString.append("\"id\":");
+			jsonString.append("\""+exercises.get(i).getId()+"\"");
 			if( i+1 == exercises.size()) 
 			{
 				jsonString.append("}");

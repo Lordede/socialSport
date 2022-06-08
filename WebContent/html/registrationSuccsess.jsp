@@ -1,16 +1,13 @@
-<
-
-
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+<base href="${pageContext.request.requestURI}" /> <!-- Basis fï¿½r relative Verweise -> Basis = Speicherort -->
 <meta charset="utf-8">
 <title>Registriervorgang erfolgreich!</title>
 </head>
 <body>
-<%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
+<%@ include file="fragments/authenticationCheck.jspf" %> <%-- ï¿½berprï¿½fung, ob User eingeloggt ist --%>
 	<h1>Der Registriervorgang war erfolgreich!</h1>
 	<main>
 		<ul>

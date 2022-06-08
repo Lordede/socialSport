@@ -66,10 +66,12 @@ public class SetServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		SetBean set = new SetBean();
-		
+		HttpSession session = request.getSession();
 		set.setRep(Integer.parseInt(request.getParameter("rep")));
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
-		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
+		ExerciseBean exercise = (ExerciseBean) session.getAttribute("exercise");
+		set.setExerciseId(exercise.getId());
+		TrainingBean training = (TrainingBean) session.getAttribute("training");
 		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 				
 		create(set);

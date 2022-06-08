@@ -49,6 +49,9 @@ public class TrainingServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
     	//Long id = Long.parseLong(request.getParameter("id"));
+    	HttpSession session = request.getSession();
+    	//Cem Durmus
+    	int counter = 0;
     	Enumeration<String> params = request.getParameterNames();
 		while(params.hasMoreElements()) 
 		{
@@ -57,15 +60,26 @@ public class TrainingServlet extends HttpServlet {
 			switch(paramNames) 
 			{
 			case "loadTrainings":
-				HttpSession session = request.getSession();
 				ArrayList<TrainingBean> allTrainings = listAllTrainings();
 				String json = convertListToJson(allTrainings);
+				System.out.println(json);	
 				response.getWriter().write(json);
 				break;
 			case "exerciseInputField":
-				
+				ArrayList<TrainingBean> trainingSearched = search(request.getParameter("exerciseInputField"));
+				String jsonSearch = convertListToJson(trainingSearched);
+				response.getWriter().write(jsonSearch);
 				break;
-			
+			case "selectedTraining":
+				TrainingBean training =(TrainingBean) read
+				(Long.parseLong(request.getParameter("selectedTraining")));
+				if(counter > 0) 
+				{
+					session.removeAttribute("training");
+				}
+				session.setAttribute("training", training);
+				counter++;
+				response.sendRedirect("./html/training.jsp");
 			}
 		}
 		
@@ -82,11 +96,20 @@ public class TrainingServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		TrainingBean training = new TrainingBean();
+		HttpSession session = request.getSession();
+		int counter = 0;
+		if(counter > 0) 
+		{
+			session.removeAttribute("training");
+		}
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
 		create(training);
-		request.getSession().setAttribute("training", training);
-		doGet(request, response);
+		session.setAttribute("training", training);
+		counter++;
+		System.out.println("in post");
+		response.sendRedirect("html/training.jsp");
+		//doGet(request, response);
 	}
 
 	/**
@@ -141,7 +164,7 @@ public class TrainingServlet extends HttpServlet {
 		TrainingBean form = new TrainingBean();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE userId = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE id = ?")){
 			
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
@@ -149,7 +172,6 @@ public class TrainingServlet extends HttpServlet {
 					form.setName(rs.getString("name"));
 					form.setId(rs.getLong("id"));
 					form.setPoints(rs.getDouble("points"));
-					form.setUserId(rs.getLong("userId"));
 					
 				}
 			}
@@ -159,26 +181,23 @@ public class TrainingServlet extends HttpServlet {
 		return form;
 	}
 	
-	private List<TrainingBean> search(Long userId) throws ServletException{
-		List<TrainingBean> trainings = new ArrayList<TrainingBean>();
-		
+	private ArrayList<TrainingBean> search(String input) throws ServletException{
+		ArrayList<TrainingBean> trainings = new ArrayList<TrainingBean>();
+		input = (input == null || input == "") ? "%" : "%" + input + "%";
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE ?")) 
+		{
 			
-		
-			
+			pstmt.setString(1, input);
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
-					
 					Long id = Long.valueOf(rs.getLong("id"));
 					String name = rs.getString("name");
-					double points = Double.valueOf(rs.getDouble("points"));
-					
+					double points = Double.valueOf(rs.getDouble("points"));					
 					training.setId(id);
 					training.setName(name);
 					training.setPoints(points);
-					
 					trainings.add(training);
 				}
 			}
@@ -208,7 +227,6 @@ public class TrainingServlet extends HttpServlet {
 					training.setId(id);
 					training.setName(name);
 					training.setPoints(points);
-					
 					trainings.add(training);
 				}
 			}
@@ -225,7 +243,7 @@ public class TrainingServlet extends HttpServlet {
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"
 														+ "(name, points) "
-														+ "VALUES (?, ?)", generatedKeys)){
+											+ "VALUES (?, ?)", generatedKeys)){	
 			pstmt.setString(1, form.getName());
 			pstmt.setDouble(2, form.getPoints());
 			
@@ -240,21 +258,23 @@ public class TrainingServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-
+//Cem Durmus
 	private String convertListToJson(ArrayList<TrainingBean> arr) 
 	{
 		StringBuilder jsonString = new StringBuilder();
-		ArrayList<TrainingBean> exercises = arr;
+		ArrayList<TrainingBean> trainings = arr;
 		
 		jsonString.append("[");
-		for(int i = 0;i < exercises.size(); i++) 
+		for(int i = 0;i < trainings.size(); i++) 
 		{			
 			jsonString.append("{");
 			jsonString.append("\"name\":");
-			jsonString.append("\""+exercises.get(i).getName()+"\",");
-			jsonString.append("\"muscleGroup\":");
-			jsonString.append("\""+exercises.get(i).getPoints()+"\"");
-			if( i+1 == exercises.size()) 
+			jsonString.append("\""+trainings.get(i).getName()+"\",");
+			jsonString.append("\"points\":");
+			jsonString.append("\""+trainings.get(i).getPoints()+"\",");
+			jsonString.append("\"id\":");
+			jsonString.append("\""+trainings.get(i).getId()+"\"");
+			if( i+1 == trainings.size()) 
 			{
 				jsonString.append("}");
 			} else {
