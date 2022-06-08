@@ -43,6 +43,11 @@ function selectTraining(training)
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "../TrainingServlet?selectedTraining="+training.id, true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.onload = function()
+    {
+        var text = xmlhttp.responseText;
+        window.location = "training.jsp";
+    }
     xmlhttp.send();
 }
 function hideSearch()
@@ -74,6 +79,11 @@ function sendTrainingDB(inputField)
     {
         xmlhttp.open("POST", "../TrainingServlet", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.onload = function ()
+        {
+            var text = xmlhttp.responseText;
+            window.location = "training.jsp";
+        }
         xmlhttp.send("name="+input.value+"&points=2");
     }
     

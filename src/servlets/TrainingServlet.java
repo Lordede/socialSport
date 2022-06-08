@@ -14,6 +14,7 @@ import beans.ExerciseBean;
 import beans.TrainingBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -51,7 +52,6 @@ public class TrainingServlet extends HttpServlet {
     	//Long id = Long.parseLong(request.getParameter("id"));
     	HttpSession session = request.getSession();
     	//Cem Durmus
-    	int counter = 0;
     	Enumeration<String> params = request.getParameterNames();
 		while(params.hasMoreElements()) 
 		{
@@ -73,13 +73,16 @@ public class TrainingServlet extends HttpServlet {
 			case "selectedTraining":
 				TrainingBean training =(TrainingBean) read
 				(Long.parseLong(request.getParameter("selectedTraining")));
-				if(counter > 0) 
+				if(session.getAttribute("training") != null) 
 				{
 					session.removeAttribute("training");
+					System.out.println("mehr als ein attriubt");
+					
 				}
 				session.setAttribute("training", training);
-				counter++;
-				response.sendRedirect("./html/training.jsp");
+				response.getWriter().write("hasi");
+//				RequestDispatcher disp = request.getRequestDispatcher("html/training.jsp");
+//				disp.forward(request, response);
 			}
 		}
 		
@@ -107,8 +110,8 @@ public class TrainingServlet extends HttpServlet {
 		create(training);
 		session.setAttribute("training", training);
 		counter++;
-		System.out.println("in post");
-		response.sendRedirect("html/training.jsp");
+		response.getWriter().write("hasi");
+		//response.sendRedirect("html/training.jsp");
 		//doGet(request, response);
 	}
 

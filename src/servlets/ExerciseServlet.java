@@ -47,9 +47,6 @@ public class ExerciseServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
@@ -84,29 +81,8 @@ public class ExerciseServlet extends HttpServlet {
 				sessionCounter++;
 			}
 		}
-		
-	
-		
-//		PrintWriter out = response.getWriter();
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		out.print(convertListToJson());
-//		out.flush();
-		
-		
-		
-		
-		
-		
-		
-//		ExerciseBean exerciseBean = findExercise(request.getParameter("name"), exercises1);
-//		
-//		session.setAttribute("exercise", exerciseBean);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		RequestDispatcher rd = request.getRequestDispatcher("SetServlet");
@@ -120,11 +96,6 @@ public class ExerciseServlet extends HttpServlet {
 		exerciseBean.setExerciseImage(filepart.getSubmittedFileName());
 		createExcercise(exerciseBean, filepart);
 		session.setAttribute("exercise", exerciseBean);
-		//alarm
-		//String jsonExercises = convertListToJson();***
-		//session.setAttribute("exercisesJson", jsonExercises);**
-//		RequestDispatcher disp = request.getRequestDispatcher("html/success.jsp");
-//		disp.forward(request, response);
 		response.sendRedirect("html/success.jsp");
 		//create(training);
 		
@@ -144,9 +115,7 @@ public class ExerciseServlet extends HttpServlet {
 		//update()
 	}
 	
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
+	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ExerciseBean exerciseBean = (ExerciseBean) session.getAttribute("exercise");
@@ -177,22 +146,6 @@ public class ExerciseServlet extends HttpServlet {
 			//pstmt.setDouble(2, exercise.getPoint());
 			pstmt.setString(2, exercise.getMuscleGroup());
 			pstmt.setLong(3, exercise.getId());
-			/*
-			 * List<SetBean> sets = new LinkedList<>(); try (Connection setCon =
-			 * ds.getConnection(); PreparedStatement setStatement =
-			 * con.prepareStatement("SELECT * FROM set WHERE exerciseId=?")) { try(ResultSet
-			 * result = setStatement.executeQuery()) { while(result != null &&
-			 * result.next()) { SetBean setBean = new SetBean();
-			 * setBean.setRep(result.getInt("rep")); setBean.setKg(result.getDouble("kg"));
-			 * sets.add(setBean); } } }
-			 */
-			/*while(!finished) 
-			{
-				rd.include(request, response);
-				SetBean set = Set.getSet();
-				sets.add(set);
-			}
-			exerciseBean.setSets(sets);*/
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
@@ -209,8 +162,8 @@ public class ExerciseServlet extends HttpServlet {
 			{
 				while(rs != null && rs.next()) {
 					ExerciseBean exercise = new ExerciseBean();
+					exercise.setId(rs.getLong("id"));
 					exercise.setName(rs.getString("name"));
-					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setExerciseImage(rs.getString("filename"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
 					exercises.add(exercise);
@@ -228,7 +181,7 @@ public class ExerciseServlet extends HttpServlet {
 		ExerciseBean exercise = new ExerciseBean();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM exercise WHERE Id = ?")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM exercises WHERE Id = ?")){
 			
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
@@ -238,24 +191,6 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
-					
-//					List<SetBean> setList = new LinkedList<>();
-//					
-//					try(Connection itterateSet = ds.getConnection();
-//						PreparedStatement sets = itterateSet.prepareStatement("SELECT * From sets WHERE exerciseId=?"))
-//					{
-//						sets.setLong(1,id);
-//						try(ResultSet result = sets.executeQuery())
-//						{
-//							while(result != null && result.next()) 
-//							{
-//								SetBean setBean = new SetBean();
-//								setBean.setRep(result.getInt("rep"));
-//								setBean.setKg(result.getDouble("kg"));
-//								setList.add(setBean);
-//							}
-//						}
-//					}
 				}
 			}
 		} catch (Exception ex) {
@@ -285,14 +220,13 @@ public class ExerciseServlet extends HttpServlet {
 					result += s;
 				}
 				if(result.toLowerCase()
-						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("ï¿½bung exsistiert bereits");
+						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("Übung exsistiert bereits");
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
 			stmtExercise.setString(4, exercise.getExerciseImage());
 			stmtExercise.setBinaryStream(3, filepart.getInputStream());
 			stmtExercise.executeUpdate();
-			//stmtExercise.setLong(3, exercise.getTrainigsId);
 			
 			try(ResultSet rs = stmtExercise.getGeneratedKeys()){
 				while(rs.next()) {
