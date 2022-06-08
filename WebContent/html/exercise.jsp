@@ -38,6 +38,13 @@
 						name="muscleGroup" value="Bauchmuskulatur" id="c5"> <label
 						for="c5">Bauchmuskulatur</label>
 				</fieldset>
+				<input id="image" 
+            type="file"
+            name="image"
+            accept="image/*"
+            formaction="../ExerciseServlet"
+            formmethod="post">
+            </div>
 			</div>
 			<Button type="submit">Übung Erstellen</Button>
 		</Form>
