@@ -5,10 +5,10 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -44,11 +44,11 @@ public class ExerciseServlet extends HttpServlet {
      */
     public ExerciseServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		HttpSession session = request.getSession();
 		int sessionCounter = 0;
 		//UserBean userBean = (UserBean) session.getAttribute("userData");
@@ -84,12 +84,13 @@ public class ExerciseServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 //		RequestDispatcher rd = request.getRequestDispatcher("SetServlet");
 //		rd.forward(request, response);
 		ExerciseBean exerciseBean = new ExerciseBean();
 		exerciseBean.setName(request.getParameter("exerciseName"));
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
+		exerciseBean.setCreationDate(new Date());
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		Part filepart = request.getPart("image");
@@ -166,6 +167,7 @@ public class ExerciseServlet extends HttpServlet {
 					exercise.setName(rs.getString("name"));
 					exercise.setExerciseImage(rs.getString("filename"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
+					exercise.setCreationDate(rs.getDate("creationDate"));
 					exercises.add(exercise);
 				}
 			}
@@ -186,11 +188,9 @@ public class ExerciseServlet extends HttpServlet {
 			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs != null && rs.next()) {
-					
-					
 					exercise.setName(rs.getString("name"));
-					//exercise.setPoint(rs.getDouble("point"));
 					exercise.setMuscleGroup(rs.getString("muscleGroup"));
+					exercise.setCreationDate(rs.getDate("creationDate"));
 				}
 			}
 		} catch (Exception ex) {
@@ -204,8 +204,8 @@ public class ExerciseServlet extends HttpServlet {
 		
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
-														+ "(name, muscleGroup, exerciseImage, filename)"
-														+ "VALUES (?, ?, ?, ?)", generatedKeys))
+														+ "(name, muscleGroup, creationDate, exerciseImage, filename)"
+														+ "VALUES (?, ?, ?, ?, ?)", generatedKeys))
 		{
 			ArrayList<ExerciseBean> exercises = getListOfExercises();
 			//System.out.println("---------------------"+exercises.size()+"----------");
@@ -220,12 +220,13 @@ public class ExerciseServlet extends HttpServlet {
 					result += s;
 				}
 				if(result.toLowerCase()
-						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("Übung exsistiert bereits");
+						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("ï¿½bung exsistiert bereits");
 			}
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
+			stmtExercise.setDate(3, (java.sql.Date) exercise.getCreationDate());
 			stmtExercise.setString(4, exercise.getExerciseImage());
-			stmtExercise.setBinaryStream(3, filepart.getInputStream());
+			stmtExercise.setBinaryStream(5, filepart.getInputStream());
 			stmtExercise.executeUpdate();
 			
 			try(ResultSet rs = stmtExercise.getGeneratedKeys()){

@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--Um hier reinzukommen erst Passwort abfrage-->
 <html lang="de">
@@ -10,6 +11,7 @@
 <meta name="description" content="Ihre one stop Sport Plattform">
 <meta name="keywords" content="Sport, Gym, social media, sports">
 <meta name="author" content="Cem Durmus">
+<link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>

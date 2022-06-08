@@ -1,8 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+<base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
 <meta charset="utf-8">
 <title>Registriervorgang erfolgreich!</title>
 </head>
@@ -11,7 +12,7 @@
 	<h1>Der Registriervorgang war erfolgreich!</h1>
 	<main>
 		<ul>
-			<li>UserID:  	${form.id}		</li> <!-- TODO: Fix Bug: Gibt immer 0 aus? -->
+			<li>UserID:  	${form.id}		</li>
 			<li>e-Mail: 	${form.eMail}	</li>
 			<li>Username: 	${form.username}</li>
 			<li>Vorname: 	${form.firstName}</li>

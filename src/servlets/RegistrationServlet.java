@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.Enumeration;
 
 import javax.sql.DataSource;
@@ -59,6 +60,10 @@ public class RegistrationServlet extends HttpServlet {
 		form.setFirstName(firstName);
 		final String lastName = request.getParameter("lastName");
 		form.setLastName(lastName);
+		
+		//https://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
+		final java.sql.Date creationDate = new java.sql.Date(new java.util.Date().getTime());
+		form.setCreationDate(creationDate);
 		//final String password = request.getParameter("password");
 		//form.setPassword(password);
 
@@ -66,9 +71,9 @@ public class RegistrationServlet extends HttpServlet {
 		boolean errorFound = false;
 
 		session.setAttribute("form", form); // Bean in Session abspeichern
-											// TODO: Macht man das tatsächlich so oder besser in der Bean mit @SessionScoped?
+											// TODO: Macht man das tatsï¿½chlich so oder besser in der Bean mit @SessionScoped?
 
-		// Überprüfung ob eines der übergebenen Paramter entweder NULL oder Leer ist.
+		// ï¿½berprï¿½fung ob eines der ï¿½bergebenen Paramter entweder NULL oder Leer ist.
 
 		while (formInputs.hasMoreElements()) {
 			String inputName = (String) formInputs.nextElement();
@@ -79,13 +84,12 @@ public class RegistrationServlet extends HttpServlet {
 			}
 		}
 
-		
 		if (!errorFound)
 		{
 
-			createNewUser(eMail, userName, firstName, lastName, password); 	// User in Datenbank schreiben
-			form.setId(getUserId(form.getUsername()));						// TODO: Besser generierte id aus Datenbank auslesen
-			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect, da auf DB schreibend zugegriffen wird.
+			createNewUser(eMail, userName, firstName, lastName, password, creationDate); 	// User in Datenbank schreiben
+			form.setId(getUserId(form.getUsername()));						// generierte id aus Datenbank auslesen
+			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect richtig, da auf DB schreibend zugegriffen wird.
 			
 		}
 
@@ -123,25 +127,26 @@ public class RegistrationServlet extends HttpServlet {
 	 * @author Hubertus Seitz
 	 */
 	
-	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password ) throws ServletException { // Funktion zum anlegen eines Users
+	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password, Date creationDate ) throws ServletException { // Funktion zum anlegen eines Users
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
-						"INSERT INTO users (email,username,firstName, lastname, pwd) VALUES(?,?,?,?,?)")) {
-			
+						"INSERT INTO users (email,username,firstName, lastname, pwd, creationDate) VALUES(?,?,?,?,?,?)")) {
+
 			// Datenbank Operationen
 			pstmt.setString(1, eMail);
 			pstmt.setString(2, userName);
 			pstmt.setString(3, firstName);
 			pstmt.setString(4, lastName);
 			pstmt.setString(5, password);
+			pstmt.setString(6, creationDate.toString());
 			pstmt.executeUpdate();
 			
 
 		} catch (Exception ex) {
 
 			throw new ServletException(ex.getMessage());
-//			if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfügbarer E-Mail oder Username
-//																// Wäre es möglich bei der Eingabe schon die Verfügbarkeit zu testen?
+//			if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verfï¿½gbarer E-Mail oder Username
+//																// Wï¿½re es mï¿½glich bei der Eingabe schon die Verfï¿½gbarkeit zu testen?
 //			}
 		}
 		

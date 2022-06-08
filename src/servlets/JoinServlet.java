@@ -10,7 +10,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import beans.JoinBean;
-import beans.SetBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -36,14 +35,14 @@ public class JoinServlet extends HttpServlet {
      */
     public JoinServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userData");
 		
@@ -56,7 +55,7 @@ public class JoinServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 	

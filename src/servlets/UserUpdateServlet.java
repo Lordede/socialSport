@@ -34,7 +34,7 @@ public class UserUpdateServlet extends HttpServlet {
      */
     public UserUpdateServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -45,7 +45,7 @@ public class UserUpdateServlet extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		HttpSession session = request.getSession();
 		UserBean user = (UserBean) session.getAttribute("userData");
 		deleteUser(user);

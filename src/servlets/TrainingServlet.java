@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -39,14 +40,14 @@ public class TrainingServlet extends HttpServlet {
      */
     public TrainingServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
     	//Long id = Long.parseLong(request.getParameter("id"));
@@ -97,7 +98,7 @@ public class TrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		TrainingBean training = new TrainingBean();
 		HttpSession session = request.getSession();
 		int counter = 0;
@@ -107,6 +108,9 @@ public class TrainingServlet extends HttpServlet {
 		}
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
+		training.setUserId(Long.parseLong(request.getParameter("userId")));
+		training.setCreationDate(new Date());
+				
 		create(training);
 		session.setAttribute("training", training);
 		counter++;
@@ -119,7 +123,7 @@ public class TrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		TrainingBean training = new TrainingBean();
 		training.setId(Long.parseLong(request.getParameter("id")));
 		training.setName(request.getParameter("name"));
@@ -134,7 +138,7 @@ public class TrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		Long id = Long.parseLong(request.getParameter("id")) ;
 		delete(id);
 	}
@@ -175,6 +179,8 @@ public class TrainingServlet extends HttpServlet {
 					form.setName(rs.getString("name"));
 					form.setId(rs.getLong("id"));
 					form.setPoints(rs.getDouble("points"));
+					form.setUserId(rs.getLong("userId"));
+					form.setCreationDate(rs.getDate("creationDate"));
 					
 				}
 			}
@@ -223,13 +229,18 @@ public class TrainingServlet extends HttpServlet {
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
 					
-					Long id = Long.valueOf(rs.getLong("id"));
+					Long id = rs.getLong("id");
 					String name = rs.getString("name");
-					double points = Double.valueOf(rs.getDouble("points"));
+					double points = rs.getDouble("points");
+					Date creationDate = rs.getDate("creationDate");
+					Long userId = rs.getLong("userId");
 					
 					training.setId(id);
 					training.setName(name);
 					training.setPoints(points);
+					training.setUserId(userId);
+					training.setCreationDate(creationDate);
+					
 					trainings.add(training);
 				}
 			}
@@ -245,10 +256,12 @@ public class TrainingServlet extends HttpServlet {
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"
-														+ "(name, points) "
-											+ "VALUES (?, ?)", generatedKeys)){	
+														+ "(name, points, userId, creationDate) "
+														+ "VALUES (?, ?, ?, ?)", generatedKeys)){
 			pstmt.setString(1, form.getName());
 			pstmt.setDouble(2, form.getPoints());
+			pstmt.setLong(3, form.getUserId());
+			pstmt.setDate(4, (java.sql.Date) form.getCreationDate());
 			
 			pstmt.executeUpdate();
 			

@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="author" content="Cem Durmus" />
-<!-- Basis für relative Verweise -> Basis = Speicherort -->
+<!-- Basis fï¿½r relative Verweise -> Basis = Speicherort -->
 <base href="${pageContext.request.requestURI}" />
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
+<%@ include file="fragments/authenticationCheck.jspf" %> <%-- ï¿½berprï¿½fung, ob User eingeloggt ist --%>
 	<header>
 		<h1>Profil Bearbeiten</h1>
 	</header>
@@ -19,7 +19,7 @@
 		<div class="profile_image">
 			<img src="" alt="Profil Picture">
 			<form action="" method="post" enctype="multipart/form-data">
-				<p>Profilbild ändern:</p>
+				<p>Profilbild ï¿½ndern:</p>
 			</form>
 		</div>
 		<div class="userName">
