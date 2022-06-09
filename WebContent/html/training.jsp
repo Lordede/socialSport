@@ -109,6 +109,7 @@
                 function init() {
 
                     var button = document.getElementById("addButton");
+                    var addSetButton = document.getElementsByClassName("button addSet")
 
                     //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
                     button.addEventListener('click', toggleExerciseSearchbar);
