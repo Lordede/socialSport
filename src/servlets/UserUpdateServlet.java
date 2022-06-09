@@ -1,13 +1,15 @@
 package servlets;
 
-import java.awt.Image;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.sql.DataSource;
 
+import beans.TrainingBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
@@ -41,7 +43,22 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		Enumeration<String> paramNames = request.getParameterNames();
+		while (paramNames.hasMoreElements()) 
+		{
+			String param = paramNames.nextElement();
+			switch (param) 
+			{
+			case "getUsers":
+				ArrayList<UserBean> users = listOfAllUsers();
+				String usersJson = convertListToJson(users);
+				response.getWriter().write(usersJson);
+				break;
+			case "getSpecificUserPwd":
+				UserBean user = getUser(Long.parseLong(request.getParameter("getSpecificUser")));
+				//insert functionality
+			}
+		}
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -199,5 +216,81 @@ public class UserUpdateServlet extends HttpServlet {
 		{
 			throw new ServletException(ex.getMessage());
 		}
+	}
+	
+	private UserBean getUser(Long id) throws ServletException
+	{
+		UserBean user = new UserBean();
+		try (Connection conDs = ds.getConnection();
+				PreparedStatement statement = conDs.prepareStatement("SELECT * FROM users WHERE id = ?"))
+		{
+			try(ResultSet rs = statement.executeQuery())
+			{
+				user.setUsername(rs.getString("username"));
+				user.setCreationDate(rs.getDate("creationDate"));
+				user.setFirstName(rs.getString("firstname"));
+				user.setLastName(rs.getString("lastname"));
+				user.seteMail(rs.getString("eMail"));
+				user.setId(id);
+			}
+			return user;
+		}
+		catch (Exception ex) 
+		{
+			throw new ServletException(ex.getMessage());
+		}
+	}
+	private ArrayList<UserBean> listOfAllUsers() throws ServletException 
+	{
+		ArrayList<UserBean> userList = new ArrayList<>();
+		try(Connection con = ds.getConnection();
+		PreparedStatement pstmt = con.prepareStatement("SELECT * FROM users"))
+		{
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					UserBean user = new UserBean();
+					user.setUsername(rs.getString("username"));
+					user.setFirstName(rs.getString("firstname"));
+					user.seteMail(rs.getString("eMail"));
+					user.setLastName(rs.getString("lastname"));
+					userList.add(user);
+				}
+			}
+			return userList;
+		}
+		catch(Exception ex)
+		{
+			throw new ServletException(ex.getMessage());
+		}
+	}
+	private String convertListToJson(ArrayList<UserBean> arr) 
+	{
+		StringBuilder jsonString = new StringBuilder();
+		ArrayList<UserBean> users = arr;
+		
+		jsonString.append("[");
+		for(int i = 0;i < users.size(); i++) 
+		{			
+			jsonString.append("{");
+			jsonString.append("\"Vorname:\":");
+			jsonString.append("\""+users.get(i).getFirstName()+"\",");
+			jsonString.append("\"Nachname:\":");
+			jsonString.append("\""+users.get(i).getLastName()+"\",");
+			jsonString.append("\"eMail:\":");
+			jsonString.append("\""+users.get(i).geteMail()+"\",");
+			jsonString.append("\"Benutzername:\":");
+			jsonString.append("\""+users.get(i).getUsername()+"\",");
+			jsonString.append("\"id\":");
+			jsonString.append("\""+users.get(i).getId()+"\"");
+			if( i+1 == users.size()) 
+			{
+				jsonString.append("}");
+			} else {
+				jsonString.append("},");
+				}
+		}
+		jsonString.append("]");
+		
+		return jsonString.toString();
 	}
 }
