@@ -5,7 +5,6 @@
 <head>
 	<base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
     <meta charset="utf-8">
-    <base href="${pageContext.request.requestURI}" /> 
   	
     <title>Training</title>
     <link rel="stylesheet" href="../css/training.css">
