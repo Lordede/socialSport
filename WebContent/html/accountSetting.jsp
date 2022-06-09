@@ -7,7 +7,7 @@
 <base href="${pageContext.request.requestURI}" />
 <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
 <title>Profil Bearbeiten</title>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
 <meta name="keywords" content="Sport, Gym, social media, sports">
 <meta name="author" content="Cem Durmus">
@@ -27,7 +27,7 @@
 		</ul> 
 	</nav>
 	<header>
-		<h1>Profil Bearbeiten</h1>
+		<h1>Profil bearbeiten</h1>
 	</header>
 	<article>
 		<h2>Bearbeiten Sie Ihr Profil hier</h2>
@@ -40,7 +40,7 @@
 					formaction="../UserUpdateServlet" formmethod="post">
 				<button type="submit" name="changeImage" value="changeImage"
 					formaction="../UserUpdateServlet" formmethod="post">Bild
-					�ndern</button>
+					ändern</button>
 			</form>
 		</div>
 		<div class="userName">
@@ -50,7 +50,7 @@
 				<p>${userData.username}</p>
 				<input type="text" name="changeUsername" size="30" maxlength="35"><br>
 				<Button type="submit" value="changeUsername">Benutzernamen
-					�ndern</Button>
+					ändern</Button>
 			</form>
 		</div>
 		<div>
@@ -63,7 +63,7 @@
 					name="changeLastName" maxlength="35"><br>
 				<Button type="submit">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"df -->
-					Namen �ndern
+					Namen ändern
 				</Button>
 			</form>
 		</div>
@@ -74,7 +74,7 @@
 					type="password" name="password" size="30" maxlength="35"><br>
 				<Button type="submit" name="password" value="password"
 					formaction="../UserUpdateServlet" formmethod="post">
-					Passwort �ndern</Button>
+					Passwort ändern</Button>
 			</form>
 		</div>
 		<div>
@@ -84,7 +84,7 @@
 				<input type="email" name="changeMail" size="30" maxlength="35"><br>
 				<Button type="submit" value="changeMail">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"> -->
-					E-Mail �ndern
+					E-Mail ändern
 				</Button>
 			</form>
 		</div>
@@ -92,7 +92,7 @@
 			<form action="../UserUpdateServlet" method="post">
 				<Button type="submit" name="deleteUser"
 					formaction="../UserUpdateServlet" formmethod="post">Benutzer
-					l�schen</Button>
+					löschen</Button>
 			</form>
 		</div>
 	</article>
