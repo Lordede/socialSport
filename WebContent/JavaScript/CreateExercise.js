@@ -109,7 +109,7 @@ function addSet(callingTable) {
 
 function disableSet() {
 
-    let NameOfcallingExercise = this.parentNode.parentNode.parentNode.parentNode.getAttribute("name");   // Smell
+    let exerciseid = this.parentNode.parentNode.parentNode.parentNode.getAttribute("id");   // Smell
     let idOfTraining = document.getElementsByTagName("header");
     idOfTraining = idOfTraining[0].getAttribute("id");              // id des Trainings
 
@@ -124,7 +124,7 @@ function disableSet() {
     var whdinput = whdZelle.children[0];
 
     if (whdinput.value != "") {   // kg darf null / "" sein, da man ja ohne weiteres z.B Klimmzüge ohne Gewicht machen kann.
-        if (sendSet(kginput.value, whdinput.value)) {    // nur sperren, wenn auch gesendet wurde
+        if (sendSet(kginput.value, whdinput.value, exerciseid)) {    // nur sperren, wenn auch gesendet wurde
 
             //sperren der Eingabefelder
             this.checked = true;                         //nur optisch schöner // Warum geht das nicht mit this.setAttribute?
@@ -138,13 +138,14 @@ function disableSet() {
 
 }
 
-function sendSet(kginput, whdinput) {
+function sendSet(kginput, whdinput, exerciseid) {
 
     var xmlhttp = new XMLHttpRequest;
 
     //console.log("KG "+kginput);
     //console.log("whd "+whdinput);
     var url = "../SetServlet";
+    
 
     xmlhttp.addEventListener("load", function () {
 
@@ -158,17 +159,22 @@ function sendSet(kginput, whdinput) {
         Das ist wichtig, da das UI darauf reagiert
         
         */
-        return true;
+        
 
 
     });
+
+   
 
 
 
 
     xmlhttp.open("POST", url, true)
-    xmlhttp.setRequestHeader("Content-Type","application/x-www-form.urlencoded");
-    xmlhttp.send("rep="+whdinput+"&kg="+kginput);
+    xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xmlhttp.send("rep="+whdinput+"&kg="+kginput+"&exerciseid="+exerciseid);
+
+
+    return true;
 
 }
 

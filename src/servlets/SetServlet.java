@@ -68,17 +68,20 @@ public class SetServlet extends HttpServlet {
 		
 		SetBean set = new SetBean();
 		HttpSession session = request.getSession();
-		set.setRep(Integer.parseInt(request.getParameter("rep")));
+		System.out.println(request.getParameter("rep" + Integer.parseInt(request.getParameter("kg")))+ Long.parseLong(request.getParameter("exerciseid")));
+		set.setRep(Integer.parseInt(request.getParameter("rep"))); 
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
-		ExerciseBean exercise = (ExerciseBean) session.getAttribute("exercise");
-		set.setExerciseId(exercise.getId());
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseid"))); // warum dafuck ist das immer null?!
+		//ExerciseBean exercise = (ExerciseBean) session.getAttribute("exercise");
+		//set.setExerciseId(exercise.getId());
 		TrainingBean training = (TrainingBean) session.getAttribute("training");
-		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
+		System.out.println(session.getAttribute("training"));
+		set.setTrainingId(training.getId());
 		set.setCreationDate(new java.sql.Date(new java.util.Date().getTime()));
 				
 		create(set);
 		
-		doGet(request, response);
+		//doGet(request, response); //TODO: Ist die weiterleitung gewollt? Dadurch funktioniert das Satz abspeichern nicht...
 	}
 
 	/**
