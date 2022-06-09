@@ -107,15 +107,15 @@ function addSet(callingTable) {
 
 
 
-function sendSet() {
+function disableSet() {
 
     let NameOfcallingExercise = this.parentNode.parentNode.parentNode.parentNode.getAttribute("name");   // Smell
     let idOfTraining = document.getElementsByTagName("header");
     idOfTraining = idOfTraining[0].getAttribute("id");              // id des Trainings
 
-        /*
-            notwendig um vom aufrufgenden Element zu den jeweiligen Elementen zu navigieren
-        */
+    /*
+        notwendig um vom aufrufgenden Element zu den jeweiligen Elementen zu navigieren
+    */
     var tds = this.parentNode.parentNode.children;
     var kgZelle = tds[1];
     var whdZelle = tds[2];
@@ -123,10 +123,29 @@ function sendSet() {
     var kginput = kgZelle.children[0];
     var whdinput = whdZelle.children[0];
 
-    //sperren der Eingabefelder
-    this.setAttribute("disabled", "true");
-    kginput.setAttribute("disabled", "true");
-    whdinput.setAttribute("disabled", "true");
+    if (whdinput.value != "") {   // kg darf null / "" sein, da man ja ohne weiteres z.B Klimmzüge ohne Gewicht machen kann.
+        if (sendSet(kginput.value, whdinput.value)) {    // nur sperren, wenn auch gesendet wurde
+
+            //sperren der Eingabefelder
+            this.checked = true;                         //nur optisch schöner // Warum geht das nicht mit this.setAttribute?
+            this.setAttribute("disabled", "true");
+            kginput.setAttribute("disabled", "true");
+            whdinput.setAttribute("disabled", "true");
+
+        }
+    }
+
+
+}
+
+function sendSet(kginput, whdinput) {
+    console.log("KG "+kginput);
+    console.log("whd "+whdinput);
+    var url = "../SetServlet";
+
+    
+    return true;
+
 }
 
 

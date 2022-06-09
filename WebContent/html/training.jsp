@@ -90,7 +90,7 @@
                     //Eventlistener für die Checkboxes der Sets
                     var checkboxes = document.getElementsByClassName("checkbox");
                     for (var i = 0; i < checkboxes.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
-                        checkboxes[i].addEventListener("change", sendSet);
+                        checkboxes[i].addEventListener("change", disableSet);
                     }
 
                 }          
