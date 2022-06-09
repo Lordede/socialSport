@@ -52,6 +52,7 @@ public class TrainingServlet extends HttpServlet {
 		
     	//Long id = Long.parseLong(request.getParameter("id"));
     	HttpSession session = request.getSession();
+    	UserBean user = (UserBean) session.getAttribute("userData");
     	//Cem Durmus
     	Enumeration<String> params = request.getParameterNames();
 		while(params.hasMoreElements()) 
@@ -61,7 +62,7 @@ public class TrainingServlet extends HttpServlet {
 			switch(paramNames) 
 			{
 			case "loadTrainings":
-				ArrayList<TrainingBean> allTrainings = listAllTrainings();
+				ArrayList<TrainingBean> allTrainings = listAllTrainings(user.getId());
 				String json = convertListToJson(allTrainings);
 				System.out.println(json);	
 				response.getWriter().write(json);
@@ -222,13 +223,13 @@ public class TrainingServlet extends HttpServlet {
 		return trainings;
 	}
 	
-	private ArrayList<TrainingBean> listAllTrainings() throws ServletException{
+	private ArrayList<TrainingBean> listAllTrainings(Long userId) throws ServletException{
 		ArrayList<TrainingBean> trainings = new ArrayList<TrainingBean>();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings")){
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings Where userId = ?")){
 			
-			
+			pstmt.setLong(1, userId);
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
@@ -237,8 +238,6 @@ public class TrainingServlet extends HttpServlet {
 					String name = rs.getString("name");
 					double points = rs.getDouble("points");
 					java.sql.Date creationDate = rs.getDate("creationDate");
-					Long userId = rs.getLong("userId");
-					
 					training.setId(id);
 					training.setName(name);
 					training.setPoints(points);
