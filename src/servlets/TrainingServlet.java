@@ -99,14 +99,21 @@ public class TrainingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		TrainingBean training = new TrainingBean();
+		
 		HttpSession session = request.getSession();
-		training.setName(request.getParameter("name"));
-		training.setPoints(Double.parseDouble(request.getParameter("points")));
+		String name = request.getParameter("name");
+		double points = Double.parseDouble(request.getParameter("points"));
 		UserBean user = (UserBean) session.getAttribute("userData");
-		System.out.print(user.getId());
-		training.setUserId(user.getId());
-		training.setCreationDate(new java.sql.Date(new java.util.Date().getTime()));
+		long userId = user.getId();
+		java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
+		
+		TrainingBean training = new TrainingBean();
+		training.setName(name);
+		training.setPoints(points);
+		training.setUserId(userId);
+		training.setCreationDate(date);
+		
+//		TrainingBean training = create(name, points, userid, date);
 		create(training);
 		session.setAttribute("training", training);
 		response.getWriter().write("hasi");
@@ -253,10 +260,10 @@ public class TrainingServlet extends HttpServlet {
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO trainings"
 														+ "(name, points, userId, creationDate) "
 														+ "VALUES (?, ?, ?, ?)", generatedKeys)){
-			pstmt.setString(1, form.getName());
+			pstmt.setString(1,form.getName());
 			pstmt.setDouble(2, form.getPoints());
 			pstmt.setLong(3, form.getUserId());
-			pstmt.setDate(4, (java.sql.Date) form.getCreationDate());
+			pstmt.setDate(4, form.getCreationDate());
 			
 			pstmt.executeUpdate();
 			

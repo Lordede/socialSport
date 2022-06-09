@@ -51,5 +51,4 @@ public class TrainingBean implements Serializable
 	public void setPoints(double points) {
 		this.points = points;
 	}
-	
 }
