@@ -6,7 +6,7 @@
 <base href="${pageContext.request.requestURI}" />
 <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
 <title>Übung</title>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
 <meta name="keywords" content="Sport, Gym, social media, sports">
 <meta name="author" content="Cem Durmus">
@@ -65,7 +65,7 @@
 		<div>
 			<table>
 				<tr>
-					<th>Name der �bung</th>
+					<th>Name der Übung</th>
 					<th>Muskelgruppe</th>
 				</tr>
 				<tr>
