@@ -41,7 +41,7 @@ function addExercise(exercise) {
     init(); // Damit auch ein EventListener auf dem neuen Button gesetzt wird
 }
 
-// Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
+
 function getExerciseReference() {
 
     let NameOfcallingExercise = this.parentNode.getAttribute("name");      // Name der Übung
@@ -50,7 +50,7 @@ function getExerciseReference() {
     Das Nachfolgende muss irgendwie auch eleganter gehen aber für den Moment funktioniert es
 
     INFO: Über das Attribut "name" des jeweiligen Article weiß der Button wo er das Set hinzufügen soll! 
-    
+
     ---
     */
 
@@ -63,7 +63,7 @@ function getExerciseReference() {
     /*
     ---
     */
-
+// Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
 }
 function addSet(callingTable) {
     var tr = document.createElement("tr");
@@ -94,6 +94,7 @@ function addSet(callingTable) {
 
     //Button um Set abzuschließen
     var check = document.createElement("input");
+    check.setAttribute("class", "checkbox")
     check.setAttribute("type", "checkbox");
     checktd.appendChild(check);
 
@@ -101,6 +102,16 @@ function addSet(callingTable) {
     tr.appendChild(kgtd);
     tr.appendChild(whdtd);
     tr.appendChild(checktd);
+}
+
+
+
+function sendSet(){
+
+    let NameOfcallingExercise = this.parentNode.getAttribute("name"); // Name der Übung die gerade callt
+    console.log("Checkbox aufgerufen!");
+    this.setAttribute("disabled", "true"); // TODO: Nicht nur die Checkbox disablen, sondern auch die vorhergehenden Eingabefelder
+
 }
 
 

@@ -84,7 +84,13 @@
                     console.log("html spricht an");
 
                     for (var i = 0; i < addSetButton.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
-                        addSetButton[i].addEventListener("click", getExerciseReference)
+                        addSetButton[i].addEventListener("click", getExerciseReference);
+                    }
+
+                    //Eventlistener für die Checkboxes der Sets
+                    var checkboxes = document.getElementsByClassName("checkbox");
+                    for (var i = 0; i < checkboxes.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
+                        checkboxes[i].addEventListener("change", sendSet);
                     }
 
                 }          
