@@ -139,12 +139,29 @@ function disableSet() {
 }
 
 function sendSet(kginput, whdinput) {
-    console.log("KG "+kginput);
-    console.log("whd "+whdinput);
+
+    var xmlhttp = new XMLHttpRequest;
+
+    //console.log("KG "+kginput);
+    //console.log("whd "+whdinput);
     var url = "../SetServlet";
 
+    xmlhttp.addEventListener("load", function () {
+
+        var response = xmlhttp.response;
+        console.log("Der Ajax Aufruf gibt zurück"+response);
+        if(response.)
+        return true;
+
+
+    });
+
     
-    return true;
+
+
+    xmlhttp.open("POST", url, true)
+    xmlhttp.setRequestHeader("Content-Type","application/x-www-form.urlencoded");
+    xmlhttp.send("rep="+whdinput+"&kg="+kginput);
 
 }
 
