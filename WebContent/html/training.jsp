@@ -96,7 +96,7 @@
 
             <div id="buttons">
                 <button class="button" id="cancelWorkout">Workout abbrechen</button>
-                <button class="button" id="test">Testübung hinzufügen</button>
+                
             </div>
 
             <footer>Hier generischen Footer einfügen</footer>
