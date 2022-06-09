@@ -63,7 +63,7 @@ function getExerciseReference() {
     /*
     ---
     */
-// Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
+    // Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
 }
 function addSet(callingTable) {
     var tr = document.createElement("tr");
@@ -78,7 +78,7 @@ function addSet(callingTable) {
     var checktd = document.createElement("td");
 
 
-    satztd.innerHTML = numberOfChildren; 
+    satztd.innerHTML = numberOfChildren;
 
     //Feld um Gewicht einzutragen
     var kg = document.createElement("input");
@@ -102,16 +102,31 @@ function addSet(callingTable) {
     tr.appendChild(kgtd);
     tr.appendChild(whdtd);
     tr.appendChild(checktd);
+    init(); //damit der Satz auch vom Eventlistener überwacht wird
 }
 
 
 
-function sendSet(){
+function sendSet() {
 
-    let NameOfcallingExercise = this.parentNode.getAttribute("name"); // Name der Übung die gerade callt
-    console.log("Checkbox aufgerufen!");
-    this.setAttribute("disabled", "true"); // TODO: Nicht nur die Checkbox disablen, sondern auch die vorhergehenden Eingabefelder
+    let NameOfcallingExercise = this.parentNode.parentNode.parentNode.parentNode.getAttribute("name");   // Smell
+    let idOfTraining = document.getElementsByTagName("header");
+    idOfTraining = idOfTraining[0].getAttribute("id");              // id des Trainings
 
+        /*
+            notwendig um vom aufrufgenden Element zu den jeweiligen Elementen zu navigieren
+        */
+    var tds = this.parentNode.parentNode.children;
+    var kgZelle = tds[1];
+    var whdZelle = tds[2];
+
+    var kginput = kgZelle.children[0];
+    var whdinput = whdZelle.children[0];
+
+    //sperren der Eingabefelder
+    this.setAttribute("disabled", "true");
+    kginput.setAttribute("disabled", "true");
+    whdinput.setAttribute("disabled", "true");
 }
 
 
