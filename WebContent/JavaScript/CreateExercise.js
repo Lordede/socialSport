@@ -50,20 +50,15 @@ function getExerciseReference() {
     Das Nachfolgende muss irgendwie auch eleganter gehen aber für den Moment funktioniert es
 
     INFO: Über das Attribut "name" des jeweiligen Article weiß der Button wo er das Set hinzufügen soll! 
+    
     ---
     */
 
-    var callingTable = document.getElementsByName(NameOfcallingExercise); //Liste der Übungen mit dem Namen
-    var callingTable = callingTable[0];// Verweis auf Article          //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
-
-    //var callingTable = callingTable.children[0]; // -> h2!
+    var callingTable = document.getElementsByName(NameOfcallingExercise);   //Liste der Übungen mit dem Namen
+    var callingTable = callingTable[0];// Verweis auf Article                //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
     var callingTable = callingTable.children[1]; // -> table!
 
     addSet(callingTable)
-
-  
-
-    article.appendChild(setButton); //
 
     /*
     ---
