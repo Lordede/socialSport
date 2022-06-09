@@ -150,13 +150,20 @@ function sendSet(kginput, whdinput) {
 
         var response = xmlhttp.response;
         console.log("Der Ajax Aufruf gibt zurück"+response);
-        if(response.)
+        /* 
+        TODO: Überprüfen, ob die Antwort vom Server auf Erfolg hinweist oder nicht
+        Erfolg -> return true
+        Errror -> return false
+
+        Das ist wichtig, da das UI darauf reagiert
+        
+        */
         return true;
 
 
     });
 
-    
+
 
 
     xmlhttp.open("POST", url, true)
