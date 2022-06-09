@@ -5,7 +5,6 @@
 <head>
 	<base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/uebungen.css"> <!-- href nach konvertierung zu jsp anpassen -->
     <base href="${pageContext.request.requestURI}" /> 
   	
     <title>Training</title>
