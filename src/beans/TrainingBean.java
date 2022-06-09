@@ -10,6 +10,7 @@ public class TrainingBean implements Serializable
 	
 	private Long id;
 	private String name;
+	private List<ExerciseBean> exercises;
 	private double points;
 	private Long userId;
 	private Date creationDate;
@@ -38,12 +39,16 @@ public class TrainingBean implements Serializable
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public List<ExerciseBean> getExercise() {
+		return exercises;
+	}
+	public void setExercise(List<ExerciseBean> exercise) {
+		this.exercises = exercise;
+	}
 	public double getPoints() {
 		return points;
 	}
 	public void setPoints(double points) {
 		this.points = points;
 	}
-	
 }
