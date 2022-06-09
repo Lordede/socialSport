@@ -145,37 +145,27 @@ function sendSet(kginput, whdinput, exerciseid) {
     //console.log("KG "+kginput);
     //console.log("whd "+whdinput);
     var url = "../SetServlet";
-    
-
     xmlhttp.addEventListener("load", function () {
 
         var response = xmlhttp.response;
         console.log("Der Ajax Aufruf gibt zurück"+response);
+
         /* 
-        TODO: Überprüfen, ob die Antwort vom Server auf Erfolg hinweist oder nicht
+        TODO:
+        Überprüfen, ob die Antwort vom Server auf Erfolg hinweist oder nicht
         Erfolg -> return true
         Errror -> return false
 
         Das ist wichtig, da das UI darauf reagiert
         
         */
-        
-
-
-    });
-
    
-
-
-
-
+    });
+    
     xmlhttp.open("POST", url, true)
     xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlhttp.send("rep="+whdinput+"&kg="+kginput+"&exerciseid="+exerciseid);
-
-
-    return true;
-
+    return true; // TODO:
 }
 
 

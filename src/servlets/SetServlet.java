@@ -61,19 +61,23 @@ public class SetServlet extends HttpServlet {
 	}
 	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		SetBean set = new SetBean();
 		HttpSession session = request.getSession();
-		System.out.println(request.getParameter("rep" + Integer.parseInt(request.getParameter("kg")))+ Long.parseLong(request.getParameter("exerciseid")));
+		
 		set.setRep(Integer.parseInt(request.getParameter("rep"))); 
-		set.setKg(Double.parseDouble(request.getParameter("kg")));
-		set.setExerciseId(Long.parseLong(request.getParameter("exerciseid"))); // warum dafuck ist das immer null?!
-		//ExerciseBean exercise = (ExerciseBean) session.getAttribute("exercise");
-		//set.setExerciseId(exercise.getId());
+		
+		if(request.getParameter("kg") != "") {// Falls der User keinen Wert bei kg eingegeben hat
+			set.setKg(Double.parseDouble(request.getParameter("kg")));
+		}
+		else {
+			set.setKg(0);
+		}
+		
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseid")));
+
 		TrainingBean training = (TrainingBean) session.getAttribute("training");
 		System.out.println(session.getAttribute("training"));
 		set.setTrainingId(training.getId());
@@ -81,12 +85,8 @@ public class SetServlet extends HttpServlet {
 				
 		create(set);
 		
-		//doGet(request, response); //TODO: Ist die weiterleitung gewollt? Dadurch funktioniert das Satz abspeichern nicht...
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		SetBean set = new SetBean();
@@ -102,9 +102,7 @@ public class SetServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
+
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		Long id = Long.parseLong(request.getParameter("id"));
