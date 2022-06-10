@@ -69,7 +69,7 @@ public class SetServlet extends HttpServlet {
 		
 		set.setRep(Integer.parseInt(request.getParameter("rep"))); 
 		
-		if(request.getParameter("kg") != "") {// Falls der User keinen Wert bei kg eingegeben hat
+		if(request.getParameter("kg") != "" || request.getParameter("kg") == null) {// Falls der User keinen Wert bei kg eingegeben hat
 			set.setKg(Double.parseDouble(request.getParameter("kg")));
 		}
 		else {
