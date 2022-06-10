@@ -5,11 +5,7 @@ function createUserElements() {
     let parentTableElm = document.querySelector("#userTable");
     let templateTableRow = document.querySelector("#trTemplate");
 
-    let buttonLoadUsers = document.querySelector(".loadUsers");
-
-    var request = new XMLHttpRequest();
     let usersJson = "";
-    request.open("Get", "../UserUpdateServlet?getUsers")
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function () {
         usersJson = request.responseText;
@@ -60,22 +56,23 @@ function readExercises() {
     xmlhttp.send();
 }
 
+
 function createNewExercise() {
     var xmlhttp = new XMLHttpRequest();
-    let inputImage = document.querySelector("#image");
-    let buttonSubmission = document.querySelector("#submitExercise");
     let inputName = document.querySelector(".nameExercise");
-    let idListOfRadioBox = ['c1', 'c2', 'c3', 'c4', 'c5'];
-    idListOfRadioBox.forEach(listItem => {
-        let radioBox = document.getElementById(listItem);
-        if (!inputName) {
-            alert("keine gültige Eingaben");
-        }
 
-        if (!radioBox.value) {
-            xmlhttp.open("POST", "../ExerciseServlet", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("exerciseName=" + inputName.value + "&muscleGroup=" + radioBox.value);// + "&image=" +inputImage.value
-        }
-    });
+    if (!inputName) {
+        return alert("keine gültige Eingaben");
+    }
+
+    const checkboxIds = ['c1', 'c2', 'c3', 'c4', 'c5'];
+    for (const checkboxId of checkboxIds) {
+        const checkboxElem = document.getElementById(checkboxId);
+        if (!checkboxElem.value) continue;
+
+        const label = document.querySelector(`label[for=${checkboxId}]`).textContent;
+        xmlhttp.open("POST", "../ExerciseServlet", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("name=" + label + "&points=2");
+    }
 }
