@@ -29,7 +29,7 @@ function createUserElements() {
     }
     request.send();
 }
-
+//Read
 function listAllExercises(jsonString) {
     let exercisesArrayList = JSON.parse(jsonString);
     let tableRowTemplateExercise = document.querySelector("#trExercise");
