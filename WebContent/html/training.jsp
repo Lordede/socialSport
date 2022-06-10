@@ -30,7 +30,7 @@
   				<li style="float:right"><a class="active" href="#about">Logout</a></li>
 			</ul> 
     	</nav>
-    <header> Social Sport</header>
+    <header id ="${training.id}"> Social Sport</header> <!-- Über die ID "wissen" die Sätze beim abspeichern zu welchem training sie gehören-->
 
     <!-- <nav id="navbar" class="navbar">
         LINKS EINFÜGEN
@@ -42,40 +42,7 @@
     </nav> -->
 
 
-    <main id="exercises">
-        <!--TODO: Logik hinzufuegen-->
-    
-        <!--<article class ="exercise elements">
-            <h2 class = "ExerciseHeadline">Bench Press</h2>
-            <table class="exerciseTable">
-                <tr class = "headLineTable">
-                    <th>Satz</th>
-                    <th>KG</th>
-                    <th>Wiederholungen</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>BLANK</td>
-                    <td>BLANK</td>
-                    <td>&check;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>BLANK</td>
-                    <td>BLANK</td>
-                    <td>&check;</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>BLANK</td>
-                    <td>BLANK</td>
-                    <td>&check;</td>
-                </tr>
-            </table>
-            <p><button class="button addSet"> Satz hinzuf&uuml;gen</button></p>
-        </article>-->
-
-            </main>
+    <main id="exercises"></main>
 
 
             <aside id="searchContainer" class="elements">
@@ -117,7 +84,13 @@
                     console.log("html spricht an");
 
                     for (var i = 0; i < addSetButton.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
-                        addSetButton[i].addEventListener("click", getExerciseReference)
+                        addSetButton[i].addEventListener("click", getExerciseReference);
+                    }
+
+                    //Eventlistener für die Checkboxes der Sets
+                    var checkboxes = document.getElementsByClassName("checkbox");
+                    for (var i = 0; i < checkboxes.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
+                        checkboxes[i].addEventListener("change", disableSet);
                     }
 
                 }          

@@ -41,7 +41,7 @@ function addExercise(exercise) {
     init(); // Damit auch ein EventListener auf dem neuen Button gesetzt wird
 }
 
-// Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
+
 function getExerciseReference() {
 
     let NameOfcallingExercise = this.parentNode.getAttribute("name");      // Name der Übung
@@ -50,25 +50,20 @@ function getExerciseReference() {
     Das Nachfolgende muss irgendwie auch eleganter gehen aber für den Moment funktioniert es
 
     INFO: Über das Attribut "name" des jeweiligen Article weiß der Button wo er das Set hinzufügen soll! 
+
     ---
     */
 
-    var callingTable = document.getElementsByName(NameOfcallingExercise); //Liste der Übungen mit dem Namen
-    var callingTable = callingTable[0];// Verweis auf Article          //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
-
-    //var callingTable = callingTable.children[0]; // -> h2!
+    var callingTable = document.getElementsByName(NameOfcallingExercise);   //Liste der Übungen mit dem Namen
+    var callingTable = callingTable[0];// Verweis auf Article                //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
     var callingTable = callingTable.children[1]; // -> table!
 
     addSet(callingTable)
 
-  
-
-    article.appendChild(setButton); //
-
     /*
     ---
     */
-
+    // Funktion fügt jeweil bei dem Button von dem es aufgerufen wird einen Satz hinzu
 }
 function addSet(callingTable) {
     var tr = document.createElement("tr");
@@ -83,7 +78,7 @@ function addSet(callingTable) {
     var checktd = document.createElement("td");
 
 
-    satztd.innerHTML = numberOfChildren; 
+    satztd.innerHTML = numberOfChildren;
 
     //Feld um Gewicht einzutragen
     var kg = document.createElement("input");
@@ -99,6 +94,7 @@ function addSet(callingTable) {
 
     //Button um Set abzuschließen
     var check = document.createElement("input");
+    check.setAttribute("class", "checkbox")
     check.setAttribute("type", "checkbox");
     checktd.appendChild(check);
 
@@ -106,6 +102,70 @@ function addSet(callingTable) {
     tr.appendChild(kgtd);
     tr.appendChild(whdtd);
     tr.appendChild(checktd);
+    init(); //damit der Satz auch vom Eventlistener überwacht wird
+}
+
+
+
+function disableSet() {
+
+    let exerciseid = this.parentNode.parentNode.parentNode.parentNode.getAttribute("id");   // Smell
+    let idOfTraining = document.getElementsByTagName("header");
+    idOfTraining = idOfTraining[0].getAttribute("id");              // id des Trainings
+
+    /*
+        notwendig um vom aufrufgenden Element zu den jeweiligen Elementen zu navigieren
+    */
+    var tds = this.parentNode.parentNode.children;
+    var kgZelle = tds[1];
+    var whdZelle = tds[2];
+
+    var kginput = kgZelle.children[0];
+    var whdinput = whdZelle.children[0];
+
+    if (whdinput.value != "") {   // kg darf null / "" sein, da man ja ohne weiteres z.B Klimmzüge ohne Gewicht machen kann.
+        if (sendSet(kginput.value, whdinput.value, exerciseid)) {    // nur sperren, wenn auch gesendet wurde
+
+            //sperren der Eingabefelder
+            this.checked = true;                         //nur optisch schöner // Warum geht das nicht mit this.setAttribute?
+            this.setAttribute("disabled", "true");
+            kginput.setAttribute("disabled", "true");
+            whdinput.setAttribute("disabled", "true");
+
+        }
+    }
+
+
+}
+
+function sendSet(kginput, whdinput, exerciseid) {
+
+    var xmlhttp = new XMLHttpRequest;
+
+    //console.log("KG "+kginput);
+    //console.log("whd "+whdinput);
+    var url = "../SetServlet";
+    xmlhttp.addEventListener("load", function () {
+
+        var response = xmlhttp.response;
+        console.log("Der Ajax Aufruf gibt zurück"+response);
+
+        /* 
+        TODO:
+        Überprüfen, ob die Antwort vom Server auf Erfolg hinweist oder nicht
+        Erfolg -> return true
+        Errror -> return false
+
+        Das ist wichtig, da das UI darauf reagiert
+        
+        */
+   
+    });
+    
+    xmlhttp.open("POST", url, true)
+    xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xmlhttp.send("rep="+whdinput+"&kg="+kginput+"&exerciseid="+exerciseid);
+    return true; // TODO:
 }
 
 

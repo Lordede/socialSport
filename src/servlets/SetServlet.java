@@ -61,29 +61,32 @@ public class SetServlet extends HttpServlet {
 	}
 	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		SetBean set = new SetBean();
 		HttpSession session = request.getSession();
-		set.setRep(Integer.parseInt(request.getParameter("rep")));
-		set.setKg(Double.parseDouble(request.getParameter("kg")));
-		ExerciseBean exercise = (ExerciseBean) session.getAttribute("exercise");
-		set.setExerciseId(exercise.getId());
+		
+		set.setRep(Integer.parseInt(request.getParameter("rep"))); 
+		
+		if(request.getParameter("kg") != "" || request.getParameter("kg") == null) {// Falls der User keinen Wert bei kg eingegeben hat
+			set.setKg(Double.parseDouble(request.getParameter("kg")));
+		}
+		else {
+			set.setKg(0);
+		}
+		
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseid")));
+
 		TrainingBean training = (TrainingBean) session.getAttribute("training");
-		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
+		System.out.println(session.getAttribute("training"));
+		set.setTrainingId(training.getId());
 		set.setCreationDate(new java.sql.Date(new java.util.Date().getTime()));
 				
 		create(set);
 		
-		doGet(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		SetBean set = new SetBean();
@@ -99,9 +102,7 @@ public class SetServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
+
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		Long id = Long.parseLong(request.getParameter("id"));
