@@ -46,9 +46,32 @@ function selectTraining(training)
     xmlhttp.onload = function()
     {
         var text = xmlhttp.responseText;
-        window.location = "training.jsp";
+        // window.location = "training.jsp";
     }
     xmlhttp.send();
+    
+    var responsePost;
+    var xmlhttpTrainingSessionPost = new XMLHttpRequest();
+    xmlhttpTrainingSessionPost.open("POST", "../TrainingSessionServlet?trainingId=" + training.id, true);
+    xmlhttpTrainingSessionPost.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttpTrainingSessionPost.onload = function()
+    {
+        responsePost = xmlhttp.responseText;
+        window.location = "training.jsp";
+    }
+    xmlhttpTrainingSessionPost.send();
+
+    xmlhttp.send();
+
+    var xmlhttpTrainingSessionGet = new XMLHttpRequest();
+    xmlhttpTrainingSessionGet.open("GET", "../TrainingSessionServlet?id=" + parseInt(responsePost), true);
+    xmlhttpTrainingSessionGet.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttpTrainingSessionGet.onload = function()
+    {
+        var text = xmlhttp.responseText;
+        window.location = "training.jsp";
+    }
+    xmlhttpTrainingSessionGet.send();
 }
 function hideSearch()
 {

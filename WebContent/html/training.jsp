@@ -23,7 +23,7 @@
 	<nav>
     		<ul>
                 <li><a href="./dashboard.jsp">Dashboard</a></li>
-                <li><a class="active"  href="./training.jsp">Training</a></li>
+                <li><a class="active"  href="./trainingsmenu.jsp">Training</a></li>
                 <li><a href="./leaderboard.jsp">Leaderboard</a></li>
                 <li><a href="./accountSetting.jsp">Account Settings</a></li>
                 <li><a href="./exercise.jsp">Übung erstellen</a></li>
@@ -77,9 +77,11 @@
 
                     var button = document.getElementById("addButton");
                     var addSetButton = document.getElementsByClassName("button addSet")
+                    var cancelWorkoutButton = document.getElementById("cancelWorkout");
 
                     //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
                     button.addEventListener('click', toggleExerciseSearchbar);
+                    cancelWorkoutButton.addEventListener('click', cancelWorkout);
                     // document.ElementByName('addButton').submit();
                     console.log("html spricht an");
 
