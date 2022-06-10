@@ -94,6 +94,7 @@ public class ExerciseServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Part filepart = request.getPart("image");
 		exerciseBean.setExerciseImage(filepart.getSubmittedFileName());
+		System.out.println(filepart.getSubmittedFileName().toString());		
 		createExcercise(exerciseBean, filepart);
 		session.setAttribute("exercise", exerciseBean);
 		response.sendRedirect("html/success.jsp");
@@ -204,7 +205,7 @@ public class ExerciseServlet extends HttpServlet {
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
 														+ "(name, muscleGroup, exerciseImage, filename)"
-														+ "VALUES (?, ?, ?, ?, ?)", generatedKeys))
+														+ "VALUES (?, ?, ?, ?)", generatedKeys))
 		{
 			ArrayList<ExerciseBean> exercises = getListOfExercises();
 			//System.out.println("---------------------"+exercises.size()+"----------");
@@ -221,11 +222,8 @@ public class ExerciseServlet extends HttpServlet {
 				if(result.toLowerCase()
 						.equals(checkExer.getName().toLowerCase()))  throw new ServletException("Übung exsistiert bereits");
 			}
-			
-			
 			stmtExercise.setString(1, exercise.getName());
 			stmtExercise.setString(2, exercise.getMuscleGroup());
-			//stmtExercise.setDate(3, (java.sql.Date) exercise.getCreationDate());
 			stmtExercise.setString(3, exercise.getExerciseImage());
 			stmtExercise.setBinaryStream(4, filepart.getInputStream());
 			stmtExercise.executeUpdate();

@@ -1,125 +1,81 @@
-function createUserElements()
-{   
+/**
+ * Cem Durmus
+ */
+function createUserElements() {
     let parentTableElm = document.querySelector("#userTable");
     let templateTableRow = document.querySelector("#trTemplate");
 
     let buttonLoadUsers = document.querySelector(".loadUsers");
-    
-        var request = new XMLHttpRequest();
-        let usersJson = "";
-        request.open("Get", "../UserUpdateServlet?getUsers")
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.onload = function()
-        {
-            usersJson = request.responseText;
-            let parseJson = JSON.parse(usersJson);
-            parseJson.forEach(user => {
-                let tableRowElm = document.createElement("tr");
-                const templateRow = templateTableRow.content.cloneNode(true).children[0];
-                tableRowElm.appendChild(templateRow);
-                const username = templateRow.querySelector(".username");
-                tableRowElm.appendChild(username);
-                const firstname = templateRow.querySelector(".firstname");
-                tableRowElm.appendChild(firstname);
-                const lastname = templateRow.querySelector(".lastname");
-                tableRowElm.appendChild(lastname);
-                const email = templateRow.querySelector()
-                tableRowElm.appendChild(email);
-                username.textContent=user.username;
-                firstname.textContent=user.firstname;
-                lastname.textContent=user.lastnamen;
-                email.textContent=user.eMail;
-                parentTableElm.appendChild(tableRowElm)
-            })
-        }
-        request.send();
-        
+
+    var request = new XMLHttpRequest();
+    let usersJson = "";
+    request.open("Get", "../UserUpdateServlet?getUsers")
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.onload = function () {
+        usersJson = request.responseText;
+        let parseJson = JSON.parse(usersJson);
+        parseJson.forEach(user => {
+            const templateRow = templateTableRow.content.cloneNode(true).children[0];
+            parentTableElm.appendChild(templateRow)
+            const username = templateRow.querySelector(".username");
+            const firstname = templateRow.querySelector(".firstname");
+            const lastname = templateRow.querySelector(".lastname");
+            const email = templateRow.querySelector(".email")
+            username.textContent = user.benutzername;
+            firstname.textContent = user.vorname;
+            lastname.textContent = user.nachname;
+            email.textContent = user.eMail;
+        })
+    }
+    request.send();
 }
 
-function listAllExercises(jsonString)
-{
+function listAllExercises(jsonString) {
     let exercisesArrayList = JSON.parse(jsonString);
-   
-        // exercise.forEach(exerciseInput =>{
-        //     const isVisible = exerciseInput.name.includes(value);
-        //     exerciseInput.element.classList.toggle("hide", !isVisible);
-        // })
-        
-    const searchResults = document.getElementById("searchResults");
-    const toggleContainer = document.getElementById("searchResultContainer");
-    toggleContainer.style.display = "block";
-    toggleContainer.innerHTML = "";
-    exercisesArrayList.forEach(exercise => {
-        const result = searchResults.content.cloneNode(true).children[0];
-        toggleContainer.appendChild(result);
-        const header = result.querySelector('.searchExerciseName');
-        header.addEventListener("click", () => onExerciseClick(exercise))
-        const body = result.querySelector('.searchMuscleGroup');
-        header.textContent = exercise.name;
-        body.textContent = exercise.muscleGroup;
-        console.log(exercise);
-   });
+    let tableRowTemplateExercise = document.querySelector("#trExercise");
+    let containerTable = document.querySelector("#exerciseContainer");
+
+    exercisesArrayList.forEach(exercise => 
+    {
+        let templateRowExercise = tableRowTemplateExercise.content.cloneNode(true).children[0]; //Table row
+        containerTable.appendChild(templateRowExercise);
+        const exerciseName = templateRowExercise.querySelector(".exerciseName");
+        const muscleGroup = templateRowExercise.querySelector(".muscleGroup");
+        const image = templateRowExercise.querySelector(".picture");
+        exerciseName.textContent = exercise.name;
+        muscleGroup.textContent = exercise.muscleGroup;
+        //exercise.image = exercise.image;
+    });
 }
-  
-function readExercises()
-{
+
+function readExercises() {
     var xmlhttp = new XMLHttpRequest();
     var jsonString;
     xmlhttp.open("GET", "../ExerciseServlet?addButton=name", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.onload = function()
-    {
+    xmlhttp.onload = function () {
         jsonString = xmlhttp.responseText;
-        extractExercises(jsonString);
+        listAllExercises(jsonString);
     }
-        xmlhttp.send() ;
+    xmlhttp.send();
 }
 
-function createNewExercise()
-{
+function createNewExercise() {
     var xmlhttp = new XMLHttpRequest();
-    let inputName = document.querySelector(".nameExercise");
-    let inputCheckBox1 = document.querySelector("#c1");
-    let inputCheckBox2 = document.querySelector("#c2");
-    let inputCheckBox3 = document.querySelector("#c3");
-    let inputCheckBox4 = document.querySelector("#c4");
-    let inputCheckBox5 = document.querySelector("#c5");
     let inputImage = document.querySelector("#image");
     let buttonSubmission = document.querySelector("#submitExercise");
-    if(input.name === '')
-    {
-        alert("keine gültige Eingaben");
-    } else 
-    {
-        if (inputCheckBox1.value != null)
-        {
+    let inputName = document.querySelector(".nameExercise");
+    let idListOfRadioBox = ['c1', 'c2', 'c3', 'c4', 'c5'];
+    idListOfRadioBox.forEach(listItem => {
+        let radioBox = document.getElementById(listItem);
+        if (!inputName) {
+            alert("keine gültige Eingaben");
+        }
+
+        if (!radioBox.value) {
             xmlhttp.open("POST", "../ExerciseServlet", true);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("name="+input.value+"&points=2");
+            xmlhttp.send("exerciseName=" + inputName.value + "&muscleGroup=" + radioBox.value);// + "&image=" +inputImage.value
         }
-        if (inputCheckBox2.value != null)
-        {
-            xmlhttp.open("POST", "../ExerciseServlet", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("name="+input.value+"&points=2");
-        }
-        if (inputCheckBox3.value != null)
-        {
-            xmlhttp.open("POST", "../ExerciseServlet", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("name="+input.value+"&points=2");
-        }
-        if (inputCheckBox4.value != null)
-        {
-            xmlhttp.open("POST", "../ExerciseServlet", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("name="+input.value+"&points=2");
-        }
-        if (inputCheckBox5.value != null)
-        {
-            xmlhttp.open("POST", "../ExerciseServlet", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("name="+input.value+"&points=2");
-        }
-    }
+    });
 }

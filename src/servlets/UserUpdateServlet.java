@@ -54,7 +54,7 @@ public class UserUpdateServlet extends HttpServlet {
 				String usersJson = convertListToJson(users);
 				response.getWriter().write(usersJson);
 				break;
-			case "getSpecificUserPwd":
+			case "getSpecificUser":
 				UserBean user = getUser(Long.parseLong(request.getParameter("getSpecificUser")));
 				//insert functionality
 			}
@@ -272,13 +272,13 @@ public class UserUpdateServlet extends HttpServlet {
 		for(int i = 0;i < users.size(); i++) 
 		{			
 			jsonString.append("{");
-			jsonString.append("\"Vorname:\":");
+			jsonString.append("\"vorname\":");
 			jsonString.append("\""+users.get(i).getFirstName()+"\",");
-			jsonString.append("\"Nachname:\":");
+			jsonString.append("\"nachname\":");
 			jsonString.append("\""+users.get(i).getLastName()+"\",");
-			jsonString.append("\"eMail:\":");
+			jsonString.append("\"eMail\":");
 			jsonString.append("\""+users.get(i).geteMail()+"\",");
-			jsonString.append("\"Benutzername:\":");
+			jsonString.append("\"benutzername\":");
 			jsonString.append("\""+users.get(i).getUsername()+"\",");
 			jsonString.append("\"id\":");
 			jsonString.append("\""+users.get(i).getId()+"\"");
