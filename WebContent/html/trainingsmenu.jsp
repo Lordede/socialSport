@@ -22,7 +22,7 @@
                 <li><a href="./leaderboard.jsp">Leaderboard</a></li>
                 <li><a href="./accountSetting.jsp">Account Settings</a></li>
                 <li><a href="./exercise.jsp">Übung erstellen</a></li>
-  				<li style="float:right"><a class="active" href="#about">Logout</a></li>
+  				<li class="logout"><a class="active" href="#about">Logout</a></li>
 			</ul> 
     	</nav>
         <header>
