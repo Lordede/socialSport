@@ -8,7 +8,7 @@ function readUsers() {
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function () {
         usersJson = request.responseText;
-        let parseJson = JSON.parse(usersJson);
+        createUserElements(usersJson);
     }
     request.send();
 
@@ -16,9 +16,9 @@ function readUsers() {
     searchBarUsers.addEventListener("input", event => 
     {
         const input = event.target.value;
-        searchTraining(input, function(trainingJson)
+        searchAdminUi(input, function(trainingJson)
         {
-            extractTraining(trainingJson);
+            callback(trainingJson);
         });
     });
 
@@ -27,10 +27,7 @@ function readUsers() {
 function createUserElements(jsonString) {
     let parentTableElm = document.querySelector("#userTable");
     let templateTableRow = document.querySelector("#trTemplate");
-
-    let buttonLoadUsers = document.querySelector(".loadUsers");
-    usersJson = request.responseText;
-    let parseJson = JSON.parse(usersJson);
+    let parseJson = JSON.parse(jsonString);
     parseJson.forEach(user => {
         const templateRow = templateTableRow.content.cloneNode(true).children[0];
         parentTableElm.appendChild(templateRow)
@@ -67,9 +64,10 @@ function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
 //Read
 function listAllExercises(jsonString) {
     let exercisesArrayList = JSON.parse(jsonString);
+
     let tableRowTemplateExercise = document.querySelector("#trExercise");
     let containerTable = document.querySelector("#exerciseContainer");
-
+    containerTable.innerHTML="";
     exercisesArrayList.forEach(exercise => {
         let templateRowExercise = tableRowTemplateExercise.content.cloneNode(true).children[0]; //Table row
         containerTable.appendChild(templateRowExercise);

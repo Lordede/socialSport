@@ -268,15 +268,15 @@ public class UserUpdateServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-	private ArrayList<UserBean> search(String exerciseName) throws ServletException
+	private ArrayList<UserBean> search(String username) throws ServletException
 	{
-		exerciseName = (exerciseName == null || exerciseName == "") ? "%" : "%" + exerciseName + "%";
+		username = (username == null || username == "") ? "%" : "%" + username + "%";
 		ArrayList<UserBean> users = new ArrayList<>();
 		
 		try (Connection con = ds.getConnection();
 				PreparedStatement search = con.prepareStatement("SELECT * FROM exercises WHERE name LIKE ?")) 
 		{
-			search.setString(1, exerciseName);
+			search.setString(1, username);
 			try (ResultSet result = search.executeQuery())
 			{
 				while (result.next()) 
@@ -290,7 +290,6 @@ public class UserUpdateServlet extends HttpServlet {
 				}
 				return users;
 			}
-			
 		}
 		catch (Exception ex) 
 		{

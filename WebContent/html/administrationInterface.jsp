@@ -61,7 +61,7 @@
                 formaction="../ExerciseServlet"
                 formmethod="post">
             </div>
-            <label for="searchExercises">Übung Löschen</label>
+            <label for="searchExercises">Übung suchen</label>
             <input type="text" id="searchExercises">
 			<Button id="submitExercise" type="submit">Übung Erstellen</Button>
 
@@ -76,11 +76,13 @@
     </div>
     <script>
         var button = document.getElementById("loadUsers");
+        let inputExercises = document.querySelector("#searchExercises");
         document.addEventListener("DOMContentLoaded", init);
-        window.onload = readExercises();
+        window.onload = readExercises;
         function init() {
             //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-            button.addEventListener('click', createUserElements);
+            button.addEventListener('click', readUsers);
+            inputExercises.addEventListener('input', readExercises);
             // document.ElementByName('addButton').submit();
             console.log("html spricht an");
         }
