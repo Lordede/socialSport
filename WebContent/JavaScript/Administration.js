@@ -1,33 +1,68 @@
 /**
  * Cem Durmus
  */
-function createUserElements() {
-    let parentTableElm = document.querySelector("#userTable");
-    let templateTableRow = document.querySelector("#trTemplate");
-
-    let buttonLoadUsers = document.querySelector(".loadUsers");
-
+function readUsers() {
+    
     var request = new XMLHttpRequest();
-    let usersJson = "";
     request.open("Get", "../UserUpdateServlet?getUsers")
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function () {
         usersJson = request.responseText;
         let parseJson = JSON.parse(usersJson);
-        parseJson.forEach(user => {
-            const templateRow = templateTableRow.content.cloneNode(true).children[0];
-            parentTableElm.appendChild(templateRow)
-            const username = templateRow.querySelector(".username");
-            const firstname = templateRow.querySelector(".firstname");
-            const lastname = templateRow.querySelector(".lastname");
-            const email = templateRow.querySelector(".email")
-            username.textContent = user.benutzername;
-            firstname.textContent = user.vorname;
-            lastname.textContent = user.nachname;
-            email.textContent = user.eMail;
-        })
     }
     request.send();
+
+    let searchBarUsers = document.querySelector("#searchInput");
+    searchBarUsers.addEventListener("input", event => 
+    {
+        const input = event.target.value;
+        searchTraining(input, function(trainingJson)
+        {
+            extractTraining(trainingJson);
+        });
+    });
+
+}
+
+function createUserElements(jsonString) {
+    let parentTableElm = document.querySelector("#userTable");
+    let templateTableRow = document.querySelector("#trTemplate");
+
+    let buttonLoadUsers = document.querySelector(".loadUsers");
+    usersJson = request.responseText;
+    let parseJson = JSON.parse(usersJson);
+    parseJson.forEach(user => {
+        const templateRow = templateTableRow.content.cloneNode(true).children[0];
+        parentTableElm.appendChild(templateRow)
+        const username = templateRow.querySelector(".username");
+        const firstname = templateRow.querySelector(".firstname");
+        const lastname = templateRow.querySelector(".lastname");
+        const email = templateRow.querySelector(".email")
+        username.textContent = user.benutzername;
+        firstname.textContent = user.vorname;
+        lastname.textContent = user.nachname;
+        email.textContent = user.eMail;
+    })
+
+}
+
+function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
+    let request = new XMLHttpRequest;
+    let extractedJson = ""
+    request.open("GET", "../" + servletname + "?" + nameOfInputField + "=" + searchInput, true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.onload = function () {
+        if (nameOfInputField == "listAllExercises") {
+            extractedJson = request.responseText;
+            callback(extractedJson);
+        } else
+        {
+            extractedJson = request.responseText;
+            callback(extractedJson)
+        }
+
+        
+    }
 }
 //Read
 function listAllExercises(jsonString) {
@@ -35,8 +70,7 @@ function listAllExercises(jsonString) {
     let tableRowTemplateExercise = document.querySelector("#trExercise");
     let containerTable = document.querySelector("#exerciseContainer");
 
-    exercisesArrayList.forEach(exercise => 
-    {
+    exercisesArrayList.forEach(exercise => {
         let templateRowExercise = tableRowTemplateExercise.content.cloneNode(true).children[0]; //Table row
         containerTable.appendChild(templateRowExercise);
         const exerciseName = templateRowExercise.querySelector(".exerciseName");
@@ -51,6 +85,7 @@ function listAllExercises(jsonString) {
 function readExercises() {
     var xmlhttp = new XMLHttpRequest();
     var jsonString;
+    let exerciseInputBar = document.querySelector("#searchExercises");
     xmlhttp.open("GET", "../ExerciseServlet?addButton=name", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.onload = function () {
@@ -58,6 +93,15 @@ function readExercises() {
         listAllExercises(jsonString);
     }
     xmlhttp.send();
+
+    exerciseInputBar.addEventListener("input", event => {
+        const input = event.target.value;
+        searchAdminUi("ExerciseServlet", "exerciseInputBar", input, function (trainingJson) {
+        extractTraining(trainingJson);
+        });
+    });
+
+    
 }
 
 function createNewExercise() {

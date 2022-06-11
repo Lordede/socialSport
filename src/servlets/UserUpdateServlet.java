@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.lang.module.ResolutionException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -107,6 +108,10 @@ public class UserUpdateServlet extends HttpServlet {
 				deleteUser(user);
 				response.sendRedirect("html/accountDeletion.jsp");
 				break;
+			case "searchUser":
+				ArrayList<UserBean> users = search(request.getParameter("searchUser"));
+				String userSearchJson = convertListToJson(users);
+				response.getWriter().write(userSearchJson);
 			default:
 				break;
 			}
@@ -261,6 +266,35 @@ public class UserUpdateServlet extends HttpServlet {
 		catch(Exception ex)
 		{
 			throw new ServletException(ex.getMessage());
+		}
+	}
+	private ArrayList<UserBean> search(String exerciseName) throws ServletException
+	{
+		exerciseName = (exerciseName == null || exerciseName == "") ? "%" : "%" + exerciseName + "%";
+		ArrayList<UserBean> users = new ArrayList<>();
+		
+		try (Connection con = ds.getConnection();
+				PreparedStatement search = con.prepareStatement("SELECT * FROM exercises WHERE name LIKE ?")) 
+		{
+			search.setString(1, exerciseName);
+			try (ResultSet result = search.executeQuery())
+			{
+				while (result.next()) 
+				{
+					UserBean user = new UserBean();
+					user.setUsername(result.getString("username"));
+					user.setFirstName(result.getString("firstname"));
+					user.seteMail(result.getString("eMail"));
+					user.setLastName(result.getString("lastname"));
+					users.add(user);
+				}
+				return users;
+			}
+			
+		}
+		catch (Exception ex) 
+		{
+			throw new ServletException(ex.getMessage()); 
 		}
 	}
 	private String convertListToJson(ArrayList<UserBean> arr) 

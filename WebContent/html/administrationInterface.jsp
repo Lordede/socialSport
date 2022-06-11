@@ -17,6 +17,8 @@
         </header>
         <main>
             <div id="userAdministration">
+                <label for="searchInput">Mitglied suchen: </label>
+                <input id="searchInput" type="type">
                 <button id="loadUsers">Nutzer Laden</button>
                 <table id="userTable">
                     <tr>
@@ -59,8 +61,8 @@
                 formaction="../ExerciseServlet"
                 formmethod="post">
             </div>
-            <label for="deleteExercise">Übung Löschen</label>
-            <input type="text" id="deleteExercise">
+            <label for="searchExercises">Übung Löschen</label>
+            <input type="text" id="searchExercises">
 			<Button id="submitExercise" type="submit">Übung Erstellen</Button>
 
             <table id="exerciseContainer">
