@@ -1,8 +1,10 @@
 /**
  * Cem Durmus
  */
+
+//Starpunkt Users
 function readUsers() {
-    
+
     var request = new XMLHttpRequest();
     request.open("Get", "../UserUpdateServlet?getUsers")
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -13,15 +15,12 @@ function readUsers() {
     request.send();
 
     let searchBarUsers = document.querySelector("#searchInput");
-    searchBarUsers.addEventListener("input", event => 
-    {
+    searchBarUsers.addEventListener("input", event => {
         const input = event.target.value;
-        searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
-        {
+        searchAdminUi("UserUpdateServlet", "searchUser", input, function (jsonString) {
             createUserElements(jsonString);
         });
     });
-
 }
 
 function createUserElements(jsonString) {
@@ -40,11 +39,10 @@ function createUserElements(jsonString) {
         lastname.textContent = user.nachname;
         email.textContent = user.eMail;
         selectUser(user);
-    })
+    });
 }
 
-function selectUser(user)
-{
+function selectUser(user) {
     let userContainer = document.querySelector("#userContainer");
     let userName = document.createElement("div");
     userName.setAttribute("id", "userName");
@@ -52,86 +50,48 @@ function selectUser(user)
     let deleteUser = document.createElement("button");
     deleteUser.setAttribute("id", "delUser");
     deleteUser.textContent = "Benutzer Löschen";
-    deleteUser.addEventListener("click",makeUserAdmin(user))
+    setAdmin.addEventListener("click", makeUserAdmin(user));
+    deleteUser.addEventListener("click", deleteUser(user));
     let setAdmin = document.createElement("button");
     setAdmin.setAttribute("id", "setAdmin");
     setAdmin.textContent = "Adminrechte vergeben";
+    userName.append(deleteUser);
+    userName.appendChild(setAdmin);
+    userContainer.appendChild(userName);
+}
+function deleteUser(user) {
+    let request = new XMLHttpRequest;
+    request.open("DELETE", "../UserUpdateServlet", true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send("setAdmin");
 }
 
-function selectUser(user)
-{
-    let userContainer = document.querySelector("#userContainer");
-    let userName = document.createElement("div");
-    userName.setAttribute("id", "userName");
-    userName.textContent = user.username;
-    let deleteUser = document.createElement("button");
-    deleteUser.setAttribute("id", "delUser");
-    deleteUser.textContent = "Benutzer Löschen";
-    deleteUser.addEventListener("click",makeUserAdmin(user))
-    let setAdmin = document.createElement("button");
-    setAdmin.setAttribute("id", "setAdmin");
-    setAdmin.textContent = "Adminrechte vergeben";
-}
 
-function selectUser(user)
-{
-    let userContainer = document.querySelector("#userContainer");
-    let userName = document.createElement("div");
-    userName.setAttribute("id", "userName");
-    userName.textContent = user.username;
-    let deleteUser = document.createElement("button");
-    deleteUser.setAttribute("id", "delUser");
-    deleteUser.textContent = "Benutzer Löschen";
-    deleteUser.addEventListener("click",makeUserAdmin(user))
-    let setAdmin = document.createElement("button");
-    setAdmin.setAttribute("id", "setAdmin");
-    setAdmin.textContent = "Adminrechte vergeben";
-}
-
-function makeUserAdmin(user)
-{
+function makeUserAdmin(user) {
     let request = new XMLHttpRequest;
     request.open("POST", "../UserUpdateServlet", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send("setAdmin");
 }
-
+//Generische Suchfunktion im Interface
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
     let request = new XMLHttpRequest;
     let extractedJson = ""
     request.open("GET", "../" + servletname + "?" + nameOfInputField + "=" + searchInput, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function () {
-        if (nameOfInputField == "listAllExercises") {
+        if (nameOfInputField == "exerciseInputBar") {
             extractedJson = request.responseText;
             callback(extractedJson);
-        } else
-        {
+        } else {
             extractedJson = request.responseText;
             callback(extractedJson)
         }
-        
+
     }
 }
-//Read
-function listAllExercises(jsonString) {
-    let exercisesArrayList = JSON.parse(jsonString);
 
-    let tableRowTemplateExercise = document.querySelector("#trExercise");
-    let containerTable = document.querySelector("#exerciseContainer");
-    containerTable.innerHTML="";
-    exercisesArrayList.forEach(exercise => {
-        let templateRowExercise = tableRowTemplateExercise.content.cloneNode(true).children[0]; //Table row
-        containerTable.appendChild(templateRowExercise);
-        const exerciseName = templateRowExercise.querySelector(".exerciseName");
-        const muscleGroup = templateRowExercise.querySelector(".muscleGroup");
-        const image = templateRowExercise.querySelector(".picture");
-        exerciseName.textContent = exercise.name;
-        muscleGroup.textContent = exercise.muscleGroup;
-        //exercise.image = exercise.image;
-    });
-}
-
+//Startpunkt Exercise
 function readExercises() {
     var xmlhttp = new XMLHttpRequest();
     var jsonString;
@@ -146,26 +106,33 @@ function readExercises() {
 
     exerciseInputBar.addEventListener("input", event => {
         const input = event.target.value;
-        searchAdminUi("ExerciseServlet", "exerciseInputBar", input, function (exerciseJson) 
-        {
+        searchAdminUi("ExerciseServlet", "exerciseInputBar", input, function (exerciseJson) {
             listAllExercises(exerciseJson);
         });
     });
-    
 }
 
+//Read
+function listAllExercises(jsonString) {
+    let exercisesArrayList = JSON.parse(jsonString);
 
-async function createNewExercise() {
-    // async function uploadFile() {
-        //let formData = new FormData(); 
-    //     formData.append("file", ajaxfile.files[0]);
-    //     await fetch('fileuploadservlet', {
-    //       method: "POST", 
-    //       body: formData
-    //     }); 
-    //     alert('The file upload with Ajax and Java was a success!');
-    //   }
-    var xmlhttp = new XMLHttpRequest();
+    let tableRowTemplateExercise = document.querySelector("#trExercise");
+    let containerTable = document.querySelector("#exerciseContainer");
+    containerTable.innerHTML = "";
+    exercisesArrayList.forEach(exercise => {
+        let templateRowExercise = tableRowTemplateExercise.content.cloneNode(true).children[0]; //Table row
+        containerTable.appendChild(templateRowExercise);
+        const exerciseName = templateRowExercise.querySelector(".exerciseName");
+        const muscleGroup = templateRowExercise.querySelector(".muscleGroup");
+        const image = templateRowExercise.querySelector(".picture");
+        exerciseName.textContent = exercise.name;
+        muscleGroup.textContent = exercise.muscleGroup;
+        //exercise.image = exercise.image;
+    });
+}
+
+function createNewExercise() {
+
     let inputImage = document.querySelector("#image");
     let buttonSubmission = document.querySelector("#submitExercise");
     let inputName = document.querySelector(".nameExercise");
@@ -181,11 +148,11 @@ async function createNewExercise() {
             formData.append("exerciseName=", inputName.value);
             formData.append("muscleGroup", radioBox.value);
             formData.append("image", inputImage.files[0]);
-            await fetch("ExerciseServlet", 
-            {
-                method: "POST",
-                body: formData
-            });
+            fetch("ExerciseServlet",
+                {
+                    method: "POST",
+                    body: formData
+                });
             // xmlhttp.open("POST", "../ExerciseServlet", true);
             // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             // xmlhttp.send("exerciseName=" + inputName.value + "&muscleGroup=" + radioBox.value);// + "&image=" +inputImage.value
