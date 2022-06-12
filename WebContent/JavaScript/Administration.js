@@ -16,27 +16,9 @@ function readUsers() {
     searchBarUsers.addEventListener("input", event => 
     {
         const input = event.target.value;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        searchAdminUi(input, function(trainingJson)
-        {
-            callback(trainingJson);
-=======
         searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
         {
             createUserElements(jsonString);
->>>>>>> Stashed changes
-=======
-        searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
-        {
-            createUserElements(jsonString);
->>>>>>> Stashed changes
-=======
-        searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
-        {
-            createUserElements(jsonString);
->>>>>>> Stashed changes
         });
     });
 
@@ -60,8 +42,6 @@ function createUserElements(jsonString) {
         selectUser(user);
     })
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
 function selectUser(user)
 {
@@ -78,9 +58,20 @@ function selectUser(user)
     setAdmin.textContent = "Adminrechte vergeben";
 }
 
-=======
-=======
->>>>>>> Stashed changes
+function selectUser(user)
+{
+    let userContainer = document.querySelector("#userContainer");
+    let userName = document.createElement("div");
+    userName.setAttribute("id", "userName");
+    userName.textContent = user.username;
+    let deleteUser = document.createElement("button");
+    deleteUser.setAttribute("id", "delUser");
+    deleteUser.textContent = "Benutzer Löschen";
+    deleteUser.addEventListener("click",makeUserAdmin(user))
+    let setAdmin = document.createElement("button");
+    setAdmin.setAttribute("id", "setAdmin");
+    setAdmin.textContent = "Adminrechte vergeben";
+}
 
 function selectUser(user)
 {
@@ -97,10 +88,6 @@ function selectUser(user)
     setAdmin.textContent = "Adminrechte vergeben";
 }
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 function makeUserAdmin(user)
 {
     let request = new XMLHttpRequest;
