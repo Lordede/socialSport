@@ -18,9 +18,15 @@ function readUsers() {
         const input = event.target.value;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         searchAdminUi(input, function(trainingJson)
         {
             callback(trainingJson);
+=======
+        searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
+        {
+            createUserElements(jsonString);
+>>>>>>> Stashed changes
 =======
         searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
         {
@@ -55,6 +61,7 @@ function createUserElements(jsonString) {
     })
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 function selectUser(user)
 {
@@ -72,6 +79,8 @@ function selectUser(user)
 }
 
 =======
+=======
+>>>>>>> Stashed changes
 
 function selectUser(user)
 {
@@ -88,6 +97,9 @@ function selectUser(user)
     setAdmin.textContent = "Adminrechte vergeben";
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 function makeUserAdmin(user)
 {
