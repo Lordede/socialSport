@@ -151,11 +151,11 @@ function readExercises() {
             listAllExercises(exerciseJson);
         });
     });
-
     
 }
 
-function createNewExercise() {
+
+async function createNewExercise() {
     // async function uploadFile() {
         //let formData = new FormData(); 
     //     formData.append("file", ajaxfile.files[0]);
@@ -191,5 +191,4 @@ function createNewExercise() {
             // xmlhttp.send("exerciseName=" + inputName.value + "&muscleGroup=" + radioBox.value);// + "&image=" +inputImage.value
         }
     });
-    
 }
