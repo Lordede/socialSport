@@ -16,9 +16,15 @@ function readUsers() {
     searchBarUsers.addEventListener("input", event => 
     {
         const input = event.target.value;
+<<<<<<< Updated upstream
         searchAdminUi(input, function(trainingJson)
         {
             callback(trainingJson);
+=======
+        searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
+        {
+            createUserElements(jsonString);
+>>>>>>> Stashed changes
         });
     });
 
@@ -39,8 +45,31 @@ function createUserElements(jsonString) {
         firstname.textContent = user.vorname;
         lastname.textContent = user.nachname;
         email.textContent = user.eMail;
+        selectUser(user);
     })
+}
 
+function selectUser(user)
+{
+    let userContainer = document.querySelector("#userContainer");
+    let userName = document.createElement("div");
+    userName.setAttribute("id", "userName");
+    userName.textContent = user.username;
+    let deleteUser = document.createElement("button");
+    deleteUser.setAttribute("id", "delUser");
+    deleteUser.textContent = "Benutzer Löschen";
+    deleteUser.addEventListener("click",makeUserAdmin(user))
+    let setAdmin = document.createElement("button");
+    setAdmin.setAttribute("id", "setAdmin");
+    setAdmin.textContent = "Adminrechte vergeben";
+}
+
+function makeUserAdmin(user)
+{
+    let request = new XMLHttpRequest;
+    request.open("POST", "../UserUpdateServlet", true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send("setAdmin");
 }
 
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
@@ -57,7 +86,6 @@ function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
             extractedJson = request.responseText;
             callback(extractedJson)
         }
-
         
     }
 }
@@ -94,8 +122,9 @@ function readExercises() {
 
     exerciseInputBar.addEventListener("input", event => {
         const input = event.target.value;
-        searchAdminUi("ExerciseServlet", "exerciseInputBar", input, function (trainingJson) {
-        extractTraining(trainingJson);
+        searchAdminUi("ExerciseServlet", "exerciseInputBar", input, function (exerciseJson) 
+        {
+            listAllExercises(exerciseJson);
         });
     });
 
@@ -103,6 +132,15 @@ function readExercises() {
 }
 
 function createNewExercise() {
+    // async function uploadFile() {
+        //let formData = new FormData(); 
+    //     formData.append("file", ajaxfile.files[0]);
+    //     await fetch('fileuploadservlet', {
+    //       method: "POST", 
+    //       body: formData
+    //     }); 
+    //     alert('The file upload with Ajax and Java was a success!');
+    //   }
     var xmlhttp = new XMLHttpRequest();
     let inputImage = document.querySelector("#image");
     let buttonSubmission = document.querySelector("#submitExercise");
@@ -115,9 +153,19 @@ function createNewExercise() {
         }
 
         if (!radioBox.value) {
-            xmlhttp.open("POST", "../ExerciseServlet", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("exerciseName=" + inputName.value + "&muscleGroup=" + radioBox.value);// + "&image=" +inputImage.value
+            let formData = new FormData();
+            formData.append("exerciseName=", inputName.value);
+            formData.append("muscleGroup", radioBox.value);
+            formData.append("image", inputImage.files[0]);
+            await fetch("ExerciseServlet", 
+            {
+                method: "POST",
+                body: formData
+            });
+            // xmlhttp.open("POST", "../ExerciseServlet", true);
+            // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // xmlhttp.send("exerciseName=" + inputName.value + "&muscleGroup=" + radioBox.value);// + "&image=" +inputImage.value
         }
     });
+    
 }

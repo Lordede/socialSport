@@ -57,7 +57,12 @@ public class UserUpdateServlet extends HttpServlet {
 				break;
 			case "getSpecificUser":
 				UserBean user = getUser(Long.parseLong(request.getParameter("getSpecificUser")));
-				//insert functionality
+				break;
+			case "searchUser":
+				ArrayList<UserBean> usersSearched = search(request.getParameter("searchUser"));
+				String userSearchJson = convertListToJson(usersSearched);
+				response.getWriter().write(userSearchJson);
+				break;
 			}
 		}
 	}
@@ -108,12 +113,11 @@ public class UserUpdateServlet extends HttpServlet {
 				deleteUser(user);
 				response.sendRedirect("html/accountDeletion.jsp");
 				break;
-			case "searchUser":
-				ArrayList<UserBean> users = search(request.getParameter("searchUser"));
-				String userSearchJson = convertListToJson(users);
-				response.getWriter().write(userSearchJson);
-			default:
+			case "setAdmin":
+				setAdmin(user);
 				break;
+				default:
+				return;
 			}
 		}
 		response.sendRedirect("html/accountDataChanged.jsp");
@@ -159,7 +163,22 @@ public class UserUpdateServlet extends HttpServlet {
 			throw new ServletException(exception.getMessage());
 		}
 	}
-	
+	public void setAdmin(UserBean user) throws ServletException
+	{
+		try (Connection con = ds.getConnection();
+				PreparedStatement statementName = con.prepareStatement("UPDATE users "
+																		+ "SET admin = ? "
+																		+ "WHERE id = ?"))
+		{	
+			statementName.setString(1, "true");
+			statementName.setLong(2, user.getId());
+			statementName.executeUpdate();
+		}	
+		catch (Exception exception)
+		{
+			throw new ServletException(exception.getMessage());
+		}
+	}
 	
 	private void updateFirstName(UserBean user, String firstName) throws ServletException
 	{
