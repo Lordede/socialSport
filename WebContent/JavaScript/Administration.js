@@ -88,6 +88,7 @@ function selectUser(user)
     setAdmin.textContent = "Adminrechte vergeben";
 }
 
+>>>>>>> Stashed changes
 function makeUserAdmin(user)
 {
     let request = new XMLHttpRequest;
