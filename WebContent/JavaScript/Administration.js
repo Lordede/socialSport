@@ -17,9 +17,15 @@ function readUsers() {
     {
         const input = event.target.value;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         searchAdminUi(input, function(trainingJson)
         {
             callback(trainingJson);
+=======
+        searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
+        {
+            createUserElements(jsonString);
+>>>>>>> Stashed changes
 =======
         searchAdminUi("UserUpdateServlet","searchUser",input, function(jsonString)
         {
@@ -48,6 +54,24 @@ function createUserElements(jsonString) {
         selectUser(user);
     })
 }
+<<<<<<< Updated upstream
+
+function selectUser(user)
+{
+    let userContainer = document.querySelector("#userContainer");
+    let userName = document.createElement("div");
+    userName.setAttribute("id", "userName");
+    userName.textContent = user.username;
+    let deleteUser = document.createElement("button");
+    deleteUser.setAttribute("id", "delUser");
+    deleteUser.textContent = "Benutzer Löschen";
+    deleteUser.addEventListener("click",makeUserAdmin(user))
+    let setAdmin = document.createElement("button");
+    setAdmin.setAttribute("id", "setAdmin");
+    setAdmin.textContent = "Adminrechte vergeben";
+}
+
+=======
 
 function selectUser(user)
 {
