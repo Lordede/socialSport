@@ -5,6 +5,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="author" content="Cem Durmus" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="../css/layout.css">
 <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
 <base href="${pageContext.request.requestURI}" />
 <title>Insert title here</title>
@@ -16,12 +18,6 @@
 	</header>
 	<article>
 		<h2>Bearbeiten Sie Ihr Profil hier</h2>
-		<div class="profile_image">
-			<img src="" alt="Profil Picture">
-			<form action="" method="post" enctype="multipart/form-data">
-				<p>Profilbild �ndern:</p>
-			</form>
-		</div>
 		<div class="userName">
 			<form action="User_Servlet" method="post">
 				<p>Benutzername:</p>

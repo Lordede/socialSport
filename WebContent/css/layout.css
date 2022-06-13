@@ -1,0 +1,55 @@
+/* <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet"> */
+body
+{
+    font-family:"Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    background-color: #242423;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 40;
+    margin-right: 40;
+    padding: 20px;
+}
+header
+{
+	font-weight:600;
+	color: #95D5B2;
+}
+
+h1
+{
+    color: #40916C;
+}
+h2
+{
+    color: #52B788;
+}
+h3
+{
+    color: #74C69D;
+}
+div
+{
+	color:white;
+}
+input
+{
+    background-color: #242423;
+    color: white;
+}
+label
+{
+	color: white;
+}
+button
+{
+	background-color: #2D6A4F;
+	color: white;
+	border-radius: 5px;
+}
+table
+{
+	color: white;
+}
+

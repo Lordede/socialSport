@@ -3,8 +3,8 @@
 <!-- Erstellt von Cem Durmus -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index_dark.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
     <head>
         <title>
             Social Sport

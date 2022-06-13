@@ -10,6 +10,8 @@
         <meta name="description" content="chose your training">
         <meta name="keywords" content="Training Sport Workout">
         <link rel="stylesheet" href="../css/navbar.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/layout.css">
         <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
         <script src="../JavaScript/TrainingsManagement.js" type="text/javascript"></script>
     </head>
@@ -24,20 +26,14 @@
                 <li><a href="./exercise.jsp">Übung erstellen</a></li>
   				<li class="logout"><a class="active" href="#about">Logout</a></li>
 			</ul> 
-    	</nav>
-        <header>
-            <h1><strong>Training: </strong></h1>
-            <input type="search" 
-            name="suche"
-            formaction=""
-            formmethod="get">
-        </header>
-        
+    	</nav>   
         <article>
+            <h1><strong>Training: </strong></h1>
             <div id="training">
                 <div id="addTraining">
                     <button id="loadTrainings">Trainings laden</button>
                     <button id="addNewTraining">Training hinzufügen</button>
+                    <br>
                     <label id="nameOfTrainingLabel" hidden="hidden">Name des Traings</label>
                     <input id="nameOfTrainingInput" type="hidden">
                     <button id="sendTraining" hidden="hidden">Training erstellen</button>
