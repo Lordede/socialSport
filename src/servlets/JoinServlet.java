@@ -1,5 +1,5 @@
 package servlets;
-//von Lukas Edmüller
+//von Lukas Edmï¿½ller
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import beans.JoinBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -49,6 +50,8 @@ public class JoinServlet extends HttpServlet {
 		List<JoinBean> joins = read(userBean.getId());
 		
 		session.setAttribute("set", joins);
+		RequestDispatcher disp = request.getRequestDispatcher("html/leaderboardAusgabe.jsp");
+		disp.forward(request, response);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 package beans;
 
 import java.io.Serializable;
-// von Lukas Edmüller
+// von Lukas Edmï¿½ller
 public class JoinBean implements Serializable{
 
 	private static final long serialVersionID = 1L;
@@ -17,6 +17,8 @@ public class JoinBean implements Serializable{
 	private String trainingName;
 	private double points;
 	private Long userId;
+	
+	
 	public Long getId() {
 		return id;
 	}
