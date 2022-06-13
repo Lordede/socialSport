@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import beans.ExerciseBean;
 import beans.SetBean;
 import beans.TrainingBean;
+import beans.TrainingSessionBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -61,29 +62,35 @@ public class SetServlet extends HttpServlet {
 	}
 	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		SetBean set = new SetBean();
 		HttpSession session = request.getSession();
-		set.setRep(Integer.parseInt(request.getParameter("rep")));
-		set.setKg(Double.parseDouble(request.getParameter("kg")));
-		ExerciseBean exercise = (ExerciseBean) session.getAttribute("exercise");
-		set.setExerciseId(exercise.getId());
+		
+		set.setRep(Integer.parseInt(request.getParameter("rep"))); 
+		
+		if(request.getParameter("kg") != "" || request.getParameter("kg") == null) {// Falls der User keinen Wert bei kg eingegeben hat
+			set.setKg(Double.parseDouble(request.getParameter("kg")));
+		}
+		else {
+			set.setKg(0);
+		}
+		
+		set.setExerciseId(Long.parseLong(request.getParameter("exerciseid")));
+
 		TrainingBean training = (TrainingBean) session.getAttribute("training");
-		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
+		System.out.println(session.getAttribute("training"));
+		set.setTrainingId(training.getId());
+		TrainingSessionBean trainingSession = (TrainingSessionBean) session.getAttribute("trainingSession");
+		
+		set.setTrainingSessionId(trainingSession.getId());
 		set.setCreationDate(new java.sql.Date(new java.util.Date().getTime()));
 				
 		create(set);
 		
-		doGet(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		SetBean set = new SetBean();
@@ -93,15 +100,14 @@ public class SetServlet extends HttpServlet {
 		set.setKg(Double.parseDouble(request.getParameter("kg")));
 		set.setExerciseId(Long.parseLong(request.getParameter("exerciseId")));
 		set.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
+		set.setTrainingSessionId(Long.parseLong(request.getParameter("trainingSessionId")));
 				
 		update(set);
 		
 		doGet(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
+
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		Long id = Long.parseLong(request.getParameter("id"));
@@ -145,8 +151,8 @@ public class SetServlet extends HttpServlet {
 					form.setKg(rs.getDouble("kg"));
 					form.setExerciseId(rs.getLong("exerciseId"));
 					form.setTrainingId(rs.getLong("trainingId"));
+					form.setTrainingSessionId(rs.getLong("trainingSessionId"));
 					form.setCreationDate(rs.getDate("creationDate"));
-					
 				}
 			}
 		} catch (Exception ex) {
@@ -173,7 +179,8 @@ public class SetServlet extends HttpServlet {
 					double kg = Double.valueOf(rs.getDouble("kg"));
 					int rep = Integer.valueOf(rs.getInt("rep"));
 					Long trainingId = Long.valueOf(rs.getLong("trainingId"));
-					Date creationDate = rs.getDate("creationDate");
+					Long trainingSessionId = Long.valueOf(rs.getLong("trainingSessionId"));
+					java.sql.Date creationDate = rs.getDate("creationDate");
 					
 					
 					set.setId(id);
@@ -181,6 +188,8 @@ public class SetServlet extends HttpServlet {
 					set.setRep(rep);
 					set.setExerciseId(exerciseId);
 					set.setTrainingId(trainingId);
+					set.setTrainingSessionId(trainingSessionId);
+					set.setCreationDate(creationDate);
 					
 					sets.add(set);
 				}
@@ -197,13 +206,14 @@ public class SetServlet extends HttpServlet {
 		String[] generatedKeys = new String[] {"id"};
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sets"
-														+ "(rep, kg, exerciseId, trainingId, creationDate) "
-														+ "VALUES (?, ?, ?, ?, ?)", generatedKeys)){
+														+ "(rep, kg, exerciseId, trainingId, trainingsessionId, creationDate) "
+														+ "VALUES (?, ?, ?, ?, ?, ?)", generatedKeys)){
 			pstmt.setInt(1, form.getRep());
 			pstmt.setDouble(2, form.getKg());
 			pstmt.setLong(3, form.getExerciseId());
 			pstmt.setLong(4, form.getTrainingId());
-			pstmt.setDate(5, (java.sql.Date) form.getCreationDate());
+			pstmt.setLong(5, form.getTrainingSessionId());
+			pstmt.setDate(6, (java.sql.Date) form.getCreationDate());
 			
 			pstmt.executeUpdate();
 			

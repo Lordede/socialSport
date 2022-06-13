@@ -73,8 +73,7 @@ public class TrainingServlet extends HttpServlet {
 				response.getWriter().write(jsonSearch);
 				break;
 			case "selectedTraining":
-				TrainingBean training =(TrainingBean) read
-				(Long.parseLong(request.getParameter("selectedTraining")));
+				TrainingBean training =(TrainingBean) read(Long.parseLong(request.getParameter("selectedTraining")));
 				if(session.getAttribute("training") != null) 
 				{
 					session.removeAttribute("training");
@@ -82,6 +81,9 @@ public class TrainingServlet extends HttpServlet {
 					
 				}
 				session.setAttribute("training", training);
+				
+
+				
 				response.getWriter().write("hasi");
 //				RequestDispatcher disp = request.getRequestDispatcher("html/training.jsp");
 //				disp.forward(request, response);
