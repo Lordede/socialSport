@@ -88,6 +88,15 @@
                         // document.ElementByName('addButton').submit();
                         console.log("html spricht an");
 
+                    var button = document.getElementById("addButton");
+                    var addSetButton = document.getElementsByClassName("button addSet")
+                    var cancelWorkoutButton = document.getElementById("cancelWorkout");
+
+                    //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
+                    button.addEventListener('click', toggleExerciseSearchbar);
+                    cancelWorkoutButton.addEventListener('click', cancelWorkout);
+                    // document.ElementByName('addButton').submit();
+                    console.log("html spricht an");
                         for (var i = 0; i < addSetButton.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
                             addSetButton[i].addEventListener("click", getExerciseReference);
                         }

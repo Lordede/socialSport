@@ -15,7 +15,14 @@ public class SetBean implements Serializable {
 	private Long exerciseId;
 	private Long trainingId;
 	private Date creationDate;
+	private Long trainingSessionId;
 	
+	public Long getTrainingSessionId() {
+		return trainingSessionId;
+	}
+	public void setTrainingSessionId(Long trainingSessionId) {
+		this.trainingSessionId = trainingSessionId;
+	}
 	public Date getCreationDate() {
 		return creationDate;
 	}

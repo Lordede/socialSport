@@ -23,6 +23,10 @@ function toggleExerciseSearchbar()
 })
 }
 
+function cancelWorkout(){
+    window.location = 'trainingsmenu.jsp';
+}
+
 function showExercises()
 {
     var exerciseInsert = document.createElement('div');

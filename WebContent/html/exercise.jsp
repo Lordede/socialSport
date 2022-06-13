@@ -21,7 +21,7 @@
     	<nav>
     		<ul>
                 <li><a href="./dashboard.jsp">Dashboard</a></li>
-                <li><a href="./training.jsp">Training</a></li>
+                <li><a href="./trainingsmenu.jsp">Training</a></li>
                 <li><a href="./leaderboard.jsp">Leaderboard</a></li>
                 <li><a href="./accountSetting.jsp">Account Settings</a></li>
                 <li><a class="active" href="./exercise.jsp">Übung erstellen</a></li>
