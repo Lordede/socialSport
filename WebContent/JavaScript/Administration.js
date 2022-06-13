@@ -13,7 +13,6 @@ function readUsers() {
         createUserElements(usersJson);
     }
     request.send();
-
     let searchBarUsers = document.querySelector("#searchInput");
     searchBarUsers.addEventListener("input", event => {
         const input = event.target.value;
@@ -27,6 +26,7 @@ function createUserElements(jsonString) {
     let parentTableElm = document.querySelector("#userTable");
     let templateTableRow = document.querySelector("#trTemplate");
     let parseJson = JSON.parse(jsonString);
+    parentTableElm.textContent="";
     parseJson.forEach(user => {
         const templateRow = templateTableRow.content.cloneNode(true).children[0];
         parentTableElm.appendChild(templateRow)
@@ -38,32 +38,34 @@ function createUserElements(jsonString) {
         firstname.textContent = user.vorname;
         lastname.textContent = user.nachname;
         email.textContent = user.eMail;
-        selectUser(user);
+        templateRow.addEventListener("click", () => selectUser(user));
     });
 }
 
 function selectUser(user) {
+    let delButton = document.querySelector("#delUser");
+    let adminButton = document.querySelector("#setAdmin");
+    let hiddenProperty = delButton.getAttribute("hidden");
+    if(hiddenProperty)
+    {
+        delButton.removeAttribute("hidden");
+        adminButton.removeAttribute("hidden");
+    }
     let userContainer = document.querySelector("#userContainer");
     let userName = document.createElement("div");
     userName.setAttribute("id", "userName");
-    userName.textContent = user.username;
-    let deleteUser = document.createElement("button");
-    deleteUser.setAttribute("id", "delUser");
-    deleteUser.textContent = "Benutzer Löschen";
-    setAdmin.addEventListener("click", makeUserAdmin(user));
-    deleteUser.addEventListener("click", deleteUser(user));
-    let setAdmin = document.createElement("button");
-    setAdmin.setAttribute("id", "setAdmin");
-    setAdmin.textContent = "Adminrechte vergeben";
-    userName.append(deleteUser);
-    userName.appendChild(setAdmin);
+    userName.textContent = user.benutzername;
     userContainer.appendChild(userName);
+    
+    delButton.addEventListener("click", ()  => deleteUser(user));
+    adminButton.addEventListener("click", () => makeUserAdmin(user))
 }
+
 function deleteUser(user) {
     let request = new XMLHttpRequest;
-    request.open("DELETE", "../UserUpdateServlet", true);
+    request.open("DELETE", "../UserUpdateServlet?id="+user.id, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    request.send("setAdmin");
+    request.send();
 }
 
 
@@ -71,7 +73,7 @@ function makeUserAdmin(user) {
     let request = new XMLHttpRequest;
     request.open("POST", "../UserUpdateServlet", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    request.send("setAdmin");
+    request.send("setAdmin="+user.id);
 }
 //Generische Suchfunktion im Interface
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
@@ -80,15 +82,10 @@ function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
     request.open("GET", "../" + servletname + "?" + nameOfInputField + "=" + searchInput, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function () {
-        if (nameOfInputField == "exerciseInputBar") {
-            extractedJson = request.responseText;
-            callback(extractedJson);
-        } else {
-            extractedJson = request.responseText;
-            callback(extractedJson)
-        }
-
+        extractedJson = request.responseText;
+        callback(extractedJson);
     }
+    request.send();
 }
 
 //Startpunkt Exercise
@@ -149,13 +146,10 @@ function createNewExercise() {
             formData.append("muscleGroup", radioBox.value);
             formData.append("image", inputImage.files[0]);
             fetch("ExerciseServlet",
-                {
-                    method: "POST",
-                    body: formData
-                });
-            // xmlhttp.open("POST", "../ExerciseServlet", true);
-            // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            // xmlhttp.send("exerciseName=" + inputName.value + "&muscleGroup=" + radioBox.value);// + "&image=" +inputImage.value
+            {
+                method: "POST",
+                body: formData
+            });
         }
     });
 }

@@ -29,7 +29,9 @@
                     </tr>    
                 </table>
                 <div id="userContainer"> <!--Hier ausgewählten User reinladen-->
-                    
+                    <br>
+                    <button id="delUser" hidden="hidden">Benutzer Löschen</button>
+                    <button id="setAdmin" hidden="hidden">Adminrechte vergeben</button>
                 </div>
             </div>
             <div id="exerciseHandler">
@@ -77,8 +79,14 @@
     <script>
         var button = document.getElementById("loadUsers");
         let inputExercises = document.querySelector("#searchExercises");
+        let delButton = document.querySelector("#delUser");
+        let adminButton = document.querySelector("#setAdmin");
         document.addEventListener("DOMContentLoaded", init);
-        window.onload = readExercises;
+        window.onload = function(){
+            readExercises();
+            readUsers();
+        };
+        
         function init() {
             //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
             button.addEventListener('click', readUsers);

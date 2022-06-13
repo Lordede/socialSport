@@ -68,10 +68,7 @@ public class UserUpdateServlet extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		HttpSession session = request.getSession();
-		UserBean user = (UserBean) session.getAttribute("userData");
-		deleteUser(user);
+		deleteUser(Long.parseLong(request.getParameter("id")));
 	}
 	
 	
@@ -109,12 +106,12 @@ public class UserUpdateServlet extends HttpServlet {
 			case "changeImage":
 				updateImage(user);
 				break;
-			case "deleteUser":
-				deleteUser(user);
-				response.sendRedirect("html/accountDeletion.jsp");
-				break;
+//			case "deleteUser":
+//				deleteUser(user);
+//				response.sendRedirect("html/accountDeletion.jsp");
+//				break;
 			case "setAdmin":
-				setAdmin(user);
+				setAdmin(Long.parseLong(request.getParameter("setAdmin")));
 				break;
 				default:
 				return;
@@ -163,15 +160,15 @@ public class UserUpdateServlet extends HttpServlet {
 			throw new ServletException(exception.getMessage());
 		}
 	}
-	public void setAdmin(UserBean user) throws ServletException
+	public void setAdmin(Long id) throws ServletException
 	{
 		try (Connection con = ds.getConnection();
 				PreparedStatement statementName = con.prepareStatement("UPDATE users "
-																		+ "SET admin = ? "
+																		+ "SET isAdmin = ?"
 																		+ "WHERE id = ?"))
 		{	
-			statementName.setString(1, "true");
-			statementName.setLong(2, user.getId());
+			statementName.setBoolean(1,true);
+			statementName.setLong(2, id);
 			statementName.executeUpdate();
 		}	
 		catch (Exception exception)
@@ -229,11 +226,11 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteUser(UserBean user) throws ServletException 
+	private void deleteUser(Long id) throws ServletException 
 	{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM users WHERE id = ?")){
-			pstmt.setLong(1, user.getId());
+			pstmt.setLong(1, id);
 			pstmt.executeUpdate();
 		} 
 		catch (Exception ex) 
@@ -273,6 +270,7 @@ public class UserUpdateServlet extends HttpServlet {
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					UserBean user = new UserBean();
+					user.setId(rs.getLong("id"));
 					user.setUsername(rs.getString("username"));
 					user.setFirstName(rs.getString("firstname"));
 					user.seteMail(rs.getString("eMail"));
@@ -293,7 +291,7 @@ public class UserUpdateServlet extends HttpServlet {
 		ArrayList<UserBean> users = new ArrayList<>();
 		
 		try (Connection con = ds.getConnection();
-				PreparedStatement search = con.prepareStatement("SELECT * FROM exercises WHERE name LIKE ?")) 
+				PreparedStatement search = con.prepareStatement("SELECT * FROM exercises WHERE username LIKE ?")) 
 		{
 			search.setString(1, username);
 			try (ResultSet result = search.executeQuery())
@@ -301,6 +299,7 @@ public class UserUpdateServlet extends HttpServlet {
 				while (result.next()) 
 				{
 					UserBean user = new UserBean();
+					user.setId(result.getLong("id"));
 					user.setUsername(result.getString("username"));
 					user.setFirstName(result.getString("firstname"));
 					user.seteMail(result.getString("eMail"));
