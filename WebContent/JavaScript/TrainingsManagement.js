@@ -50,6 +50,7 @@ function selectTraining(training)
     }
     xmlhttp.send();
     
+    //Edmüller Lukas
     var responsePost;
     var xmlhttpTrainingSessionPost = new XMLHttpRequest();
     xmlhttpTrainingSessionPost.open("POST", "../TrainingSessionServlet?trainingId=" + training.id, true);
@@ -63,16 +64,18 @@ function selectTraining(training)
 
     xmlhttp.send();
 
-    var xmlhttpTrainingSessionGet = new XMLHttpRequest();
-    xmlhttpTrainingSessionGet.open("GET", "../TrainingSessionServlet?id=" + parseInt(responsePost), true);
-    xmlhttpTrainingSessionGet.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttpTrainingSessionGet.onload = function()
-    {
-        var text = xmlhttp.responseText;
-        window.location = "training.jsp";
-    }
-    xmlhttpTrainingSessionGet.send();
+    // Trainingsession wird bei POst bereits in SessionScope geladen, daher GET nicht nötig
+    // var xmlhttpTrainingSessionGet = new XMLHttpRequest();
+    // xmlhttpTrainingSessionGet.open("GET", "../TrainingSessionServlet?id=" + parseInt(responsePost), true);
+    // xmlhttpTrainingSessionGet.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // xmlhttpTrainingSessionGet.onload = function()
+    // {
+    //     var text = xmlhttp.responseText;
+    //     window.location = "training.jsp";
+    // }
+    // xmlhttpTrainingSessionGet.send();
 }
+
 function hideSearch()
 {
     let label = document.getElementById("nameOfTrainingLabel");

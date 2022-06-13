@@ -38,6 +38,7 @@ public class TrainingSessionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    // WIRD NICHT BENUTZT
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -77,7 +78,7 @@ public class TrainingSessionServlet extends HttpServlet {
 		
 		
 		
-		doGet(request, response);
+		//doGet(request, response);
 	}
 	
 	private void create(TrainingSessionBean form) throws ServletException {

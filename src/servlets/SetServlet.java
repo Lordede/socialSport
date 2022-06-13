@@ -82,7 +82,6 @@ public class SetServlet extends HttpServlet {
 		TrainingBean training = (TrainingBean) session.getAttribute("training");
 		System.out.println(session.getAttribute("training"));
 		set.setTrainingId(training.getId());
-		System.out.println(session.getAttribute("trainingSession").toString());
 		TrainingSessionBean trainingSession = (TrainingSessionBean) session.getAttribute("trainingSession");
 		
 		set.setTrainingSessionId(trainingSession.getId());
