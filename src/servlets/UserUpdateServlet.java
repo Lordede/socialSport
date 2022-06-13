@@ -163,12 +163,10 @@ public class UserUpdateServlet extends HttpServlet {
 	public void setAdmin(Long id) throws ServletException
 	{
 		try (Connection con = ds.getConnection();
-				PreparedStatement statementName = con.prepareStatement("UPDATE users "
-																		+ "SET isAdmin = ?"
-																		+ "WHERE id = ?"))
+				PreparedStatement statementName = con.prepareStatement("UPDATE `users` SET `isAdmin` = '1' WHERE `users`.`id` = ?");     )
 		{	
-			statementName.setBoolean(1,true);
-			statementName.setLong(2, id);
+			//statementName.setBoolean(1,true);
+			statementName.setLong(1, id);
 			statementName.executeUpdate();
 		}	
 		catch (Exception exception)
