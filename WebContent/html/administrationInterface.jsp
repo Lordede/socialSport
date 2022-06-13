@@ -63,10 +63,9 @@
                 formaction="../ExerciseServlet"
                 formmethod="post">
             </div>
+			<Button id="submitExercise" type="submit">Übung Erstellen</Button>
             <label for="searchExercises">Übung suchen</label>
             <input type="text" id="searchExercises">
-			<Button id="submitExercise" type="submit">Übung Erstellen</Button>
-
             <table id="exerciseContainer">
                 <tr>
                     <th>Name der Übung</th>

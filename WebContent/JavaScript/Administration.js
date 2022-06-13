@@ -4,12 +4,11 @@
 
 //Starpunkt Users
 function readUsers() {
-
     var request = new XMLHttpRequest();
     request.open("Get", "../UserUpdateServlet?getUsers")
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function () {
-        usersJson = request.responseText;
+        let usersJson = request.responseText;
         createUserElements(usersJson);
     }
     request.send();
@@ -79,7 +78,7 @@ function makeUserAdmin(user) {
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
     let request = new XMLHttpRequest;
     let extractedJson = ""
-    request.open("GET", "../" + servletname + "?" + nameOfInputField + "=" + searchInput, true);
+    request.open("GET", "../" + servletname + "?" + nameOfInputField + "=" + searchInput);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function () {
         extractedJson = request.responseText;
@@ -91,29 +90,25 @@ function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
 //Startpunkt Exercise
 function readExercises() {
     var xmlhttp = new XMLHttpRequest();
-    var jsonString;
-    
-    xmlhttp.open("GET", "../ExerciseServlet?addButton=name", true);
+    xmlhttp.open("GET", "../ExerciseServlet?addButton");
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.onload = function () {
-        jsonString = xmlhttp.responseText;
+        let jsonString = xmlhttp.responseText;
         listAllExercises(jsonString);
     }
     xmlhttp.send();
-    let exerciseInputBar = document.querySelector("#searchExercises");
+	let exerciseInputBar = document.querySelector("#searchExercises");
     exerciseInputBar.addEventListener("input", event => {
         const input = event.target.value;
-        searchAdminUi("ExerciseServlet", "exerciseInputBar", input, function (exerciseJson) {
+        searchAdminUi("ExerciseServlet", "exerciseInputField", input, function (exerciseJson) {
             listAllExercises(exerciseJson);
         });
     });
-    
 }
 
 //Read
 function listAllExercises(jsonString) {
     let exercisesArrayList = JSON.parse(jsonString);
-
     let tableRowTemplateExercise = document.querySelector("#trExercise");
     let containerTable = document.querySelector("#exerciseContainer");
     containerTable.innerHTML = "";

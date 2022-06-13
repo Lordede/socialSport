@@ -68,6 +68,7 @@ public class ExerciseServlet extends HttpServlet {
 				ArrayList<ExerciseBean> exercisesSearched = search(request.getParameter("exerciseInputField"));
 				String jsonSearch = convertListToJson(exercisesSearched);
 				response.getWriter().write(jsonSearch);
+				
 				break;
 			case "selectedExercise":
 				ExerciseBean exercise = (ExerciseBean) initializeExercise
