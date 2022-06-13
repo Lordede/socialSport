@@ -92,7 +92,7 @@ function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
 function readExercises() {
     var xmlhttp = new XMLHttpRequest();
     var jsonString;
-    let exerciseInputBar = document.querySelector("#searchExercises");
+    
     xmlhttp.open("GET", "../ExerciseServlet?addButton=name", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.onload = function () {
@@ -100,13 +100,14 @@ function readExercises() {
         listAllExercises(jsonString);
     }
     xmlhttp.send();
-
+    let exerciseInputBar = document.querySelector("#searchExercises");
     exerciseInputBar.addEventListener("input", event => {
         const input = event.target.value;
         searchAdminUi("ExerciseServlet", "exerciseInputBar", input, function (exerciseJson) {
             listAllExercises(exerciseJson);
         });
     });
+    
 }
 
 //Read

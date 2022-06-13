@@ -289,7 +289,7 @@ public class UserUpdateServlet extends HttpServlet {
 		ArrayList<UserBean> users = new ArrayList<>();
 		
 		try (Connection con = ds.getConnection();
-				PreparedStatement search = con.prepareStatement("SELECT * FROM exercises WHERE username LIKE ?")) 
+				PreparedStatement search = con.prepareStatement("SELECT * FROM users WHERE username LIKE ?")) 
 		{
 			search.setString(1, username);
 			try (ResultSet result = search.executeQuery())
