@@ -9,6 +9,7 @@ function addExercise(exercise) {
     var article = document.createElement("article");
     article.setAttribute("id", exercise.id);
     var h2 = document.createElement("h2");
+    var bild = document.createElement("img")
     var table = document.createElement("table");
     var tr = document.createElement("tr");
     var th = document.createElement("th");
@@ -17,12 +18,20 @@ function addExercise(exercise) {
     //Innerhalb von Exercises einen neuen <article> anlegen
     exercises.appendChild(article);
     article.setAttribute("class", "exercise elements");
+    
 
     //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
     article.appendChild(h2);
     h2.innerText = exercise.name;// TODO: Dynamisch richtigen Namen einfügen
     article.setAttribute("name", h2.innerHTML)
     h2.setAttribute("class", "ExerciseHeadline");
+
+    //Bild
+    article.appendChild(bild);
+    //var path = `${pageContext.request.contextPath}`;
+    bild.setAttribute("src", "../BildServlet?id="+exercise.id);
+    bild.setAttribute("width", "50");
+    bild.setAttribute("height", "50");
 
     //Innerhalb der neuen <h2> einen <table> anlegen
     article.appendChild(table);
@@ -56,7 +65,7 @@ function getExerciseReference() {
 
     var callingTable = document.getElementsByName(NameOfcallingExercise);   //Liste der Übungen mit dem Namen
     var callingTable = callingTable[0];// Verweis auf Article                //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
-    var callingTable = callingTable.children[1]; // -> table!
+    var callingTable = callingTable.children[2]; // -> table!
 
     addSet(callingTable)
 
