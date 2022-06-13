@@ -1,43 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
-    <html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="${pageContext.request.requestURI}" />
+    <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+    <meta charset="utf-8" />
 
-    <head>
-        <base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
-        <meta charset="utf-8">
+    <title>Training</title>
+    <link rel="stylesheet" href="../css/training.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
 
-        <title>Training</title>
-        <link rel="stylesheet" href="../css/training.css">
-        <link rel="stylesheet" href="../css/navbar.css">
+    <script src="../JavaScript/CreateExercise.js"></script>
+    <script
+      src="../JavaScript/TriggerExerciseAdditon.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="../JavaScript/TrainingSettings.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <noscript>
+    <h1>BITTE JAVASCRIPT AKTIEREN!</h1>
+  </noscript>
 
-        <script src="../JavaScript/CreateExercise.js"></script>
-        <script src="../JavaScript/TriggerExerciseAdditon.js" type="text/javascript"></script>
-
-    </head>
-    <noscript>
-        <h1>BITTE JAVASCRIPT AKTIEREN!</h1>
-    </noscript>
-
-    <body>
-        <%@ include file="fragments/authenticationCheck.jspf" %>
-            <%-- �berpr�fung, ob User eingeloggt ist --%>
-                <!--Lukas Edmüller
+  <body>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung,
+    ob User eingeloggt ist --%>
+    <!--Lukas Edmüller
         Navbar 
         https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
-                <nav>
-                    <ul>
-                        <li><a href="./dashboard.jsp">Dashboard</a></li>
-                        <li><a class="active" href="./training.jsp">Training</a></li>
-                        <li><a href="./leaderboard.jsp">Leaderboard</a></li>
-                        <li><a href="./accountSetting.jsp">Account Settings</a></li>
-                        <li><a href="./exercise.jsp">Übung erstellen</a></li>
-                        <li style="float:right"><a class="active" href="#about">Logout</a></li>
-                    </ul>
-                </nav>
-                <header id="${training.id}"> Social Sport</header>
-                <!-- Über die ID "wissen" die Sätze beim abspeichern zu welchem training sie gehören-->
+    <nav>
+      <ul>
+        <li><a href="./dashboard.jsp">Dashboard</a></li>
+        <li><a class="active" href="./trainingsmenu.jsp">Training</a></li>
+        <li><a href="./leaderboard.jsp">Leaderboard</a></li>
+        <li><a href="./accountSetting.jsp">Account Settings</a></li>
+        <li><a href="./exercise.jsp">Übung erstellen</a></li>
+        <li style="float: right"><a class="active" href="#about">Logout</a></li>
+      </ul>
+    </nav>
+    <header id="${training.id}">Social Sport</header>
+    <!-- Über die ID "wissen" die Sätze beim abspeichern zu welchem training sie gehören-->
 
-                <!-- <nav id="navbar" class="navbar">
+    <!-- <nav id="navbar" class="navbar">
         LINKS EINFÜGEN
         <ul class="navbar">
             <li class="navbar">Home</li>
@@ -46,80 +53,76 @@
         </ul>
     </nav> -->
 
+    <main id="exercises"></main>
 
-                <main id="exercises"></main>
+    <aside id="searchContainer" class="elements">
+      <button id="toogleViewButton">Bearbeitungsansicht</button>
+      <div id="toggleExerciseAddition">
+        <input type="hidden" id="searchBar" />
+        <button id="addButton" value="addButton">Übung hinzufügen</button>
+        <template id="searchResults">
+          <div>
+            <div class="searchExerciseName" exercise-name></div>
+            <div class="searchMuscleGroup" exercise-group></div>
+          </div>
+        </template>
+        <div id="searchResultContainer"></div>
+      </div>
+    </aside>
 
+    <div class="clear"></div>
 
-                <aside id="searchContainer" class="elements">
-                    <div id="toggleExerciseAddition">
-                        <input type="hidden" id="searchBar">
-                        <button id="addButton" value="addButton">Übung hinzufügen</button>
-                        <template id="searchResults">
-                            <div>
-                                <div class="searchExerciseName" exercise-name></div>
-                                <div class="searchMuscleGroup" exercise-group></div>
-                            </div>
-                        </template>
-                        <div id="searchResultContainer"></div>
-                    </div>
-                </aside>
+    <div id="buttons">
+      <button class="button" id="cancelWorkout">Workout abbrechen</button>
+    </div>
 
-                <div class="clear"></div>
+    <footer>Hier generischen Footer einfügen</footer>
+    <!--Hier generischen Footer einfügen -->
 
-                <div id="buttons">
-                    <button class="button" id="cancelWorkout">Workout abbrechen</button>
+    <script>
+      document.addEventListener("DOMContentLoaded", init);
 
-                </div>
+      function init() {
+        var button = document.getElementById("addButton");
+        var addSetButton = document.getElementsByClassName("button addSet");
+        var toogleViewButton = document.getElementById("toogleViewButton");
 
-                <footer>Hier generischen Footer einfügen</footer>
-                <!--Hier generischen Footer einfügen -->
+        //Lukas Edmüller
+        toogleViewButton.addEventListener("click", toogleView);
 
-                <script>
+        // document.ElementByName('addButton').submit();
 
-                    document.addEventListener("DOMContentLoaded", init);
+        var cancelWorkoutButton = document.getElementById("cancelWorkout");
 
-                    function init() {
+        //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
+        button.addEventListener("click", toggleExerciseSearchbar);
+        cancelWorkoutButton.addEventListener("click", cancelWorkout);
+        // document.ElementByName('addButton').submit();
+        console.log("html spricht an");
+        for (var i = 0; i < addSetButton.length; i++) {
+          // Alle "SetButton" mit EventListener überwachen
+          addSetButton[i].addEventListener("click", getExerciseReference);
+        }
 
-                        var button = document.getElementById("addButton");
-                        var addSetButton = document.getElementsByClassName("button addSet")
+        //Eventlistener für die Checkboxes der Sets
+        var checkboxes = document.getElementsByClassName("checkbox");
+        for (var i = 0; i < checkboxes.length; i++) {
+          // Alle "SetButton" mit EventListener überwachen
+          checkboxes[i].addEventListener("change", disableSet);
+        }
 
-                        //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-                        button.addEventListener('click', toggleExerciseSearchbar);
-                        // document.ElementByName('addButton').submit();
-                        console.log("html spricht an");
+        //https://stackoverflow.com/questions/7317273/warn-user-before-leaving-web-page-with-unsaved-changes
 
-                    var button = document.getElementById("addButton");
-                    var addSetButton = document.getElementsByClassName("button addSet")
-                    var cancelWorkoutButton = document.getElementById("cancelWorkout");
+        window.addEventListener("beforeunload", function (e) {
+          var confirmationMessage =
+            "It looks like you have been editing something. " +
+            "If you leave before saving, your changes will be lost.";
 
-                    //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-                    button.addEventListener('click', toggleExerciseSearchbar);
-                    cancelWorkoutButton.addEventListener('click', cancelWorkout);
-                    // document.ElementByName('addButton').submit();
-                    console.log("html spricht an");
-                        for (var i = 0; i < addSetButton.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
-                            addSetButton[i].addEventListener("click", getExerciseReference);
-                        }
-
-                        //Eventlistener für die Checkboxes der Sets
-                        var checkboxes = document.getElementsByClassName("checkbox");
-                        for (var i = 0; i < checkboxes.length; i++) {                  		// Alle "SetButton" mit EventListener überwachen
-                            checkboxes[i].addEventListener("change", disableSet);
-                        }
-
-                        //https://stackoverflow.com/questions/7317273/warn-user-before-leaving-web-page-with-unsaved-changes
-
-                        window.addEventListener("beforeunload", function (e) {
-                            var confirmationMessage = 'It looks like you have been editing something. '
-                                + 'If you leave before saving, your changes will be lost.';
-
-                            (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-                            return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-                        });
-                        //---
-
-                    }          
-                </script>
-    </body>
-
-    </html>
+          (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+          return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+        });
+        //---
+      }
+    </script>
+  </body>
+</html>

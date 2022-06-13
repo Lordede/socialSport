@@ -131,3 +131,4 @@ function searchTraining(trainingName, callback)
     }
     xmlhttp.send();
 }
+

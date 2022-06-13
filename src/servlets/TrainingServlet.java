@@ -58,13 +58,13 @@ public class TrainingServlet extends HttpServlet {
 		while(params.hasMoreElements()) 
 		{
 			String paramNames = params.nextElement();
-			System.out.println(paramNames);
+//			System.out.println(paramNames);
 			switch(paramNames) 
 			{
 			case "loadTrainings":
 				ArrayList<TrainingBean> allTrainings = listAllTrainings(user.getId());
 				String json = convertListToJson(allTrainings);
-				System.out.println(json);	
+//				System.out.println(json);	
 				response.getWriter().write(json);
 				break;
 			case "exerciseInputField":
@@ -77,7 +77,7 @@ public class TrainingServlet extends HttpServlet {
 				if(session.getAttribute("training") != null) 
 				{
 					session.removeAttribute("training");
-					System.out.println("mehr als ein attriubt");
+//					System.out.println("mehr als ein attriubt");
 					
 				}
 				session.setAttribute("training", training);

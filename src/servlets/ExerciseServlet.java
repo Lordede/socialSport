@@ -240,6 +240,7 @@ public class ExerciseServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
+	
 	private ArrayList<ExerciseBean> search(String exerciseName) throws ServletException
 	{
 		exerciseName = (exerciseName == null || exerciseName == "") ? "%" : "%" + exerciseName + "%";

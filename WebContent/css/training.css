@@ -46,6 +46,11 @@ header {
 #cancelWorkout {
   background-color: #ef3506;
 }
+
+#toggleExerciseAddition{
+  visibility: hidden;
+}
+
 h2 {
   padding: 5px;
 }

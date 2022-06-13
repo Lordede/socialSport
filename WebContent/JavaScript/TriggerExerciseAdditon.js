@@ -86,7 +86,7 @@ function extractExercises(jsonString)
         const result = searchResults.content.cloneNode(true).children[0];
         toggleContainer.appendChild(result);
         const header = result.querySelector('.searchExerciseName');
-        header.addEventListener("click", () => onExerciseClick(exercise))
+        header.addEventListener("click", () => onExerciseClick1(exercise))
         const body = result.querySelector('.searchMuscleGroup');
         header.textContent = exercise.name;
         body.textContent = exercise.muscleGroup;
@@ -94,6 +94,7 @@ function extractExercises(jsonString)
    });
    
 }
+
 
 function onExerciseClick(exercise)
 {
@@ -112,4 +113,5 @@ function onExerciseClick(exercise)
     var searchItems = document.getElementById("searchResultContainer");
     searchItems.style.display = "none";
 }
+
 
