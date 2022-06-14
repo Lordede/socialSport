@@ -9,6 +9,7 @@
 		<meta name="description" content="leaderboard">
 		<base href="${pageContext.request.requestURI}" />
 		<link rel="stylesheet" href="../css/navbar.css">
+		<script src="../JavaScript/Leaderboard.js"></script>
 		<!-- Basis für relative Verweise -> Basis = Speicherort -->
 	</head>
 
@@ -38,13 +39,25 @@
 
 				<article id="leaderboard">
 					<table id="leaderboardTable">
-						<tr>
+						<tr id="Headrow">
 							<th>Punktezahl</th>
-							<th>Name + ID</th>
-						</tr id="Headrow">
+							<th>Name</th>
+							<th>ID</th>
+						</tr>
 
 					</table>
 				</article>
+				<script>
+
+					window.addEventListener("DOMContentLoaded", init);
+					function init() {
+						window.addEventListener("load", loadLeaderboard());	//Leaderboard soll mit Seitenaufbau geladen werden
+
+					}
+
+
+
+				</script>
 				<footer> </footer>
 	</body>
 
