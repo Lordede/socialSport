@@ -45,7 +45,7 @@ function sortTable() {
 
     xmlhttp.addEventListener("load" , function(){
 
-        var leaderboard = xmlhttp.response       // js Objekt aus jsonfile
+        var leaderboard = JSON.parse(xmlhttp.response);       // js Objekt aus jsonfile
         //var table = document.getElementById("leaderboardTable").children[0].children[0]; //Damit auf das tr verwiesen wird
         var headrow = document.getElementById("Headrow").parentElement; //Damit auf das tr verwiesen wird
 
@@ -53,13 +53,14 @@ function sortTable() {
             document.getElementById("leaderboard").innerHTML("Fehler beim laden des Leaderboards!");
             return;
         }
-        for (var i=0; i < leaderboard.length; i++){
+        for (var i=0; i < leaderboard.length; i++){ //Hier ist noch irgendwas falsch
             var tr = document.createElement("tr");
             var td1 = document.createElement("td");
             var td2 = document.createElement("td");
             var td3 = document.createElement("td");
 
             headrow.append(tr);
+
             tr.appendChild(td1);
             td1.innerHTML =leaderboard[i].points;
 
@@ -67,7 +68,7 @@ function sortTable() {
             td2.innerHTML= leaderboard[i].username;
 
             tr.appendChild(td3);
-            td2.innerHTML= leaderboard[i].id;
+            td3.innerHTML= leaderboard[i].id;
         }
 
 

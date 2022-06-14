@@ -11,12 +11,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import beans.ExerciseBean;
 import beans.JoinBean;
-import beans.UserBean;
+import beans.LeaderboardBean;
 import jakarta.annotation.Resource;
-import jakarta.jms.Session;
-import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -62,7 +59,7 @@ public class JoinServlet extends HttpServlet {
 			System.out.println(paramNames);
 			switch (paramNames) {
 			case "getLeaderboard":
-				List<JoinBean> leaderboard = getLeaderboard();
+				List<LeaderboardBean> leaderboard = getLeaderboard();
 				session.setAttribute("leaderboard", leaderboard); // <- das muss eine List sein
 				RequestDispatcher disp = request.getRequestDispatcher("html/leaderboardAusgabe.jsp");
 				disp.forward(request, response);
@@ -134,8 +131,8 @@ public class JoinServlet extends HttpServlet {
 	}
 
 	//Hubertus Seitz
-	private List<JoinBean> getLeaderboard() throws ServletException {
-		List<JoinBean> joinBeans = new ArrayList<JoinBean>();
+	private List<LeaderboardBean> getLeaderboard() throws ServletException {
+		List<LeaderboardBean> leaderboardBean = new ArrayList<LeaderboardBean>();
 		
 		
 
@@ -145,12 +142,12 @@ public class JoinServlet extends HttpServlet {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
-					JoinBean leaderboard = new JoinBean();
+					beans.LeaderboardBean leaderboard = new LeaderboardBean();
 					leaderboard.setPoints(rs.getDouble("points"));
 					leaderboard.setUsername(rs.getString("username"));
 					leaderboard.setId(rs.getLong("id"));
 					
-					joinBeans.add(leaderboard);
+					leaderboardBean.add(leaderboard);
 					
 
 				}
@@ -162,7 +159,7 @@ public class JoinServlet extends HttpServlet {
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
-		return joinBeans;
+		return leaderboardBean;
 		
 	}
 }
