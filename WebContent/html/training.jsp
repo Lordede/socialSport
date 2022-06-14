@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../css/navbar.css">
 
         <script src="../JavaScript/CreateExercise.js"></script>
-        <script src="../JavaScript/TriggerExerciseAdditon.js" type="text/javascript"></script>
+        <script src="../JavaScript/TriggerExerciseAdditon.js"></script>
 
     </head>
     <noscript>
@@ -71,8 +71,7 @@
 
                 </div>
 
-                <footer>Hier generischen Footer einfügen</footer>
-                <!--Hier generischen Footer einfügen -->
+                <%@ include file="fragments/footer.jspf" %>
 
                 <script>
 
