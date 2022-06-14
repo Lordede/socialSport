@@ -140,16 +140,22 @@
             </div>
             <div class="Rueckenmuskulatur">
                 <article class="Latzug_breit">
-                    <h2>Beanspruchte Muskeln</h2>
+                    <h2>Latzug</h2>
                     <img src="" alt="">
                     <div>
+                        Latzug ist eine der bekanntesten und effektivsten Übungen für die Rückenmuskulatur. Häufig triftt man dabei viele Variationen mit
+                        variierenden Griffen(eng/breit).
+                        Dies Übung ist auch als <strong>anfängerfreundlich</strong> zu erachten, weshlab sie jedermann empfohlen werden kann.
                         <h4>Beanspruchte Muskeln</h4>
+
                     </div>
                 </article>
                 <article class="rudern_Langhantel">
                     <h2>Gebeugtes Rudern mit Langhantel</h2>
                     <img src="" alt="">
                     <div>
+                        Gebeugtes Rudern mit Langhantel ist sehr effektive Übung in Punkto Rückenmuskulatur. Sie birgt jedoch ein hohes Verletzungspotenzial bei einer falschen Ausführung.
+                        Das macht dies Übung <strong>anspruchsvoll</strong> und damit sollte sie im Trainingsplan von Fortgeschrittenen bis Profis aufgenommen werden.
                         <h4>Beanspruchte Muskeln</h4>
                     </div>
                 </article>
@@ -166,10 +172,16 @@
                     <h2>Beinpresse</h2>
                     <img src="" alt="">
                     <div>
+                        Ist der Klassiker schlecht hin bei den Beiübungen und diese stellt auch eine der wenigen Übungen dar, die unsere Plattform 
+                        an einer Maschine vorgestellt werden. 
+                        Sie ist eine <strong>einfache</strong> Übung und kann somit von jedem Sportler/in vollführt werden.
                         <h4>Beanspruchte Muskeln</h4>
                     </div>
                 </article>
                 <article class="Ausfallschritte">
+                    Ausfallschritte sind auch aus dem Eigenkörpergewicht segment bekannt. Jedoch bringen hierbei Gewichte mehr freude in diese Übung,
+                    weshalb diese als unversichtbar beim Beintraining gilt.
+                    Bei dieser Übung ist es schwierig die Balance zu halten, weshalb sie der <strong>mittelschwer</strong> gilt.
                     <h2>Ausfallschritte mit Langhantel</h2>
                     <img src="" alt="">
                     <div>
@@ -177,6 +189,9 @@
                     </div>
                 </article>
                 <article class="Kniebeugen">
+                    Auch ein weitverbreiter Klassiker unter den Beinübungen gelten Kniebeugen, welche unversichtbar in jedes Training aufgenommen werden müssen,
+                    wo ein großer Fokus auf Kraft gelegt wird.
+                    Diese Übung gilt als eher <strong>Anspruchsvoll</strong>.
                     <h2>Kniebeugen mit Langhantel</h2>
                     <img src="" alt="">
                     <div>
