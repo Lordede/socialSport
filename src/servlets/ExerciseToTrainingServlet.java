@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
 
 /**
  * Servlet implementation class ExerciseToTrainingServlet
@@ -44,7 +43,70 @@ public class ExerciseToTrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long trainingId =Long.valueOf(request.getParameter("trainingId"));
+		ArrayList<ExerciseToTrainingBean> exercisesToTraining = getAll(trainingId);
+		ExerciseServlet exerciseServlet = new ExerciseServlet();
+		ArrayList<ExerciseBean> exercises = exerciseServlet.getExercisesById(exercisesToTraining, this.ds);
+		String jsonExercises = convertListToJson(exercises);
+		response.getWriter().write(jsonExercises);
+		System.out.println(jsonExercises);
 		
+		
+	}
+	
+	private ArrayList<ExerciseToTrainingBean> getAll(Long trainingId) throws ServletException
+	{
+		ArrayList<ExerciseToTrainingBean> exercisesToTraining = new ArrayList<>();
+		
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM exercisestotrainings WHERE trainingId = ?")) 
+		{
+			pstmt.setLong(1, trainingId);
+			try (ResultSet result = pstmt.executeQuery())
+			{
+				while (result.next()) 
+				{
+					ExerciseToTrainingBean exerciseToTraining = new ExerciseToTrainingBean();
+					exerciseToTraining.setExerciseId(result.getLong("exerciseId"));
+					exerciseToTraining.setTrainingId(trainingId);
+					
+					exercisesToTraining.add(exerciseToTraining);
+				}
+				return exercisesToTraining;
+			}
+			
+		}
+		catch (Exception ex) 
+		{
+			throw new ServletException(ex.getMessage()); 
+		}
+	}
+	
+	private String convertListToJson(ArrayList<ExerciseBean> arr) 
+	{
+		StringBuilder jsonString = new StringBuilder();
+		ArrayList<ExerciseBean> exercises = arr;
+		
+		jsonString.append("[");
+		for(int i = 0;i < exercises.size(); i++) 
+		{			
+			jsonString.append("{");
+			jsonString.append("\"name\":");
+			jsonString.append("\""+exercises.get(i).getName()+"\",");
+			jsonString.append("\"muscleGroup\":");
+			jsonString.append("\""+exercises.get(i).getMuscleGroup()+"\",");
+			jsonString.append("\"id\":");
+			jsonString.append("\""+exercises.get(i).getId()+"\"");
+			if( i+1 == exercises.size()) 
+			{
+				jsonString.append("}");
+			} else {
+				jsonString.append("},");
+				}
+		}
+		jsonString.append("]");
+		
+		return jsonString.toString();
 	}
 
 	
@@ -80,6 +142,7 @@ public class ExerciseToTrainingServlet extends HttpServlet {
 		}
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */

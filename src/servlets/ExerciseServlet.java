@@ -12,6 +12,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import beans.ExerciseBean;
+import beans.ExerciseToTrainingBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -268,6 +269,38 @@ public class ExerciseServlet extends HttpServlet {
 		{
 			throw new ServletException(ex.getMessage()); 
 		}
+	}
+	
+	protected ArrayList<ExerciseBean> getExercisesById(ArrayList<ExerciseToTrainingBean> list, DataSource dsParameter) throws ServletException
+	{
+		ArrayList<ExerciseBean> exercises = new ArrayList<>();
+		
+		for (ExerciseToTrainingBean exerciseToTraining : list) {
+			try (Connection con = dsParameter.getConnection();
+					PreparedStatement pstmt = con.prepareStatement("SELECT * FROM exercises WHERE id = ?")) 
+			{
+				pstmt.setLong(1, exerciseToTraining.getExerciseId());
+				try (ResultSet result = pstmt.executeQuery())
+				{
+					while (result.next()) 
+					{
+						ExerciseBean exercise = new ExerciseBean();
+						exercise.setId(result.getLong("id"));
+						exercise.setName(result.getString("name"));
+						exercise.setMuscleGroup(result.getString("muscleGroup"));
+						exercises.add(exercise);
+					}
+				}
+				
+			}
+			catch (Exception ex) 
+			{
+				throw new ServletException(ex.getMessage()); 
+			}
+		}
+		return exercises;
+		
+		
 	}
 	
 	private ExerciseBean findExercise(String name, ArrayList<ExerciseBean> exercises) 

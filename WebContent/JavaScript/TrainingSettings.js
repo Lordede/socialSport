@@ -1,3 +1,4 @@
+
 //Lukas Edmüller
 function toogleView()
 {
@@ -47,4 +48,27 @@ function onExerciseClick1(exercise)
     // insertableSearchbar.setAttribute("type", "hidden");
     // var searchItems = document.getElementById("searchResultContainer");
     // searchItems.style.display = "none";
+}
+
+function loadSavedExercises(){
+    var headerElement = document.getElementsByTagName("header");
+    var trainingId = headerElement[0].id;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "../ExerciseToTrainingServlet?trainingId=" + trainingId, true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.onload = function ()
+    {
+        let json = xmlhttp.responseText;
+        loadExercises(json);
+    }
+    xmlhttp.send();
+
+}
+
+function loadExercises(json)
+{
+    let parseString = JSON.parse(json);
+    parseString.forEach(exercise => {
+        addExercise(exercise);
+    });
 }

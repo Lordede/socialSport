@@ -121,6 +121,9 @@ pageEncoding="UTF-8" %>
           (e || window.event).returnValue = confirmationMessage; //Gecko + IE
           return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
         });
+
+        window.addEventListener("load", loadSavedExercises);
+
         //---
       }
     </script>
