@@ -51,6 +51,10 @@ header {
   visibility: hidden;
 }
 
+.setContainer{
+  visibility: hidden;
+}
+
 h2 {
   padding: 5px;
 }

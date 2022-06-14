@@ -119,7 +119,8 @@ public class TrainingServlet extends HttpServlet {
 //		TrainingBean training = create(name, points, userid, date);
 		create(training);
 		session.setAttribute("training", training);
-		response.getWriter().write("hasi");
+		System.out.println(training.getId().toString());
+		response.getWriter().append(training.getId().toString());
 		//response.sendRedirect("html/training.jsp");
 		//doGet(request, response);
 	}
