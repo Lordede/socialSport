@@ -138,7 +138,7 @@ public class JoinServlet extends HttpServlet {
 
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT users.username, users.id, trainings.points FROM users JOIN trainings GROUP BY users.username;")) {
+						"SELECT users.username, users.id, SUM(trainings.points) as points FROM users JOIN trainings ON trainings.userId = users.id GROUP BY ID ORDER BY points DESC;")) {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {

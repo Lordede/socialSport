@@ -37,11 +37,12 @@
 					<input type="search" name="suche" formaction="get" formmethod="">
 				</header>
 
+				<!--Hubertus Seitz--->
 				<article id="leaderboard">
 					<table id="leaderboardTable">
 						<tr id="Headrow">
 							<th>Punktezahl</th>
-							<th>Name</th>
+							<th>Username</th>
 							<th>ID</th>
 						</tr>
 
