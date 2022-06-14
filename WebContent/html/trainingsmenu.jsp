@@ -39,7 +39,7 @@
                     <button id="sendTraining" hidden="hidden">Training erstellen</button>
                 </div>
                 <div id="searchPastTrainings">
-                    <label id ="searchBarTrainingLabel">Übung Suchen</label>
+                    <label id ="searchBarTrainingLabel">Training Suchen</label>
                     <input id="searchBarTraining" type="search">
                     <template class="searchResults">
                         <div class="trainingsName"></div>
@@ -47,26 +47,6 @@
                 </div>
                 <div class="trainingsContainer"></div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Datum</th>
-                        <th>Trainingseinheit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </tfoot>
-            </table>
             <button type="addTraining"
                     name="new training"
                     formaction=""

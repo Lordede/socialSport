@@ -1,9 +1,10 @@
 /* <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet"> */
+/* Cem Durmus */
 body
 {
     font-family:"Open Sans";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     background-color: #242423;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -20,6 +21,7 @@ header
 h1
 {
     color: #40916C;
+    font-weight: 300;
 }
 h2
 {
@@ -35,8 +37,10 @@ div
 }
 input
 {
-    background-color: #242423;
+    background-color: #1B4332;
     color: white;
+    border: #95D5B2;
+    border-radius: 5px;
 }
 label
 {
@@ -47,9 +51,14 @@ button
 	background-color: #2D6A4F;
 	color: white;
 	border-radius: 5px;
+    box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+    padding: 10px;
 }
 table
 {
 	color: white;
+    background-color: rgb(0,0,0);
+    border: white;
+    box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
 }
 
