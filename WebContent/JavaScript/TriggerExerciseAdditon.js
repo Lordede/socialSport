@@ -71,13 +71,7 @@ function readSearchExercises(exerciseName, callback)
 	
 function extractExercises(jsonString)
 {
-    let exercisesArrayList = JSON.parse(jsonString);
-   
-        // exercise.forEach(exerciseInput =>{
-        //     const isVisible = exerciseInput.name.includes(value);
-        //     exerciseInput.element.classList.toggle("hide", !isVisible);
-        // })
-        
+    let exercisesArrayList = JSON.parse(jsonString) //[{"":""},{"rep":"3"}]
     const searchResults = document.getElementById("searchResults");
     const toggleContainer = document.getElementById("searchResultContainer");
     toggleContainer.style.display = "block";
@@ -88,7 +82,7 @@ function extractExercises(jsonString)
         const header = result.querySelector('.searchExerciseName');
         header.addEventListener("click", () => onExerciseClick(exercise))
         const body = result.querySelector('.searchMuscleGroup');
-        header.textContent = exercise.name;
+        header.textContent = exercise.name; //set.rep
         body.textContent = exercise.muscleGroup;
         console.log(exercise);
    });
