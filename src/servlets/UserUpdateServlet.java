@@ -185,6 +185,7 @@ public class UserUpdateServlet extends HttpServlet {
 			statementNames.setString(1, firstName);
 			System.out.println(firstName);
 			statementNames.setLong(2, user.getId());
+			statementNames.executeUpdate();
 		}	
 		catch (Exception exception)
 		{
@@ -201,6 +202,7 @@ public class UserUpdateServlet extends HttpServlet {
 		{
 			statementNames.setString(1, lastName);
 			statementNames.setLong(2, user.getId());
+			statementNames.executeUpdate();
 		}	
 		catch (Exception exception)
 		{

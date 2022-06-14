@@ -1,22 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<!DOCTYPE html>
-	<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<meta charset="utf-8">
+<meta name="author" content="Hubertus Seitz">
+<meta name="description" content="leaderboard">
+<meta name="keywords" content="best leader leaderboard">
+<base href="${pageContext.request.requestURI}" />
+<link rel="stylesheet" href="../css/navbar.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="../css/layout.css">
 
-	<head>
-		<title>Dashboard</title>
-		<meta charset="utf-8">
-		<meta name="author" content="Cem Durmus">
-		<meta name="description" content="leaderboard">
-		<base href="${pageContext.request.requestURI}" />
-		<link rel="stylesheet" href="../css/navbar.css">
-		<script src="../JavaScript/Leaderboard.js"></script>
-		<!-- Basis für relative Verweise -> Basis = Speicherort -->
-	</head>
 
 	<body>
 		<%@ include file="fragments/authenticationCheck.jspf" %>
-			<%-- �berpr�fung, ob User eingeloggt ist --%>
-				<!--Lukas Edmüller
+			<%-- Überprüfung, ob User eingeloggt ist --%>
+			<!--Lukas Edmüller
+
         Navbar 
         https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
 				<nav>
@@ -31,13 +33,13 @@
 				</nav>
 				<header>
 					<!---------->
+					<!--Hubertus Seitz--->
 					<h1>
 						<strong>Leaderboard: </strong>
 					</h1>
 					<input type="search" name="suche" formaction="get" formmethod="">
 				</header>
 
-				<!--Hubertus Seitz--->
 				<article id="leaderboard">
 					<table id="leaderboardTable">
 						<tr id="Headrow">

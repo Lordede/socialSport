@@ -8,6 +8,8 @@
         <meta name="description" content="Speichern Sie Ihre Traings hier">
         <meta name="keywords" content="Sport, Training, Sommerfigur, Trainingserfolg">
         <meta name="author" content="Cem Durmus">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/layout.css">
         <script src="../JavaScript/Administration.js" type="text/javascript"></script>
     </head>
     <body>

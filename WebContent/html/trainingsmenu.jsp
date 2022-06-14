@@ -10,6 +10,8 @@
         <meta name="description" content="chose your training">
         <meta name="keywords" content="Training Sport Workout">
         <link rel="stylesheet" href="../css/navbar.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/layout.css">
         <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
         <script src="../JavaScript/TrainingsManagement.js" type="text/javascript"></script>
     </head>
@@ -24,26 +26,20 @@
                 <li><a href="./exercise.jsp">Übung erstellen</a></li>
   				<li class="logout"><a class="active" href="#about">Logout</a></li>
 			</ul> 
-    	</nav>
-        <header>
-            <h1><strong>Training: </strong></h1>
-            <input type="search" 
-            name="suche"
-            formaction=""
-            formmethod="get">
-        </header>
-        
+    	</nav>   
         <article>
+            <h1><strong>Training: </strong></h1>
             <div id="training">
                 <div id="addTraining">
                     <button id="loadTrainings">Trainings laden</button>
                     <button id="addNewTraining">Training hinzufügen</button>
+                    <br>
                     <label id="nameOfTrainingLabel" hidden="hidden">Name des Traings</label>
                     <input id="nameOfTrainingInput" type="hidden">
                     <button id="sendTraining" hidden="hidden">Training erstellen</button>
                 </div>
                 <div id="searchPastTrainings">
-                    <label id ="searchBarTrainingLabel">Übung Suchen</label>
+                    <label id ="searchBarTrainingLabel">Training Suchen</label>
                     <input id="searchBarTraining" type="search">
                     <template class="searchResults">
                         <div class="trainingsName"></div>
@@ -51,26 +47,6 @@
                 </div>
                 <div class="trainingsContainer"></div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Datum</th>
-                        <th>Trainingseinheit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </tfoot>
-            </table>
             <button type="addTraining"
                     name="new training"
                     formaction=""
