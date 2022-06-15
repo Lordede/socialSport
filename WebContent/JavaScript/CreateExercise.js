@@ -4,7 +4,7 @@
 /*
 addExercise fügt eine neue Übung ein, bei der man dann x belibige Setze trainieren kann
 */
-function addExercise(exercise) {
+function addExercise(exercise, isLoadExercise) {
 
     var article = document.createElement("article");
     article.setAttribute("id", exercise.id);
@@ -15,12 +15,32 @@ function addExercise(exercise) {
     var th = document.createElement("th");
     var td = document.createElement("td");
     var container = document.createElement("div");
+    var removeExerciseButton = document.createElement("button");
+    
+    
+    // Checkt Erstellung Exercise in Bearbeitungs- oder Trainingssicht -> Regelt Sichtbarkeit von Elementen 
     container.setAttribute("class", "setContainer");
-    container.style.visibility = "hidden";
+    if(isLoadExercise){
+        container.style.visibility = "visible";
+        removeExerciseButton.style.visibility = "hidden";
+    }
+    else
+    {
+        container.style.visibility = "hidden"; 
+        removeExerciseButton.style.visibility = "visible";
+        article.style.height = "150px";
+        
+    }
+  
 
     //Innerhalb von Exercises einen neuen <article> anlegen
     exercises.appendChild(article);
     article.setAttribute("class", "exercise elements");
+
+    //Remove exercise button
+    removeExerciseButton.innerHTML = "Übung entfernen";
+    removeExerciseButton.setAttribute("class", "removeExerciseButton");
+    article.appendChild(removeExerciseButton);
 
     //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
     article.appendChild(h2);
@@ -31,7 +51,10 @@ function addExercise(exercise) {
     //Bild
     article.appendChild(bild);
 
+    //SetDiv
     article.appendChild(container);
+
+    
     
 
     
@@ -74,7 +97,7 @@ function getExerciseReference() {
 
     var callingTable = document.getElementsByName(NameOfcallingExercise);   //Liste der Übungen mit dem Namen
     var callingTable = callingTable[0];// Verweis auf Article                //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
-    var callingTable = callingTable.children[2].children[0]; // -> table!
+    var callingTable = callingTable.children[3].children[0]; // -> table!
 
     addSet(callingTable)
 

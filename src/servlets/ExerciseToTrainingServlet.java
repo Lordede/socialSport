@@ -154,7 +154,25 @@ public class ExerciseToTrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		ExerciseToTrainingBean exerciseToTraining = new ExerciseToTrainingBean();
+		exerciseToTraining.setExerciseId(Long.valueOf(request.getParameter("exerciseId")));
+		exerciseToTraining.setTrainingId(Long.valueOf(request.getParameter("trainingId")));
+		delete(exerciseToTraining);
+	}
+
+	private void delete(ExerciseToTrainingBean exerciseToTraining) throws ServletException {
+		
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("DELETE FROM exercisestotrainings WHERE exerciseId = ? AND trainingId = ?")){
+				pstmt.setLong(1, exerciseToTraining.getExerciseId());
+				pstmt.setLong(2, exerciseToTraining.getTrainingId());
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception ex) {
+				throw new ServletException(ex.getMessage());
+			}
+		
 	}
 
 }

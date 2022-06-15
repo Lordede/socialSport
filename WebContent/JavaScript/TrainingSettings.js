@@ -5,30 +5,38 @@ function toogleView()
     var settingButtons = document.getElementById("toggleExerciseAddition");
     var clickedButton = document.getElementById("toogleViewButton");
     var setContainer = document.getElementsByClassName("setContainer");
+    var removeExerciseButtons = document.getElementsByClassName("removeExerciseButton");
+    var exercises = document.getElementsByClassName("exercise");
     if(settingButtons.style.visibility === "visible"){
         settingButtons.style.visibility = "hidden";
         for(let i = 0; i < setContainer.length; i++){
             setContainer.item(i).style.visibility = "visible";
+            removeExerciseButtons.item(i).style.visibility = "hidden";
+            exercises.item(i).style.height = "auto";
         }
+       
         clickedButton.innerHTML = "Bearbeitungsansicht";
     }
     else{
         settingButtons.style.visibility = "visible";
         for(let i = 0; i < setContainer.length; i++){
             setContainer.item(i).style.visibility = "hidden";
+            removeExerciseButtons.item(i).style.visibility = "visible";
+            exercises.item(i).style.height = "150px";
         }
+        
         clickedButton.innerHTML = "Trainingsansicht";
     }
 
     init();
 }
 
-function onExerciseClick1(exercise)
+function onExerciseClick(exercise)
 {
 	var check = document.getElementsByName(exercise.name)
 	if(check.length === 0)
     {
-	    addExercise(exercise); // HTML DOM Manipulation 
+	    addExercise(exercise, false); // HTML DOM Manipulation 
     }
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "../ExerciseServlet?selectedExercise="+exercise.id, true);
@@ -69,6 +77,28 @@ function loadExercises(json)
 {
     let parseString = JSON.parse(json);
     parseString.forEach(exercise => {
-        addExercise(exercise);
+        addExercise(exercise, true);
     });
+}
+
+function removeExercise(){
+    let exerciseId = this.parentNode.getAttribute("id"); 
+    let header = document.getElementsByTagName("header");
+    let trainingId = header[0].getAttribute("id");
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("DELETE", "../ExerciseToTrainingServlet?trainingId=" + trainingId + "&exerciseId=" + exerciseId, true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // xmlhttp.onload = function ()
+    // {
+        
+    // }
+    xmlhttp.send();
+    let exercises = document.getElementsByClassName("exercise elements");
+        for(let i = 0; i < exercises.length; i++){
+            if(exercises[i].getAttribute("id") === exerciseId){
+                let removedElement = exercises[i];
+                removedElement.parentNode.removeChild(removedElement);
+            }
+        }
 }

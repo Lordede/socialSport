@@ -85,6 +85,7 @@ pageEncoding="UTF-8" %>
       function init() {
         var button = document.getElementById("addButton");
         var addSetButton = document.getElementsByClassName("button addSet");
+        var removeExerciseButtons = document.getElementsByClassName("removeExerciseButton");
         var toogleViewButton = document.getElementById("toogleViewButton");
 
         //Lukas Edmüller
@@ -102,6 +103,13 @@ pageEncoding="UTF-8" %>
         for (var i = 0; i < addSetButton.length; i++) {
           // Alle "SetButton" mit EventListener überwachen
           addSetButton[i].addEventListener("click", getExerciseReference);
+        }
+
+        //Lukas Edmüller
+        // Alle removeExerciseButtons mit EventListener versorgen
+        for (var i = 0; i < removeExerciseButtons.length; i++) {
+          // Alle "SetButton" mit EventListener überwachen
+          removeExerciseButtons[i].addEventListener("click", removeExercise);
         }
 
         //Eventlistener für die Checkboxes der Sets

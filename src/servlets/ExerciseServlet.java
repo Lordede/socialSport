@@ -205,7 +205,7 @@ public class ExerciseServlet extends HttpServlet {
 		try(Connection con = ds.getConnection();
 			PreparedStatement stmtExercise = con.prepareStatement("INSERT INTO exercises"
 														+ "(name, muscleGroup, filename, exerciseImage)"
-														+ "VALUES (?, ?, ?, ?, ?)", generatedKeys))
+														+ "VALUES (?, ?, ?, ?)", generatedKeys))
 		{
 			ArrayList<ExerciseBean> exercises = getListOfExercises();
 			//System.out.println("---------------------"+exercises.size()+"----------");
