@@ -180,6 +180,7 @@ public class ExerciseServlet extends HttpServlet {
 		return exercises;
 	}
 	
+	
 	private ExerciseBean initializeExercise(Long id, HttpServletResponse response) throws ServletException{
 		ExerciseBean exercise = new ExerciseBean();
 		
