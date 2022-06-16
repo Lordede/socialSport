@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/dark_index.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index_dark.css">
 
     <head>
         <title>
@@ -33,15 +33,17 @@
             </nav>
         </header>
         <article>
+            <h1>Willkommen auf ihrer one stop Sport Plattform</h1>
             <div class="photoBox">
-                <h1>Willkommen auf ihrer one stop Sport Plattform</h1>
-                <div class="zwei_box">
+                <div class="zwei_box" id="col">
                     <p>
                         <img src="../img/victor-freitas-WvDYdXDzkhs-unsplash.jpg" alt="Kreuzheben.jpg" width="720"
                             height="480">
                     </p>
                 </div>
-                <div class="zwei_box">
+                <div id="col"></div>
+                <div id="col"></div>
+                <div class="zwei_box" id="col">
                     <p>
                         <img src="../img/samuel-girven-VJ2s0c20qCo-unsplash.jpg" alt="Hanteln" width="320" height="480">
                     </p>

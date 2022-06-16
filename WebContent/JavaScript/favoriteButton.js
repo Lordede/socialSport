@@ -38,10 +38,11 @@ function senseEvent(event)
     let tagName = parentElem.getElementsByTagName("h2");
     dbCall(tagName.innerHtml);
 }
+
 function dbCall(exerciseName)
 {
     let request = new XMLHttpRequest();
-    request.open("Get", "../FavoriteExerciseServlet?name="+exerciseName);
+    request.open("Post", "../FavoriteExerciseServlet");
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    request.send();
+    request.send("name="+exerciseName);
 }

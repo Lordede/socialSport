@@ -62,6 +62,9 @@
                             </div>
                         </template>
                         <div id="searchResultContainer"></div>
+                        <h2>Markierten Übungen</h2>
+                        <div id="favoritesContainer">
+                        </div>
                     </div>
                 </aside>
 
@@ -78,9 +81,10 @@
                 <script>
 
                     document.addEventListener("DOMContentLoaded", init);
+                    
 
                     function init() {
-
+                        readFavoriteExercises();
                         var button = document.getElementById("addButton");
                         var addSetButton = document.getElementsByClassName("button addSet")
 

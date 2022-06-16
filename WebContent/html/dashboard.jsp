@@ -29,17 +29,12 @@
 			</ul> 
     	</nav>
         <header>
-            <h1><strong>Dashboard: </strong></h1>
-            <input type="search" 
-            name="suche"
-            
-            formaction="get"
-            formmethod="">
+            <h1><strong>Dashboard</strong></h1>
         </header>
         <article>
             <div class="Armmuskulatur">
                 <article class="Bizepscurls" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Bizepscurls" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -53,7 +48,7 @@
                     </div>
                 </article>
                 <article class="Hammercurls" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Hammercurls" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -67,7 +62,7 @@
                     </div>
                 </article>
                 <article class="Trizepsdruecken_SZ" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Strindrücken mit SZ-Stange" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -84,7 +79,7 @@
                 <div class="row2">
 
                     <article class="Trizepsdruecken_kabel" id="col1_1">
-                        <button class="fav-button">
+                        <button data-exercise="Trizepsdrücken am Kabelturm" class="fav-button">
                             <i class="fa fa-star"></i>
                             <span>Übung merken</span>
                         </button>
@@ -99,7 +94,7 @@
                         </div>
                     </article>
                     <article class="Seitenheben" id="col1_1">
-                        <button class="fav-button">
+                        <button data-exercise="Seitenheben mit Kurzhanteln" class="fav-button">
                             <i class="fa fa-star"></i>
                             <span>Übung merken</span>
                         </button>
@@ -113,7 +108,7 @@
                         </div>
                     </article>
                     <article class="Schulterdruecken_Kh" id="col1_1">
-                        <button class="fav-button">
+                        <button data-exercise="Schulterdrücken sitzend mit Kurzhanteln" class="fav-button">
                             <i class="fa fa-star"></i>
                             <span>Übung merken</span>
                         </button>
@@ -131,7 +126,7 @@
                 </div>
             <div class="Brustmuskulatur">
                 <article class="Bankdruecken" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Bankdrücken Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -147,7 +142,7 @@
                     </div>
                 </article>
                 <article class="Schraegbankdruecken" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Schrägbankdrücken" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -163,7 +158,7 @@
                     </div>
                 </article>
                 <article class="Brust_Kabel_ueberzug" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Überzug liegend am Kabelturm" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -181,7 +176,7 @@
             </div>
             <div class="Rueckenmuskulatur">
                 <article class="Latzug_breit" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Latzug" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -199,7 +194,7 @@
                     </div>
                 </article>
                 <article class="rudern_Langhantel" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Gebeugtes Rudern mit Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -215,7 +210,7 @@
                     </div>
                 </article>
                 <article class="rudern_kabelturm" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Rudern am Kabelturm" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -233,7 +228,7 @@
             </div>
             <div class="Beinmuskulatur">
                 <article class="Beinpresse" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Beinpresse" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -249,7 +244,7 @@
                     </div>
                 </article>
                 <article class="Ausfallschritte" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Ausfallschritte mit Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -265,7 +260,7 @@
                     </div>
                 </article>
                 <article class="Kniebeugen" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Kniebeugen mit Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -283,7 +278,7 @@
             </div>
             <div class="Bauchmuskulatur">
                 <article class="Situps_negativbank" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Situps auf Schrägbank" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -299,7 +294,7 @@
                     </div>
                 </article>
                 <article class="Crunshes_maschine" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Crunsh Maschine" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -314,7 +309,7 @@
                     </div>
                 </article>
                 <article class="seitliches_oberkoerperbeugen_kh" id="col1">
-                    <button class="fav-button">
+                    <button data-exercise="Seitliches Oberkörperbeugen mit Kurzhanteln" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -331,10 +326,15 @@
             </div>
         </article>
         <script>
-            document.addEventListener("DOMContentLoaded", init);
-            document.addEventListener("click",event => {
-                    senseEvent(event);
-                });
+            const favButtons = document.querySelectorAll("button");
+            favButtons.forEach(button => button.addEventListener("click", event => {
+                   console.log(button.dataset.exercise);
+                   dbCall(button.dataset.exercise);
+                })); 
+            // document.addEventListener("DOMContentLoaded", init);
+            // document.addEventListener("click",event => {
+            //         senseEvent(event);
+            //     });
             function init() {
                
                 //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);

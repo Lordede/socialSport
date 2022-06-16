@@ -50,13 +50,16 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
+		System.out.print("istDrin");
 		setFavoriteExercise(name);
+		response.getWriter().write("ok");
 	}
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 		delFavoriteExercise(name);
+		response.getWriter().write("ok");
 	}
 	
 	private ArrayList<ExerciseBean> getFavoriteExercises() throws ServletException
@@ -69,19 +72,19 @@ public class FavoriteExerciseServlet extends HttpServlet {
 			try(ResultSet rs = pstmt.executeQuery())
 			{
 				while(rs != null && rs.next()) {
-					Long exerciseId =rs.getLong("exerciseId");
+					Long exerciseId = rs.getLong("exerciseId");
 					try(Connection conEx = ds.getConnection();
 							PreparedStatement exercisePstmt = conEx.prepareStatement("SELECT * FROM exercises WHERE id=?"))
 					{
 						exercisePstmt.setLong(1, exerciseId);
 						
-						try(ResultSet res = pstmt.executeQuery())
+						try(ResultSet res = exercisePstmt.executeQuery())
 						{
 							while(res != null && res.next()) {
 								ExerciseBean exercise = new ExerciseBean();
 								exercise.setName(res.getString("name"));
-								exercise.setId(exerciseId);
-								exercise.setMuscleGroup("muscleGroup");
+								exercise.setId(res.getLong("id"));
+								exercise.setMuscleGroup(res.getString("muscleGroup"));
 								exercises.add(exercise);
 							}
 						}
@@ -100,25 +103,15 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	private void setFavoriteExercise(String name) throws ServletException 
 	{
 		ExerciseBean exercise = new ExerciseBean();
-		
+		System.out.print("istDrin1");
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM exercises WHERE name = ?")){
-			
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO favoriteexercises (exerciseId) "
+					+ "VALUE( "
+					+ "(SELECT id From exercises WHERE name = ?) "
+					+ ")")){
 			pstmt.setString(1, name);
-			try(ResultSet rs = pstmt.executeQuery()){
-				String[] generatedKeys = new String[] {"id"};
-				if(rs != null && rs.next()) {
-					Long exerciseId = rs.getLong("id");
-					//exercise.setCreationDate(rs.getDate("creationDate"));
-					try(Connection conFav = ds.getConnection();
-							PreparedStatement favCon = conFav.prepareStatement("INSERT INTO favoriteExercise"
-																			+ "(exerciseId)"
-																			+  "VALUES (?)", generatedKeys))
-					{
-						favCon.setLong(1, exerciseId);
-					}
-				}
-			}
+			pstmt.executeUpdate();
+			
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}

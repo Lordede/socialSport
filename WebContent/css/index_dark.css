@@ -4,11 +4,21 @@
     display: table;
     width: 100%;
     table-layout: fixed;
-    border-spacing: 10px;
+    border-left: 30px;
+    border-right: 30px;
+    border-spacing: 50px;
 }
 .zwei_box
 {
     display: table-cell;
+}
+#col
+{
+    border-left: 30px;
+    border-right: 30px;
+    border-spacing: 50px;
+    display: table-cell;
+
 }
 .lowerBox
 {
@@ -16,7 +26,7 @@
     display: table;
     width: 100%;
     table-layout: fixed;
-    border-spacing: 10px;
+    border-spacing: 40px;
 }
 
 .drei_box
@@ -28,4 +38,9 @@
     padding-left: 3.33%;
     box-sizing: border-box; */
     
+}
+.text_block
+{
+    margin-top: 10px;
+    align-items: center;
 }
