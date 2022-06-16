@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import beans.ExerciseBean;
+import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,7 +40,8 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<ExerciseBean> favoriteExercises = getFavoriteExercises();
+		UserBean user = (UserBean) request.getSession().getAttribute("userData");
+		ArrayList<ExerciseBean> favoriteExercises = getFavoriteExercises(user.getId());
 		String json = convertListToJson(favoriteExercises);
 		response.getWriter().write(json);
 	}
@@ -51,7 +53,8 @@ public class FavoriteExerciseServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 		System.out.print("istDrin");
-		setFavoriteExercise(name);
+		UserBean user = (UserBean) request.getSession().getAttribute("userData");
+		setFavoriteExercise(name, user.getId());
 		response.getWriter().write("ok");
 	}
 	
@@ -62,13 +65,13 @@ public class FavoriteExerciseServlet extends HttpServlet {
 		response.getWriter().write("ok");
 	}
 	
-	private ArrayList<ExerciseBean> getFavoriteExercises() throws ServletException
+	private ArrayList<ExerciseBean> getFavoriteExercises(Long id) throws ServletException
 	{
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
 		
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM favoriteexercises")){
-			
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM favoriteexercises WHERE userId=?")){
+			pstmt.setLong(1, id);
 			try(ResultSet rs = pstmt.executeQuery())
 			{
 				while(rs != null && rs.next()) {
@@ -100,16 +103,17 @@ public class FavoriteExerciseServlet extends HttpServlet {
 		return exercises;
 	}
 
-	private void setFavoriteExercise(String name) throws ServletException 
+	private void setFavoriteExercise(String name,Long id) throws ServletException 
 	{
 		ExerciseBean exercise = new ExerciseBean();
 		System.out.print("istDrin1");
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO favoriteexercises (exerciseId) "
-					+ "VALUE( "
-					+ "(SELECT id From exercises WHERE name = ?) "
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO favoriteexercises (exerciseId, userId) "
+					+ "VALUES( "
+					+ "(SELECT id From exercises WHERE name = ?), ?"
 					+ ")")){
 			pstmt.setString(1, name);
+			pstmt.setLong(2, id);
 			pstmt.executeUpdate();
 			
 		} catch (Exception ex) {
