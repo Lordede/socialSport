@@ -1,0 +1,71 @@
+.Armmuskulatur
+{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+#col1
+{
+    display: table-cell;
+}
+.row2
+{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+#col1_1
+{
+    display: table-cell;
+}
+.Brustmuskulatur{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+.Rueckenmuskulatur
+{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+.Beinmuskulatur{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+.Bauchmuskulatur
+{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+/* https://bbbootstrap.com/snippets/add-favorites-button-animation-82551543 */
+.fav-button{
+    border:none;
+    height:40px;
+    width:120px;
+    font-size:15px;
+    background-color:#000;
+    color:#fff;
+    border-radius:5px;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.fav-button:active i {
+    
+    animation: item 1s ease-in forwards;
+}
+.fav-button i{
+    position:absolute;
+    left:70px;
+
+}

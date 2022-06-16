@@ -1,42 +1,31 @@
 /* Cem Durmus */
-.font_t
+.photoBox
 {
-    font-family: 'Montserrat', sans-serif;
-}
-body
-{
-    background-color: rgb(20, 5, 4);
-    font-family: 'Montserrat', sans-serif;
-    color: aliceblue;
-    
-}
-.drei_box
-{
-    float : left;
-    width: 33%;
-    padding: 5px;
-    padding-left: 3.33%;
-    box-sizing: border-box;
-    
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
 }
 .zwei_box
 {
-    float:left;
-    width: auto;
-    margin-left: 5%;
-    padding: 5;
-    box-sizing:border-box;
+    display: table-cell;
 }
-h1
+.lowerBox
 {
-    text-align: center;
+    display: table;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
 }
-h2
+
+.drei_box
 {
-	clear:left;
-    text-align: center;
-}
-.text_block
-{
-    text-align: justify;
+    display: table-cell;
+    /* float : left;
+    width: 33%;
+    padding: 5px;
+    padding-left: 3.33%;
+    box-sizing: border-box; */
+    
 }
