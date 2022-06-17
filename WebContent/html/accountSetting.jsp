@@ -9,11 +9,12 @@
 <title>Profil Bearbeiten</title>
 <meta charset="utf-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
-<meta name="keywords" content="Sport, Gym, social media, sports">
+<meta name="keywords" content="Benutzerkonto bearbeiten">
 <meta name="author" content="Cem Durmus">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/layout.css">
 <link rel="stylesheet" href="../css/navbar.css">
+<script src="../JavaScript/FavoriteManagement.js" type="text/javascript"></script>
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>
@@ -84,6 +85,24 @@
 					formaction="../UserUpdateServlet" formmethod="post">Benutzer
 					löschen</Button>
 			</form>
+		</div>
+		<div>
+			<h3>Favorisierte Übungen bearbeiten</h3>
+			<div id="toggleExerciseAddition">
+				<template id="favoriteExercises">
+					<div>
+						<div class="searchExerciseName" exercise-name></div>
+						<div class="searchMuscleGroup" exercise-group></div>
+					</div>
+				</template>
+				<div id="favoritesContainer">
+				</div>
+				<div id="exerciseContainer"></div>
+				<button id="delExercise" hidden="hidden">Übung aus Favoriten Löschen</Button>
+				<script>
+					document.addEventListener("DOMContentLoaded", readFavoriteExercises);
+				</script>
+			</div>
 		</div>
 	</article>
 	<footer>

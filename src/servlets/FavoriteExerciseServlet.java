@@ -1,3 +1,5 @@
+
+//Cem Durmus
 package servlets;
 
 import java.io.IOException;
@@ -124,9 +126,12 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	private void delFavoriteExercise(String name) throws ServletException
 	{
 		try(Connection con = ds.getConnection();
-				PreparedStatement favCon = con.prepareStatement("DELETE FROM favoriteExercise WHERE name=?"))
+				PreparedStatement favCon = con.prepareStatement("DELETE FROM favoriteexercises "
+						+ "WHERE (SELECT exercises.id FROM exercises "
+						+ "WHERE name=?)"))
 		{
 			favCon.setString(1, name);
+			favCon.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
