@@ -86,8 +86,9 @@ public class LoginServlet extends HttpServlet {
 			}
 		}
 
-		RequestDispatcher disp = request.getRequestDispatcher("html/login.html");
-		disp.forward(request, response);
+		//Nicht notwendig bei einem Ajax aufruf
+		//RequestDispatcher disp = request.getRequestDispatcher("html/login.html");
+		//disp.forward(request, response);
 
 	}
 

@@ -1,7 +1,10 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
+    <head>
+    <base href="${pageContext.request.requestURI}" />
+    </head>
+
     <!--Lukas Edmüller
         Navbar 
         https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
@@ -34,8 +37,12 @@
     xmlhttp.addEventListener("load", function () {
 
         var response = xmlhttp.response;
-        console.log("Der Ajax Aufruf von --Logout-- gibt zurück"+response);
-        alert("Ausloggen war erfolgreich!")
+
+        //window.history.back(0) = window.location; // https://stackoverflow.com/questions/9246722/disable-go-back-function-in-browser-using-servlet
+        //window.unbind("beforeunload");            // https://stackoverflow.com/questions/4787995/how-to-disable-beforeunload-action-when-user-is-submitting-a-form
+        //alert("Ausloggen war erfolgreich!");
+        window.location.href = "login.html";
+        
 
 
     });
