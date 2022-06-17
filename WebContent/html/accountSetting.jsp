@@ -11,6 +11,8 @@
 <meta name="description" content="Ihre one stop Sport Plattform">
 <meta name="keywords" content="Sport, Gym, social media, sports">
 <meta name="author" content="Cem Durmus">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/layout.css">
 <link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body>
@@ -31,18 +33,6 @@
 	</header>
 	<article>
 		<h2>Bearbeiten Sie Ihr Profil hier</h2>
-		<div class="profile_image">
-			<img src="" alt="Profil Picture">
-			<form action="../UserUpdateServlet" method="post"
-				enctype="multipart/form-data" accept-charset="utf-8">
-				<p>Profilbild ändern:</p>
-				<input type="image" name="changeImage" accept="image/*"
-					formaction="../UserUpdateServlet" formmethod="post">
-				<button type="submit" name="changeImage" value="changeImage"
-					formaction="../UserUpdateServlet" formmethod="post">Bild
-					ändern</button>
-			</form>
-		</div>
 		<div class="userName">
 			<form class="ChangeUsername" action="../UserUpdateServlet"
 				method="post" accept-charset="utf-8">

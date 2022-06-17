@@ -35,7 +35,6 @@
                     // document.ElementByName('addButton').submit();
                     console.log("html spricht an");
                 }
-
             </script>
         </div>
     </header>

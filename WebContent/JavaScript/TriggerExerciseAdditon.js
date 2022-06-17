@@ -13,6 +13,7 @@ function toggleExerciseSearchbar()
    
     parentElement.appendChild(insertableSearchbar);
     showExercises();
+    readFavoriteExercises();
     // showExercises;
     //console.log("funktioniert 22");
     insertableSearchbar.addEventListener("input", event => {
@@ -67,17 +68,41 @@ function readSearchExercises(exerciseName, callback)
     }
     xmlhttp.send();
 }
+function readFavoriteExercises(){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "../FavoriteExerciseServlet", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.onload = function()
+    {
+        let exercisesJson = xmlhttp.responseText;
+        extractFavorites(exercisesJson);
+    }
+    xmlhttp.send();
+}
 
+function extractFavorites(jsonString)
+{
+    let exercisesArrayList = JSON.parse(jsonString) //[{"":""},{"rep":"3"}]
+    const searchResults = document.getElementById("searchResults");
+    const toggleContainer = document.getElementById("favoritesContainer");
+    toggleContainer.style.display = "block";
+    toggleContainer.innerHTML = "";
+    exercisesArrayList.forEach(exercise => {
+        const result = searchResults.content.cloneNode(true).children[0];
+        toggleContainer.appendChild(result);
+        const header = result.querySelector('.searchExerciseName');
+        header.addEventListener("click", () => onExerciseClick(exercise))
+        const body = result.querySelector('.searchMuscleGroup');
+        header.textContent = exercise.name; //set.rep
+        body.textContent = exercise.muscleGroup;
+        console.log(exercise);
+   });
+   
+}
 	
 function extractExercises(jsonString)
 {
-    let exercisesArrayList = JSON.parse(jsonString);
-   
-        // exercise.forEach(exerciseInput =>{
-        //     const isVisible = exerciseInput.name.includes(value);
-        //     exerciseInput.element.classList.toggle("hide", !isVisible);
-        // })
-        
+    let exercisesArrayList = JSON.parse(jsonString) //[{"":""},{"rep":"3"}]
     const searchResults = document.getElementById("searchResults");
     const toggleContainer = document.getElementById("searchResultContainer");
     toggleContainer.style.display = "block";
@@ -88,7 +113,7 @@ function extractExercises(jsonString)
         const header = result.querySelector('.searchExerciseName');
         header.addEventListener("click", () => onExerciseClick(exercise))
         const body = result.querySelector('.searchMuscleGroup');
-        header.textContent = exercise.name;
+        header.textContent = exercise.name; //set.rep
         body.textContent = exercise.muscleGroup;
         console.log(exercise);
    });
