@@ -17,16 +17,7 @@
     </head>
     <body>
     <%@ include file="fragments/authenticationCheck.jspf" %> <%-- ÃberprÃ¼fung, ob User eingeloggt ist --%>
-    <nav>
-    		<ul>
-                <li><a href="./dashboard.jsp">Dashboard</a></li>
-                <li><a class="active"  href="./trainingsmenu.jsp">Training</a></li>
-                <li><a href="./leaderboard.jsp">Leaderboard</a></li>
-                <li><a href="./accountSetting.jsp">Account Settings</a></li>
-                <li><a href="./exercise.jsp">Übung erstellen</a></li>
-  				<li class="logout"><a class="active" href="#about">Logout</a></li>
-			</ul> 
-    	</nav>   
+    <%@ include file="fragments/navbar.jspf" %>               <%-- Navbar --%>
         <article>
             <h1><strong>Training: </strong></h1>
             <div id="training">

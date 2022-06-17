@@ -9,7 +9,6 @@ pageEncoding="UTF-8" %>
 
     <title>Training</title>
     <link rel="stylesheet" href="../css/training.css" />
-    <link rel="stylesheet" href="../css/navbar.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
     <script src="../JavaScript/CreateExercise.js"></script>

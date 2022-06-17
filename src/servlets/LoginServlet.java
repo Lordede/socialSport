@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userData", userData); // UserData in Session Scope hinterlegen
 
 			// forward to HomePage
-			RequestDispatcher disp = request.getRequestDispatcher("html/index.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("html/dashboard.jsp");
 			disp.forward(request, response);
 		} else {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED); // TODO: Fail more userfriendly
@@ -117,19 +117,19 @@ public class LoginServlet extends HttpServlet {
 		try (Connection con = ds.getConnection(); // Querry erstellen
 				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM users WHERE username = ? AND pwd = ?")) {
 
-			pstmt.setString(1, username); //
+			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 
 			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
 				if (rs.next()) {
 					userData.setId(rs.getLong("id"));
-
 					userData.seteMail(rs.getString("email"));
 					userData.setUsername(rs.getString("username"));
 					userData.setLastName(rs.getString("lastname"));
 					userData.setFirstName(rs.getString("firstname"));
 					System.out.print(userData.getFirstName());
 					userData.setPassword(rs.getString("pwd"));
+					userData.setAdmin(rs.getBoolean("isAdmin"));
 				}
 				return userData;
 			}
