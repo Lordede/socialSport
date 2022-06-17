@@ -120,21 +120,23 @@ function extractExercises(jsonString)
    
 }
 
-function onExerciseClick(exercise)
-{
-	var check = document.getElementsByName(exercise.name)
-	if(check.length === 0)
-    {
-	    addExercise(exercise); // HTML DOM Manipulation 
-    }
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "../ExerciseServlet?selectedExercise="+exercise.id, true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send();
+// Wurde in TrainingSettings.js ersetzt
+// function onExerciseClick(exercise)
+// {
+// 	var check = document.getElementsByName(exercise.name)
+// 	if(check.length === 0)
+//     {
+// 	    addExercise(exercise); // HTML DOM Manipulation 
+//     }
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.open("GET", "../ExerciseServlet?selectedExercise="+exercise.id, true);
+//     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     xmlhttp.send();
 	
-    var insertableSearchbar = document.getElementById("searchBar");
-    insertableSearchbar.setAttribute("type", "hidden");
-    var searchItems = document.getElementById("searchResultContainer");
-    searchItems.style.display = "none";
-}
+//     var insertableSearchbar = document.getElementById("searchBar");
+//     insertableSearchbar.setAttribute("type", "hidden");
+//     var searchItems = document.getElementById("searchResultContainer");
+//     searchItems.style.display = "none";
+// }
+
 

@@ -15,6 +15,7 @@ header {
 
 .elements {
   background-color: #8db4d8;
+  height: auto;
 }
 
 #searchContainer {
@@ -46,6 +47,23 @@ header {
 #cancelWorkout {
   background-color: #ef3506;
 }
+
+#toggleExerciseAddition{
+  visibility: hidden;
+}
+
+.removeExerciseButton{
+  background-color: #ef3506;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100%;
+}
+
+.setContainer{
+  visibility: visible;
+}
+
 h2 {
   padding: 5px;
 }
@@ -69,7 +87,7 @@ h2 {
 
 .exercise {
   width: auto;
-  width: auto;
+  
   border-radius: 25px;
   margin: 1cm;
   padding: 1cm;
@@ -110,5 +128,9 @@ td:hover {
 
 tr:hover {
   background-color: lightgreen;
+}
+
+.searchExerciseName:hover{
+  cursor: pointer;
 }
 
