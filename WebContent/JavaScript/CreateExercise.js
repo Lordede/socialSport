@@ -54,13 +54,7 @@ function addExercise(exercise, isLoadExercise) {
     //SetDiv
     article.appendChild(container);
 
-    
-    
 
-    
-
-    
-    //var path = `${pageContext.request.contextPath}`;
     bild.setAttribute("src", "../BildServlet?id="+exercise.id);
     bild.setAttribute("width", "50");
     bild.setAttribute("height", "50");
@@ -182,10 +176,8 @@ function disableSet() {
 function sendSet(kginput, whdinput, exerciseid) {
 
     var xmlhttp = new XMLHttpRequest;
-
-    //console.log("KG "+kginput);
-    //console.log("whd "+whdinput);
     var url = "../SetServlet";
+    
     xmlhttp.addEventListener("load", function () {
 
         var response = xmlhttp.response;

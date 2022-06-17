@@ -27,32 +27,11 @@ pageEncoding="UTF-8" %>
   </noscript>
 
   <body>
-    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung,
-    ob User eingeloggt ist --%>
-    <!--Lukas Edmüller
-        Navbar 
-        https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
-    <nav>
-      <ul>
-        <li><a href="./dashboard.jsp">Dashboard</a></li>
-        <li><a class="active" href="./trainingsmenu.jsp">Training</a></li>
-        <li><a href="./leaderboard.jsp">Leaderboard</a></li>
-        <li><a href="./accountSetting.jsp">Account Settings</a></li>
-        <li><a href="./exercise.jsp">Übung erstellen</a></li>
-        <li style="float: right"><a class="active" href="#about">Logout</a></li>
-      </ul>
-    </nav>
+    <%@ include file="fragments/authenticationCheck.jspf" %>  <%-- Login check --%>
+    <%@ include file="fragments/navbar.jspf" %>               <%-- Navbar --%>
+
     <header id="${training.id}">Social Sport</header>
     <!-- Über die ID "wissen" die Sätze beim abspeichern zu welchem training sie gehören-->
-
-    <!-- <nav id="navbar" class="navbar">
-        LINKS EINFÜGEN
-        <ul class="navbar">
-            <li class="navbar">Home</li>
-            <li class="navbar">Training</li>
-            <li class="navbar">Leaderboard</li>
-        </ul>
-    </nav> -->
 
     <main id="exercises"></main>
 
