@@ -17,7 +17,7 @@ public class UserBean implements Serializable
 	private String eMail;
 	private String password;
 	private Image profilePicture;
-	private boolean isAdmin;
+	private boolean admin;
 	private Date creationDate;
 		
 	public Date getCreationDate() {
@@ -75,10 +75,11 @@ public class UserBean implements Serializable
 		this.profilePicture = profilePicture;
 	}
 	public boolean isAdmin() {
-		return isAdmin;
+		return admin;
 	}
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setIsAdmin(boolean isAdmin) {
+		this.admin = isAdmin;
 	}
+
 }	
 	

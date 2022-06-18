@@ -12,7 +12,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
+<%@ include file="fragments/noScript.jspf" %>
+<%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
 	<header>
 		<h1>Profil Bearbeiten</h1>
 	</header>
