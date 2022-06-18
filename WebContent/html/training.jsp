@@ -21,9 +21,7 @@ pageEncoding="UTF-8" %>
       type="text/javascript"
     ></script>
   </head>
-  <noscript>
-    <h1>BITTE JAVASCRIPT AKTIEREN!</h1>
-  </noscript>
+<%@ include file="fragments/noScript.jspf" %>
 
   <body>
     <%@ include file="fragments/authenticationCheck.jspf" %>  <%-- Login check --%>

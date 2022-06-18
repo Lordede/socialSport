@@ -7,6 +7,7 @@
 <base href="${pageContext.request.requestURI}" />
 <title>Insert title here</title>
 </head>
+<%@ include file="fragments/noScript.jspf" %>
 <body>
 	<div>
 	<h1>${exercise.name}</h1><br>

@@ -18,6 +18,7 @@
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>		<%-- Login Check--%>
 	<%@ include file="fragments/navbar.jspf" %>               	<%-- Navbar --%>
+	<%@ include file="fragments/noScript.jspf" %>
 	<header>
 		<h1>Profil bearbeiten</h1>
 	</header>

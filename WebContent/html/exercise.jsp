@@ -18,6 +18,7 @@
 	<header>
 		<h1>Profil Bearbeiten</h1>
 	</header>
+<%@ include file="fragments/noScript.jspf" %>
 	<article>
 		<h2>Übung erstellen:</h2>
 		<form class="ChangeUsername" action="../ExerciseServlet" method="post"

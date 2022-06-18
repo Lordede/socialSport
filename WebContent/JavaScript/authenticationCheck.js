@@ -2,11 +2,10 @@
 
 "use strict"
 
-//Vermutlich so in Produktivumgebungen nicht machbar da Clientseitige Auswertung -> Unsicher?
 
 
-function authenticationCheck(userData) { 	
-
+//Vermutlich so in Produktivumgebungen nicht machbar da Clientseitige Auswertung
+function authenticationCheck(userData) { 
 
 	if (userData === "") { // Kann man das so auswerten?
 

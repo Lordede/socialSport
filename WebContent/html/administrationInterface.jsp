@@ -13,6 +13,7 @@
         <script src="../JavaScript/Administration.js" type="text/javascript"></script>
     </head>
     <body>
+    <%@ include file="fragments/noScript.jspf" %>
         
         <header>
             

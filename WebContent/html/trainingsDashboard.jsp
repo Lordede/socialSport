@@ -14,6 +14,7 @@
 </head>
 
 <body>
+<%@ include file="fragments/noScript.jspf" %>
     <header>
         <div id="toggleExerciseAddition">
             <input type="hidden" id="searchBar">

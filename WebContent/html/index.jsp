@@ -20,6 +20,7 @@
     </head>
 
     <body class="font_t">
+<%@ include file="fragments/noScript.jspf" %>
         <header>
             <h1>Social Sport</h1>
             <nav>

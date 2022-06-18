@@ -9,13 +9,17 @@
 <meta name="description" content="leaderboard">
 <meta name="keywords" content="best leader leaderboard">
 <base href="${pageContext.request.requestURI}" />
-<link rel="stylesheet" href="../css/navbar.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/navbar.css" />
+<%@ include file="fragments/authenticationCheckHEAD.jspf" %>
+<%@ include file="fragments/navbarHEAD.jspf" %>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
 
 	<body>
+	
+<%@ include file="fragments/noScript.jspf" %>
+
 		<%@ include file="fragments/authenticationCheck.jspf" %>
+		<%@ include file="fragments/navbar.jspf" %> 
 			<%-- Überprüfung, ob User eingeloggt ist --%>
 			<!--Lukas Edmüller
 

@@ -25,9 +25,11 @@
     <body>
     <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
     <%@ include file="fragments/navbar.jspf" %>              <%-- Navbar --%>
+    <%@ include file="fragments/noScript.jspf" %>
         <header>
             <h1><strong>Dashboard</strong></h1>
         </header>
+          
         <article>
             <div class="Armmuskulatur">
                 <article class="Bizepscurls" id="col1">
