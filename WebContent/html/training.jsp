@@ -20,6 +20,8 @@ pageEncoding="UTF-8" %>
       src="../JavaScript/TrainingSettings.js"
       type="text/javascript"
     ></script>
+    <%@ include file="fragments/authenticationCheckHEAD.jspf"%>
+	<%@ include file="fragments/navbarHEAD.jspf"%>
   </head>
 <%@ include file="fragments/noScript.jspf" %>
 

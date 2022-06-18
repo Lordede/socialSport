@@ -11,9 +11,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/layout.css">
         <script src="../JavaScript/Administration.js" type="text/javascript"></script>
+        <%@ include file="fragments/authenticationCheckHEAD.jspf"%>
+		<%@ include file="fragments/navbarHEAD.jspf"%>
     </head>
     <body>
-    <%@ include file="fragments/noScript.jspf" %>
+    <%@ include file="fragments/noScript.jspf"%>
+	<%@ include file="fragments/authenticationCheck.jspf"%>
+	<%@ include file="fragments/navbar.jspf"%>
         
         <header>
             

@@ -11,9 +11,7 @@
         Navbar 
         https://www.w3schools.com/Css/css_navbar_horizontal.asp -->
 
-    <nav>
-    <p> Das ist ein Test1: ${userData.id}</p>
-    <p> Das ist ein Test2: ${userData.admin}</p>   
+    <nav>  
       <ul>
         <li><a href="./dashboard.jsp">Dashboard</a></li>
         <li><a href="./trainingsmenu.jsp">Training</a></li>
