@@ -70,7 +70,7 @@
                     <img src="../img/ExerciseImages/french-press-sz.gif" alt="Strindrücken mit SZ-Stange" width="180" height="180">
                     <div class="text_Trizeps">
                         Stirndücken oder auch French Press, Nosebreaker, Skull Crushers bezeichnet hört sich anfangs zwar ziehmlich martialisch an, jedoch ist sie eine der effektivsten Trizepsübungen überhaupt.
-                        Diese Übung gilt als <strong>nicht anfängerfreundliche</strong>, jedoch ist sie ein wenig Übung gut zu meistern.
+                        Diese Übung gilt als <strong>nicht anfängerfreundliche</strong>, jedoch ist sie nach ein wenig Übung gut zu meistern.
                         <h4>Beanspruchte Muslkeln</h4>
                         Mit dieser Übung wird vorrainig die Trizepsmuskulatur(musculus triceps brachii) traininert, auch wird dem Knorrenmuskel(musculus anconaeus) ein Trainingsreiz gegeben. Unterstützend wirkt dabei der Handstrecker (musculus extensor carpi) und der gemeinsame Fingerstrecker (musculus extensor digitorum).
                     </div>
