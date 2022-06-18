@@ -3,5 +3,5 @@ CREATE TABLE trainingsessions(
 	creationDate datetime NOT NULL,
 	trainingId int NOT NULL,
 	PRIMARY KEY(id),
-	FOREIGN KEY trainingId REFERENCES training(id)
+	FOREIGN KEY trainingId REFERENCES trainings(id)
 )

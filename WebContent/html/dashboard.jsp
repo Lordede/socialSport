@@ -8,13 +8,19 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of avaible exercises on SocialSport">
         <meta name="keywords" content="Training Sport Exerices">
+
+        <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <!--         https://stackoverflow.com/questions/20490848/servlet-not-redirected-to-page-showing-non-styled-page -->
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/dashboard.css"> 
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/navbar.css" />
-        <base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+        
         <script src="../JavaScript/favoriteButton.js" type="text/javascript"></script>
+        
+        <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
+        <%@ include file="fragments/navbarHEAD.jspf" %>
+        
     </head>
     <body>
     <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>

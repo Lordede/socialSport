@@ -127,9 +127,9 @@ public class LoginServlet extends HttpServlet {
 					userData.setUsername(rs.getString("username"));
 					userData.setLastName(rs.getString("lastname"));
 					userData.setFirstName(rs.getString("firstname"));
-					System.out.print(userData.getFirstName());
-					userData.setPassword(rs.getString("pwd"));
-					userData.setAdmin(rs.getBoolean("isAdmin"));
+					userData.setPassword(rs.getString("pwd")); //TODO: hier sinnvoll?
+					userData.setIsAdmin(rs.getBoolean("isAdmin"));
+					
 				}
 				return userData;
 			}
