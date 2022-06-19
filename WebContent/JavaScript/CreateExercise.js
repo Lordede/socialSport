@@ -56,8 +56,8 @@ function addExercise(exercise, isLoadExercise) {
 
 
     bild.setAttribute("src", "../BildServlet?id="+exercise.id);
-    bild.setAttribute("width", "50");
-    bild.setAttribute("height", "50");
+    bild.setAttribute("width", "200");
+    bild.setAttribute("height", "200");
 
     //Innerhalb der neuen <h2> einen <table> anlegen
     container.appendChild(table);

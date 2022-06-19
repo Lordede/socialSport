@@ -7,12 +7,19 @@ function toogleView()
     var setContainer = document.getElementsByClassName("setContainer");
     var removeExerciseButtons = document.getElementsByClassName("removeExerciseButton");
     var exercises = document.getElementsByClassName("exercise");
+
+    var imgs = document.getElementsByTagName("img")
+
     if(settingButtons.style.visibility === "visible"){
         settingButtons.style.visibility = "hidden";
         for(let i = 0; i < setContainer.length; i++){
             setContainer.item(i).style.visibility = "visible";
             removeExerciseButtons.item(i).style.visibility = "hidden";
             exercises.item(i).style.height = "auto";
+        }
+
+        for(let i = 0; i < imgs.length; i++){
+            imgs.item(i).style.visibility = "visible";
         }
        
         clickedButton.innerHTML = "Bearbeitungsansicht";
@@ -23,6 +30,10 @@ function toogleView()
             setContainer.item(i).style.visibility = "hidden";
             removeExerciseButtons.item(i).style.visibility = "visible";
             exercises.item(i).style.height = "150px";
+        }
+
+        for(let i = 0; i < imgs.length; i++){
+            imgs.item(i).style.visibility = "hidden";
         }
         
         clickedButton.innerHTML = "Trainingsansicht";

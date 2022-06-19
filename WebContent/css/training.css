@@ -1,37 +1,113 @@
 /* Hubertus Seitz */
 
 body {
-  /* background-color: #15395c; */
+  /* Template von Cem */
+  font-family:"Open Sans";
+  font-style: normal;
+  font-weight: 300;
+  background-color: #242423;
+
 }
 
 header {
-  color: Black;
+  color: #95D5B2; 
   font-size: 300%;
-  width: 50%;
   padding: 10px;
-  margin: auto;
   text-align: center;
+  display: block;
+}
+/* <main> */
+#exercises { 
+  float: left;
+  width: 75%;
+
+}
+/* <article> */
+.exercise {
+  border-style: solid;
+  border-radius: 50px;
+  background-color:rgb(40, 40, 40);
+  border-color: #95D5B2;
+  color: white;
+  margin-left: 3cm;
+  margin-bottom: 2cm;
+  padding: 1cm;
+  display: inline-block  
 }
 
+.exerciseTable {
+
+  border: 3px solid #73AD21;
+  padding: 10px;
+  border-style: solid;
+  border-radius: 10px;
+  background-color:rgb(36, 36, 35);
+  border-color: #95D5B2;
+  font-size: 120%;
+  color: white;
+  width: 50%;
+  size: auto;
+}
+.button.addSet {
+  padding: 10px;
+  width: 100%;
+  display: inline-block  
+}
+
+.ExerciseHeadline{
+  float: center;
+  padding: 5px;
+
+}
+img{
+  float: right;
+  border-radius: 30px;
+  padding: 5px;
+  margin: 10px;
+  object-fit: contain;
+}
+
+.setContainer{
+  float: left;
+  size: auto;
+}
+
+th {
+  padding: 15px;
+  text-align: left;
+  border-style: hidden;
+}
+
+td {
+  padding: 15px;
+  text-align: left;
+  border-style: hidden;
+}
+
+
+.searchExerciseName{
+
+  font-size: 110%;
+
+}
+/* 
 .elements {
   background-color: #8db4d8;
   height: auto;
-}
+} */
 
 #searchContainer {
   float: right;
-  border-style: hidden;
+  border-style: solid;
+  border-radius: 5px;
   width: auto;
   height: auto;
   margin: 10px;
-
+  width: 10%;
   border-radius: 10px;
   padding: 5px;
-}
-
-#exercises {
-  float: left;
-  width: auto;
+  color: #95D5B2;
+  
 }
 
 #buttons {
@@ -63,11 +139,7 @@ header {
 .setContainer{
   visibility: visible;
 }
-
-h2 {
-  padding: 5px;
-}
-.button {
+button {
   margin: 5px;
   padding: 5px;
   border-radius: 5px;
@@ -76,42 +148,11 @@ h2 {
   cursor: pointer;
 }
 
-.exerciseTable {
-  padding: 10px;
-  border-style: solid 5px black;
-  border-collapse: collapse;
-  background-color: #b3cde5;
-  border-radius: 10px;
-  font-size: 120%;
-}
-
-.exercise {
-  width: auto;
-  
-  border-radius: 25px;
-  margin: 1cm;
-  padding: 1cm;
-}
-
-th {
-  padding: 15px;
-  text-align: left;
-  border-style: hidden;
-}
-
-td {
-  padding: 15px;
-  text-align: left;
-  border-style: hidden;
-}
-
 .clear {
   clear: both;
 }
 
-.button.addSet {
-  width: 100%; /* -> 100% of article  */
-}
+
 
 footer {
   position: fixed;
@@ -122,13 +163,13 @@ footer {
 }
 
 /* Nur zum testen!*/
-td:hover {
+/* td:hover {
   background-color: rgba(0, 128, 0, 0.425);
 }
 
 tr:hover {
   background-color: lightgreen;
-}
+} */
 
 .searchExerciseName:hover{
   cursor: pointer;
