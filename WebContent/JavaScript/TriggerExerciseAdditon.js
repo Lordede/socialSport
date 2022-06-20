@@ -22,6 +22,10 @@ function toggleExerciseSearchbar()
         extractExercises(exercisesJson);
     });
 })
+
+//Aus optischen Gründen ~Hubertus Seitz
+document.getElementById("addButton").style.visibility = "hidden"
+
 }
 
 function cancelWorkout(){

@@ -60,7 +60,7 @@
                   document.addEventListener("DOMContentLoaded", init);
 
                   function init() {
-                    var button = document.getElementById("addButton");
+                    // var button = document.getElementById("addButton"); Wird nicht mehr benötigt
                     var addSetButton = document.getElementsByClassName("button addSet");
                     var removeExerciseButtons = document.getElementsByClassName("removeExerciseButton");
                     var toogleViewButton = document.getElementById("toogleViewButton");
@@ -74,7 +74,7 @@
                     var cancelWorkoutButton = document.getElementById("cancelWorkout");
 
                     //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-                    button.addEventListener("click", toggleExerciseSearchbar);
+                    toogleViewButton.addEventListener("click", toggleExerciseSearchbar);
                     cancelWorkoutButton.addEventListener("click", cancelWorkout);
                     // document.ElementByName('addButton').submit();
                     console.log("html spricht an");
