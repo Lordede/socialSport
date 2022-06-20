@@ -9,8 +9,8 @@
         <meta name="description" content="main page to have overview of avaible exercises on SocialSport">
         <meta name="keywords" content="Training Sport Exerices">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/layout.css">
-        <link rel="stylesheet" href="../css/dashboard.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/dashboard.css">
 <!--         https://stackoverflow.com/questions/20490848/servlet-not-redirected-to-page-showing-non-styled-page -->
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/navbar.css" />
         <base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
@@ -34,7 +34,7 @@
         <article>
             <div class="Armmuskulatur">
                 <article class="Bizepscurls" id="col1">
-                    <button data-exercise="Bizepscurls" class="fav-button">
+                    <button data-="" data-exercise="Bizepscurls" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>

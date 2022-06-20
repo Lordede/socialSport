@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Request über get ist nicht erlaubt!
+		// Request ï¿½ber get ist nicht erlaubt!
 		response.sendError(HttpServletResponse.SC_FORBIDDEN);
 	}
 
@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userData", userData); 						//UserData in Session Scope hinterlegen
 			
 			//forward to HomePage
-			RequestDispatcher disp = request.getRequestDispatcher("html/index.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("html/dashboard.jsp");
 			disp.forward(request, response);
 		}
 		else {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import beans.ExerciseBean;
+import beans.TrainingBean;
 import beans.UserBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -41,9 +42,19 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		UserBean user = (UserBean) request.getSession().getAttribute("userData");
-		ArrayList<ExerciseBean> favoriteExercises = getFavoriteExercises(user.getId());
-		String json = convertListToJson(favoriteExercises);
-		response.getWriter().write(json);
+		if(request.getParameter("checkExisting") != null) {
+			long userId = user.getId();
+			String exerciseName = request.getParameter("name");
+			Boolean isExisting = checkExistingExercise(null, null);
+			
+			response.getWriter().write(isExisting.toString());
+		}
+		else {
+			ArrayList<ExerciseBean> favoriteExercises = getFavoriteExercises(user.getId());
+			String json = convertListToJson(favoriteExercises);
+			response.getWriter().write(json);
+		}
+		
 	}
 
 	/**
@@ -63,6 +74,26 @@ public class FavoriteExerciseServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		delFavoriteExercise(name);
 		response.getWriter().write("ok");
+	}
+	
+	private boolean checkExistingExercise(Long userId, String exerciseName) throws ServletException {
+		
+		try(Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM favoriteexercises WHERE exerciseId = (SELECT id FROM exercises WHERE name = ? ) AND userId = ?")){
+			
+			pstmt.setString(1, exerciseName);
+			pstmt.setLong(2, userId);
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs != null && rs.next()) {
+					return true;
+					
+				}
+			}
+		} catch (Exception ex) {
+			throw new ServletException(ex.getMessage());
+		}
+		return false;
 	}
 	
 	private ArrayList<ExerciseBean> getFavoriteExercises(Long id) throws ServletException
