@@ -21,19 +21,27 @@
     </head>
 
     <body class="font_t">
-<%@ include file="fragments/noScript.jspf" %>
-        <header>
+        <header class="centered">
             <h1>Social Sport</h1>
-            <nav>
-                <a href="login.html">Login</a>
-            </nav>
+            <div class="linksContainer centered">
+                <div class="links">
+                    <p>Bereits Mitglied?</p>
+                    <a href="html/login.html"><button>Login</button></a>
+                </div>
+                <div class="links">
+                     <p>Noch kein Mitglied?</p>
+                <a href="html/registration.html"><button>Registrieren</button></a>
+                </div>
+                    
+            </div>
+                
         </header>
         <article>
-            <h1>Willkommen auf ihrer one stop Sport Plattform</h1>
+            <h1 class="centered">Willkommen auf ihrer one stop Sport Plattform</h1>
             <div class="photoBox">
                 <div class="zwei_box" id="col">
                     <p>
-                        <img src="../img/victor-freitas-WvDYdXDzkhs-unsplash.jpg" alt="Kreuzheben.jpg" width="720"
+                        <img src="img/victor-freitas-WvDYdXDzkhs-unsplash.jpg" alt="Kreuzheben.jpg" width="720"
                             height="480">
                     </p>
                 </div>
@@ -41,7 +49,7 @@
                 <div id="col_b2"></div>
                 <div class="zwei_box" id="col2">
                     <p>
-                        <img src="../img/samuel-girven-VJ2s0c20qCo-unsplash.jpg" alt="Hanteln" width="320" height="480">
+                        <img src="img/samuel-girven-VJ2s0c20qCo-unsplash.jpg" alt="Hanteln" width="320" height="480">
                     </p>
                 </div>
             </div>
@@ -52,7 +60,7 @@
 
                 <div class="drei_box">
                     <h3>Warum Social Sport?</h3>
-                    <img src="../img/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg" alt="Klimmzüge.jpg" width="324"
+                    <img src="img/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg" alt="Klimmzüge.jpg" width="324"
                         height="480">
                     <p class="text_block">
                         <br> Verwende Social Sport um deinen Trainingserfolg zu verfolgen und immer zu wissen wie viel
@@ -63,7 +71,7 @@
                 </div>
                 <div class="drei_box">
                     <h3>Was ist daran die soziale Komponente?</h3>
-                    <img src="../img/logan-weaver-lgnwvr-9D_rUDe7xvA-unsplash.jpg" alt="Freunde.jpg" width="324"
+                    <img src="img/logan-weaver-lgnwvr-9D_rUDe7xvA-unsplash.jpg" alt="Freunde.jpg" width="324"
                         height="480">
                     <p class="text_block">
                         <br> Da du je absolvierter Trainingseinheit Punkte erhälst, kannst du diese mit deinen Freunden
@@ -74,7 +82,7 @@
                 </div>
                 <div class="drei_box">
                     <h3>An wen richtet sich diese Website?</h3>
-                    <img src="../img/max-libertine-Pi4MOqVb85c-unsplash.jpg" alt="Kämpferin.jpg" width="324"
+                    <img src="img/max-libertine-Pi4MOqVb85c-unsplash.jpg" alt="Kämpferin.jpg" width="324"
                         height="480">
                     <p class="text_block">
                         <br> Ganze unabhängig von deinem Level, - ob bluter Anfänger, oder eiserner Bodybuilder - wirst
