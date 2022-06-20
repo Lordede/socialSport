@@ -68,6 +68,7 @@ pageEncoding="UTF-8" %>
         var removeExerciseButtons = document.getElementsByClassName("removeExerciseButton");
         var toogleViewButton = document.getElementById("toogleViewButton");
 
+
         //Lukas Edmüller
         toogleViewButton.addEventListener("click", toogleView);
 

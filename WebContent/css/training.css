@@ -15,6 +15,7 @@ header {
   padding: 10px;
   text-align: center;
   display: block;
+  margin-bottom: 35px;
 }
 /* <main> */
 #exercises { 
@@ -98,7 +99,7 @@ td {
 
 #searchContainer {
   float: right;
-  border-style: solid;
+  border-style: hidden;
   border-radius: 5px;
   width: auto;
   height: auto;
@@ -108,6 +109,25 @@ td {
   padding: 5px;
   color: #95D5B2;
   
+}
+.resultItem {
+  width: 100%;
+  border-spacing: 10px;
+  border-bottom: 2px solid #1B4332;
+}
+
+#toogleViewButton{
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: lightgreen;
+  border: none;
+  cursor: pointer;
+}
+
+.searchMuscleGroup{
+  color: white;
+  margin-right: 3px;
 }
 
 #buttons {

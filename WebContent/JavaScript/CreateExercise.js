@@ -16,21 +16,26 @@ function addExercise(exercise, isLoadExercise) {
     var td = document.createElement("td");
     var container = document.createElement("div");
     var removeExerciseButton = document.createElement("button");
+    var imgs = document.getElementsByTagName("img");
     
     
     // Checkt Erstellung Exercise in Bearbeitungs- oder Trainingssicht -> Regelt Sichtbarkeit von Elementen 
     container.setAttribute("class", "setContainer");
-    if(isLoadExercise){
+    if(isLoadExercise){ //Trainingsansicht
         container.style.visibility = "visible";
         removeExerciseButton.style.visibility = "hidden";
-    }
-    else
-    {
-        container.style.visibility = "hidden"; 
-        removeExerciseButton.style.visibility = "visible";
-        article.style.height = "150px";
+        for(let i = 0; i < imgs.length; i++){
+            imgs.item(i).style.visibility = "visible";
+            }
         
     }
+    else
+    {                   // Bearbeitungsansicht
+        container.style.visibility = "hidden"; 
+        removeExerciseButton.style.visibility = "visible";
+        article.style.height = "150px"; 
+    }
+
   
 
     //Innerhalb von Exercises einen neuen <article> anlegen
@@ -58,6 +63,7 @@ function addExercise(exercise, isLoadExercise) {
     bild.setAttribute("src", "../BildServlet?id="+exercise.id);
     bild.setAttribute("width", "200");
     bild.setAttribute("height", "200");
+    bild.style.visibility = "hidden";
 
     //Innerhalb der neuen <h2> einen <table> anlegen
     container.appendChild(table);

@@ -89,6 +89,7 @@ function extractFavorites(jsonString)
     toggleContainer.innerHTML = "";
     exercisesArrayList.forEach(exercise => {
         const result = searchResults.content.cloneNode(true).children[0];
+        result.setAttribute("class","resultItem");
         toggleContainer.appendChild(result);
         const header = result.querySelector('.searchExerciseName');
         header.addEventListener("click", () => onExerciseClick(exercise))
@@ -109,6 +110,7 @@ function extractExercises(jsonString)
     toggleContainer.innerHTML = "";
     exercisesArrayList.forEach(exercise => {
         const result = searchResults.content.cloneNode(true).children[0];
+        result.setAttribute("class","resultItem");
         toggleContainer.appendChild(result);
         const header = result.querySelector('.searchExerciseName');
         header.addEventListener("click", () => onExerciseClick(exercise))
@@ -116,6 +118,7 @@ function extractExercises(jsonString)
         header.textContent = exercise.name; //set.rep
         body.textContent = exercise.muscleGroup;
         console.log(exercise);
+        
    });
    
 }

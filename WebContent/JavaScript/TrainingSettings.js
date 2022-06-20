@@ -21,7 +21,8 @@ function toogleView()
         for(let i = 0; i < imgs.length; i++){
             imgs.item(i).style.visibility = "visible";
         }
-       
+
+        document.getElementById("searchContainer").style.borderStyle = "hidden";
         clickedButton.innerHTML = "Bearbeitungsansicht";
     }
     else{
@@ -35,7 +36,9 @@ function toogleView()
         for(let i = 0; i < imgs.length; i++){
             imgs.item(i).style.visibility = "hidden";
         }
+
         
+        document.getElementById("searchContainer").style.borderStyle = "solid";
         clickedButton.innerHTML = "Trainingsansicht";
     }
 
