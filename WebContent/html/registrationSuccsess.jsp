@@ -8,7 +8,8 @@
 <title>Registriervorgang erfolgreich!</title>
 </head>
 <body>
-<%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
+<%@ include file="fragments/noScript.jspf" %>
+<!-- HIER DARF NICHT AUF LOGIN ÜBERPRÜFT WERDEN! -->
 	<h1>Der Registriervorgang war erfolgreich!</h1>
 	<main>
 		<ul>

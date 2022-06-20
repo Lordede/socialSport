@@ -1,8 +1,4 @@
-<head>
-<script type="text/javascript" src="../JavaScript/authenticationCheck.js" ></script>
-</head>
-
 <script> // TODO: Fragen ob das i.o ist.
         var userData = "${userData}"
-        	authenticationCheck(userData) //redirect, wenn user nicht eingeloggt ist.
-        </script>
+        authenticationCheck(userData) //redirect, wenn user nicht eingeloggt ist.
+</script>

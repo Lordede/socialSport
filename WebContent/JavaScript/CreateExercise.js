@@ -4,7 +4,7 @@
 /*
 addExercise fügt eine neue Übung ein, bei der man dann x belibige Setze trainieren kann
 */
-function addExercise(exercise) {
+function addExercise(exercise, isLoadExercise) {
 
     var article = document.createElement("article");
     article.setAttribute("id", exercise.id);
@@ -14,11 +14,33 @@ function addExercise(exercise) {
     var tr = document.createElement("tr");
     var th = document.createElement("th");
     var td = document.createElement("td");
+    var container = document.createElement("div");
+    var removeExerciseButton = document.createElement("button");
+    
+    
+    // Checkt Erstellung Exercise in Bearbeitungs- oder Trainingssicht -> Regelt Sichtbarkeit von Elementen 
+    container.setAttribute("class", "setContainer");
+    if(isLoadExercise){
+        container.style.visibility = "visible";
+        removeExerciseButton.style.visibility = "hidden";
+    }
+    else
+    {
+        container.style.visibility = "hidden"; 
+        removeExerciseButton.style.visibility = "visible";
+        article.style.height = "150px";
+        
+    }
+  
 
     //Innerhalb von Exercises einen neuen <article> anlegen
     exercises.appendChild(article);
     article.setAttribute("class", "exercise elements");
-    
+
+    //Remove exercise button
+    removeExerciseButton.innerHTML = "Übung entfernen";
+    removeExerciseButton.setAttribute("class", "removeExerciseButton");
+    article.appendChild(removeExerciseButton);
 
     //Innerhalb von dem neuen <article> eine neue <h2> anlegen 
     article.appendChild(h2);
@@ -28,13 +50,17 @@ function addExercise(exercise) {
 
     //Bild
     article.appendChild(bild);
-    //var path = `${pageContext.request.contextPath}`;
+
+    //SetDiv
+    article.appendChild(container);
+
+
     bild.setAttribute("src", "../BildServlet?id="+exercise.id);
     bild.setAttribute("width", "50");
     bild.setAttribute("height", "50");
 
     //Innerhalb der neuen <h2> einen <table> anlegen
-    article.appendChild(table);
+    container.appendChild(table);
     table.setAttribute("class", "exerciseTable");
 
     //Statisch die Headzeile einfügen
@@ -43,7 +69,7 @@ function addExercise(exercise) {
     var setButton = document.createElement("button");
     setButton.setAttribute("class", "button addSet");
     setButton.innerHTML = "Satz hinzufügen";
-    article.appendChild(setButton);
+    container.appendChild(setButton);
 
     addSet(table)
 
@@ -53,7 +79,7 @@ function addExercise(exercise) {
 
 function getExerciseReference() {
 
-    let NameOfcallingExercise = this.parentNode.getAttribute("name");      // Name der Übung
+    let NameOfcallingExercise = this.parentNode.parentNode.getAttribute("name");      // Name der Übung
 
     /*
     Das Nachfolgende muss irgendwie auch eleganter gehen aber für den Moment funktioniert es
@@ -65,7 +91,7 @@ function getExerciseReference() {
 
     var callingTable = document.getElementsByName(NameOfcallingExercise);   //Liste der Übungen mit dem Namen
     var callingTable = callingTable[0];// Verweis auf Article                //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
-    var callingTable = callingTable.children[2]; // -> table!
+    var callingTable = callingTable.children[3].children[0]; // -> table!
 
     addSet(callingTable)
 
@@ -118,7 +144,7 @@ function addSet(callingTable) {
 
 function disableSet() {
 
-    let exerciseid = this.parentNode.parentNode.parentNode.parentNode.getAttribute("id");   // Smell
+    let exerciseid = this.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute("id");   // Smell
     let idOfTraining = document.getElementsByTagName("header");
     idOfTraining = idOfTraining[0].getAttribute("id");              // id des Trainings
 
@@ -150,10 +176,8 @@ function disableSet() {
 function sendSet(kginput, whdinput, exerciseid) {
 
     var xmlhttp = new XMLHttpRequest;
-
-    //console.log("KG "+kginput);
-    //console.log("whd "+whdinput);
     var url = "../SetServlet";
+    
     xmlhttp.addEventListener("load", function () {
 
         var response = xmlhttp.response;

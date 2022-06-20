@@ -20,16 +20,11 @@
     </head>
 
     <body class="font_t">
+<%@ include file="fragments/noScript.jspf" %>
         <header>
             <h1>Social Sport</h1>
             <nav>
-                <ul>
-                    <li><a href="./dashboard.jsp">Dashboard</a></li>
-                    <li><a href="./trainingsmenu.jsp">Training</a></li>
-                    <li><a href="./leaderboard.jsp">Leaderboard</a></li>
-                    <li><a href="./accountSetting.jsp">Account Settings</a></li>
-                    <li><a href="./exercise.jsp">Übung erstellen</a></li>
-                </ul>
+                <a href="login.html">Login</a>
             </nav>
         </header>
         <article>

@@ -63,12 +63,12 @@ public class TrainingSessionServlet extends HttpServlet {
 		trainingSession.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 		
 		create(trainingSession);
-		System.out.println("TS Id: " + trainingSession.getId());
+//		System.out.println("TS Id: " + trainingSession.getId());
 		
 		if(session.getAttribute("trainingSession") != null) 
 		{
 			session.removeAttribute("trainingSession");
-			System.out.println("ts war vorhanden");
+//			System.out.println("ts war vorhanden");
 			
 		}
 		session.setAttribute("trainingSession", trainingSession);

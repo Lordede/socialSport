@@ -126,9 +126,7 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	private void delFavoriteExercise(String name) throws ServletException
 	{
 		try(Connection con = ds.getConnection();
-				PreparedStatement favCon = con.prepareStatement("DELETE FROM favoriteexercises "
-						+ "WHERE (SELECT exercises.id FROM exercises "
-						+ "WHERE name=?)"))
+				PreparedStatement favCon = con.prepareStatement("DELETE FROM favoriteexercises WHERE exerciseId = (SELECT id From exercises WHERE name = ?)"))
 		{
 			favCon.setString(1, name);
 			favCon.executeUpdate();

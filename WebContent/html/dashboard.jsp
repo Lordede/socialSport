@@ -8,29 +8,28 @@
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="main page to have overview of avaible exercises on SocialSport">
         <meta name="keywords" content="Training Sport Exerices">
+
+        <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/layout.css">
-        <link rel="stylesheet" href="../css/dashboard.css">
-<!--         https://stackoverflow.com/questions/20490848/servlet-not-redirected-to-page-showing-non-styled-page -->
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/navbar.css" />
-        <base href="${pageContext.request.requestURI}" /> <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+        <!--         https://stackoverflow.com/questions/20490848/servlet-not-redirected-to-page-showing-non-styled-page -->
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/dashboard.css"> 
+        
         <script src="../JavaScript/favoriteButton.js" type="text/javascript"></script>
+        
+        <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
+        <%@ include file="fragments/navbarHEAD.jspf" %>
+        
     </head>
     <body>
-    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- �berpr�fung, ob User eingeloggt ist --%>
-    <nav>
-    		<ul>
-                <li><a class="active" href="./dashboard.jsp">Dashboard</a></li>
-                <li><a href="./trainingsmenu.jsp">Training</a></li>
-                <li><a href="./leaderboard.jsp">Leaderboard</a></li>
-                <li><a href="./accountSetting.jsp">Account Settings</a></li>
-                <li><a href="./exercise.jsp">Übung erstellen</a></li>
-  				<li class="logout"><a class="active" href="#about">Logout</a></li>
-			</ul> 
-    	</nav>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
+    <%@ include file="fragments/navbar.jspf" %>              <%-- Navbar --%>
+    <%@ include file="fragments/noScript.jspf" %>
         <header>
             <h1><strong>Dashboard</strong></h1>
         </header>
+          
         <article>
             <div class="Armmuskulatur">
                 <article class="Bizepscurls" id="col1">
@@ -70,7 +69,7 @@
                     <img src="../img/ExerciseImages/french-press-sz.gif" alt="Strindrücken mit SZ-Stange" width="180" height="180">
                     <div class="text_Trizeps">
                         Stirndücken oder auch French Press, Nosebreaker, Skull Crushers bezeichnet hört sich anfangs zwar ziehmlich martialisch an, jedoch ist sie eine der effektivsten Trizepsübungen überhaupt.
-                        Diese Übung gilt als <strong>nicht anfängerfreundliche</strong>, jedoch ist sie ein wenig Übung gut zu meistern.
+                        Diese Übung gilt als <strong>nicht anfängerfreundliche</strong>, jedoch ist sie nach ein wenig Übung gut zu meistern.
                         <h4>Beanspruchte Muslkeln</h4>
                         Mit dieser Übung wird vorrainig die Trizepsmuskulatur(musculus triceps brachii) traininert, auch wird dem Knorrenmuskel(musculus anconaeus) ein Trainingsreiz gegeben. Unterstützend wirkt dabei der Handstrecker (musculus extensor carpi) und der gemeinsame Fingerstrecker (musculus extensor digitorum).
                     </div>
