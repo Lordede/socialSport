@@ -20,6 +20,30 @@
     display: table-cell;
 
 }
+#col_b1
+{
+    border-left: 30px;
+    border-right: 30px;
+    border-spacing: 50px;
+    display: table-cell;
+
+}
+#col_b2
+{
+    border-left: 30px;
+    border-right: 30px;
+    border-spacing: 50px;
+    display: table-cell;
+
+}
+#col2
+{
+    border-left: 30px;
+    border-right: 30px;
+    border-spacing: 50px;
+    display: table-cell;
+
+}
 .lowerBox
 {
     display: table;
@@ -42,7 +66,7 @@
 .text_block
 {
     margin-top: 10px;
-    align-items: center;
+    text-align: center;
 }
 
 .centered

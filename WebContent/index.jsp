@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
     <!DOCTYPE html>
+    <html>
     <!-- Erstellt von Cem Durmus -->
+    <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
@@ -8,7 +10,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index_dark.css">
 
-    <head>
         <title>
             Social Sport
         </title>
@@ -44,18 +45,16 @@
                             height="480">
                     </p>
                 </div>
-                <div id="col"></div>
-                <div id="col"></div>
-                <div class="zwei_box" id="col">
+                <div id="col_b1"></div>
+                <div id="col_b2"></div>
+                <div class="zwei_box" id="col2">
                     <p>
                         <img src="img/samuel-girven-VJ2s0c20qCo-unsplash.jpg" alt="Hanteln" width="320" height="480">
                     </p>
                 </div>
             </div>
             <div>
-                <p class="text_block">
-                <h2>Genug vor der Couch gesessen, jetzt kannst du Sport machen und deine Freunde teilhaben lassen</h2>
-                </p>
+                  <h2 class="text_block">Genug vor der Couch gesessen, jetzt kannst du Sport machen und deine Freunde teilhaben lassen</h2>
             </div>
             <div class="lowerBox">
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="de">
+<html>
     <head>
         <title>Exercise Dashboard</title>
         <meta charset="utf-8">
@@ -20,7 +20,6 @@
         
         <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
         <%@ include file="fragments/navbarHEAD.jspf" %>
-        
     </head>
     <body>
     <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
@@ -32,8 +31,8 @@
           
         <article>
             <div class="Armmuskulatur">
-                <article class="Bizepscurls" id="col1">
-                    <button data-="" data-exercise="Bizepscurls" class="fav-button">
+                <article class="col1">
+                    <button data-exercise="Bizepscurls" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
@@ -46,7 +45,7 @@
                         Wie der Name schon sagt, wird dabei in erster Linie der Bizeps-Muskel(musculus biceps brachii) angesprochen. Unterstützend wirken dabei auch der Armbeuger(musculus branchii) und Oberarmspeichenmuskel(musculus brachioradialis).
                     </div>
                 </article>
-                <article class="Hammercurls" id="col1">
+                <article class="col1">
                     <button data-exercise="Hammercurls" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -60,7 +59,7 @@
                         Dabei wird vorallem Bizeps-Muskel(musculus biceps brachii) beansprucht. Unterstützend sind dabei der Armbeuger (musculus brachialis), Oberarmspeichenmuskel (musculus brachioradialis), der lange radiale Handstrecker (musculus extrensor carpi radialis longus) und zuletzt der kurze radiale Handstrecker (musculus extensor carpi radialis longus)
                     </div>
                 </article>
-                <article class="Trizepsdruecken_SZ" id="col1">
+                <article class="col1">
                     <button data-exercise="Strindrücken mit SZ-Stange" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -77,7 +76,7 @@
             </div>
                 <div class="row2">
 
-                    <article class="Trizepsdruecken_kabel" id="col1_1">
+                    <article class="col1_1">
                         <button data-exercise="Trizepsdrücken am Kabelturm" class="fav-button">
                             <i class="fa fa-star"></i>
                             <span>Übung merken</span>
@@ -92,7 +91,7 @@
                             Dabei unterstützt der Handstrecker(musculus extensor carpi), der Fingerstrecker(musculus extensor capri) und zuletzt der Kleinfingerstrecker(musculus extensor digitorum)
                         </div>
                     </article>
-                    <article class="Seitenheben" id="col1_1">
+                    <article class="col1_1">
                         <button data-exercise="Seitenheben mit Kurzhanteln" class="fav-button">
                             <i class="fa fa-star"></i>
                             <span>Übung merken</span>
@@ -106,7 +105,7 @@
                             Das Seitheben beansprucht die Deltamuskulatur(musculus deltoideus), sowie den mittleren Teil des Deltamuskels(musculus deltoideus pars acromialis). Unterstützen tut dabei der Trapezmuskel(musculus trapezius pars descendens).
                         </div>
                     </article>
-                    <article class="Schulterdruecken_Kh" id="col1_1">
+                    <article class="col1_1">
                         <button data-exercise="Schulterdrücken sitzend mit Kurzhanteln" class="fav-button">
                             <i class="fa fa-star"></i>
                             <span>Übung merken</span>
@@ -124,7 +123,7 @@
                     </article>
                 </div>
             <div class="Brustmuskulatur">
-                <article class="Bankdruecken" id="col1">
+                <article class="col1">
                     <button data-exercise="Bankdrücken Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -140,7 +139,7 @@
                         Zur unterstützenden Muskulatur gehören der vordere Teil deines Deltamuskels, der vordere Sägemuskel (musculus serratus anterior) und der Knorrenmuskel (musculus anconaeus).
                     </div>
                 </article>
-                <article class="Schraegbankdruecken" id="col1">
+                <article class="col1">
                     <button data-exercise="Schrägbankdrücken" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -156,7 +155,7 @@
                         Zur unterstützenden Muskulatur gehören der vordere Teil deines Deltamuskels, der vordere Sägemuskel (musculus serratus anterior) und der Knorrenmuskel (musculus anconaeus).
                     </div>
                 </article>
-                <article class="Brust_Kabel_ueberzug" id="col1">
+                <article class="col1">
                     <button data-exercise="Überzug liegend am Kabelturm" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -174,7 +173,7 @@
                 </article>
             </div>
             <div class="Rueckenmuskulatur">
-                <article class="Latzug_breit" id="col1">
+                <article class="col1">
                     <button data-exercise="Latzug" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -192,7 +191,7 @@
                         Unterstützend wirkt dabei der Rückenstrecker (musculus erector spinae), Bizeps (musculus biceps brachii) und Armbeuger (musculus brachialis).
                     </div>
                 </article>
-                <article class="rudern_Langhantel" id="col1">
+                <article class="col1">
                     <button data-exercise="Gebeugtes Rudern mit Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -208,7 +207,7 @@
                         Unterstützen tut dabei der Bizeps (musculus biceps brachii) und der Armbeuger (musculus brachialis)
                     </div>
                 </article>
-                <article class="rudern_kabelturm" id="col1">
+                <article class="col1">
                     <button data-exercise="Rudern am Kabelturm" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -226,7 +225,7 @@
                 </article>
             </div>
             <div class="Beinmuskulatur">
-                <article class="Beinpresse" id="col1">
+                <article class="col1">
                     <button data-exercise="Beinpresse" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -242,7 +241,7 @@
                         und der große Gesäßmuskel (musculus gluteus maximus). Unterstützung gibt es dabei durch den  Rückenstrecker (musculus erector spinae) und den dreiköpfige Adduktor (musculus adductor).
                     </div>
                 </article>
-                <article class="Ausfallschritte" id="col1">
+                <article class="col1">
                     <button data-exercise="Ausfallschritte mit Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -258,7 +257,7 @@
                         Als unterstützende Muskulatur gilt der Beinbizeps (musculus biceps femoris).
                     </div>
                 </article>
-                <article class="Kniebeugen" id="col1">
+                <article class="col1">
                     <button data-exercise="Kniebeugen mit Langhantel" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -276,7 +275,7 @@
                 </article>
             </div>
             <div class="Bauchmuskulatur">
-                <article class="Situps_negativbank" id="col1">
+                <article class="col1">
                     <button data-exercise="Situps auf Schrägbank" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -292,7 +291,7 @@
                         Zur unterstützenden Muskulatur gehört der schräge Bauchmuskel, der bei dieser Übung (musculus obliquus abdominis) ebenfalls gestärkt wird.
                     </div>
                 </article>
-                <article class="Crunshes_maschine" id="col1">
+                <article class="col1">
                     <button data-exercise="Crunsh Maschine" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
@@ -307,7 +306,7 @@
                         Unterstütz wird dabei durch den schrägen Bauchmuskel (musculus obliquus abdominis) gewährleistet.
                     </div>
                 </article>
-                <article class="seitliches_oberkoerperbeugen_kh" id="col1">
+                <article class="col1">
                     <button data-exercise="Seitliches Oberkörperbeugen mit Kurzhanteln" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>

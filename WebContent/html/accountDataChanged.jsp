@@ -41,7 +41,9 @@
 				<p>E-Mail: ${userData.eMail}</p>
 			</form>
 		</div>
-
+		<div>
+			<a href="./accountSetting.jsp">Weitere Daten ändern</a>
+		</div>
 	</article>
 	<footer>
 		<!--Generische Navigationsleiste-->
