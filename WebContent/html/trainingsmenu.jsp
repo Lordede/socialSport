@@ -44,12 +44,6 @@
                 </div>
                 <div class="trainingsContainer"></div>
             </div>
-            <button type="addTraining"
-                    name="new training"
-                    formaction=""
-                    formmethod="post">
-                    Neues Training
-            </button>
             <script>
                 let searchTrainingInput = document.getElementById("searchPastTrainings")
                 let loadAllTrainings = document.getElementById("loadTrainings");
