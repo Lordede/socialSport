@@ -1,5 +1,7 @@
+/**Cem Durmus */
+function readPastTrainings()
+{
 
-function readPastTrainings() {
     var xmlhttp = new XMLHttpRequest();
     var jsonString;
     xmlhttp.open("GET", "../TrainingServlet?loadTrainings=name", true);
@@ -53,7 +55,7 @@ function selectTraining(training) {
         window.location = "training.jsp";
     }
     xmlhttpTrainingSessionPost.send();
-
+    //Ende Edmüller Lukas
     xmlhttp.send();
 
     // Trainingsession wird bei POst bereits in SessionScope geladen, daher GET nicht nötig
