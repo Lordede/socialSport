@@ -27,9 +27,7 @@ function extractFavorites(jsonString)
         toggleContainer.appendChild(result);
         const header = result.querySelector('.searchExerciseName');
         header.addEventListener("click", () => onExerciseClick(exercise))
-        const body = result.querySelector('.searchMuscleGroup');
         header.textContent = exercise.name; //set.rep
-        body.textContent = exercise.muscleGroup;
         console.log(exercise);
    });
 }

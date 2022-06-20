@@ -89,44 +89,39 @@ public class UserUpdateServlet extends HttpServlet {
 			{
 			case "changeMail":
 				updateEmail(user, request.getParameter("changeMail"));
-//				user = getUser(user.getId());
-//				session.setAttribute("userData", user);
+				user = getUser(user.getId());
+				session.setAttribute("userData", user);
 				break;
 			case "changeFirstName":
 				updateFirstName(user, request.getParameter("changeFirstName"));
-//				user = getUser(user.getId());
-//				session.setAttribute("userData", user);
+				user = getUser(user.getId());
+				session.setAttribute("userData", user);
 				break;
 			case "changeLastName": // TODO : namen bitte zum laufen kriegen du kek
 				updateLastName(user, request.getParameter("changeLastName"));
-//				user = getUser(user.getId());
-//				session.setAttribute("userData", user);
+				user = getUser(user.getId());
+				session.setAttribute("userData", user);
 				break;
 			case "changeUsername":
 				updateUsername(user,request.getParameter("changeUsername"));
-//				user = getUser(user.getId());
-//				session.setAttribute("userData", user);
+				user = getUser(user.getId());
+				session.setAttribute("userData", user);
 				break;
 			case "password":
 				updatePassword(user, request.getParameter("password"));
-//				user = getUser(user.getId());
-//				session.setAttribute("userData", user);
+				user = getUser(user.getId());
+				session.setAttribute("userData", user);
 				break;
 			case "setAdmin":
 				setAdmin(Long.parseLong(request.getParameter("setAdmin")));
-//				user = getUser(user.getId());
-//				session.setAttribute("userData", user);
+				user = getUser(user.getId());
+				session.setAttribute("userData", user);
 				break;
 			default:
 				return;
 			}
 		}
-		response.sendRedirect("html/accountDataChanged.jsp");
-	}
-	
-	private void updateImage(UserBean user) {
-		// TODO Bildhochladen
-		
+		response.sendRedirect("html/accountSetting.jsp");
 	}
 
 	public void updateEmail(UserBean user, String eMail) throws ServletException
@@ -156,7 +151,6 @@ public class UserUpdateServlet extends HttpServlet {
 																		+ "WHERE id = ?"))
 		{	
 			statementName.setString(1, newName);
-			System.out.println(newName);
 			statementName.setLong(2, user.getId());
 			statementName.executeUpdate();
 		}	
@@ -255,14 +249,17 @@ public class UserUpdateServlet extends HttpServlet {
 		try (Connection conDs = ds.getConnection();
 				PreparedStatement statement = conDs.prepareStatement("SELECT * FROM users WHERE id = ?"))
 		{
+			statement.setLong(1, id);
 			try(ResultSet rs = statement.executeQuery())
 			{
+				if(rs != null && rs.next()) {
 				user.setUsername(rs.getString("username"));
 				user.setCreationDate(rs.getDate("creationDate"));
 				user.setFirstName(rs.getString("firstname"));
 				user.setLastName(rs.getString("lastname"));
 				user.seteMail(rs.getString("eMail"));
-				user.setId(id);
+				user.setId(rs.getLong("id"));
+				}
 			}
 			return user;
 		}

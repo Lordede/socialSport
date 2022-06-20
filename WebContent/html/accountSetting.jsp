@@ -37,13 +37,13 @@
 			</form>
 		</div>
 		<div>
-			<form action="../UserUpdateServlet" method="post"
-				accept-charset="utf-8">
+			<form action="../UserUpdateServlet" method="post" accept-charset="utf-8">
 				<label for="changeFirstName"> Vorname: ${userData.firstName}</label><br> 
 				<input type="text" size="30" id="changeFirstName" name="changeFirstName" maxlength="35"><br> 
 				<Button value="changeFirstName" type="submit">Vornamen ändern</Button><br>
-				<label for="changeLastName">Nachname:
-					${userData.lastName}</label><br> 
+			</form>
+			<form action="../UserUpdateServlet" method="post" accept-charset="utf-8">
+				<label for="changeLastName">Nachname: ${userData.lastName}</label><br> 
 				<input type="text" size="30" id="changeLastName" name="changeLastName" maxlength="35"><br>
 				<Button value="changeLastName" type="submit">
 					Nachnamen ändern
@@ -84,7 +84,6 @@
 				<template id="favoriteExercises">
 					<div>
 						<div class="searchExerciseName" exercise-name></div>
-						<div class="searchMuscleGroup" exercise-group></div>
 					</div>
 				</template>
 				<div id="favoritesContainer">
@@ -93,6 +92,8 @@
 				<button id="delExercise" hidden="hidden">Übung aus Favoriten Löschen</Button>
 				<script>
 					document.addEventListener("DOMContentLoaded", readFavoriteExercises);
+					var buttons = document.querySelectorAll("Button");
+					buttons.forEach(button => button.addEventListener("click", event => {window.location.reload})); 
 				</script>
 			</div>
 		</div>
