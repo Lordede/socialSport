@@ -33,7 +33,7 @@
         <article>
             <div class="Armmuskulatur">
                 <article class="Bizepscurls" id="col1">
-                    <button data-exercise="Bizepscurls" class="fav-button">
+                    <button data-="" data-exercise="Bizepscurls" class="fav-button">
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>

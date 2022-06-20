@@ -44,3 +44,21 @@
     margin-top: 10px;
     align-items: center;
 }
+
+.centered
+{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.linksContainer{
+    display: flex;
+    border: 3px solid #95D5B2;
+    border-radius: 10px;
+}
+
+.links{
+    margin: 20px;
+}
