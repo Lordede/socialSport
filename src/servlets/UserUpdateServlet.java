@@ -137,6 +137,7 @@ public class UserUpdateServlet extends HttpServlet {
 			statementName.setString(1, eMail);
 			statementName.setLong(2, user.getId());
 			statementName.executeUpdate();
+			
 		}	
 		catch (Exception exception)
 		{

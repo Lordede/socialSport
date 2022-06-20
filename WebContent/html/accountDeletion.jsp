@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <base href="${pageContext.request.requestURI}" />
 <!-- Basis für relative Verweise -> Basis = Speicherort -->
 <title>Insert title here</title>
@@ -12,6 +12,6 @@
 	<%@ include file="fragments/authenticationCheck.jspf"%>
 	<%@ include file="fragments/noScript.jspf" %>
 	<%-- Überprüfung, ob User eingeloggt ist --%>
-	<h1>Schade dass Sie uns verlassen haben</h1>
+	<h1>Schade dass Sie uns verlassen haben, wir hoffen doch, dass sie zurückkehren</h1>
 </body>
 </html>

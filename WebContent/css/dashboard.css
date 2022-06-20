@@ -1,3 +1,4 @@
+/*Cem Durmus*/
 .Armmuskulatur
 {
     display: table;
@@ -5,8 +6,9 @@
     table-layout: fixed;
     border-spacing: 10px;
     border-bottom: 4px solid #1B4332;
+    border-top: 4px solid #1B4332;
 }
-#col1
+.col1
 {
     display: table-cell;
 }
@@ -18,7 +20,7 @@
     border-spacing: 10px;
     border-bottom: 2px solid #1B4332;
 }
-#col1_1
+.col1_1
 {
     display: table-cell;
 }

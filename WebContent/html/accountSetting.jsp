@@ -5,7 +5,7 @@
 <html lang="de">
 <head>
 <base href="${pageContext.request.requestURI}" />
-<!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+<!-- Basis für relative Verweise -> Basis = Speicherort -->
 <title>Profil Bearbeiten</title>
 <meta charset="utf-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
@@ -39,10 +39,10 @@
 			<form action="../UserUpdateServlet" method="post"
 				accept-charset="utf-8">
 				<label for="changeFirstName"> Vorname: ${userData.firstName}
-				</label><br> <input type="text" size="30" name="changeFirstName"
+				</label><br> <input type="text" size="30" id="changeFirstName" name="changeFirstName"
 					maxlength="35"><br> <label for="changeLastName">Nachname:
-					${userData.lastName}</label><br> <input type="text" size="30"
-					name="changeLastName" maxlength="35"><br>
+					${userData.lastName}</label><br> 
+					<input type="text" size="30" id="changeLastName" name="changeLastName" maxlength="35"><br>
 				<Button type="submit">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"df -->
 					Namen ändern
@@ -52,8 +52,8 @@
 		<div>
 			<form action="../UserUpdateServlet" method="post"
 				accept-charset="utf-8">
-				<label for="password">Passwort: </label><br> <input
-					type="password" name="password" size="30" maxlength="35"><br>
+				<label for="password">Passwort: </label><br> 
+				<input type="password" id="password" name="password" size="30" maxlength="35"><br>
 				<Button type="submit" name="password" value="password"
 					formaction="../UserUpdateServlet" formmethod="post">
 					Passwort ändern</Button>
@@ -63,7 +63,7 @@
 			<form action="../UserUpdateServlet" method="post"
 				accept-charset="utf-8">
 				<label for="changeMail"> E-Mail: ${userData.eMail}</label><br>
-				<input type="email" name="changeMail" size="30" maxlength="35"><br>
+				<input type="email" id="changeMail" name="changeMail" size="30" maxlength="35"><br>
 				<Button type="submit" value="changeMail">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"> -->
 					E-Mail ändern
