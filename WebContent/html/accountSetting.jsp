@@ -12,8 +12,9 @@
 <meta name="keywords" content="Benutzerkonto bearbeiten">
 <meta name="author" content="Cem Durmus">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/layout.css">
 <link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/accountSetting.css">
 <script src="../JavaScript/FavoriteManagement.js" type="text/javascript"></script>
 </head>
 <body>
@@ -38,14 +39,14 @@
 		<div>
 			<form action="../UserUpdateServlet" method="post"
 				accept-charset="utf-8">
-				<label for="changeFirstName"> Vorname: ${userData.firstName}
-				</label><br> <input type="text" size="30" id="changeFirstName" name="changeFirstName"
-					maxlength="35"><br> <label for="changeLastName">Nachname:
+				<label for="changeFirstName"> Vorname: ${userData.firstName}</label><br> 
+				<input type="text" size="30" id="changeFirstName" name="changeFirstName" maxlength="35"><br> 
+				<Button value="changeFirstName" type="submit">Vornamen ändern</Button><br>
+				<label for="changeLastName">Nachname:
 					${userData.lastName}</label><br> 
-					<input type="text" size="30" id="changeLastName" name="changeLastName" maxlength="35"><br>
-				<Button type="submit">
-					<!-- formaction="../UserUpdateServlet" formmethod="post"df -->
-					Namen ändern
+				<input type="text" size="30" id="changeLastName" name="changeLastName" maxlength="35"><br>
+				<Button value="changeLastName" type="submit">
+					Nachnamen ändern
 				</Button>
 			</form>
 		</div>

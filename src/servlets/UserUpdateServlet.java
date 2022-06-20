@@ -89,32 +89,35 @@ public class UserUpdateServlet extends HttpServlet {
 			{
 			case "changeMail":
 				updateEmail(user, request.getParameter("changeMail"));
+//				user = getUser(user.getId());
+//				session.setAttribute("userData", user);
 				break;
 			case "changeFirstName":
-				System.out.println(request.getParameter("changeFirstName"));
 				updateFirstName(user, request.getParameter("changeFirstName"));
-				
+//				user = getUser(user.getId());
+//				session.setAttribute("userData", user);
 				break;
 			case "changeLastName": // TODO : namen bitte zum laufen kriegen du kek
 				updateLastName(user, request.getParameter("changeLastName"));
+//				user = getUser(user.getId());
+//				session.setAttribute("userData", user);
 				break;
 			case "changeUsername":
 				updateUsername(user,request.getParameter("changeUsername"));
+//				user = getUser(user.getId());
+//				session.setAttribute("userData", user);
 				break;
 			case "password":
 				updatePassword(user, request.getParameter("password"));
+//				user = getUser(user.getId());
+//				session.setAttribute("userData", user);
 				break;
-			case "changeImage":
-				updateImage(user);
-				break;
-//			case "deleteUser":
-//				deleteUser(user);
-//				response.sendRedirect("html/accountDeletion.jsp");
-//				break;
 			case "setAdmin":
 				setAdmin(Long.parseLong(request.getParameter("setAdmin")));
+//				user = getUser(user.getId());
+//				session.setAttribute("userData", user);
 				break;
-				default:
+			default:
 				return;
 			}
 		}
@@ -185,7 +188,6 @@ public class UserUpdateServlet extends HttpServlet {
 																		+ "WHERE id = ?"))
 		{
 			statementNames.setString(1, firstName);
-			System.out.println(firstName);
 			statementNames.setLong(2, user.getId());
 			statementNames.executeUpdate();
 		}	
