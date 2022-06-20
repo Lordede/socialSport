@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
+<title>Leaderboard</title>
 <meta charset="utf-8">
 <meta name="author" content="Hubertus Seitz">
 <meta name="description" content="leaderboard">
@@ -11,9 +11,11 @@
 <base href="${pageContext.request.requestURI}" />
 <%@ include file="fragments/authenticationCheckHEAD.jspf"%>
 <%@ include file="fragments/navbarHEAD.jspf"%>
+<script src="../JavaScript/Leaderboard.js"></script>
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
 	rel="stylesheet">
+	</head>
 <body>
 
 	<%@ include file="fragments/noScript.jspf"%>
