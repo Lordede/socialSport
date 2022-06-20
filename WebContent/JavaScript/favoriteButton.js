@@ -38,9 +38,23 @@ function senseEvent(event) {
   dbCall(tagName.innerHtml);
 }
 
+//Anlage Exercise als Favorit
+//GET Aufruf von Lukas Edmüller
 function dbCall(exerciseName) {
+  /*
+    Ruft FavoriteExercise ab
+    Wenn nicht vorhanden -> Response = false -> Post
+    Wenn  vorhanden -> Response = true -> Alert 
+  */
   let http = new XMLHttpRequest();
-  http.open("GET", "../FavoriteExerciseServlet?name=" + exerciseName + "&checkExisting=" + true, true);
+  http.open(
+    "GET",
+    "../FavoriteExerciseServlet?name=" +
+      exerciseName +
+      "&checkExisting=" +
+      true,
+    true
+  );
   http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   http.onload = function () {
     let response = http.responseText;
@@ -52,9 +66,8 @@ function dbCall(exerciseName) {
         "application/x-www-form-urlencoded"
       );
       request.send("name=" + exerciseName);
-    }
-    else{
-        alert("Übung ist bereits favorisiert!");
+    } else {
+      alert("Übung ist bereits favorisiert!");
     }
   };
   http.send();

@@ -18,6 +18,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class FavoriteExerciseServlet
@@ -41,11 +42,12 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UserBean user = (UserBean) request.getSession().getAttribute("userData");
+		HttpSession session = request.getSession();
+    	UserBean user = (UserBean) session.getAttribute("userData");
 		if(request.getParameter("checkExisting") != null) {
 			long userId = user.getId();
 			String exerciseName = request.getParameter("name");
-			Boolean isExisting = checkExistingExercise(null, null);
+			Boolean isExisting = checkExistingExercise(userId, exerciseName);
 			
 			response.getWriter().write(isExisting.toString());
 		}
