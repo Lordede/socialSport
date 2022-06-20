@@ -1,8 +1,7 @@
-CREATE Table exercises(
-    id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) NOT NULL,
-    muscleGroup varchar(255),
-    exerciseImage MEDIUMBLOB,
-    filename varchar(255),
-    PRIMARY KEY (id)
-   )
+CREATE TABLE trainingsessions(
+	id int NOT NULL AUTO_INCREMENT,
+	creationDate datetime NOT NULL,
+	trainingId int NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (trainingId) REFERENCES trainings(id)
+)

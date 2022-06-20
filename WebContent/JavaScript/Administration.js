@@ -51,6 +51,7 @@ function selectUser(user) {
         adminButton.removeAttribute("hidden");
     }
     let userContainer = document.querySelector("#userContainer");
+    userContainer.innerHTML="";
     let userName = document.createElement("div");
     userName.setAttribute("id", "userName");
     userName.textContent = user.benutzername;

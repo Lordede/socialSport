@@ -69,6 +69,7 @@ public class UserUpdateServlet extends HttpServlet {
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		deleteUser(Long.parseLong(request.getParameter("id")));
+		response.getWriter().write("ok");
 	}
 	
 	
@@ -229,9 +230,15 @@ public class UserUpdateServlet extends HttpServlet {
 	private void deleteUser(Long id) throws ServletException 
 	{
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("DELETE FROM users WHERE id = ?")){
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM favoriteexercises WHERE userId=?");
+				PreparedStatement delTraining = con.prepareStatement("DELETE FROM trainings WHERE userId=?");
+				PreparedStatement delUser = con.prepareStatement("DELETE FROM users WHERE id=?")){
 			pstmt.setLong(1, id);
+			delTraining.setLong(1, id);
+			delUser.setLong(1, id);
 			pstmt.executeUpdate();
+			delTraining.executeUpdate();
+			delUser.executeUpdate();
 		} 
 		catch (Exception ex) 
 		{
