@@ -1,0 +1,44 @@
+body {
+    /* Template von Cem */
+    font-family:"Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    background-color: #242423;
+    color: white;
+  }
+
+#leaderboard{
+    /* Allign Center */
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 100%;
+    color: white;
+    display: inline-block;
+  }
+
+
+
+#leaderboardTable{
+    border-style: solid;
+    border-radius: 50px;
+    background-color:rgb(40, 40, 40);
+    border-color: #95D5B2;
+    
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1cm;
+}
+input{
+    background-color: #1B4332;
+    color: white;
+    border: #95D5B2;
+    border-radius: 5px;
+}
+
+header{
+
+    margin: auto;
+    padding: 1cm;
+    text-align: center;
+  }

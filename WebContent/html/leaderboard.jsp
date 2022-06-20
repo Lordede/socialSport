@@ -12,9 +12,10 @@
 <%@ include file="fragments/authenticationCheckHEAD.jspf"%>
 <%@ include file="fragments/navbarHEAD.jspf"%>
 <script src="../JavaScript/Leaderboard.js"></script>
+<link rel="stylesheet" href="../css/leaderboard.css" />
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
-	rel="stylesheet">
+	rel="stylesheet"  />
 	</head>
 <body>
 
@@ -29,9 +30,10 @@
 		<h1>
 			<strong>Leaderboard: </strong>
 		</h1>
-		<input type="search" name="suche" formaction="get" formmethod="">
+		<input type="search" name="suche" formaction="get" formmethod="" placeholder="Nach Username suchen..." autofocus>
 	</header>
 
+	<main>
 	<article id="leaderboard">
 		<table id="leaderboardTable">
 			<tr id="Headrow">
@@ -42,6 +44,7 @@
 
 		</table>
 	</article>
+	</main>
 	<script>
 		window.addEventListener("DOMContentLoaded", init);
 		function init() {
