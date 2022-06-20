@@ -5,15 +5,17 @@
 <html lang="de">
 <head>
 <base href="${pageContext.request.requestURI}" />
-<!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+<!-- Basis für relative Verweise -> Basis = Speicherort -->
 <title>Profil Bearbeiten</title>
 <meta charset="utf-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
-<meta name="keywords" content="Sport, Gym, social media, sports">
+<meta name="keywords" content="Benutzerkonto bearbeiten">
 <meta name="author" content="Cem Durmus">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/layout.css">
 <link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/accountSetting.css">
+<script src="../JavaScript/FavoriteManagement.js" type="text/javascript"></script>
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>		<%-- Login Check--%>
@@ -35,24 +37,24 @@
 			</form>
 		</div>
 		<div>
-			<form action="../UserUpdateServlet" method="post"
-				accept-charset="utf-8">
-				<label for="changeFirstName"> Vorname: ${userData.firstName}
-				</label><br> <input type="text" size="30" name="changeFirstName"
-					maxlength="35"><br> <label for="changeLastName">Nachname:
-					${userData.lastName}</label><br> <input type="text" size="30"
-					name="changeLastName" maxlength="35"><br>
-				<Button type="submit">
-					<!-- formaction="../UserUpdateServlet" formmethod="post"df -->
-					Namen ändern
+			<form action="../UserUpdateServlet" method="post" accept-charset="utf-8">
+				<label for="changeFirstName"> Vorname: ${userData.firstName}</label><br> 
+				<input type="text" size="30" id="changeFirstName" name="changeFirstName" maxlength="35"><br> 
+				<Button value="changeFirstName" type="submit">Vornamen ändern</Button><br>
+			</form>
+			<form action="../UserUpdateServlet" method="post" accept-charset="utf-8">
+				<label for="changeLastName">Nachname: ${userData.lastName}</label><br> 
+				<input type="text" size="30" id="changeLastName" name="changeLastName" maxlength="35"><br>
+				<Button value="changeLastName" type="submit">
+					Nachnamen ändern
 				</Button>
 			</form>
 		</div>
 		<div>
 			<form action="../UserUpdateServlet" method="post"
 				accept-charset="utf-8">
-				<label for="password">Passwort: </label><br> <input
-					type="password" name="password" size="30" maxlength="35"><br>
+				<label for="password">Passwort: </label><br> 
+				<input type="password" id="password" name="password" size="30" maxlength="35"><br>
 				<Button type="submit" name="password" value="password"
 					formaction="../UserUpdateServlet" formmethod="post">
 					Passwort ändern</Button>
@@ -62,7 +64,7 @@
 			<form action="../UserUpdateServlet" method="post"
 				accept-charset="utf-8">
 				<label for="changeMail"> E-Mail: ${userData.eMail}</label><br>
-				<input type="email" name="changeMail" size="30" maxlength="35"><br>
+				<input type="email" id="changeMail" name="changeMail" size="30" maxlength="35"><br>
 				<Button type="submit" value="changeMail">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"> -->
 					E-Mail ändern
@@ -75,6 +77,25 @@
 					formaction="../UserUpdateServlet" formmethod="post">Benutzer
 					löschen</Button>
 			</form>
+		</div>
+		<div>
+			<h3>Favorisierte Übungen bearbeiten</h3>
+			<div id="toggleExerciseAddition">
+				<template id="favoriteExercises">
+					<div>
+						<div class="searchExerciseName" exercise-name></div>
+					</div>
+				</template>
+				<div id="favoritesContainer">
+				</div>
+				<div id="exerciseContainer"></div>
+				<button id="delExercise" hidden="hidden">Übung aus Favoriten Löschen</Button>
+				<script>
+					document.addEventListener("DOMContentLoaded", readFavoriteExercises);
+					var buttons = document.querySelectorAll("Button");
+					buttons.forEach(button => button.addEventListener("click", event => {window.location.reload})); 
+				</script>
+			</div>
 		</div>
 	</article>
 	<footer>

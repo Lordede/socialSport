@@ -1,0 +1,9 @@
+/*Cem Durmus*/
+.exerciseContainer{
+border-bottom: 4px solid #1B4332;
+border-top: 4px solid #1B4332;
+}
+.favoritesContainer{
+    border-style: solid;
+    border-color: #1B4332;
+}
