@@ -29,8 +29,8 @@
 							<strong>Leaderboard: </strong>
 						</h1>
 						<%-- wieder sichtbar machen, sobald es benötigt wird --%>
-						<input type="hidden" name="suche" formaction="get" formmethod=""
-							placeholder="Nach Username suchen..." autofocus> 
+						<%-- <input type="search" name="suche" formaction="get" formmethod=""
+							placeholder="Nach Username suchen..." autofocus>  --%>
 					</header>
 
 					<main>
