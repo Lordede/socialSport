@@ -24,9 +24,10 @@ function addExercise(exercise, isLoadExercise) {
     if(isLoadExercise){ //Trainingsansicht
         container.style.visibility = "visible";
         removeExerciseButton.style.visibility = "hidden";
-        for(let i = 0; i < imgs.length; i++){
-            imgs.item(i).style.visibility = "visible";
-            }
+        // Unnötig, wohl noch vom Testen
+        // for(let i = 0; i < imgs.length; i++){
+        //     imgs.item(i).style.visibility = "visible";
+        //     }
         
     }
     else
@@ -63,7 +64,15 @@ function addExercise(exercise, isLoadExercise) {
     bild.setAttribute("src", "../BildServlet?id="+exercise.id);
     bild.setAttribute("width", "200");
     bild.setAttribute("height", "200");
-    bild.style.visibility = "hidden";
+
+    // Benötigt für hinzufügen neuer Übung zu bestehendem Training, damit Bild nciht angezeigt wird 
+    if(isLoadExercise){
+        bild.style.visibility = "visible";  
+    }
+    else{
+        bild.style.visibility = "hidden";
+    }
+    
 
     //Innerhalb der neuen <h2> einen <table> anlegen
     container.appendChild(table);
