@@ -72,9 +72,9 @@
 			</form>
 		</div>
 		<div>
-			<form action="../UserUpdateServlet" method="post">
+			<form action="../UserUpdateServlet" method="GET">
 				<Button type="submit" name="deleteUser"
-					formaction="../UserUpdateServlet" formmethod="post">Benutzer
+					formaction="../UserUpdateServlet" formmethod="GET">Benutzer
 					löschen</Button>
 			</form>
 		</div>
@@ -94,8 +94,8 @@
 				</div>
 				<script>
 					document.addEventListener("DOMContentLoaded", readFavoriteExercises);
-					var buttons = document.querySelectorAll("Button");
-					buttons.forEach(button => button.addEventListener("click", event => {window.location.reload})); 
+					// var buttons = document.querySelectorAll("Button");
+					// buttons.forEach(button => button.addEventListener("click", event => {window.location.reload(true)})); 
 				</script>
 			</div>
 		</div>
