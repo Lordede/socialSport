@@ -111,7 +111,7 @@ function sendTrainingDB(inputField) {
             xmlhttp.send();
             //window.location = "training.jsp";
         }
-        xmlhttp.send("name=" + input.value + "&points=2");
+        xmlhttp.send("name=" + input.value);
 
 
     }
