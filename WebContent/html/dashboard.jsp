@@ -17,14 +17,17 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/dashboard.css"> 
         
         <script src="../JavaScript/favoriteButton.js" type="text/javascript"></script>
-        
+        <%-- Hubertus --%>
+        <script src="../JavaScript/CheckForCookie.js" ></script>
         <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
         <%@ include file="fragments/navbarHEAD.jspf" %>
+        <%-- -------- --%>
     </head>
     <body>
     <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
     <%@ include file="fragments/navbar.jspf" %>              <%-- Navbar --%>
-    <%@ include file="fragments/noScript.jspf" %>
+    <%@ include file="fragments/noScript.jspf" %>            <%-- Auf deaktiviertes js prüfen --%>
+    
         <header>
             <h1><strong>Dashboard</strong></h1>
         </header>
@@ -329,16 +332,14 @@
                    console.log(button.dataset.exercise);
                    dbCall(button.dataset.exercise);
                 })); 
-            // document.addEventListener("DOMContentLoaded", init);
-            // document.addEventListener("click",event => {
-            //         senseEvent(event);
-            //     });
+
+            // Hubertus Seitz
+            document.addEventListener("DOMContentLoaded", init);
+           
             function init() {
-               
-                //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-               
+               checkForCookie ()
             }
-            
+            // ---
         </script>
     </body>
 </html>
