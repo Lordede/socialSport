@@ -1,0 +1,23 @@
+#imgRuehl{
+    border-radius: 800px;
+    height: 300px;
+    width: 300px;
+}
+#quote{
+    font-style: italic;
+}
+#ruehl{
+    text-align: center;
+    margin-top: 50px;
+}
+.trainingsName{
+    cursor: pointer;
+}
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+.trainingsContainer{
+    border: 2px ;
+}

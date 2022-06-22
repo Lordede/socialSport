@@ -55,12 +55,8 @@ function deleteExercise(exercise) {
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onload = function()
     {
-        reloadWindow();
+        location.reload();
     }
     
     request.send();
-}
-function reloadWindow()
-{
-    location.reload();
 }
