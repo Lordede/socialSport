@@ -16,7 +16,7 @@
         <li style="float: right"><a class="active" id="logoutButton">Logout</a></li> <!--TODO: das flaot sollte in die CSS ausgelagert werden-->
         <!-- Hubertus Seitz -->
   		<c:if test="${userData.admin}">
-        <li> <a id="administrationInterfaceButton" href="administrationInterface.jsp">Admin verwaltung </a></li>
+        <li> <a id="administrationInterfaceButton" href="administrationInterface.jsp">Adminverwaltung </a></li>
         </c:if>
         <!-- -------------- -->
 
