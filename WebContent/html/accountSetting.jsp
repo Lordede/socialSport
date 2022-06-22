@@ -16,6 +16,10 @@
 <link rel="stylesheet" href="../css/navbar.css">
 <link rel="stylesheet" href="../css/accountSetting.css">
 <script src="../JavaScript/FavoriteManagement.js" type="text/javascript"></script>
+
+<%@ include file="fragments/authenticationCheckHEAD.jspf"%>
+<%@ include file="fragments/navbarHEAD.jspf" %>
+
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>		<%-- Login Check--%>
