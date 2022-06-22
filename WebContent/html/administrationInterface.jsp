@@ -26,14 +26,18 @@
             <div id="userAdministration">
                 <label for="searchInput">Mitglied suchen: </label>
                 <input id="searchInput" type="type">
-                <button id="loadUsers">Nutzer Laden</button>
                 <table id="userTable">
+                    <thead>
                     <tr>
                         <th>Benutzername</th>
                         <th>E-Mail</th>
                         <th>Vorname</th>
                         <th>Nachname</th>
-                    </tr>    
+                    </tr>
+                </thead>
+                <tbody id="insertUsers">
+
+                </tbody>    
                 </table>
                 <div id="userContainer"> <!--Hier ausgewählten User reinladen-->
                     <br>
@@ -74,16 +78,17 @@
             <label for="searchExercises">Übung suchen</label>
             <input type="text" id="searchExercises">
             <table id="exerciseContainer">
-                <tr>
-                    <th>Name der Übung</th>
-                    <th>Muskelgruppe</th>
-                    <th>Bild</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Name der Übung</th>
+                        <th>Muskelgruppe</th>
+                    </tr>
+                </thead>
+                <tbody id="insertExercises"></tbody>
             </table>
 		</form>
     </div>
     <script>
-        var button = document.getElementById("loadUsers");
         let inputExercises = document.querySelector("#searchExercises");
         let delButton = document.querySelector("#delUser");
         let adminButton = document.querySelector("#setAdmin");
@@ -95,7 +100,6 @@
         
         function init() {
             //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-            button.addEventListener('click', readUsers);
             inputExercises.addEventListener('input', readExercises);
             // document.ElementByName('addButton').submit();
             console.log("html spricht an");
