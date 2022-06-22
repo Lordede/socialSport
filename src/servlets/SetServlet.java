@@ -222,9 +222,28 @@ public class SetServlet extends HttpServlet {
 					form.setId(rs.getLong(1));
 				}
 			}
+			
+			addPointsToTraining(form.getKg() * form.getRep(), form.getTrainingId());
+			
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
+	}
+	
+	private void addPointsToTraining(double points, long trainingId) throws ServletException{
+		try(Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("UPDATE trainings "
+															+ "SET points = points + ? "
+															+ "WHERE id = ?")){
+				pstmt.setDouble(1, points);
+				pstmt.setLong(2, trainingId);
+								
+				pstmt.executeUpdate();
+				
+				
+			} catch (Exception ex) {
+				throw new ServletException(ex.getMessage());
+			}
 	}
 
 }

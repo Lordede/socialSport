@@ -105,7 +105,7 @@ public class TrainingServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String name = request.getParameter("name");
-		double points = Double.parseDouble(request.getParameter("points"));
+		double points = 0.00;
 		UserBean user = (UserBean) session.getAttribute("userData");
 		long userId = user.getId();
 		java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
@@ -168,6 +168,7 @@ public class TrainingServlet extends HttpServlet {
 			pstmt.setString(1, form.getName());
 			pstmt.setDouble(2, form.getPoints());
 			pstmt.setLong(3, form.getId());
+			pstmt.executeUpdate();
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
