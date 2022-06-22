@@ -1,53 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head>
-<title>Dashboard</title>
-<meta charset="utf-8">
-<meta name="author" content="Hubertus Seitz">
-<meta name="description" content="leaderboard">
-<meta name="keywords" content="best leader leaderboard">
-<base href="${pageContext.request.requestURI}" />
-<%@ include file="fragments/authenticationCheckHEAD.jspf"%>
-<%@ include file="fragments/navbarHEAD.jspf"%>
-<link
-	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
-	rel="stylesheet">
-<body>
 
-	<%@ include file="fragments/noScript.jspf"%>
-	<%@ include file="fragments/authenticationCheck.jspf"%>
-	<%@ include file="fragments/navbar.jspf"%>
-	<%-- Überprüfung, ob User eingeloggt ist --%>
+	<head>
 
-	<header>
-		<!---------->
-		<!--Hubertus Seitz--->
-		<h1>
-			<strong>Leaderboard: </strong>
-		</h1>
-		<input type="search" name="suche" formaction="get" formmethod="">
-	</header>
+		<title>Leaderboard</title>
+		<meta charset="utf-8">
+		<meta name="author" content="Hubertus Seitz">
+		<meta name="description" content="leaderboard">
+		<base href="${pageContext.request.requestURI}" />
+		<%@ include file="fragments/authenticationCheckHEAD.jspf" %>
+		<%@ include file="fragments/navbarHEAD.jspf" %>
+		<script src="../JavaScript/Leaderboard.js"></script>
+		<link rel="stylesheet" href="../css/leaderboard.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
 
-	<article id="leaderboard">
-		<table id="leaderboardTable">
-			<tr id="Headrow">
-				<th>Punktezahl</th>
-				<th>Username</th>
-				<th>ID</th>
-			</tr>
+	</head>
+	<body>
 
-		</table>
-	</article>
-	<script>
-		window.addEventListener("DOMContentLoaded", init);
-		function init() {
-			window.addEventListener("load", loadLeaderboard()); //Leaderboard soll mit Seitenaufbau geladen werden
+		<%@ include file="fragments/noScript.jspf" %>
+		<%@ include file="fragments/authenticationCheck.jspf" %>
+		<%@ include file="fragments/navbar.jspf" %>
 
-		}
-	</script>
-	<footer> </footer>
-</body>
+					<header>
+						<!---------->
+						<!--Hubertus Seitz--->
+						<h1>
+							<strong>Leaderboard: </strong>
+						</h1>
+						<%-- wieder sichtbar machen, sobald es benötigt wird --%>
+						<%-- <input type="search" name="suche" formaction="get" formmethod=""
+							placeholder="Nach Username suchen..." autofocus>  --%>
+					</header>
 
-</html>
+					<main>
+						<article id="leaderboard">
+							<table id="leaderboardTable">
+								<tr id="Headrow">
+									<th>Punktezahl</th>
+									<th>Username</th>
+									<th>ID</th>
+								</tr>
+
+							</table>
+						</article>
+					</main>
+					<script>
+						window.addEventListener("DOMContentLoaded", init);
+						function init() {
+							window.addEventListener("load", loadLeaderboard()); //Leaderboard soll mit Seitenaufbau geladen werden
+
+						}
+					</script>
+					<footer> </footer>
+	</body>
+
+	</html>

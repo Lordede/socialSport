@@ -7,6 +7,9 @@ function toogleView()
     var setContainer = document.getElementsByClassName("setContainer");
     var removeExerciseButtons = document.getElementsByClassName("removeExerciseButton");
     var exercises = document.getElementsByClassName("exercise");
+
+    var imgs = document.getElementsByTagName("img")
+
     if(settingButtons.style.visibility === "visible"){
         settingButtons.style.visibility = "hidden";
         for(let i = 0; i < setContainer.length; i++){
@@ -14,7 +17,12 @@ function toogleView()
             removeExerciseButtons.item(i).style.visibility = "hidden";
             exercises.item(i).style.height = "auto";
         }
-       
+
+        for(let i = 0; i < imgs.length; i++){
+            imgs.item(i).style.visibility = "visible";
+        }
+
+        document.getElementById("searchContainer").style.borderStyle = "hidden";
         clickedButton.innerHTML = "Bearbeitungsansicht";
     }
     else{
@@ -24,7 +32,13 @@ function toogleView()
             removeExerciseButtons.item(i).style.visibility = "visible";
             exercises.item(i).style.height = "150px";
         }
+
+        for(let i = 0; i < imgs.length; i++){
+            imgs.item(i).style.visibility = "hidden";
+        }
+
         
+        document.getElementById("searchContainer").style.borderStyle = "solid";
         clickedButton.innerHTML = "Trainingsansicht";
     }
 
