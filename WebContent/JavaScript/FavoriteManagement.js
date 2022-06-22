@@ -44,7 +44,11 @@ function onExerciseClick(exercise)
     }
     let exerciseContainer = document.querySelector("#exerciseContainer");
     exerciseContainer.textContent = exercise.name;
-    delButton.addEventListener("click", ()  => deleteExercise(exercise));
+    delButton.addEventListener("click", function()  {
+        deleteExercise(exercise);
+        document.location.reload(true);
+    });
+    
 
 }
 
@@ -53,10 +57,5 @@ function deleteExercise(exercise) {
     let request = new XMLHttpRequest;
     request.open("DELETE", "../FavoriteExerciseServlet?name="+exercise.name, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    reloadWindow;
     request.send();
-}
-function reloadWindow()
-{
-    location.reload;
 }
