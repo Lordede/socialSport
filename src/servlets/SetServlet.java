@@ -175,11 +175,11 @@ public class SetServlet extends HttpServlet {
 				while(rs.next()) {
 					SetBean set = new SetBean();
 					
-					Long id = Long.valueOf(rs.getLong("id"));
-					double kg = Double.valueOf(rs.getDouble("kg"));
-					int rep = Integer.valueOf(rs.getInt("rep"));
-					Long trainingId = Long.valueOf(rs.getLong("trainingId"));
-					Long trainingSessionId = Long.valueOf(rs.getLong("trainingSessionId"));
+					Long id = rs.getLong("id");
+					double kg = rs.getDouble("kg");
+					int rep = rs.getInt("rep");
+					Long trainingId = rs.getLong("trainingId");
+					Long trainingSessionId = rs.getLong("trainingSessionId");
 					java.sql.Date creationDate = rs.getDate("creationDate");
 					
 					
