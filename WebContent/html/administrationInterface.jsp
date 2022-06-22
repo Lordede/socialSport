@@ -52,7 +52,7 @@
                 accept-charset="utf-8" enctype="multipart/form-data">
                 <div class="nameExercise">
                     <p>Name der Übung:</p>
-                    <input type="text" name="exerciseName" size="30" maxlength="35"><br>
+                    <input type="text" name="exerciseName" size="30" maxlength="50"><br>
                 </div>
                 <div>
 				<fieldset>
