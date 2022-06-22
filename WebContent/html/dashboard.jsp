@@ -67,7 +67,7 @@
                         <i class="fa fa-star"></i>
                         <span>Übung merken</span>
                     </button>
-                    <h2>Strindrücken mit SZ-Stange</h2>
+                    <h2>Stirndrücken mit SZ-Stange</h2>
                     <img src="../img/ExerciseImages/french-press-sz.gif" alt="Strindrücken mit SZ-Stange" width="180" height="180">
                     <div class="text_Trizeps">
                         Stirndücken oder auch French Press, Nosebreaker, Skull Crushers bezeichnet hört sich anfangs zwar ziehmlich martialisch an, jedoch ist sie eine der effektivsten Trizepsübungen überhaupt.
