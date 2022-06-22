@@ -43,6 +43,10 @@
                     </div>
                   </template>
                   <div id="searchResultContainer"></div>
+                  <div>
+                    <h3>Favorisierten Übungen</h3>
+                    <div id="favoritesContainer"></div>
+                  </div>
                 </div>
               </aside>
 
