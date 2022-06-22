@@ -22,10 +22,10 @@ function readUsers() {
 }
 
 function createUserElements(jsonString) {
-    let parentTableElm = document.querySelector("#userTable");
+    let parentTableElm = document.querySelector("#insertUsers");
     let templateTableRow = document.querySelector("#trTemplate");
-    let parseJson = JSON.parse(jsonString);
     parentTableElm.textContent="";
+    let parseJson = JSON.parse(jsonString);
     parseJson.forEach(user => {
         const templateRow = templateTableRow.content.cloneNode(true).children[0];
         parentTableElm.appendChild(templateRow)
@@ -111,7 +111,7 @@ function readExercises() {
 function listAllExercises(jsonString) {
     let exercisesArrayList = JSON.parse(jsonString);
     let tableRowTemplateExercise = document.querySelector("#trExercise");
-    let containerTable = document.querySelector("#exerciseContainer");
+    let containerTable = document.querySelector("#insertExercises");
     containerTable.innerHTML = "";
     exercisesArrayList.forEach(exercise => {
         let templateRowExercise = tableRowTemplateExercise.content.cloneNode(true).children[0]; //Table row

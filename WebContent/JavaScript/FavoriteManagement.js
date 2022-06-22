@@ -34,10 +34,13 @@ function extractFavorites(jsonString)
 function onExerciseClick(exercise)
 {
 	let delButton = document.getElementById("delExercise");
+    let exerciseHandleContainer = document.querySelector("#handleExercise");
     let hiddenProperty = delButton.getAttribute("hidden");
+    let color = "#1B4332";
     if(hiddenProperty)
     {
         delButton.removeAttribute("hidden");
+        exerciseHandleContainer.style.backgroundColor = color;
     }
     let exerciseContainer = document.querySelector("#exerciseContainer");
     exerciseContainer.textContent = exercise.name;
@@ -50,6 +53,10 @@ function deleteExercise(exercise) {
     let request = new XMLHttpRequest;
     request.open("DELETE", "../FavoriteExerciseServlet?name="+exercise.name, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    reloadWindow;
     request.send();
-    window.location.reload;
+}
+function reloadWindow()
+{
+    location.reload;
 }

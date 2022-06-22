@@ -6,12 +6,12 @@ import java.security.NoSuchAlgorithmException;
 /**
  * @author: https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
  *  
- *  Leicht geändert von Hubertus
+ *  Leicht geï¿½ndert von Hubertus
  */
 
 public class HashPassword {
 
-	public static String hashPassword(String passwordToHash) { // Funktion zum hashen von Passwörtern
+	public static String hashPassword(String passwordToHash) { // Funktion zum hashen von Passwï¿½rtern
 		String generatedPassword = null;
 
 		try {

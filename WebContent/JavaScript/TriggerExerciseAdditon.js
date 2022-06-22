@@ -89,8 +89,6 @@ function extractFavorites(jsonString)
     let exercisesArrayList = JSON.parse(jsonString) //[{"":""},{"rep":"3"}]
     const searchResults = document.getElementById("searchResults");
     const toggleContainer = document.getElementById("favoritesContainer");
-    toggleContainer.style.display = "block";
-    toggleContainer.innerHTML = "";
     exercisesArrayList.forEach(exercise => {
         const result = searchResults.content.cloneNode(true).children[0];
         result.setAttribute("class","resultItem");

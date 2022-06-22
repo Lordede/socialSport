@@ -78,10 +78,12 @@ function hideSearch() {
     inputField.setAttribute("type", "text");
     if (hidden) {
         label.removeAttribute("hidden");
+        inputField.removeAttribute("hidden");
         button.removeAttribute("hidden");
     }
     else {
         label.setAttribute("hidden", "hidden");
+        inputField.setAttribute("hidden", "hidden");
         button.setAttribute("hidden", "hidden");
     }
     button.addEventListener("click", () => sendTrainingDB(inputField));

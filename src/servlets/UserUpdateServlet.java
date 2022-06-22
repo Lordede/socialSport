@@ -108,6 +108,8 @@ public class UserUpdateServlet extends HttpServlet {
 				session.setAttribute("userData", user);
 				break;
 			case "password":
+				String s= request.getParameter("password");
+				System.out.println(s);
 				updatePassword(user, request.getParameter("password"));
 				user = getUser(user.getId());
 				session.setAttribute("userData", user);
@@ -214,6 +216,7 @@ public class UserUpdateServlet extends HttpServlet {
 		try (Connection conDs = ds.getConnection();
 				PreparedStatement statementEmail = conDs.prepareStatement("UPDATE users SET pwd = ? WHERE id = ?"))
 		{
+			user.setPassword(HashPassword.hashPassword(password));
 			statementEmail.setString(1, HashPassword.hashPassword(user.getPassword()));//hash methode
 			statementEmail.setLong(2, user.getId());
 			statementEmail.executeUpdate();

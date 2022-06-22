@@ -88,8 +88,10 @@
 				</template>
 				<div id="favoritesContainer">
 				</div>
-				<div id="exerciseContainer"></div>
-				<button id="delExercise" hidden="hidden">Übung aus Favoriten Löschen</Button>
+				<div id="handleExercise">
+					<button id="delExercise" hidden="hidden">Übung aus Favoriten Löschen</Button>
+					<div id="exerciseContainer"></div>
+				</div>
 				<script>
 					document.addEventListener("DOMContentLoaded", readFavoriteExercises);
 					var buttons = document.querySelectorAll("Button");
