@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.lang.module.ResolutionException;
+import java.net.http.HttpResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +46,7 @@ public class UserUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Enumeration<String> paramNames = request.getParameterNames();
+		HttpSession session = request.getSession();
 		while (paramNames.hasMoreElements()) 
 		{
 			String param = paramNames.nextElement();
@@ -63,14 +65,14 @@ public class UserUpdateServlet extends HttpServlet {
 				String userSearchJson = convertListToJson(usersSearched);
 				response.getWriter().write(userSearchJson);
 				break;
+			case "deleteUser":
+				UserBean userId = (UserBean) session.getAttribute("userData");
+				deleteUser(userId.getId(),response);
+				break;
 			}
 		}
 	}
 
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		deleteUser(Long.parseLong(request.getParameter("id")));
-		response.getWriter().write("ok");
-	}
 	
 	
 
@@ -217,7 +219,7 @@ public class UserUpdateServlet extends HttpServlet {
 				PreparedStatement statementEmail = conDs.prepareStatement("UPDATE users SET pwd = ? WHERE id = ?"))
 		{
 			user.setPassword(HashPassword.hashPassword(password));
-			statementEmail.setString(1, HashPassword.hashPassword(user.getPassword()));//hash methode
+			statementEmail.setString(1, user.getPassword());//hash methode
 			statementEmail.setLong(2, user.getId());
 			statementEmail.executeUpdate();
 		}
@@ -227,7 +229,7 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteUser(Long id) throws ServletException 
+	private void deleteUser(Long id, HttpServletResponse response) throws ServletException 
 	{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM favoriteexercises WHERE userId=?");
@@ -239,6 +241,7 @@ public class UserUpdateServlet extends HttpServlet {
 			pstmt.executeUpdate();
 			delTraining.executeUpdate();
 			delUser.executeUpdate();
+			response.sendRedirect("html/accountDeletion.jsp");
 		} 
 		catch (Exception ex) 
 		{

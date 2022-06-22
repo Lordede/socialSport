@@ -1,0 +1,6 @@
+#userContainer{
+    width: 500px;
+}
+.userContainer:hover{
+    cursor: pointer;
+  }
