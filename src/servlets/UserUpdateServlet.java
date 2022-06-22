@@ -67,14 +67,17 @@ public class UserUpdateServlet extends HttpServlet {
 				break;
 			case "deleteUser":
 				UserBean userId = (UserBean) session.getAttribute("userData");
-				deleteUser(userId.getId(),response);
+				deleteUser(userId.getId());
+				response.sendRedirect("html/accountDeletion.jsp");
 				break;
 			}
 		}
 	}
 
-	
-	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		deleteUser(Long.parseLong(request.getParameter("id")));
+		response.getWriter().write("ok");
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -229,7 +232,7 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteUser(Long id, HttpServletResponse response) throws ServletException 
+	private void deleteUser(Long id) throws ServletException 
 	{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM favoriteexercises WHERE userId=?");
@@ -241,7 +244,7 @@ public class UserUpdateServlet extends HttpServlet {
 			pstmt.executeUpdate();
 			delTraining.executeUpdate();
 			delUser.executeUpdate();
-			response.sendRedirect("html/accountDeletion.jsp");
+			
 		} 
 		catch (Exception ex) 
 		{

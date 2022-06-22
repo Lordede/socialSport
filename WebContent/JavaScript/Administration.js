@@ -70,6 +70,7 @@ function deleteUser(user) {
     request.open("DELETE", "../UserUpdateServlet?id="+user.id, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send();
+    window.location.reload();
 }
 
 
@@ -78,6 +79,7 @@ function makeUserAdmin(user) {
     request.open("POST", "../UserUpdateServlet", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send("setAdmin="+user.id);
+    window.location.reload();
 }
 //Generische Suchfunktion im Interface
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {

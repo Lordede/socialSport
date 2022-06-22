@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
 <meta charset="UTF-8">
 <base href="${pageContext.request.requestURI}" />
 <title>Insert title here</title>
