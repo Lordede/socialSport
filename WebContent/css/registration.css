@@ -18,3 +18,9 @@
     width: 50%;
     align-items: center;
 }
+
+.center {
+    margin: auto;
+    width: 20%;
+    padding: 10px;
+  }
