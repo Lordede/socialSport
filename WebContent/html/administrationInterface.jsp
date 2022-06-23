@@ -10,6 +10,7 @@
         <meta name="author" content="Cem Durmus">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/layout.css">
+        <link rel="stylesheet" href="../css/admin.css">
         <script src="../JavaScript/Administration.js" type="text/javascript"></script>
         <%@ include file="fragments/authenticationCheckHEAD.jspf"%>
 		<%@ include file="fragments/navbarHEAD.jspf"%>
@@ -30,9 +31,9 @@
                     <thead>
                     <tr>
                         <th>Benutzername</th>
-                        <th>E-Mail</th>
-                        <th>Vorname</th>
                         <th>Nachname</th>
+                        <th>Vorname</th>
+                        <th>E-Mail</th>
                     </tr>
                 </thead>
                 <tbody id="insertUsers">
@@ -41,8 +42,8 @@
                 </table>
                 <div id="userContainer"> <!--Hier ausgewählten User reinladen-->
                     <br>
-                    <button id="delUser" hidden="hidden">Benutzer Löschen</button>
-                    <button id="setAdmin" hidden="hidden">Adminrechte vergeben</button>
+                    <button id="delUser" >Benutzer Löschen</button>
+                    <button id="setAdmin">Adminrechte vergeben</button>
                 </div>
             </div>
             <div id="exerciseHandler">
@@ -51,7 +52,7 @@
                 accept-charset="utf-8" enctype="multipart/form-data">
                 <div class="nameExercise">
                     <p>Name der Übung:</p>
-                    <input type="text" name="exerciseName" size="30" maxlength="35"><br>
+                    <input type="text" name="exerciseName" size="30" maxlength="50"><br>
                 </div>
                 <div>
 				<fieldset>
@@ -89,9 +90,6 @@
 		</form>
     </div>
     <script>
-        let inputExercises = document.querySelector("#searchExercises");
-        let delButton = document.querySelector("#delUser");
-        let adminButton = document.querySelector("#setAdmin");
         document.addEventListener("DOMContentLoaded", init);
         window.onload = function(){
             readExercises();
@@ -100,7 +98,6 @@
         
         function init() {
             //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-            inputExercises.addEventListener('input', readExercises);
             // document.ElementByName('addButton').submit();
             console.log("html spricht an");
         }

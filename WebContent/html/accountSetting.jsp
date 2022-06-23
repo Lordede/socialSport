@@ -16,6 +16,10 @@
 <link rel="stylesheet" href="../css/navbar.css">
 <link rel="stylesheet" href="../css/accountSetting.css">
 <script src="../JavaScript/FavoriteManagement.js" type="text/javascript"></script>
+
+<%@ include file="fragments/authenticationCheckHEAD.jspf"%>
+<%@ include file="fragments/navbarHEAD.jspf" %>
+
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>		<%-- Login Check--%>
@@ -72,9 +76,9 @@
 			</form>
 		</div>
 		<div>
-			<form action="../UserUpdateServlet" method="post">
+			<form action="../UserUpdateServlet" method="GET">
 				<Button type="submit" name="deleteUser"
-					formaction="../UserUpdateServlet" formmethod="post">Benutzer
+					formaction="../UserUpdateServlet" formmethod="GET">Benutzer
 					löschen</Button>
 			</form>
 		</div>
@@ -94,8 +98,8 @@
 				</div>
 				<script>
 					document.addEventListener("DOMContentLoaded", readFavoriteExercises);
-					var buttons = document.querySelectorAll("Button");
-					buttons.forEach(button => button.addEventListener("click", event => {window.location.reload})); 
+					// var buttons = document.querySelectorAll("Button");
+					// buttons.forEach(button => button.addEventListener("click", event => {window.location.reload(true)})); 
 				</script>
 			</div>
 		</div>

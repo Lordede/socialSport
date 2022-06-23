@@ -44,19 +44,23 @@ function createUserElements(jsonString) {
 function selectUser(user) {
     let delButton = document.querySelector("#delUser");
     let adminButton = document.querySelector("#setAdmin");
-    let hiddenProperty = delButton.getAttribute("hidden");
-    if(hiddenProperty)
-    {
-        delButton.removeAttribute("hidden");
-        adminButton.removeAttribute("hidden");
-    }
+    // let hiddenProperty = delButton.getAttribute("hidden");
+    // if(hiddenProperty)
+    // {
+    //     delButton.removeAttribute("hidden");
+    //     adminButton.removeAttribute("hidden");
+    // }
     let userContainer = document.querySelector("#userContainer");
-    userContainer.innerHTML="";
+    if(document.querySelector(".userName"))
+    {
+        document.querySelector(".userName").remove();
+    }
     let userName = document.createElement("div");
-    userName.setAttribute("id", "userName");
+    userName.setAttribute("class", "userName");
     userName.textContent = user.benutzername;
     userContainer.appendChild(userName);
-    
+    let color = "#1B4332";
+    userContainer.style.backgroundColor = color;
     delButton.addEventListener("click", ()  => deleteUser(user));
     adminButton.addEventListener("click", () => makeUserAdmin(user))
 }

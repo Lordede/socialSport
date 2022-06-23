@@ -44,7 +44,11 @@ function onExerciseClick(exercise)
     }
     let exerciseContainer = document.querySelector("#exerciseContainer");
     exerciseContainer.textContent = exercise.name;
-    delButton.addEventListener("click", ()  => deleteExercise(exercise));
+    delButton.addEventListener("click", function()  {
+        deleteExercise(exercise);
+        document.location.reload(true);
+    });
+    
 
 }
 
@@ -58,5 +62,6 @@ function deleteExercise(exercise) {
         location.reload();
     }
     
+
     request.send();
 }
