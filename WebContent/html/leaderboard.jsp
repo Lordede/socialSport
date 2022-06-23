@@ -11,6 +11,7 @@
 		<base href="${pageContext.request.requestURI}" />
 		<%@ include file="fragments/authenticationCheckHEAD.jspf" %>
 		<%@ include file="fragments/navbarHEAD.jspf" %>
+		<%@ include file="fragments/footerHEAD.jspf"%>
 		<script src="../JavaScript/Leaderboard.js"></script>
 		<link rel="stylesheet" href="../css/leaderboard.css" />
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
@@ -45,6 +46,7 @@
 							</table>
 						</article>
 					</main>
+					<%@ include file="fragments/footer.jspf" %>
 					<script>
 						window.addEventListener("DOMContentLoaded", init);
 						function init() {
@@ -52,7 +54,8 @@
 
 						}
 					</script>
-					<footer> </footer>
+					
+              
 	</body>
 
 	</html>
