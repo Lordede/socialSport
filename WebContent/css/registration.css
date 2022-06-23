@@ -1,22 +1,17 @@
+body {
+    /* Template von Cem */
+    font-family:"Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    background-color: #242423;
+    color: white;
+}
+
 .form{
     padding: 10px;
     border-style: solid;
     border-color: blue;
-}
-
-.registration-container{
-    display: flex;
-    margin: auto;
-    width: 50%;
-    align-items: center;
-    
-}
-
-.header{
-    display: flex;
-    margin: auto;
-    width: 50%;
-    align-items: center;
+    width: fit-content
 }
 
 .center {
