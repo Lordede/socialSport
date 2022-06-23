@@ -7,19 +7,13 @@ body {
     color: white;
   }
 
-#leaderboard{
-    /* Allign Center */
-    margin-left: auto;
-    margin-right: auto;
 
-    width: 100%;
-    color: white;
-    display: inline-block;
-  }
+    
+header{
+    text-align: center;
+}
 
-
-
-#leaderboardTable{
+#list{
     border-style: solid;
     border-radius: 50px;
     background-color:rgb(40, 40, 40);
@@ -30,16 +24,27 @@ body {
     padding: 1cm;
 }
 
-input{
-    background-color: #1B4332;
-    color: white;
-    border: #95D5B2;
-    border-radius: 5px;
-}
-
-header{
-
+.center {
     margin: auto;
-    padding: 1cm;
-    text-align: center;
+    width: 20%;
+    padding: 10px;
   }
+
+.ulnav{
+    list-style: none;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #1B4332;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    color: black; 
+}
+.ulnav:hover{
+    background-color: #1b4332;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
