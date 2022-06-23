@@ -97,8 +97,14 @@
         };
         
         function init() {
-            //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-            // document.ElementByName('addButton').submit();
+            var buttonDel= document.getElementById("delButton");
+            var buttonSetAdmin = document.getElementById("setAdmin");
+            var userInContainer = document.querySelector(".userName");           
+                if(!userInContainer)
+                {
+                    buttonDel.addEventListener("click", alert("keinen Benutzer ausgewählt"));
+                    buttonSetAdmin.addEventListener("click",alert("keinen Benutzer ausgewählt!"));
+                }
             console.log("html spricht an");
         }
         

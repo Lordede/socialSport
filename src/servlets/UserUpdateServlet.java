@@ -268,6 +268,7 @@ public class UserUpdateServlet extends HttpServlet {
 				user.setLastName(rs.getString("lastname"));
 				user.seteMail(rs.getString("eMail"));
 				user.setId(rs.getLong("id"));
+				user.setIsAdmin(rs.getBoolean("isAdmin"));
 				}
 			}
 			return user;
@@ -291,6 +292,7 @@ public class UserUpdateServlet extends HttpServlet {
 					user.setFirstName(rs.getString("firstname"));
 					user.seteMail(rs.getString("eMail"));
 					user.setLastName(rs.getString("lastname"));
+					user.setIsAdmin(rs.getBoolean("isAdmin"));
 					userList.add(user);
 				}
 			}
@@ -320,6 +322,7 @@ public class UserUpdateServlet extends HttpServlet {
 					user.setFirstName(result.getString("firstname"));
 					user.seteMail(result.getString("eMail"));
 					user.setLastName(result.getString("lastname"));
+					user.setIsAdmin(result.getBoolean("isAdmin"));
 					users.add(user);
 				}
 				return users;
