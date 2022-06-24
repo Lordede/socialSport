@@ -14,7 +14,7 @@ header{
 h2{
     color: #95D5B2;
 }
-#personalInfo{
+.personalInfo{
     float: left;
 }
 img{

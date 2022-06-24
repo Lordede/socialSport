@@ -27,7 +27,7 @@
 			<a href="dashboard.jsp">Zurück zum Dashboard</a>
 		</P>
 		<article>
-			<div id="personalInfo">
+			<div class="personalInfo">
 				<h2>Cem Durmus</h2>
 				<p>
 					E-Mail: <a href="mailto:ced5742@thi.de">ced5742@thi.de</a>
@@ -39,7 +39,7 @@
 		</article>
 
 		<article>
-			<div id="personalInfo">
+			<div class="personalInfo">
 				<h2>Lukas Edmüller</h2>
 				<p>
 					E-Mail: <a href="mailto:lue0558@thi.de">lue0558@thi.de</a>
@@ -51,7 +51,7 @@
 		</article>
 
 		<article>
-			<div id="personalInfo">
+			<div class="personalInfo">
 				<h2>Hubertus Seitz</h2>
 				<p>
 					E-Mail: <a href="mailto:hus4725@thi.de">hus4725@thi.de</a>
