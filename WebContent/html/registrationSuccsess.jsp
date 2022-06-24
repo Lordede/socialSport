@@ -6,6 +6,7 @@
 <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
 <meta charset="utf-8">
 <title>Registriervorgang erfolgreich!</title>
+<%@ include file="fragments/footerHEAD.jspf"%>
 </head>
 <body>
 <%@ include file="fragments/noScript.jspf" %>
@@ -26,5 +27,6 @@
 			
 		</ul>
 	</nav>
+	<%@ include file="fragments/footer.jspf"%>
 </body>
 </html>

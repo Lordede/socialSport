@@ -9,6 +9,7 @@
  <link rel="stylesheet" href="../css/layout.css">
 <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
 <base href="${pageContext.request.requestURI}" />
+<%@ include file="fragments/footerHEAD.jspf"%>
 <title>Insert title here</title>
 </head>
 <body>
@@ -45,8 +46,6 @@
 			<a href="./accountSetting.jsp">Weitere Daten ändern</a>
 		</div>
 	</article>
-	<footer>
-		<!--Generische Navigationsleiste-->
-	</footer>
+	<%@ include file="fragments/footer.jspf"%>
 </body>
 </html>

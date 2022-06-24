@@ -21,6 +21,7 @@
         <script src="../JavaScript/CheckForCookie.js" ></script>
         <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
         <%@ include file="fragments/navbarHEAD.jspf" %>
+        <%@ include file="fragments/footerHEAD.jspf"%>
         <%-- -------- --%>
     </head>
     <body>
@@ -326,6 +327,7 @@
                 </article>
             </div>
         </article>
+        <%@ include file="fragments/footer.jspf"%>
         <script>
             const favButtons = document.querySelectorAll("button");
             favButtons.forEach(button => button.addEventListener("click", event => {

@@ -15,7 +15,7 @@
         <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
         
         <script src="../JavaScript/TrainingsManagement.js" type="text/javascript"></script>
-
+        <%@ include file="fragments/footerHEAD.jspf"%>
         <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
         <%@ include file="fragments/navbarHEAD.jspf" %>
 
@@ -58,5 +58,6 @@
                 }
             </script>
         </article>
+        <%@ include file="fragments/footer.jspf"%>
     </body>
 </html>

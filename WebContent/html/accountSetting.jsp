@@ -19,6 +19,7 @@
 
 <%@ include file="fragments/authenticationCheckHEAD.jspf"%>
 <%@ include file="fragments/navbarHEAD.jspf" %>
+<%@ include file="fragments/footerHEAD.jspf"%>
 
 </head>
 <body>
@@ -104,8 +105,6 @@
 			</div>
 		</div>
 	</article>
-	<footer>
-		<!--Generische Navigationsleiste-->
-	</footer>
+	<%@ include file="fragments/footer.jspf"%>
 </body>
 </html>

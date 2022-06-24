@@ -16,7 +16,9 @@
     <script src="../JavaScript/TriggerExerciseAdditon.js" type="text/javascript"></script>
     <script src="../JavaScript/TrainingSettings.js" type="text/javascript"></script>
     <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
-      <%@ include file="fragments/navbarHEAD.jspf" %>
+    <%@ include file="fragments/navbarHEAD.jspf" %>
+    <%@ include file="fragments/footerHEAD.jspf"%>
+    
   </head>
   <%@ include file="fragments/noScript.jspf" %>
 
