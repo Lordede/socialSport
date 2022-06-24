@@ -57,5 +57,11 @@ function deleteExercise(exercise) {
     let request = new XMLHttpRequest;
     request.open("DELETE", "../FavoriteExerciseServlet?name="+exercise.name, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.onload = function()
+    {
+        location.reload();
+    }
+    
+
     request.send();
 }
