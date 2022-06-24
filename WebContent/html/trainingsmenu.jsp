@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="de">
     <head>
@@ -18,37 +18,53 @@
         <%@ include file="fragments/footerHEAD.jspf"%>
         <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
         <%@ include file="fragments/navbarHEAD.jspf" %>
-
-    </head>
-    <body>
-    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
-    <%@ include file="fragments/navbar.jspf" %>               <%-- Navbar --%>
-    <%@ include file="fragments/noScript.jspf" %>
-        <article>
-            <h1><strong>Training: </strong></h1>
-            <div id="training">
-                <div id="addTraining">
-                    <button id="loadTrainings">Trainings laden</button>
-                    <button id="addNewTraining">Training hinzufügen</button>
-                    <br>
-                    <label id="nameOfTrainingLabel" hidden="hidden">Name des Traings</label>
-                    <input id="nameOfTrainingInput" type="hidden">
-                    <button id="sendTraining" hidden="hidden">Training erstellen</button>
-                </div>
-                <div id="searchPastTrainings">
-                    <label id ="searchBarTrainingLabel">Training Suchen</label>
-                    <input id="searchBarTraining" type="search">
-                    <template class="searchResults">
-                        <div class="trainingsName"></div>
-                    </template>
-                </div>
-                <div class="trainingsContainer"></div>
-            </div>
-            <script>
-                let searchTrainingInput = document.getElementById("searchPastTrainings")
-                let loadAllTrainings = document.getElementById("loadTrainings");
-                let createTraining = document.getElementById("addNewTraining");
-                document.addEventListener("DOMContentLoaded", init);
+  </head>
+  <body>
+    <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung,
+    ob User eingeloggt ist --%> <%@ include file="fragments/navbar.jspf" %> <%--
+    Navbar --%> <%@ include file="fragments/noScript.jspf" %>
+    <article class="center">
+      <div class="center">
+        <h1><strong>Training: </strong></h1>
+        <div id="training">
+          <div id="addTraining">
+            <button id="loadTrainings">Trainings laden</button>
+            <button id="addNewTraining">Training hinzufügen</button>
+            <br />
+            <label id="nameOfTrainingLabel" hidden="hidden"
+              >Name des Traings</label
+            >
+            <input id="nameOfTrainingInput" type="hidden" />
+            <button id="sendTraining" hidden="hidden">
+              Training erstellen
+            </button>
+          </div>
+          <div id="searchPastTrainings">
+            <label id="searchBarTrainingLabel">Training Suchen</label>
+            <input id="searchBarTraining" type="search" />
+            <template class="searchResults">
+              <div class="trainingsName"></div>
+            </template>
+          </div>
+          <div class="trainingsContainer"></div>
+        </div>
+      </div>
+      <div id="ruehl">
+        <img
+          id="imgRuehl"
+          src="../img/Markus_Ruehl.jpg"
+          alt="Markus Rühl am flexen"
+        />
+        <p id="quote">"Wer scheiß Arme hat, sieht scheiße aus"</p>
+        <p>- Markus Rühl, Finalist Mr. Oplympia 1999</p>
+      </div>
+      <script>
+        let searchTrainingInput = document.getElementById(
+          "searchPastTrainings"
+        );
+        let loadAllTrainings = document.getElementById("loadTrainings");
+        let createTraining = document.getElementById("addNewTraining");
+        document.addEventListener("DOMContentLoaded", init);
 
                 function init() {
                     loadAllTrainings.addEventListener("click", readPastTrainings);
@@ -60,4 +76,5 @@
         </article>
         <%@ include file="fragments/footer.jspf"%>
     </body>
+
 </html>
