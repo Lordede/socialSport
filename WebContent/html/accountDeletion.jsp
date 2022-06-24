@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +12,10 @@
 </head>
 <body>
 	<%@ include file="fragments/authenticationCheck.jspf"%>
-	<%@ include file="fragments/noScript.jspf" %>
+	<%@ include file="fragments/noScript.jspf"%>
 	<%-- Überprüfung, ob User eingeloggt ist --%>
-	<h1>Schade dass Sie uns verlassen haben, wir hoffen doch, dass sie zurückkehren</h1>
+	<h1>Schade dass Sie uns verlassen haben, wir hoffen doch, dass sie
+		zurückkehren</h1>
 	<%@ include file="fragments/footer.jspf"%>
 </body>
 </html>

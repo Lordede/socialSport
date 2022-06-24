@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="../css/registration.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/layout.css">
-        <title>Login</title>
-    </head>
-    <body>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../css/registration.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="../css/layout.css">
+<title>Login</title>
+</head>
+<body>
 
-        <header class="header">
-            <h1>Login:</h1>
-        </header>
-        <noscript>
-            <h1>BITTE JAVASCRIPT AKTIEREN!</h1>
-          </noscript>
+	<header class="header">
+		<h1>Login:</h1>
+	</header>
+	<noscript>
+		<h1>BITTE JAVASCRIPT AKTIEREN!</h1>
+	</noscript>
 
-        <div class="login-container">
-            <form class="form" action="../LoginServlet" method="post">
-<!--             	<label for="email">Email:</label><br> -->
-<!--                 <input type="text" name="email"><br> -->
-                <label for="userName">Benutzername:</label><br>
-                <input type="text" name="userName" size="30" maxlength="35"><br>
-                <label for="password" size="30" maxlength="35">Passwort:</label><br>
-                <input type="password" name="password" id="password" size="30" maxlength="35"><br>
-                <input type="submit" value="Bestätigen">
-            </form>
-        </div>
-    </body>
+	<div class="login-container">
+		<form class="form" action="../LoginServlet" method="post">
+			<!--             	<label for="email">Email:</label><br> -->
+			<!--                 <input type="text" name="email"><br> -->
+			<label for="userName">Benutzername:</label><br> <input
+				type="text" name="userName" size="30" maxlength="35"><br>
+			<label for="password" size="30" maxlength="35">Passwort:</label><br>
+			<input type="password" name="password" id="password" size="30"
+				maxlength="35"><br> <input type="submit"
+				value="Bestätigen">
+		</form>
+	</div>
+</body>
 </html>

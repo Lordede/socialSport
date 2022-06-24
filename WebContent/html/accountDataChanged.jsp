@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="author" content="Cem Durmus" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="../css/layout.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="../css/layout.css">
 <!-- Basis f�r relative Verweise -> Basis = Speicherort -->
 <base href="${pageContext.request.requestURI}" />
 <%@ include file="fragments/footerHEAD.jspf"%>
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="fragments/noScript.jspf" %>
-<%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung, ob User eingeloggt ist --%>
+	<%@ include file="fragments/noScript.jspf"%>
+	<%@ include file="fragments/authenticationCheck.jspf"%>
+	<%-- Überprüfung, ob User eingeloggt ist --%>
 	<header>
 		<h1>Profil Bearbeiten</h1>
 	</header>
