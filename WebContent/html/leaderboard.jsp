@@ -48,6 +48,16 @@
 
 			</table>
 		</article>
+		<div id="Arnold">
+			<div class="pictureWrapper">
+				<img 	src="../img/ArnoldSchwarzenegger.jpg"
+						alt="ArnoldSchwarzenegger" height="200" width="333"
+						id="ArnoldPicture">
+			</div>
+			<p id="quote">»Aufgeben ist keine Option. Jeder hat erfolgreich
+				zu sein.«</p>
+			<p class="pictureWrapper">~Arnold Schwarzenegger</p>
+		</div>
 	</main>
 	<%@ include file="fragments/footer.jspf"%>
 	<script>
