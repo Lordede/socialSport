@@ -1,4 +1,10 @@
 //Cem Durmus
+
+/**
+ * 
+ * @param {event} event: getriggertes Event um die Übung auszuwählen zur favorisierung
+ *                       welche anhand ihrer Überschrift herausgefiltert wird.
+ */
 function senseEvent(event) {
   let eventTrigger = event.target.className;
   let button = document.getElementsByClassName(eventTrigger);

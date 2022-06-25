@@ -3,6 +3,12 @@
  * Cem Durmus 
  * 
  * */
+
+/**
+ * Einstiegspunkt zum Lesen der favorisierten Übungen aus dem Dashboard.
+ * Dabei wird ein Ajax aufruf an den Server gemacht welcher anschließend eine 
+ * Antwort als String zurück gibt und an die extractFavorites weitergibt
+ */
 function readFavoriteExercises(){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "../FavoriteExerciseServlet", true);
@@ -15,6 +21,11 @@ function readFavoriteExercises(){
     xmlhttp.send();
 }
 
+/**
+ * Füllung der favorisierten Übungen
+ * @param {String} jsonString: antwort des Servers welcher als Json String gesendet wird
+ * Template wird hier ausgefüllt für die Anzeige
+ */
 function extractFavorites(jsonString)
 {
     let exercisesArrayList = JSON.parse(jsonString);
@@ -31,6 +42,12 @@ function extractFavorites(jsonString)
         console.log(exercise);
    });
 }
+
+/**
+ * 
+ * @param {Object} exercise: Ausgewählt Übung,
+ * zum entfernen aus den Favoriten.
+ */
 function onExerciseClick(exercise)
 {
 	let delButton = document.getElementById("delExercise");
@@ -48,11 +65,12 @@ function onExerciseClick(exercise)
         deleteExercise(exercise);
         document.location.reload(true);
     });
-    
-
 }
 
-
+/**
+ * 
+ * @param {Object} exercise: Ajax ausruf zum entfernen aus der Datenbank
+ */
 function deleteExercise(exercise) {
     let request = new XMLHttpRequest;
     request.open("DELETE", "../FavoriteExerciseServlet?name="+exercise.name, true);
@@ -61,7 +79,5 @@ function deleteExercise(exercise) {
     {
         location.reload();
     }
-    
-
     request.send();
 }

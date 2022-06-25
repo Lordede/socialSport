@@ -2,7 +2,10 @@
  * Cem Durmus
  */
 
-//Starpunkt Users
+/**
+ * Auslesen aller User mittels Ajax aufruf,
+ * weiterleitung der Search Method
+ */
 function readUsers() {
     var request = new XMLHttpRequest();
     request.open("Get", "../UserUpdateServlet?getUsers")
@@ -21,7 +24,12 @@ function readUsers() {
     });
     
 }
-
+/**
+ * Füllung der User Tabelle
+ * @param {String} jsonString: antwort des Servers welcher als Json String gesendet wird
+ * Template wird hier ausgefüllt und ebenefalls klickbar gemacht für die weiterleitung an 
+ * selectUser
+ */
 function createUserElements(jsonString) {
     let parentTableElm = document.querySelector("#insertUsers");
     let templateTableRow = document.querySelector("#trTemplate");
@@ -42,6 +50,12 @@ function createUserElements(jsonString) {
     });
 }
 
+/**
+ * Auswahl des Users zur weiteren Verarbeiten
+ * @param {Object} user
+ * dabei wird ein User in einen dafür vorgesehenen Container geladen und 
+ * wird zusammen mit den Buttons und dem Text geladen 
+ */
 function selectUser(user) {
     let delButton = document.querySelector("#delUser");
     let adminButton = document.querySelector("#setAdmin");
@@ -64,7 +78,11 @@ function selectUser(user) {
     delButton.addEventListener("click", ()  => deleteUser(user));
     adminButton.addEventListener("click", () => makeUserAdmin(user));
 }
-
+/**
+ * Ajax aufruf an den Server um den user zu Löschen und anschließend wird die
+ * Seite geladen on Load.
+ * @param {Object} user 
+ */
 function deleteUser(user) {
     let request = new XMLHttpRequest;
     request.open("DELETE", "../UserUpdateServlet?id="+user.id, true);
@@ -77,7 +95,11 @@ function deleteUser(user) {
     
 }
 
-
+/**
+ * Ajax aufruf an den Server um den user zu admin und anschließend wird die
+ * Seite geladen onLoad.
+ * @param {Object} user 
+ */
 function makeUserAdmin(user) {
     let request = new XMLHttpRequest;
     request.open("POST", "../UserUpdateServlet", true);
@@ -112,7 +134,8 @@ function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
 
 //Startpunkt Exercise
 /**
- * Startpuntk der Exercise Extratction 
+ * Startpuntk der Exercise Extraktion welche den JsonString des Servers erhält und diese dann an 
+ * die weitern Funktionen weitergibt.
  */
 function readExercises() {
     var xmlhttp = new XMLHttpRequest();
@@ -133,7 +156,11 @@ function readExercises() {
     });
 }
 
-//Read
+/**
+ * Füllung der Exercise Tabelle
+ * @param {String} jsonString: antwort des Servers welcher als Json String gesendet wird
+ * Template wird hier ausgefüllt für die Anzeige
+ */
 function listAllExercises(jsonString) {
     let exercisesArrayList = JSON.parse(jsonString);
     let tableRowTemplateExercise = document.querySelector("#trExercise");
@@ -150,7 +177,10 @@ function listAllExercises(jsonString) {
         //exercise.image = exercise.image;
     });
 }
-
+/**
+ * Zur erstellung von neuen Exercises können hier Parameter ausgewählt werden, welche dann in die Datenbank übernommen werden.
+ * Dabei wir die FormData methode verwendet, welche in der lage ist verschiedene Input-Typen an den Server zu übermitteln.
+ */
 function createNewExercise() {
 
     let inputImage = document.querySelector("#image");
