@@ -1,0 +1,41 @@
+body {
+    /* Template von Cem */
+    font-family:"Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    background-color: #242423;
+    color: white;
+}
+header{
+    text-align: center;
+    color: #95D5B2;
+}
+
+h2{
+    color: #95D5B2;
+}
+.personalInfo{
+    float: left;
+}
+img{
+    float: left;
+    border-style: solid;
+    border-radius: 90px;
+    border-color: #95D5B2;
+    margin-left: 20px;
+    
+}
+
+
+
+article{
+    border-style: solid;
+    border-radius: 50px;
+    border-color: #95D5B2;
+    margin: 1cm;
+    padding: 1cm;
+    width: fit-content;
+    float: left;
+    width: 25%;
+    
+}

@@ -3,12 +3,14 @@
     <html>
     <!-- Erstellt von Cem Durmus -->
     <head>
+    <base href="${pageContext.request.requestURI}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index_dark.css">
+    <%@ include file="html/fragments/footerHEAD.jspf"%>
 
         <title>
             Social Sport
@@ -17,7 +19,7 @@
         <meta name="description" content="Ihre one stop Sport Plattform">
         <meta name="keywords" content="Sport, Gym, social media, sports">
         <meta name="author" content="Cem Durmus">
-        <base href="${pageContext.request.requestURI}" />
+       
     </head>
 
     <body class="font_t">
@@ -104,7 +106,7 @@
                     Also schufen wir diese Plattform, welche wir auch selber Nutzen und davon Profitieren.
                 </p>
             </div>
-        </footer>
+        <%@ include file="html/fragments/footer.jspf"%>
     </body>
 
     </html>

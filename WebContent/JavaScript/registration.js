@@ -44,19 +44,12 @@ function emailAvailable() {
     xmlhttp.send(); //setRequestHeader() nur bei Post benötigt
 
 
-
-
-
-
-
-
-
 }
 
 function usernameAvailable() {
 
     var searchURL = "../CheckAvailabilityServlet"; //TODO: Hinzufügen
-    var username = document.getElementById("usernameInput").value;
+    var username = document.getElementById("userName").value;
     var check = document.getElementById("usernamecheck");
 
     if (username != null && username.length > 0) {

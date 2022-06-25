@@ -2,29 +2,22 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <title>Trainings menu</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="Cem Durmus" />
-    <meta name="description" content="chose your training" />
-    <meta name="keywords" content="Training Sport Workout" />
-    <link rel="stylesheet" href="../css/navbar.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../css/layout.css" />
-    <link rel="stylesheet" href="../css/trainingsmenu.css" />
-    <base href="${pageContext.request.requestURI}" />
-    <!-- Basis für relative Verweise -> Basis = Speicherort -->
-
-    <script
-      src="../JavaScript/TrainingsManagement.js"
-      type="text/javascript"
-    ></script>
-
-    <%@ include file="fragments/authenticationCheckHEAD.jspf" %> <%@ include
-    file="fragments/navbarHEAD.jspf" %>
+    <head>
+    
+        <title>Dashboard</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Cem Durmus">
+        <meta name="description" content="chose your training">
+        <meta name="keywords" content="Training Sport Workout">
+        <link rel="stylesheet" href="../css/navbar.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/layout.css">
+        <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
+        
+        <script src="../JavaScript/TrainingsManagement.js" type="text/javascript"></script>
+        <%@ include file="fragments/footerHEAD.jspf"%>
+        <%@ include file="fragments/authenticationCheckHEAD.jspf" %>
+        <%@ include file="fragments/navbarHEAD.jspf" %>
   </head>
   <body>
     <%@ include file="fragments/authenticationCheck.jspf" %> <%-- Überprüfung,
@@ -73,13 +66,15 @@ pageEncoding="UTF-8"%>
         let createTraining = document.getElementById("addNewTraining");
         document.addEventListener("DOMContentLoaded", init);
 
-        function init() {
-          loadAllTrainings.addEventListener("click", readPastTrainings);
-          //searchTrainingInput.addEventListener("input", searchTraining);
-          createTraining.addEventListener("click", hideSearch);
-          console.log("html spricht an");
-        }
-      </script>
-    </article>
-  </body>
+                function init() {
+                    loadAllTrainings.addEventListener("click", readPastTrainings);
+                    //searchTrainingInput.addEventListener("input", searchTraining);
+                    createTraining.addEventListener("click", hideSearch);
+                    console.log("html spricht an");
+                }
+            </script>
+        </article>
+        <%@ include file="fragments/footer.jspf"%>
+    </body>
+
 </html>
