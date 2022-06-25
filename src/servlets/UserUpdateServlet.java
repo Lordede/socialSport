@@ -239,32 +239,18 @@ public class UserUpdateServlet extends HttpServlet {
 	private void deleteUser(Long id) throws ServletException
 	{
 		try(Connection bondTrainings = ds.getConnection();
-				PreparedStatement delExcercisesToTraning = bondTrainings.prepareStatement("DELETE FROM exercisestotrainings WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
 				PreparedStatement delSetofTraining = bondTrainings.prepareStatement("DELETE FROM sets WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
+				PreparedStatement delExcercisesToTraning = bondTrainings.prepareStatement("DELETE FROM exercisestotrainings WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
 				PreparedStatement delTrainingsSessions = bondTrainings.prepareStatement("DELETE FROM trainingsessions WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)")
 				)
 		{
-			try(ResultSet rs = delTrainingsSessions.executeQuery()){
-				while(rs.next()) 
-				{
-					delTrainingsSessions.setLong(1, id);
-					delTrainingsSessions.executeUpdate();
-				}
-			}
-			try(ResultSet rs = delSetofTraining.executeQuery()){
-				while(rs.next()) 
-				{
-					delSetofTraining.setLong(1, id);
-					delSetofTraining.executeUpdate();
-				}
-			}
-			try(ResultSet rs = delExcercisesToTraning.executeQuery()){
-				while(rs.next()) 
-				{
-					delExcercisesToTraning.setLong(1, id);
-					delExcercisesToTraning.executeUpdate();
-				}
-			}
+			delSetofTraining.setLong(1, id);
+			delTrainingsSessions.setLong(1, id);
+			delExcercisesToTraning.setLong(1, id);
+			delSetofTraining.executeUpdate();
+			delTrainingsSessions.executeUpdate();
+			delExcercisesToTraning.executeUpdate();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
