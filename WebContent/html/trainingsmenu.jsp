@@ -12,6 +12,7 @@ pageEncoding="UTF-8"%>
         <link rel="stylesheet" href="../css/navbar.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/layout.css">
+         <link rel="stylesheet" href="../css/trainingsmenu.css">
         <base href="${pageContext.request.requestURI}" /> <!-- Basis für relative Verweise -> Basis = Speicherort -->
         
         <script src="../JavaScript/TrainingsManagement.js" type="text/javascript"></script>
