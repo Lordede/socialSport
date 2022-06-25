@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 
 <footer>
-<p><a href="">Impressum</a><p> 
+	<div id="footerContent">
+		<a class="footerLink" href="<%=request.getContextPath()%>/html/impressum.jsp">Impressum</a> <a class="footerLink" href="<%=request.getContextPath()%>/html/contacts.jsp">Kontakte</a>
+	</div>
 
 </footer>

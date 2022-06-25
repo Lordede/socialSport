@@ -1,0 +1,16 @@
+footer{
+    text-align: center;
+    padding: 3px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+footer a:link, a:visited{
+
+    text-decoration: underline;
+    cursor: pointer;
+    color: #95D5B2;
+
+}
