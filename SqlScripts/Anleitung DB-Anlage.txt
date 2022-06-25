@@ -1,0 +1,9 @@
+Ausführung der SQL-Skripte in folgender Reihenfolge
+
+1. ExampleDB/users.sql
+2. ExampleDB/exercises.sql
+3. ExampleDB/trainings.sql
+4. ExampleDB/exercisestotrainings.sql
+5. CreateEmptyTables/CreateFavExercises.sql
+6. CreateEmptyTables/CreateTrainingSessions.sql
+7. CreateEmptyTables/CreateSets.sql
