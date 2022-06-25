@@ -39,7 +39,7 @@
 
 	<article class="center" id="tippBox"> <h3>Tipp:</h3> 
 		<p>Die Punkte werden wie folgt berechnet:</p>
-		<p>Wiederholungen * Gewicht * Anzahl aller deiner Abgeschlossenen Sätze</p>
+		<p>Wiederholungen * Gewicht * Anzahl aller deiner abgeschlossenen Sätze</p>
 		<button id="disableTipps">Alles klar!</button>
 		</article>
 
