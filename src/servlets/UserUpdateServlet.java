@@ -121,6 +121,7 @@ public class UserUpdateServlet extends HttpServlet {
 				setAdmin(Long.parseLong(request.getParameter("setAdmin")));
 				user = getUser(user.getId());
 				session.setAttribute("userData", user);
+				response.getWriter().write("ok");
 				break;
 			default:
 				return;
@@ -238,12 +239,15 @@ public class UserUpdateServlet extends HttpServlet {
 	{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM favoriteexercises WHERE userId=?");
+				PreparedStatement delExToTrai = con.prepareStatement("DELETE FROM exercisestotrainings WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
 				PreparedStatement delTraining = con.prepareStatement("DELETE FROM trainings WHERE userId=?");
 				PreparedStatement delUser = con.prepareStatement("DELETE FROM users WHERE id=?")){
 			pstmt.setLong(1, id);
+			delExToTrai.setLong(1, id);
 			delTraining.setLong(1, id);
 			delUser.setLong(1, id);
 			pstmt.executeUpdate();
+			delExToTrai.executeUpdate();
 			delTraining.executeUpdate();
 			delUser.executeUpdate();
 		} 

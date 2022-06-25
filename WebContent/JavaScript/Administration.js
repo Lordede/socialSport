@@ -62,7 +62,7 @@ function selectUser(user) {
     let color = "#1B4332";
     userContainer.style.backgroundColor = color;
     delButton.addEventListener("click", ()  => deleteUser(user));
-    adminButton.addEventListener("click", () => makeUserAdmin(user))
+    adminButton.addEventListener("click", () => makeUserAdmin(user));
 }
 
 function deleteUser(user) {
@@ -70,7 +70,11 @@ function deleteUser(user) {
     request.open("DELETE", "../UserUpdateServlet?id="+user.id, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send();
-    window.location.reload();
+    request.onload = function ()
+    {
+        window.location.reload();
+    }
+    
 }
 
 
@@ -78,8 +82,11 @@ function makeUserAdmin(user) {
     let request = new XMLHttpRequest;
     request.open("POST", "../UserUpdateServlet", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.onload = function ()
+    {
+        window.location.reload();
+    }
     request.send("setAdmin="+user.id);
-    window.location.reload();
 }
 //Generische Suchfunktion im Interface
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
