@@ -68,7 +68,7 @@ public class TrainingServlet extends HttpServlet {
 				response.getWriter().write(json);
 				break;
 			case "exerciseInputField":
-				ArrayList<TrainingBean> trainingSearched = search(request.getParameter("exerciseInputField"));
+				ArrayList<TrainingBean> trainingSearched = search(request.getParameter("exerciseInputField"), user.getId());
 				String jsonSearch = convertListToJson(trainingSearched);
 				response.getWriter().write(jsonSearch);
 				break;
@@ -197,14 +197,15 @@ public class TrainingServlet extends HttpServlet {
 		return form;
 	}
 	
-	private ArrayList<TrainingBean> search(String input) throws ServletException{
+	private ArrayList<TrainingBean> search(String input, long userId) throws ServletException{
 		ArrayList<TrainingBean> trainings = new ArrayList<TrainingBean>();
 		input = (input == null || input == "") ? "%" : "%" + input + "%";
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE ?")) 
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE ? AND userId = ?")) 
 		{
 			
 			pstmt.setString(1, input);
+			pstmt.setLong(2, userId);
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
@@ -214,6 +215,7 @@ public class TrainingServlet extends HttpServlet {
 					training.setId(id);
 					training.setName(name);
 					training.setPoints(points);
+					training.setUserId(userId);
 					trainings.add(training);
 				}
 			}
