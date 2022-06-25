@@ -19,6 +19,7 @@ function readUsers() {
             createUserElements(jsonString);
         });
     });
+    
 }
 
 function createUserElements(jsonString) {
@@ -44,16 +45,15 @@ function createUserElements(jsonString) {
 function selectUser(user) {
     let delButton = document.querySelector("#delUser");
     let adminButton = document.querySelector("#setAdmin");
-    // let hiddenProperty = delButton.getAttribute("hidden");
-    // if(hiddenProperty)
-    // {
-    //     delButton.removeAttribute("hidden");
-    //     adminButton.removeAttribute("hidden");
-    // }
     let userContainer = document.querySelector("#userContainer");
     if(document.querySelector(".userName"))
     {
         document.querySelector(".userName").remove();
+    }
+    if(delButton.getAttribute("hidden"))
+    {
+        delButton.removeAttribute("hidden");
+        adminButton.removeAttribute("hidden");
     }
     let userName = document.createElement("div");
     userName.setAttribute("class", "userName");
@@ -70,6 +70,7 @@ function deleteUser(user) {
     request.open("DELETE", "../UserUpdateServlet?id="+user.id, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send();
+    window.location.reload();
 }
 
 
@@ -78,6 +79,7 @@ function makeUserAdmin(user) {
     request.open("POST", "../UserUpdateServlet", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send("setAdmin="+user.id);
+    window.location.reload();
 }
 //Generische Suchfunktion im Interface
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
@@ -101,6 +103,7 @@ function readExercises() {
         let jsonString = xmlhttp.responseText;
         listAllExercises(jsonString);
     }
+    
     xmlhttp.send();
 	let exerciseInputBar = document.querySelector("#searchExercises");
     exerciseInputBar.addEventListener("input", event => {
