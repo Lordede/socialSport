@@ -67,7 +67,8 @@ public class UserUpdateServlet extends HttpServlet {
 				break;
 			case "deleteUser":
 				UserBean userId = (UserBean) session.getAttribute("userData");
-				deleteUser(userId.getId(),response);
+				deleteUser(userId.getId());
+				response.sendRedirect("html/accountDeletion.jsp");
 				break;
 			}
 		}
@@ -120,12 +121,17 @@ public class UserUpdateServlet extends HttpServlet {
 				setAdmin(Long.parseLong(request.getParameter("setAdmin")));
 				user = getUser(user.getId());
 				session.setAttribute("userData", user);
+				response.getWriter().write("ok");
 				break;
 			default:
 				return;
 			}
 		}
 		response.sendRedirect("html/accountSetting.jsp");
+	}
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		deleteUser(Long.parseLong(request.getParameter("id")));
+		response.getWriter().write("ok");
 	}
 
 	public void updateEmail(UserBean user, String eMail) throws ServletException
@@ -229,19 +235,21 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteUser(Long id, HttpServletResponse response) throws ServletException 
+	private void deleteUser(Long id) throws ServletException
 	{
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM favoriteexercises WHERE userId=?");
+				PreparedStatement delExToTrai = con.prepareStatement("DELETE FROM exercisestotrainings WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
 				PreparedStatement delTraining = con.prepareStatement("DELETE FROM trainings WHERE userId=?");
 				PreparedStatement delUser = con.prepareStatement("DELETE FROM users WHERE id=?")){
 			pstmt.setLong(1, id);
+			delExToTrai.setLong(1, id);
 			delTraining.setLong(1, id);
 			delUser.setLong(1, id);
 			pstmt.executeUpdate();
+			delExToTrai.executeUpdate();
 			delTraining.executeUpdate();
 			delUser.executeUpdate();
-			response.sendRedirect("html/accountDeletion.jsp");
 		} 
 		catch (Exception ex) 
 		{
@@ -265,6 +273,7 @@ public class UserUpdateServlet extends HttpServlet {
 				user.setLastName(rs.getString("lastname"));
 				user.seteMail(rs.getString("eMail"));
 				user.setId(rs.getLong("id"));
+				user.setIsAdmin(rs.getBoolean("isAdmin"));
 				}
 			}
 			return user;
@@ -288,6 +297,7 @@ public class UserUpdateServlet extends HttpServlet {
 					user.setFirstName(rs.getString("firstname"));
 					user.seteMail(rs.getString("eMail"));
 					user.setLastName(rs.getString("lastname"));
+					user.setIsAdmin(rs.getBoolean("isAdmin"));
 					userList.add(user);
 				}
 			}
@@ -317,7 +327,9 @@ public class UserUpdateServlet extends HttpServlet {
 					user.setFirstName(result.getString("firstname"));
 					user.seteMail(result.getString("eMail"));
 					user.setLastName(result.getString("lastname"));
+					user.setIsAdmin(result.getBoolean("isAdmin"));
 					users.add(user);
+					
 				}
 				return users;
 			}

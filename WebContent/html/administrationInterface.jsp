@@ -44,8 +44,8 @@
                 </table>
                 <div id="userContainer"> <!--Hier ausgewählten User reinladen-->
                     <br>
-                    <button id="delUser" >Benutzer Löschen</button>
-                    <button id="setAdmin">Adminrechte vergeben</button>
+                    <button id="delUser" hidden="hidden">Benutzer Löschen</button>
+                    <button id="setAdmin" hidden="hidden">Adminrechte vergeben</button>
                 </div>
             </div>
             <div id="exerciseHandler">
@@ -99,9 +99,8 @@
         };
         
         function init() {
-            //document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
-            // document.ElementByName('addButton').submit();
-            console.log("html spricht an");
+            
+            
         }
         
         </script>

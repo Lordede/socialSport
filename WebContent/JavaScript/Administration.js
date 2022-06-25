@@ -19,6 +19,7 @@ function readUsers() {
             createUserElements(jsonString);
         });
     });
+    
 }
 
 function createUserElements(jsonString) {
@@ -44,16 +45,15 @@ function createUserElements(jsonString) {
 function selectUser(user) {
     let delButton = document.querySelector("#delUser");
     let adminButton = document.querySelector("#setAdmin");
-    // let hiddenProperty = delButton.getAttribute("hidden");
-    // if(hiddenProperty)
-    // {
-    //     delButton.removeAttribute("hidden");
-    //     adminButton.removeAttribute("hidden");
-    // }
     let userContainer = document.querySelector("#userContainer");
     if(document.querySelector(".userName"))
     {
         document.querySelector(".userName").remove();
+    }
+    if(delButton.getAttribute("hidden"))
+    {
+        delButton.removeAttribute("hidden");
+        adminButton.removeAttribute("hidden");
     }
     let userName = document.createElement("div");
     userName.setAttribute("class", "userName");
@@ -62,7 +62,7 @@ function selectUser(user) {
     let color = "#1B4332";
     userContainer.style.backgroundColor = color;
     delButton.addEventListener("click", ()  => deleteUser(user));
-    adminButton.addEventListener("click", () => makeUserAdmin(user))
+    adminButton.addEventListener("click", () => makeUserAdmin(user));
 }
 
 function deleteUser(user) {
@@ -70,6 +70,11 @@ function deleteUser(user) {
     request.open("DELETE", "../UserUpdateServlet?id="+user.id, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send();
+    request.onload = function ()
+    {
+        window.location.reload();
+    }
+    
 }
 
 
@@ -77,6 +82,10 @@ function makeUserAdmin(user) {
     let request = new XMLHttpRequest;
     request.open("POST", "../UserUpdateServlet", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.onload = function ()
+    {
+        window.location.reload();
+    }
     request.send("setAdmin="+user.id);
 }
 //Generische Suchfunktion im Interface
@@ -101,6 +110,7 @@ function readExercises() {
         let jsonString = xmlhttp.responseText;
         listAllExercises(jsonString);
     }
+    
     xmlhttp.send();
 	let exerciseInputBar = document.querySelector("#searchExercises");
     exerciseInputBar.addEventListener("input", event => {
