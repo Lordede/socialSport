@@ -196,24 +196,26 @@ public class TrainingServlet extends HttpServlet {
 		}
 		return form;
 	}
-	
-	private ArrayList<TrainingBean> search(String input, Long id) throws ServletException{
+
+	private ArrayList<TrainingBean> search(String input, long userId) throws ServletException{
 		ArrayList<TrainingBean> trainings = new ArrayList<TrainingBean>();
 		input = (input == null || input == "") ? "%" : "%" + input + "%";
 		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE ? AND userId=?")) 
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE ? AND userId = ?")) 
 		{
 			
 			pstmt.setString(1, input);
-			pstmt.setLong(2, id);
+			pstmt.setLong(2, userId);
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
 					String name = rs.getString("name");
-					double points = rs.getDouble("points");					
-					training.setId(id);
+					double points = rs.getDouble("points");	
+          Long trainingsId = rs.getLong("id");
+					training.setId(trainingsId);
 					training.setName(name);
 					training.setPoints(points);
+					training.setUserId(userId);
 					trainings.add(training);
 				}
 			}

@@ -12,8 +12,8 @@
         <li><a href="./dashboard.jsp">Dashboard</a></li>
         <li><a href="./trainingsmenu.jsp">Training</a></li>
         <li><a href="./leaderboard.jsp">Leaderboard</a></li>
-        <li><a href="./accountSetting.jsp">Accounteinstellungen</a></li>
-        <li style="float: right"><a class="active" id="logoutButton">Logout</a></li> <!--TODO: das flaot sollte in die CSS ausgelagert werden-->
+        <li><a href="./accountSetting.jsp">Account Settings</a></li>
+        <li  id="logoutButton" class="logout active"><a>Logout</a></li> <!--TODO: das flaot sollte in die CSS ausgelagert werden-->
         <!-- Hubertus Seitz -->
   		<c:if test="${userData.admin}">
         <li> <a id="administrationInterfaceButton" href="administrationInterface.jsp">Adminverwaltung </a></li>
