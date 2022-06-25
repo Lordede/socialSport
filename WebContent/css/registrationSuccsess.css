@@ -23,12 +23,20 @@ header{
     margin-right: auto;
     padding: 1cm;
 }
+.table{
+    border-style: solid;
+    padding: 2cm;
+    border-color: #95D5B2;
+    border-radius: 20px;
+    list-style-type: none
+    
+}
 
 .center {
-    margin: auto;
-    width: 20%;
+    margin: auto; 
+    width: fit-content;
     padding: 10px;
-  }
+}
 
 .ulnav{
     list-style: none;
