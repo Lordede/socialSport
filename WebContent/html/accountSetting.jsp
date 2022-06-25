@@ -6,7 +6,7 @@
 <head>
 <base href="${pageContext.request.requestURI}" />
 <!-- Basis für relative Verweise -> Basis = Speicherort -->
-<title>Profil Bearbeiten</title>
+<title>Accounteinstellungen</title>
 <meta charset="utf-8">
 <meta name="description" content="Ihre one stop Sport Plattform">
 <meta name="keywords" content="Benutzerkonto bearbeiten">

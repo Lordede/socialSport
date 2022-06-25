@@ -196,7 +196,7 @@ public class TrainingServlet extends HttpServlet {
 		}
 		return form;
 	}
-	
+
 	private ArrayList<TrainingBean> search(String input, long userId) throws ServletException{
 		ArrayList<TrainingBean> trainings = new ArrayList<TrainingBean>();
 		input = (input == null || input == "") ? "%" : "%" + input + "%";
@@ -209,10 +209,10 @@ public class TrainingServlet extends HttpServlet {
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
-					Long id = rs.getLong("id");
 					String name = rs.getString("name");
-					double points = rs.getDouble("points");					
-					training.setId(id);
+					double points = rs.getDouble("points");	
+          Long trainingsId = rs.getLong("id");
+					training.setId(trainingsId);
 					training.setName(name);
 					training.setPoints(points);
 					training.setUserId(userId);

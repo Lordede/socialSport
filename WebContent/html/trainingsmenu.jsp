@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html lang="de">
     <head>
     
-        <title>Dashboard</title>
+        <title>Trainingsmenü</title>
         <meta charset="utf-8">
         <meta name="author" content="Cem Durmus">
         <meta name="description" content="chose your training">
