@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Adminverwaltung</title>
         <base href="${pageContext.request.requestURI}" />
         <meta charset="UTF-8">
         <meta name="description" content="Speichern Sie Ihre Traings hier">
