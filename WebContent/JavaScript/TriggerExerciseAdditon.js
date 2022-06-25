@@ -58,8 +58,11 @@ function readContent()
 	}
 		xmlhttp.send() ;
 }
-    //extractExercises(jsonString);
 
+/**
+ *  Die suchfunktion schickt einen gebenen input zum ExerciseServlet, welcher dann anschließend die 
+ *  erhaltene Antwort an die extractions-Funktion weiterleitet, die dann angepasst zur Suche neue Trainings zeigt. 
+ * */
 function readSearchExercises(exerciseName, callback)
 {
     var xmlhttp = new XMLHttpRequest();

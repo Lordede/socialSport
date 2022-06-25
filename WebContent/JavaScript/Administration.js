@@ -88,7 +88,16 @@ function makeUserAdmin(user) {
     }
     request.send("setAdmin="+user.id);
 }
-//Generische Suchfunktion im Interface
+/**
+ * Generische Suchfunktion im Interface 
+ * @param {String} servletname: um zwischen dem ExerciseServlet und dem UserUpdateServlet zu unterscheiden  
+ * @param {String} nameOfInputField: ebenfalls um die richtigen Parameter im Servlet anzusprechen
+ * @param {String} searchInput: inhalt des Input-Feldes
+ * @param {String} callback: die suchfunktion schickt einen gebenen input zum Servlet, welcher dann anschließend die 
+ *                            erhaltene Antwort an die extractions-Funktion weiterleitet, die dann angepasst zur Suche neue Items zeigt
+ * 
+ */
+
 function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
     let request = new XMLHttpRequest;
     let extractedJson = ""
@@ -102,6 +111,9 @@ function searchAdminUi(servletname, nameOfInputField, searchInput, callback) {
 }
 
 //Startpunkt Exercise
+/**
+ * Startpuntk der Exercise Extratction 
+ */
 function readExercises() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "../ExerciseServlet?addButton");

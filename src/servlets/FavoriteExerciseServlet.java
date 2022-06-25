@@ -28,43 +28,47 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/FavoriteExerciseServlet")
 public class FavoriteExerciseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Resource(lookup = "java:jboss/datasources/MySqlThidbDS")
 	private DataSource ds;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FavoriteExerciseServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public FavoriteExerciseServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-    	UserBean user = (UserBean) session.getAttribute("userData");
-		if(request.getParameter("checkExisting") != null) {
+		UserBean user = (UserBean) session.getAttribute("userData");
+		if (request.getParameter("checkExisting") != null) {
 			long userId = user.getId();
 			String exerciseName = request.getParameter("name");
 			Boolean isExisting = checkExistingExercise(userId, exerciseName);
-			
+
 			response.getWriter().write(isExisting.toString());
-		}
-		else {
+		} else {
 			ArrayList<ExerciseBean> favoriteExercises = getFavoriteExercises(user.getId());
 			String json = convertListToJson(favoriteExercises);
 			response.getWriter().write(json);
 		}
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 		System.out.print("istDrin");
@@ -72,26 +76,28 @@ public class FavoriteExerciseServlet extends HttpServlet {
 		setFavoriteExercise(name, user.getId());
 		response.getWriter().write("ok");
 	}
-	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 		delFavoriteExercise(name);
 		response.getWriter().write("ok");
 	}
-	
+
 	private boolean checkExistingExercise(Long userId, String exerciseName) throws ServletException {
-		
-		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM favoriteexercises WHERE exerciseId = (SELECT id FROM exercises WHERE name = ? ) AND userId = ?")){
-			
+
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(
+						"SELECT * FROM favoriteexercises WHERE exerciseId = (SELECT id FROM exercises WHERE name = ? ) AND userId = ?")) {
+
 			pstmt.setString(1, exerciseName);
 			pstmt.setLong(2, userId);
-			
-			try(ResultSet rs = pstmt.executeQuery()){
-				if(rs != null && rs.next()) {
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs != null && rs.next()) {
 					return true;
-					
+
 				}
 			}
 		} catch (Exception ex) {
@@ -99,26 +105,23 @@ public class FavoriteExerciseServlet extends HttpServlet {
 		}
 		return false;
 	}
-	
-	private ArrayList<ExerciseBean> getFavoriteExercises(Long id) throws ServletException
-	{
+
+	private ArrayList<ExerciseBean> getFavoriteExercises(Long id) throws ServletException {
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
-		
-		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM favoriteexercises WHERE userId=?")){
+
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM favoriteexercises WHERE userId=?")) {
 			pstmt.setLong(1, id);
-			try(ResultSet rs = pstmt.executeQuery())
-			{
-				while(rs != null && rs.next()) {
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
 					Long exerciseId = rs.getLong("exerciseId");
-					try(Connection conEx = ds.getConnection();
-							PreparedStatement exercisePstmt = conEx.prepareStatement("SELECT * FROM exercises WHERE id=?"))
-					{
+					try (Connection conEx = ds.getConnection();
+							PreparedStatement exercisePstmt = conEx
+									.prepareStatement("SELECT * FROM exercises WHERE id=?")) {
 						exercisePstmt.setLong(1, exerciseId);
-						
-						try(ResultSet res = exercisePstmt.executeQuery())
-						{
-							while(res != null && res.next()) {
+
+						try (ResultSet res = exercisePstmt.executeQuery()) {
+							while (res != null && res.next()) {
 								ExerciseBean exercise = new ExerciseBean();
 								exercise.setName(res.getString("name"));
 								exercise.setId(res.getLong("id"));
@@ -129,38 +132,32 @@ public class FavoriteExerciseServlet extends HttpServlet {
 					}
 				}
 			}
-			
-		}
-		catch (Exception ex) 
-		{
+
+		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
 		return exercises;
 	}
 
-	private void setFavoriteExercise(String name,Long id) throws ServletException 
-	{
+	private void setFavoriteExercise(String name, Long id) throws ServletException {
 		ExerciseBean exercise = new ExerciseBean();
 		System.out.print("istDrin1");
-		try(Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO favoriteexercises (exerciseId, userId) "
-					+ "VALUES( "
-					+ "(SELECT id From exercises WHERE name = ?), ?"
-					+ ")")){
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("INSERT INTO favoriteexercises (exerciseId, userId) "
+						+ "VALUES( " + "(SELECT id From exercises WHERE name = ?), ?" + ")")) {
 			pstmt.setString(1, name);
 			pstmt.setLong(2, id);
 			pstmt.executeUpdate();
-			
+
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-	
-	private void delFavoriteExercise(String name) throws ServletException
-	{
-		try(Connection con = ds.getConnection();
-				PreparedStatement favCon = con.prepareStatement("DELETE FROM favoriteexercises WHERE exerciseId = (SELECT id From exercises WHERE name = ?)"))
-		{
+
+	private void delFavoriteExercise(String name) throws ServletException {
+		try (Connection con = ds.getConnection();
+				PreparedStatement favCon = con.prepareStatement(
+						"DELETE FROM favoriteexercises WHERE exerciseId = (SELECT id From exercises WHERE name = ?)")) {
 			favCon.setString(1, name);
 			favCon.executeUpdate();
 		} catch (SQLException e) {
@@ -168,30 +165,28 @@ public class FavoriteExerciseServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	private String convertListToJson(ArrayList<ExerciseBean> arr) 
-	{
+
+	private String convertListToJson(ArrayList<ExerciseBean> arr) {
 		StringBuilder jsonString = new StringBuilder();
 		ArrayList<ExerciseBean> exercises = arr;
-		
+
 		jsonString.append("[");
-		for(int i = 0;i < exercises.size(); i++) 
-		{			
+		for (int i = 0; i < exercises.size(); i++) {
 			jsonString.append("{");
 			jsonString.append("\"name\":");
-			jsonString.append("\""+exercises.get(i).getName()+"\",");
+			jsonString.append("\"" + exercises.get(i).getName() + "\",");
 			jsonString.append("\"muscleGroup\":");
-			jsonString.append("\""+exercises.get(i).getMuscleGroup()+"\",");
+			jsonString.append("\"" + exercises.get(i).getMuscleGroup() + "\",");
 			jsonString.append("\"id\":");
-			jsonString.append("\""+exercises.get(i).getId()+"\"");
-			if( i+1 == exercises.size()) 
-			{
+			jsonString.append("\"" + exercises.get(i).getId() + "\"");
+			if (i + 1 == exercises.size()) {
 				jsonString.append("}");
 			} else {
 				jsonString.append("},");
-				}
+			}
 		}
 		jsonString.append("]");
-		
+
 		return jsonString.toString();
 	}
 

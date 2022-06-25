@@ -84,9 +84,8 @@ public class TrainingServlet extends HttpServlet {
 				
 
 				
-				response.getWriter().write("hasi");
-//				RequestDispatcher disp = request.getRequestDispatcher("html/training.jsp");
-//				disp.forward(request, response);
+				response.getWriter().write("ok");
+//				Ende Cem Durmus
 			}
 		}
 		

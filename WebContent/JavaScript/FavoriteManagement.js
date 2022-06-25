@@ -17,7 +17,7 @@ function readFavoriteExercises(){
 
 function extractFavorites(jsonString)
 {
-    let exercisesArrayList = JSON.parse(jsonString) //[{"":""},{"rep":"3"}]
+    let exercisesArrayList = JSON.parse(jsonString);
     const searchResults = document.getElementById("favoriteExercises");
     const toggleContainer = document.getElementById("favoritesContainer");
     toggleContainer.style.display = "block";
