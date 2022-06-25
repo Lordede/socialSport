@@ -6,6 +6,7 @@ import java.net.http.HttpResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -237,17 +238,33 @@ public class UserUpdateServlet extends HttpServlet {
 
 	private void deleteUser(Long id) throws ServletException
 	{
+		try(Connection bondTrainings = ds.getConnection();
+				PreparedStatement delSetofTraining = bondTrainings.prepareStatement("DELETE FROM sets WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
+				PreparedStatement delExcercisesToTraning = bondTrainings.prepareStatement("DELETE FROM exercisestotrainings WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
+				PreparedStatement delTrainingsSessions = bondTrainings.prepareStatement("DELETE FROM trainingsessions WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)")
+				)
+		{
+			delSetofTraining.setLong(1, id);
+			delTrainingsSessions.setLong(1, id);
+			delExcercisesToTraning.setLong(1, id);
+			delSetofTraining.executeUpdate();
+			delTrainingsSessions.executeUpdate();
+			delExcercisesToTraning.executeUpdate();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM favoriteexercises WHERE userId=?");
-				PreparedStatement delExToTrai = con.prepareStatement("DELETE FROM exercisestotrainings WHERE trainingId = (SELECT id FROM trainings WHERE userId = ?)");
+				
 				PreparedStatement delTraining = con.prepareStatement("DELETE FROM trainings WHERE userId=?");
 				PreparedStatement delUser = con.prepareStatement("DELETE FROM users WHERE id=?")){
 			pstmt.setLong(1, id);
-			delExToTrai.setLong(1, id);
 			delTraining.setLong(1, id);
 			delUser.setLong(1, id);
 			pstmt.executeUpdate();
-			delExToTrai.executeUpdate();
+			
 			delTraining.executeUpdate();
 			delUser.executeUpdate();
 		} 
