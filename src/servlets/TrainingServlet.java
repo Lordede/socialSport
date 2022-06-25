@@ -208,9 +208,9 @@ public class TrainingServlet extends HttpServlet {
 			try(ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					TrainingBean training = new TrainingBean();
-					Long id = Long.valueOf(rs.getLong("id"));
+					Long id = rs.getLong("id");
 					String name = rs.getString("name");
-					double points = Double.valueOf(rs.getDouble("points"));					
+					double points = rs.getDouble("points");					
 					training.setId(id);
 					training.setName(name);
 					training.setPoints(points);

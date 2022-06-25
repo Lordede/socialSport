@@ -1,0 +1,1 @@
+ExampleAvatar: https://aui.atlassian.com/aui/8.8/docs/avatars.html

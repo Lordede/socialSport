@@ -14,11 +14,13 @@
         <script src="../JavaScript/Administration.js" type="text/javascript"></script>
         <%@ include file="fragments/authenticationCheckHEAD.jspf"%>
 		<%@ include file="fragments/navbarHEAD.jspf"%>
+        <%@ include file="fragments/footerHEAD.jspf"%>
     </head>
     <body>
     <%@ include file="fragments/noScript.jspf"%>
 	<%@ include file="fragments/authenticationCheck.jspf"%>
 	<%@ include file="fragments/navbar.jspf"%>
+    
         
         <header>
             
@@ -121,5 +123,7 @@
             </tr>
         </template>
     </footer>
+    <%-- Es sind ja mehrere Footer Elemente erlaubt? --%>
+    <%@ include file="fragments/footer.jspf"%> 
 </body>
 </html>

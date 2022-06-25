@@ -96,16 +96,16 @@ public class JoinServlet extends HttpServlet {
 				while (rs.next()) {
 					JoinBean joinBean = new JoinBean();
 
-					Long id = Long.valueOf(rs.getLong("id"));
-					double kg = Double.valueOf(rs.getDouble("kg"));
-					int rep = Integer.valueOf(rs.getInt("rep"));
-					Long exerciseId = Long.valueOf(rs.getLong("exerciseId"));
+					Long id = rs.getLong("id");
+					double kg = rs.getDouble("kg");
+					int rep = rs.getInt("rep");
+					Long exerciseId = rs.getLong("exerciseId");
 					String exerciseName = rs.getString("exerciseName");
 					String muscleGroup = rs.getString("muscleGroup");
 					String exerciseImage = rs.getString("exerciseImage");
-					Long trainingId = Long.valueOf(rs.getLong("trainingId"));
+					Long trainingId = rs.getLong("trainingId");
 					String trainingName = rs.getString("trainingName");
-					double points = Double.valueOf(rs.getDouble("points"));
+					double points = rs.getDouble("points");
 
 					joinBean.setId(id);
 					joinBean.setKg(kg);
