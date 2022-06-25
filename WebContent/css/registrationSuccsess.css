@@ -1,0 +1,58 @@
+body {
+    /* Template von Cem */
+    font-family:"Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    background-color: #242423;
+    color: white;
+}
+
+
+    
+header{
+    text-align: center;
+}
+
+#list{
+    border-style: solid;
+    border-radius: 50px;
+    background-color:rgb(40, 40, 40);
+    border-color: #95D5B2;
+    
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1cm;
+}
+.table{
+    border-style: solid;
+    padding: 2cm;
+    border-color: #95D5B2;
+    border-radius: 20px;
+    list-style-type: none
+    
+}
+
+.center {
+    margin: auto; 
+    width: fit-content;
+    padding: 10px;
+}
+
+.ulnav{
+    list-style: none;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #1B4332;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    color: black; 
+}
+.ulnav:hover{
+    background-color: #1b4332;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
