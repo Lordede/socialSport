@@ -58,7 +58,7 @@
 	<div class="clear"></div>
 
 	<div id="buttons">
-		<button class="button" id="cancelWorkout">Workout abbrechen</button>
+		<button class="button" id="cancelWorkout">Workout abschließen</button>
 	</div>
 
 	<!--Footer-->
@@ -109,16 +109,15 @@
 
 			//https://stackoverflow.com/questions/7317273/warn-user-before-leaving-web-page-with-unsaved-changes
 
-			window
-					.addEventListener(
-							"beforeunload",
-							function(e) {
-								var confirmationMessage = "It looks like you have been editing something. "
-										+ "If you leave before saving, your changes will be lost.";
-
-								(e || window.event).returnValue = confirmationMessage; //Gecko + IE
-								return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-							});
+			// window
+			// 		.addEventListener(
+			// 				"beforeunload",
+			// 				function(e) {
+			// 					var confirmationMessage = "It looks like you have been editing something. "
+			// 							+ "If you leave before saving, your changes will be lost.";
+			// 					(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+			// 					return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+			// 				});
 
 			window.addEventListener("load", loadSavedExercises);
 
