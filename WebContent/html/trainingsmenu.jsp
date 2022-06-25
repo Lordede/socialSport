@@ -29,7 +29,6 @@ pageEncoding="UTF-8"%>
         <h1><strong>Training: </strong></h1>
         <div id="training">
           <div id="addTraining">
-            <button id="loadTrainings">Trainings laden</button>
             <button id="addNewTraining">Training hinzufügen</button>
             <br />
             <label id="nameOfTrainingLabel" hidden="hidden"
@@ -63,15 +62,14 @@ pageEncoding="UTF-8"%>
         let searchTrainingInput = document.getElementById(
           "searchPastTrainings"
         );
-        let loadAllTrainings = document.getElementById("loadTrainings");
         let createTraining = document.getElementById("addNewTraining");
         document.addEventListener("DOMContentLoaded", init);
 
                 function init() {
-                    loadAllTrainings.addEventListener("click", readPastTrainings);
                     //searchTrainingInput.addEventListener("input", searchTraining);
                     createTraining.addEventListener("click", hideSearch);
                     console.log("html spricht an");
+                    readPastTrainings();
                 }
             </script>
         </article>
