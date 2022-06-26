@@ -172,6 +172,15 @@ button {
   clear: both;
 }
 
+#tippBox{
+  color: white;
+  width: 25%;
+  border-style: dotted;
+  border-color: #95D5B2;
+  border-radius: 20px;
+  margin: 1cm;
+  padding: 2px;
+}
 
 
 footer {
@@ -192,3 +201,6 @@ tr:hover {
   cursor: pointer;
 }
 
+.hidden {
+  display: none;
+}

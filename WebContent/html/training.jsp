@@ -34,6 +34,13 @@
 	<header id="${training.id}">Social Sport</header>
 	<!-- Über die ID "wissen" die Sätze beim abspeichern zu welchem training sie gehören-->
 
+	<article id="tippBox"> <h3>Tipps:</h3> 
+		<p>Deine Sets werden durch das Abschließen automatisch gespeichert!</p>
+		<p>Bitte beleibe während einer Trainingssession auf dieser Seite.</p>
+		<p>Wenn du weg navigierst wird deine Trainingssession beendet, du kannst aber immer eine neue beginnen!</p>
+		<button id="disableTipps">Alles klar!</button>
+		</article>
+
 	<main id="exercises"></main>
 
 	<aside id="searchContainer" class="elements">
@@ -75,6 +82,17 @@
 					.getElementsByClassName("removeExerciseButton");
 			var toogleViewButton = document.getElementById("toogleViewButton");
 
+			//Um die Tipps auszublenden!
+			var tippButton = document.getElementById("disableTipps")
+			tippButton.addEventListener("click", function(e){
+
+				console.log("CLICK!")
+				document.getElementById("tippBox").setAttribute("class", "hidden");
+
+			});
+			//--
+
+
 			//Lukas Edmüller
 			toogleViewButton.addEventListener("click", toogleView);
 
@@ -86,7 +104,6 @@
 			toogleViewButton.addEventListener("click", toggleExerciseSearchbar);
 			finishWorkoutButton.addEventListener("click", finishWorkout);
 			// document.ElementByName('addButton').submit();
-			console.log("html spricht an");
 			for (var i = 0; i < addSetButton.length; i++) {
 				// Alle "SetButton" mit EventListener überwachen
 				addSetButton[i].addEventListener("click", getExerciseReference);
@@ -106,6 +123,7 @@
 				// Alle "SetButton" mit EventListener überwachen
 				checkboxes[i].addEventListener("change", disableSet);
 			}
+			// ------
 
 			//https://stackoverflow.com/questions/7317273/warn-user-before-leaving-web-page-with-unsaved-changes
 
@@ -120,6 +138,8 @@
 			// 				});
 
 			window.addEventListener("load", loadSavedExercises);
+
+			
 
 			//---
 		}

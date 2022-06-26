@@ -37,6 +37,12 @@
 							placeholder="Nach Username suchen..." autofocus>  --%>
 	</header>
 
+	<article class="center" id="tippBox"> <h3>Tipp:</h3> 
+		<p>Die Punkte werden wie folgt berechnet:</p>
+		<p>Wiederholungen * Gewicht * Anzahl aller deiner abgeschlossenen Sätze</p>
+		<button id="disableTipps">Alles klar!</button>
+		</article>
+
 	<main>
 		<article id="leaderboard">
 			<table id="leaderboardTable">
@@ -58,12 +64,21 @@
 				zu sein.«</p>
 			<p class="pictureWrapper">~Arnold Schwarzenegger</p>
 		</div>
+
 	</main>
 	<%@ include file="fragments/footer.jspf"%>
 	<script>
 		window.addEventListener("DOMContentLoaded", init);
 		function init() {
 			window.addEventListener("load", loadLeaderboard()); //Leaderboard soll mit Seitenaufbau geladen werden
+
+			var tippButton = document.getElementById("disableTipps")
+			tippButton.addEventListener("click", function(e){
+
+				console.log("CLICK!")
+				document.getElementById("tippBox").setAttribute("class", "hidden");
+
+			});
 
 		}
 	</script>
