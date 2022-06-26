@@ -12,6 +12,10 @@ function emailAvailable() {
     var searchURL = "../CheckAvailabilityServlet"; //TODO: Hinzufügen
     var email = document.getElementById("emailInput").value;
 
+    // https://stackoverflow.com/questions/42982005/email-address-regular-expression-rfc-5322-passed-in-to-match-does-not-work
+    let regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    //--
+
     if (email != null && email.length > 0) {
         searchURL += "?email=" + encodeURIComponent(email); //Erstellung des Querry Strings
     }
@@ -19,22 +23,24 @@ function emailAvailable() {
     xmlhttp.responseType = "json";
 
 
-    xmlhttp.addEventListener("load", function () {    //Ausführen einer anonymen Funktion, sobald eine Antwort vom Server gekommen ist
+    xmlhttp.addEventListener("load", function () {      //Ausführen einer anonymen Funktion, sobald eine Antwort vom Server gekommen ist
         var availability = xmlhttp.response;            // JSON to JS Object!
         var check = document.getElementById("emailcheck");
 
-        if (!email.includes("@")) { //Falls noch kein @ eingegeben wurde soll auch noch kein "❌" angezeigt werden
-            check.innerHTML = "";
-        }
-        else if (availability.email === "true") {
+
+        if (availability.email === "true" && regex.test(email)) {
 
             console.log("E-Mail: Verfügabr!")
             check.innerHTML = "✅";
-
         }
+
         else {
             console.log("E-Mail: NICHT Verfügbar!");
             check.innerHTML = "❌";
+        }
+
+        if (!email.includes("@")) { //Falls noch kein @ eingegeben wurde soll auch noch kein "❌" angezeigt werden
+            check.innerHTML = "";
         }
 
 
