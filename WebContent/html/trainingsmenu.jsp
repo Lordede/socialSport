@@ -25,8 +25,9 @@ pageEncoding="UTF-8"%>
     ob User eingeloggt ist --%> <%@ include file="fragments/navbar.jspf" %> <%--
     Navbar --%> <%@ include file="fragments/noScript.jspf" %>
     <article class="center">
-      <div class="center">
+      <div class="center" id="trainingContainer">
         <h1><strong>Training: </strong></h1>
+        <hr>
         <div id="training">
           <div id="addTraining">
             <button id="addNewTraining">Training hinzufügen</button>

@@ -101,11 +101,11 @@ td {
   float: right;
   border-style: hidden;
   border-radius: 5px;
+  border-radius: 10px;
   width: auto;
   height: auto;
   margin: 10px;
   width: 10%;
-  border-radius: 10px;
   padding: 5px;
   color: #95D5B2;
   width: 200px;
