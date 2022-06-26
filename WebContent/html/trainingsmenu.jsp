@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
             </button>
           </div>
           <div id="searchPastTrainings">
-            <label id="searchBarTrainingLabel">Training Suchen</label>
+            <label id="searchBarTrainingLabel">Training suchen:</label>
             <input id="searchBarTraining" type="search" />
             <template class="searchResults">
               <div class="trainingsName"></div>
