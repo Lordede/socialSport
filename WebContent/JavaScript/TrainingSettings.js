@@ -23,6 +23,7 @@ function toogleView()
         }
 
         document.getElementById("searchContainer").style.borderStyle = "hidden";
+        document.getElementById("searchContainer").style.height = "50px";
         clickedButton.innerHTML = "Bearbeitungsansicht";
     }
     else{
@@ -39,6 +40,7 @@ function toogleView()
 
         
         document.getElementById("searchContainer").style.borderStyle = "solid";
+        document.getElementById("searchContainer").style.height = "auto";
         clickedButton.innerHTML = "Trainingsansicht";
     }
 
