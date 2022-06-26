@@ -140,8 +140,8 @@ td {
   margin: 5px;
 }
 
-#cancelWorkout {
-  background-color: #ef3506;
+#finishWorkout {
+  background-color: lightgreen;
 }
 
 #toggleExerciseAddition{

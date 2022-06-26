@@ -58,7 +58,7 @@
 	<div class="clear"></div>
 
 	<div id="buttons">
-		<button class="button" id="cancelWorkout">Workout abschließen</button>
+		<button class="button" id="finishWorkout">Workout abschließen</button>
 	</div>
 
 	<!--Footer-->
@@ -80,11 +80,11 @@
 
 			// document.ElementByName('addButton').submit();
 
-			var cancelWorkoutButton = document.getElementById("cancelWorkout");
+			var finishWorkoutButton = document.getElementById("finishWorkout");
 
 			//document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
 			toogleViewButton.addEventListener("click", toggleExerciseSearchbar);
-			cancelWorkoutButton.addEventListener("click", cancelWorkout);
+			finishWorkoutButton.addEventListener("click", finishWorkout);
 			// document.ElementByName('addButton').submit();
 			console.log("html spricht an");
 			for (var i = 0; i < addSetButton.length; i++) {

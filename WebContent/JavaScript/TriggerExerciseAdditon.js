@@ -28,7 +28,7 @@ document.getElementById("addButton").style.visibility = "hidden"
 
 }
 
-function cancelWorkout(){
+function finishWorkout(){
     window.location = 'trainingsmenu.jsp';
 }
 
