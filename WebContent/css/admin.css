@@ -3,4 +3,12 @@
 }
 .userContainer:hover{
     cursor: pointer;
-  }
+}
+
+.user:hover{
+    cursor: pointer;
+}
+
+button:hover{
+    cursor: pointer;
+}

@@ -29,6 +29,7 @@ function createUserElements(jsonString) {
     let parseJson = JSON.parse(jsonString);
     parseJson.forEach(user => {
         const templateRow = templateTableRow.content.cloneNode(true).children[0];
+        templateRow.setAttribute("class", "user");
         parentTableElm.appendChild(templateRow)
         const username = templateRow.querySelector(".username");
         const firstname = templateRow.querySelector(".firstname");
