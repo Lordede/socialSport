@@ -12,7 +12,15 @@
 {
     display: table-cell;
 }
-#col
+#col1
+{
+     border-left: 30px;
+    border-right: 30px;
+    border-spacing: 50px;
+    display: table-cell;
+
+}
+#col2
 {
     border-left: 30px;
     border-right: 30px;
@@ -26,6 +34,7 @@
     border-right: 30px;
     border-spacing: 50px;
     display: table-cell;
+    border-color: 3px black;
 
 }
 #col_b2
@@ -34,14 +43,7 @@
     border-right: 30px;
     border-spacing: 50px;
     display: table-cell;
-
-}
-#col2
-{
-    border-left: 30px;
-    border-right: 30px;
-    border-spacing: 50px;
-    display: table-cell;
+    
 
 }
 .lowerBox

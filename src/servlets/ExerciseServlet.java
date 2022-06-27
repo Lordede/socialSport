@@ -177,7 +177,10 @@ public class ExerciseServlet extends HttpServlet {
 		}
 		return exercise;
 	}
-
+	/**
+	 * @param exercise: extrahierte Exercise  aus dem Request-Scope
+	 * {@summary: suche eines spezifischen users aus der Datenbank}
+	 * */
 	private void createExcercise(ExerciseBean exercise, Part filepart) throws ServletException {
 		String[] generatedKeys = new String[] { "id" };
 
@@ -213,6 +216,10 @@ public class ExerciseServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * @param exercisName: extrahierter Übungsname aus dem Request-Scope
+	 * {@summary: suche einer spezifischen Übung aus der Datenbank}
+	 * */
 	private ArrayList<ExerciseBean> search(String exerciseName) throws ServletException {
 		exerciseName = (exerciseName == null || exerciseName == "") ? "%" : "%" + exerciseName + "%";
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
@@ -236,6 +243,10 @@ public class ExerciseServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * @param ArrayList<ExerciseToTrainingBean> arr: summe aller exercises mit bestimmter id
+	 * {@summary: zum extrahieren der summe aller Übungen mit einer bestimmten id}
+	 * */
 	protected ArrayList<ExerciseBean> getExercisesById(ArrayList<ExerciseToTrainingBean> list, DataSource dsParameter)
 			throws ServletException {
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
@@ -262,6 +273,11 @@ public class ExerciseServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * @param ArrayList<UserBean> arr: summe aller user
+	 * {@summary: verwandelung der Nutzerdaten in einen String um ihn dann als Antwort an den 
+	 * Client weiterzuleiten}
+	 * */
 	private String convertListToJson(ArrayList<ExerciseBean> arr) {
 		StringBuilder jsonString = new StringBuilder();
 		ArrayList<ExerciseBean> exercises = arr;
