@@ -61,14 +61,20 @@ function selectUser(user) {
     let delButton = document.querySelector("#delUser");
     let adminButton = document.querySelector("#setAdmin");
     let userContainer = document.querySelector("#userContainer");
+    let emptyBox = document.getElementById("boxLeeren");
     if(document.querySelector(".userName"))
     {
-        document.querySelector(".userName").remove();
+        if(document.querySelector(".userName").textContent==user.benutzername)
+        {
+            document.querySelector(".userName").remove();
+        }
+        
     }
     if(delButton.getAttribute("hidden"))
     {
         delButton.removeAttribute("hidden");
         adminButton.removeAttribute("hidden");
+        emptyBox.removeAttribute("hidden");
     }
     let userName = document.createElement("div");
     userName.setAttribute("class", "userName");
@@ -78,6 +84,7 @@ function selectUser(user) {
     userContainer.style.backgroundColor = color;
     delButton.addEventListener("click", ()  => deleteUser(user));
     adminButton.addEventListener("click", () => makeUserAdmin(user));
+    emptyBox.addEventListener("click",() => window.location.reload());
 }
 /**
  * Ajax aufruf an den Server um den user zu Löschen und anschließend wird die

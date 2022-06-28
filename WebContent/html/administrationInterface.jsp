@@ -47,6 +47,7 @@
                     <br>
                     <button id="delUser" hidden="hidden">Benutzer Löschen</button>
                     <button id="setAdmin" hidden="hidden">Adminrechte vergeben</button>
+                    <button id="boxLeeren" hidden="hidden">Auswahl zurücksetzten</button>
                 </div>
             </div>
             <div id="exerciseHandler">
