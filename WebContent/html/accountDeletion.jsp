@@ -5,6 +5,7 @@
 <head>
 <link rel="stylesheet" href="../css/layout.css">
 <meta charset="UTF-8">
+<meta name="author" content="Cem Durmus">
 <base href="${pageContext.request.requestURI}" />
 <%@ include file="fragments/footerHEAD.jspf"%>
 <!-- Basis für relative Verweise -> Basis = Speicherort -->

@@ -18,11 +18,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-//Cem Durmus orientiert an JBDC Folien
 /**
- * Servlet implementation class BildServlet
- */
+ * @author Cem Durmus orientiert an JBDC Folien
+ * */
+
 /**
  * @param (@MulipartConfig): Begrenzung der Filegröße
  * @param maxFileSize:       Begrenzt die maximale größe der File: 5MiB

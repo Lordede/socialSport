@@ -1,5 +1,7 @@
 package beans;
-//Erstellt von Cem Durmus
+/**
+ * @author Cem Durmus
+ * */
 import java.io.Serializable;
 import java.util.Date;
 import java.sql.Blob;

@@ -24,10 +24,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
-//Cem Durmus
 /**
- * Servlet implementation class ExerciseServlet
- */
+ * @author Cem Durmus
+ * */
+
 @WebServlet("/ExerciseServlet")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 10
 		* 10, location = "/tmp", fileSizeThreshold = 1024 * 1024)

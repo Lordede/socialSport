@@ -5,9 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="Cem Durmus">
 <base href="${pageContext.request.requestURI}" />
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/layout.css">
 </head>
 <body>
 	<%@ include file="fragments/noScript.jspf"%>
@@ -16,7 +18,8 @@
 		<br>
 		<h2>${exercise.muscleGroup}</h2>
 		<br> <br> <img
-			src="${pageContext.request.contextPath}/BildServlet?id=${exercise.id}" alt="Bild der Übung" width="180" height="180">
+			src="${pageContext.request.contextPath}/BildServlet?id=${exercise.id}"
+			alt="Bild der Übung" width="180" height="180">
 	</div>
 
 </body>
