@@ -23,9 +23,10 @@
 <%@ include file="fragments/footerHEAD.jspf"%>
 
 </head>
-<%@ include file="fragments/noScript.jspf"%>
+
 
 <body>
+	<%@ include file="fragments/noScript.jspf"%>
 	<%@ include file="fragments/authenticationCheck.jspf"%>
 	<%-- Login check --%>
 	<%@ include file="fragments/navbar.jspf"%>
