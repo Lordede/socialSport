@@ -32,7 +32,7 @@ function extractFavorites(jsonString)
     const searchResults = document.getElementById("favoriteExercises");
     const toggleContainer = document.getElementById("favoritesContainer");
     toggleContainer.style.display = "block";
-    toggleContainer.innerHTML = "";
+    //toggleContainer.innerHTML = "";
     exercisesArrayList.forEach(exercise => {
         const result = searchResults.content.cloneNode(true).children[0];
         toggleContainer.appendChild(result);
@@ -53,18 +53,21 @@ function onExerciseClick(exercise)
 	let delButton = document.getElementById("delExercise");
     let exerciseHandleContainer = document.querySelector("#handleExercise");
     let hiddenProperty = delButton.getAttribute("hidden");
+    let abbrechButton = document.getElementById("abbrechen");
     let color = "#1B4332";
     if(hiddenProperty)
     {
         delButton.removeAttribute("hidden");
+        abbrechButton.removeAttribute("hidden");
         exerciseHandleContainer.style.backgroundColor = color;
     }
     let exerciseContainer = document.querySelector("#exerciseContainer");
-    exerciseContainer.textContent = exercise.name;
+    exerciseContainer.innerHTML += exercise.name +"<br>";
     delButton.addEventListener("click", function()  {
         deleteExercise(exercise);
-        document.location.reload(true);
+        // document.location.reload(true);
     });
+    abbrechButton.addEventListener("click", () => window.location.reload());
 }
 
 /**

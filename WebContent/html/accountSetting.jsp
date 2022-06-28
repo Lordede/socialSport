@@ -104,13 +104,20 @@
 				</template>
 				<div id="favoritesContainer"></div>
 				<div id="handleExercise">
-					<button id="delExercise" hidden="hidden">Übung aus
-						Favoriten Löschen</Button>
+					<button id="delExercise" hidden="hidden">
+					Ausgewählte	Favoriten Löschen</Button>
+					<button id="abbrechen" hidden="hidden">abbrechen</button>
 					<div id="exerciseContainer"></div>
 				</div>
 				<script>
 					document.addEventListener("DOMContentLoaded",
-							readFavoriteExercises);
+							init);
+							
+						function init()
+						{
+							readFavoriteExercises();
+
+						}
 					// var buttons = document.querySelectorAll("Button");
 					// buttons.forEach(button => button.addEventListener("click", event => {window.location.reload(true)}));
 				</script>
