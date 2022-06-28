@@ -6,7 +6,7 @@ import java.sql.Date;
 public class SetBean implements Serializable {
 	
 	/**
-	 * 
+	 * @author Hubertus Seitz
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long id;

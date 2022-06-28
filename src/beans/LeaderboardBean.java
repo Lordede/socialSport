@@ -2,8 +2,9 @@ package beans;
 
 import java.io.Serializable;
 
-//Hubertus Seitz
-
+/*
+ *@author Hubertus Seitz
+ */
 public class LeaderboardBean implements Serializable {
 
 	
