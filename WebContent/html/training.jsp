@@ -1,11 +1,14 @@
+<%-- Author: Hubertus Seitz--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 
 <head>
 <base href="${pageContext.request.requestURI}" />
-<!-- Basis f�r relative Verweise -> Basis = Speicherort -->
+<!-- Basis fÜr relative Verweise -> Basis = Speicherort -->
 <meta charset="utf-8" />
 
 <title>Training</title>
@@ -77,7 +80,7 @@
 		document.addEventListener("DOMContentLoaded", init);
 
 		function init() {
-			// var button = document.getElementById("addButton"); Wird nicht mehr benötigt
+			
 			var addSetButton = document.getElementsByClassName("button addSet");
 			var removeExerciseButtons = document
 					.getElementsByClassName("removeExerciseButton");
@@ -91,26 +94,21 @@
 				document.getElementById("tippBox").setAttribute("class", "hidden");
 
 			});
-			//--
-
-
-			//Lukas Edmüller
+			
+			
 			toogleViewButton.addEventListener("click", toogleView);
-
-			// document.ElementByName('addButton').submit();
 
 			var finishWorkoutButton = document.getElementById("finishWorkout");
 
-			//document.getElementById("addButton").addEventListener('click', toggleExerciseSearchbar);
 			toogleViewButton.addEventListener("click", toggleExerciseSearchbar);
 			finishWorkoutButton.addEventListener("click", finishWorkout);
-			// document.ElementByName('addButton').submit();
+			
 			for (var i = 0; i < addSetButton.length; i++) {
 				// Alle "SetButton" mit EventListener überwachen
 				addSetButton[i].addEventListener("click", getExerciseReference);
 			}
 
-			//Lukas Edmüller
+			
 			// Alle removeExerciseButtons mit EventListener versorgen
 			for (var i = 0; i < removeExerciseButtons.length; i++) {
 				// Alle "SetButton" mit EventListener überwachen
@@ -124,25 +122,8 @@
 				// Alle "SetButton" mit EventListener überwachen
 				checkboxes[i].addEventListener("change", disableSet);
 			}
-			// ------
-
-			//https://stackoverflow.com/questions/7317273/warn-user-before-leaving-web-page-with-unsaved-changes
-
-			// window
-			// 		.addEventListener(
-			// 				"beforeunload",
-			// 				function(e) {
-			// 					var confirmationMessage = "It looks like you have been editing something. "
-			// 							+ "If you leave before saving, your changes will be lost.";
-			// 					(e || window.event).returnValue = confirmationMessage; //Gecko + IE
-			// 					return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-			// 				});
 
 			window.addEventListener("load", loadSavedExercises);
-
-			
-
-			//---
 		}
 	</script>
 </body>

@@ -18,7 +18,7 @@ h2{
     float: left;
 }
 img{
-    float: left;
+    /* float: left; */
     border-style: solid;
     border-radius: 90px;
     border-color: #95D5B2;
@@ -26,15 +26,21 @@ img{
 }
 
 
+div#flexarea{
+    display: flex;
+    flex-flow: row;
+}
 
 article{
+
+    flex: 1;
+
     border-style: solid;
     border-radius: 50px;
     border-color: #95D5B2;
-    margin: 1cm;
+    margin: 3mm;
     padding: 1cm;
-    width: fit-content;
     float: left;
-    width: 20%;
+    width: fit-content
     
 }

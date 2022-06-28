@@ -1,5 +1,8 @@
+<%-- Author: Hubertus Seitz--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 
@@ -27,8 +30,6 @@
 	<%@ include file="fragments/navbar.jspf"%>
 
 	<header>
-		<!---------->
-		<!--Hubertus Seitz--->
 		<h1>
 			<strong>Leaderboard: </strong>
 		</h1>
@@ -70,8 +71,10 @@
 	<script>
 		window.addEventListener("DOMContentLoaded", init);
 		function init() {
+
 			window.addEventListener("load", loadLeaderboard()); //Leaderboard soll mit Seitenaufbau geladen werden
 
+			// Methode zum ausblenden des "Tipp-kasten"
 			var tippButton = document.getElementById("disableTipps")
 			tippButton.addEventListener("click", function(e){
 
