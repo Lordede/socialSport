@@ -29,11 +29,15 @@
             <div class="linksContainer centered">
                 <div class="links">
                     <p>Bereits Mitglied?</p>
-                    <a href="html/login.html"><button>Login</button></a>
+                    <form>
+                        <button formaction="html/login.html">Login</button>
+                    </form>
                 </div>
                 <div class="links">
                     <p>Noch kein Mitglied?</p>
-                    <a href="html/registration.html"><button>Registrieren</button></a>
+                    <form>
+                        <button formaction="html/registration.html">Registrieren</button>
+                    </form>
                 </div>
 
             </div>
@@ -104,6 +108,7 @@
                     Aus diesem Grund schufen wir diese Plattform, welche wir auch selber nutzen und davon profitieren.
                 </p>
             </div>
+        </footer>
             <%@ include file="html/fragments/footer.jspf" %>
     </body>
 

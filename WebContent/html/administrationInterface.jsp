@@ -29,7 +29,7 @@
         <main>
             <div id="userAdministration">
                 <label for="searchInput">Mitglied suchen: </label>
-                <input id="searchInput" type="type">
+                <input id="searchInput" type="search">
                 <table id="userTable">
                     <thead>
                     <tr>
@@ -60,9 +60,9 @@
                 <div>
 				<fieldset>
 					<legend>Muskelgruppe wählen: </legend>
-					<input type="radio" name="muscleGroup" value="Beinmuskulatur"id="c1"> 
+					<input type="radio" name="muscleGroup" value="Beinmuskulatur" id="c1"> 
                     <label for="c1">Beinmuskulatur</label> 
-                    <input type="radio" name="muscleGroup" value="Rückenmuskulatur"id="c2">
+                    <input type="radio" name="muscleGroup" value="Rückenmuskulatur" id="c2">
                     <label for="c2">Rückenmuskulatur</label> 
                     <input type="radio" name="muscleGroup" value="Armmuskulatur" id="c3">
 					<label for="c3">Armmuskulatur</label> 
@@ -74,9 +74,7 @@
 				<input id="image" 
                 type="file"
                 name="image"
-                accept="image/*"
-                formaction="../ExerciseServlet"
-                formmethod="post">
+                accept="image/*">
             </div>
 			<Button id="submitExercise" type="submit">Übung Erstellen</Button>
             <label for="searchExercises">Übung suchen</label>
