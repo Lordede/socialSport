@@ -1,7 +1,10 @@
 //Erstellt von Cem Durmus
-/*
-Creates searchbar and opens container for the exercises 
- */
+/** 
+ * Eingabeleiste zum Suchen von Übungen welche die Übungssuche steuert mit der weitergabe
+ * an die readSearchExercises
+ * 
+ * */
+
 /* let addButton = document.getElementById("addButton");
 addButton.addEventListener('click', event => {toggleExerciseSearchbar()}); */
 function toggleExerciseSearchbar()
@@ -14,8 +17,6 @@ function toggleExerciseSearchbar()
     parentElement.appendChild(insertableSearchbar);
     showExercises();
     readFavoriteExercises();
-    // showExercises;
-    //console.log("funktioniert 22");
     insertableSearchbar.addEventListener("input", event => {
         const input = event.target.value;
         readSearchExercises(input, function(exercisesJson){
@@ -32,11 +33,13 @@ function finishWorkout(){
     window.location = 'trainingsmenu.jsp';
 }
 
+/**
+ * erstellung des boxofexercises div-containers welche dann durch die readContent() funktion gefüllt wird.
+ */
 function showExercises()
 {
     var exerciseInsert = document.createElement('div');
     exerciseInsert.setAttribute("id", "boxOfExercises");
-    // exerciseInsert.innerHTML= extractExercises();
     var exerciseContainer = document.getElementById("toggleExerciseAddition");
     exerciseContainer.appendChild(exerciseInsert);
     readContent();
@@ -45,6 +48,9 @@ function showExercises()
 //    
 }
 
+/**
+ * Initialer Ajax beim aufruf der Suche zum erhalten der Antwort des Servers als jsonstring
+ */
 function readContent()
 {
     var xmlhttp = new XMLHttpRequest();
@@ -58,8 +64,11 @@ function readContent()
 	}
 		xmlhttp.send() ;
 }
-    //extractExercises(jsonString);
 
+/**
+ *  Die suchfunktion schickt einen gebenen input zum ExerciseServlet, welcher dann anschließend die 
+ *  erhaltene Antwort an die extractions-Funktion weiterleitet, die dann angepasst zur Suche neue Trainings zeigt. 
+ * */
 function readSearchExercises(exerciseName, callback)
 {
     var xmlhttp = new XMLHttpRequest();
@@ -72,6 +81,9 @@ function readSearchExercises(exerciseName, callback)
     }
     xmlhttp.send();
 }
+/**
+ * Funktion zum auslesen der favorisierten Übungen
+ */
 function readFavoriteExercises(){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "../FavoriteExerciseServlet", true);
@@ -83,7 +95,11 @@ function readFavoriteExercises(){
     }
     xmlhttp.send();
 }
-
+/**
+ * Füllung der favorisierten Übungen
+ * @param {String} jsonString: antwort des Servers welcher als Json String gesendet wird
+ * Template wird hier ausgefüllt für die Anzeige
+ */
 function extractFavorites(jsonString)
 {
     let exercisesArrayList = JSON.parse(jsonString) //[{"":""},{"rep":"3"}]
@@ -103,6 +119,11 @@ function extractFavorites(jsonString)
    
 }
 	
+/**
+ * Füllung der Übungen
+ * @param {String} jsonString: antwort des Servers welcher als Json String gesendet wird
+ * Template wird hier ausgefüllt für die Anzeige
+ */
 function extractExercises(jsonString)
 {
     let exercisesArrayList = JSON.parse(jsonString) //[{"":""},{"rep":"3"}]
@@ -124,24 +145,3 @@ function extractExercises(jsonString)
    });
    
 }
-
-// Wurde in TrainingSettings.js ersetzt
-// function onExerciseClick(exercise)
-// {
-// 	var check = document.getElementsByName(exercise.name)
-// 	if(check.length === 0)
-//     {
-// 	    addExercise(exercise); // HTML DOM Manipulation 
-//     }
-//     var xmlhttp = new XMLHttpRequest();
-//     xmlhttp.open("GET", "../ExerciseServlet?selectedExercise="+exercise.id, true);
-//     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     xmlhttp.send();
-	
-//     var insertableSearchbar = document.getElementById("searchBar");
-//     insertableSearchbar.setAttribute("type", "hidden");
-//     var searchItems = document.getElementById("searchResultContainer");
-//     searchItems.style.display = "none";
-// }
-
-

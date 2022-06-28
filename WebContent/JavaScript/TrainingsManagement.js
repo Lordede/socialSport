@@ -1,4 +1,14 @@
-/**Cem Durmus */
+/**
+ * Cem Durmus
+ * Im Trainingsmenü verwendete Funktionen
+ * */
+
+/**
+ * Auslesen der abgeschlossenen Trainings, aus der Datenbank mittels eines AJAX aufrufes, welcher ein Json-String
+ * von dem TrainingServlet erhält. Dabei wir auch die Suchleiste abgehört und die Eingabe eines Zeichens festzustellen und dann startet die
+ * Suchfunktion welche ein callback enthält.
+ */
+
 function readPastTrainings()
 {
 
@@ -19,6 +29,12 @@ function readPastTrainings()
         });
     });
 }
+/**
+ * erhält einen JsonString, welcher anschließend geparsed wird um anschließend ein Array darzustellen.
+ * woraus dann mittels einer forEach-loop das Template - trainingscontainer- gefüllt wird.
+ * @param {String} jsonString 
+ * Ein Training ist klickbar und führt zum aufruf der SelectTrainings methode
+ */
 
 function extractTraining(jsonString) {
     let trainingsList = JSON.parse(jsonString);
@@ -29,12 +45,15 @@ function extractTraining(jsonString) {
     trainingsList.forEach(training => {
         const trainingsNameElm = searchResults.content.cloneNode(true).children[0];
         toggleContainer.appendChild(trainingsNameElm);
-        console.log(trainingsNameElm);
         trainingsNameElm.addEventListener("click", () => selectTraining(training));
         trainingsNameElm.textContent = training.name;
     });
 
 }
+/**
+ * für dazu, dass ein neues Training ausgewählt wird und als Trainingssession in der Datenbank hinterlegt wird
+ * @param {Object} training 
+ */
 function selectTraining(training) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "../TrainingServlet?selectedTraining=" + training.id, true);
@@ -58,18 +77,13 @@ function selectTraining(training) {
     //Ende Edmüller Lukas
     xmlhttp.send();
 
-    // Trainingsession wird bei POst bereits in SessionScope geladen, daher GET nicht nötig
-    // var xmlhttpTrainingSessionGet = new XMLHttpRequest();
-    // xmlhttpTrainingSessionGet.open("GET", "../TrainingSessionServlet?id=" + parseInt(responsePost), true);
-    // xmlhttpTrainingSessionGet.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xmlhttpTrainingSessionGet.onload = function()
-    // {
-    //     var text = xmlhttp.responseText;
-    //     window.location = "training.jsp";
-    // }
-    // xmlhttpTrainingSessionGet.send();
 }
-
+/**
+ * versteckt das input-Feld und den Button zum erstellen eines neuen Trainings.
+ * Dabei wird nach der Aufdeckung die Möglichkeit gefördert, ein Training anzulegen,
+ * mit einem selbsterwähltem Namen. zuletzt wir durch den Button-click das Training
+ * and die sendTrainingDB function übermittelt
+ */
 function hideSearch() {
     let label = document.getElementById("nameOfTrainingLabel");
     let button = document.getElementById("sendTraining");
@@ -89,6 +103,12 @@ function hideSearch() {
     button.addEventListener("click", () => sendTrainingDB(inputField));
 
 }
+/**
+ * in dieser Funktion wird ein AJAX aufruf gestartet, wo im voraus geprüft wird ob es 
+ * sich um eine leere Angabe handelt. Hier wird ebenfalls eine Trainingssession erstellt und auf 
+ * das Trainings interface weitergeleitet.
+ * @param {String} inputField 
+ */
 function sendTrainingDB(inputField) {
     var xmlhttp = new XMLHttpRequest();
     var input = inputField;
@@ -118,16 +138,21 @@ function sendTrainingDB(inputField) {
 
     }
 
-
-
-
-
 }
+
+/**
+ * hier wird geprüft ob es sich bei dem mitgegebenen String um einen handelt, welcher ein Leerzeichen enthält
+ * @param {String} s 
+ * @returns {boolean}
+ */
 function hasWhiteSpace(s) {
     return s.indexOf(' ') >= 0;
 }
 
-
+/**
+ *  Die suchfunktion schickt einen gebenen input zum TrainingsServlet, welcher dann anschließend die 
+ *  erhaltene Antwort an die extractions-Funktion weiterleitet, die dann angepasst zur Suche neue Trainings zeigt. 
+ * */
 function searchTraining(trainingName, callback) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "../TrainingServlet?exerciseInputField=" + trainingName, true);

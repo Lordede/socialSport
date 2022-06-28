@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <base href="${pageContext.request.requestURI}" />
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css">
 </head>
 <%@ include file="fragments/noScript.jspf"%>
 <body>

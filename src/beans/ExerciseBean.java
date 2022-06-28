@@ -10,20 +10,12 @@ public class ExerciseBean implements Serializable
 {
 	private static final long serialVersionID = 1L;
 	
-	private Long id;//long ggf
-//	private List<SetBean> sets;
+	private Long id;
+
 	private String name;
-	//private double point;
+
 	private String muscleGroup;
-//	private enum MuscleGroup 
-//	{
-//		BEINMUSKULATUR,
-//		ARMMUSKULATUR,
-//		RUECKMUSKULATUR,
-//		BRUSTMUSKULATUR,
-//		BAUCHMUSKULATUR,
-//		SCHULTERMUSKULATUR;
-//	}
+
 
 
 	private String exerciseImage;
@@ -34,12 +26,7 @@ public class ExerciseBean implements Serializable
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public List<SetBean> getSets() {
-//		return sets;
-//	}
-//	public void setSets(List<SetBean> sets) {
-//		this.sets = sets;
-//	}
+
 	public String getName() {
 		return name;
 	}
