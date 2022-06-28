@@ -83,11 +83,11 @@
                                             </div>
                                         </article>
                                         <article class="col1">
-                                            <button data-exercise="Strindrücken mit SZ-Stange" class="fav-button">
+                                            <button data-exercise="Stirndrücken" class="fav-button">
                                                 <i class="fa fa-star"></i>
                                                 <span>Übung merken</span>
                                             </button>
-                                            <h2>Stirndrücken mit SZ-Stange</h2>
+                                            <h2>Stirndrücken</h2>
                                             <img src="../img/ExerciseImages/french-press-sz.gif"
                                                 alt="Strindrücken mit SZ-Stange" width="180" height="180">
                                             <div class="text_Trizeps">
