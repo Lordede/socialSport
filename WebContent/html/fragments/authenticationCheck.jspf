@@ -1,3 +1,5 @@
+<%-- Author: Hubertus Seitz--%>
+
 <script> // TODO: Fragen ob das i.o ist.
         var userData = "${userData}";
         authenticationCheck(userData); //redirect, wenn user nicht eingeloggt ist.
