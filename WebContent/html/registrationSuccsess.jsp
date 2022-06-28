@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<!-- Hubertus Seitz -->
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Basis für relative Verweise -> Basis = Speicherort -->
 <base href="${pageContext.request.requestURI}" />
 <link rel="stylesheet" href="../css/layout.css">
 <link rel="stylesheet" href="../css/registrationSuccsess.css">
-<!-- Basis für relative Verweise -> Basis = Speicherort -->
+
 <meta charset="utf-8">
 <title>Registriervorgang erfolgreich!</title>
 
