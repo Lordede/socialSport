@@ -23,6 +23,16 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BildServlet
  */
+/**
+ * @param (@MulipartConfig): Begrenzung der Filegröße
+ * @param maxFileSize:       Begrenzt die maximale größe der File: 5MiB
+ * @param maxRequestSize:    zulässige größe wenn mehrere Files hochgeladen
+ *                           werden: 10MiB
+ * @param location:          Ordner in dem Dateien bei Grenzwert
+ *                           überschreitungen gespeichert werden
+ * @param Grenzwert          wo Webcontainer die Dateien im Dateisystem
+ *                           zwischenspeichert
+ */
 @WebServlet("/BildServlet")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 10
 		* 10, location = "/tmp", fileSizeThreshold = 1024 * 1024)
@@ -36,10 +46,17 @@ public class BildServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
+	 * @param response: sendet die Antwort vom Servlet zurück an den Client
+	 *                  {@summary Servlet zum Auslesen eines Bildes aus einer DB und
+	 *                  Rückgabe als binärer Datenstrom}
+	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Servlet zum Auslesen eines Bildes aus einer DB und R�ckgabe als bin�rer
-		// Datenstrom
 		request.setCharacterEncoding("UTF-8"); // In diesem Format erwartet das Servlet jetzt die Formulardaten
 		Long id = Long.valueOf(request.getParameter("id"));
 

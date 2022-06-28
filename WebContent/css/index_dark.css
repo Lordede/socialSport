@@ -37,15 +37,6 @@
     border-color: 3px black;
 
 }
-#col_b2
-{
-    border-left: 30px;
-    border-right: 30px;
-    border-spacing: 50px;
-    display: table-cell;
-    
-
-}
 .lowerBox
 {
     display: table;

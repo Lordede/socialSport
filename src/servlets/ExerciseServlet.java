@@ -45,6 +45,16 @@ public class ExerciseServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
+	 * @param response: sendet die Antwort vom Servlet zurück an den Client
+	 *                  {@summary: Bearbeitet Nutzeranfragen einerseits von der
+	 *                  training.jsp & administrationsInterface.jsp, diese Methode
+	 *                  dient dabei aktuelle Werte der Exercises an den Client
+	 *                  zurückzugeben.}
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -80,10 +90,18 @@ public class ExerciseServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
+	 * @param response: sendet die Antwort vom Servlet zurück an den Client
+	 *                  {@summary: Bearbeitet Nutzeranfragen von
+	 *                  administrationsInterface.jsp, welche durch den Admin in den
+	 *                  Forms gestellt werden können und dem Zweck dienen Übungen zu
+	 *                  erstellen}
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-
 		ExerciseBean exerciseBean = new ExerciseBean();
 		exerciseBean.setName(request.getParameter("exerciseName"));
 		exerciseBean.setMuscleGroup(request.getParameter("muscleGroup"));
@@ -94,9 +112,17 @@ public class ExerciseServlet extends HttpServlet {
 		createExcercise(exerciseBean, filepart);
 		session.setAttribute("exercise", exerciseBean);
 		response.sendRedirect("html/success.jsp");
-
 	}
 
+	/**
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
+	 * @param response: sendet die Antwort vom Servlet zurück an den Client
+	 *                  {@summary: Bearbeitet Nutzeranfragen, welche durch den Admin
+	 *                  in den Forms gestellt werden können und dem zweck dienen die
+	 *                  Übungen zu bearbeiten}
+	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -106,6 +132,13 @@ public class ExerciseServlet extends HttpServlet {
 		session.setAttribute("excercise", exercise);
 	}
 
+	/**
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
+	 * @param response: sendet die Antwort vom Servlet zurück an den Client
+	 *                  {@summary: Steurung der Löschung der Übungen}
+	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -113,6 +146,10 @@ public class ExerciseServlet extends HttpServlet {
 		deleteExcercise(exerciseBean.getId());
 	}
 
+	/**
+	 * @param id: zum finden eine spezifischen Exercise {@summary Löschen der Übung
+	 *            mit einer Gewissen id}
+	 */
 	private void deleteExcercise(Long id) throws ServletException {
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement("DELETE FROM exercise WHERE id = ?")) {
@@ -123,6 +160,10 @@ public class ExerciseServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * @param exercise: eingebenen Parameter aus dem Request-Scope für die Exercise
+	 *                  {@summary zur Änderung der Übung mit einer Gewissen id}
+	 */
 	private void updateExercise(ExerciseBean exercise) throws ServletException {
 
 		try (Connection con = ds.getConnection();
@@ -137,6 +178,10 @@ public class ExerciseServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * {@summary: extraktion aller Übungen, welche in der Datenbank gespeichert
+	 * sind}
+	 */
 	private ArrayList<ExerciseBean> getListOfExercises() throws ServletException {
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
 
@@ -159,6 +204,10 @@ public class ExerciseServlet extends HttpServlet {
 		return exercises;
 	}
 
+	/**
+	 * @param id: id der exercise {@summary: initialisiert die Exercise}
+	 * @return exercise: gibt die initalisierte Übung zurück
+	 */
 	private ExerciseBean initializeExercise(Long id, HttpServletResponse response) throws ServletException {
 		ExerciseBean exercise = new ExerciseBean();
 
@@ -177,10 +226,13 @@ public class ExerciseServlet extends HttpServlet {
 		}
 		return exercise;
 	}
+
 	/**
-	 * @param exercise: extrahierte Exercise  aus dem Request-Scope
-	 * {@summary: suche eines spezifischen users aus der Datenbank}
-	 * */
+	 * @param exercise: extrahierte Exercise aus dem Request-Scope
+	 *                  {@summary: Erstellen einer Exercise durch den admin, mit
+	 *                  einer validationsprüfung ob Exercise schon in irgendeiner
+	 *                  Form in Datenbank Exsistiert}
+	 */
 	private void createExcercise(ExerciseBean exercise, Part filepart) throws ServletException {
 		String[] generatedKeys = new String[] { "id" };
 
@@ -217,9 +269,12 @@ public class ExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * @param exercisName: extrahierter Übungsname aus dem Request-Scope
-	 * {@summary: suche einer spezifischen Übung aus der Datenbank}
-	 * */
+	 * @param exerciesName: extrahierter Übungsname aus dem Request-Scope
+	 *                      {@summary: suche einer spezifischen Übung aus der
+	 *                      Datenbank}
+	 * @return ArrayList<ExerciseBean> exercises: welche mit der Suchanfrage
+	 *         übereinstimmen
+	 */
 	private ArrayList<ExerciseBean> search(String exerciseName) throws ServletException {
 		exerciseName = (exerciseName == null || exerciseName == "") ? "%" : "%" + exerciseName + "%";
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
@@ -244,9 +299,13 @@ public class ExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * @param ArrayList<ExerciseToTrainingBean> arr: summe aller exercises mit bestimmter id
-	 * {@summary: zum extrahieren der summe aller Übungen mit einer bestimmten id}
-	 * */
+	 * @param ArrayList<ExerciseToTrainingBean> arr: summe aller exercises mit
+	 *                                          bestimmter id {@summary: zum
+	 *                                          extrahieren der summe aller Übungen
+	 *                                          mit einer bestimmten id}
+	 * @return ArrayList<ExerciseBean> exercises: Exercises welche die ausgewählte
+	 *         id haben
+	 */
 	protected ArrayList<ExerciseBean> getExercisesById(ArrayList<ExerciseToTrainingBean> list, DataSource dsParameter)
 			throws ServletException {
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
@@ -274,10 +333,10 @@ public class ExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * @param ArrayList<UserBean> arr: summe aller user
-	 * {@summary: verwandelung der Nutzerdaten in einen String um ihn dann als Antwort an den 
-	 * Client weiterzuleiten}
-	 * */
+	 * @param ArrayList<UserBean> arr: summe aller user {@summary: verwandelung der
+	 *                            Nutzerdaten in einen String um ihn dann als
+	 *                            Antwort an den Client weiterzuleiten}
+	 */
 	private String convertListToJson(ArrayList<ExerciseBean> arr) {
 		StringBuilder jsonString = new StringBuilder();
 		ArrayList<ExerciseBean> exercises = arr;

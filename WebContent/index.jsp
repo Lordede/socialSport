@@ -42,11 +42,6 @@
         <article>
             <h1 class="centered">Willkommen auf Ihrer One-Stop-Sportplattform</h1>
             <div class="photoBox">
-                <!-- <div class="zwei_box" id="col1">
-                    <p>
-                        <img src="img/pexels-leon-ardho-2468339.jpg" alt="Hanteln" width="320" height="480">
-                    </p>
-                </div> -->
                 <div class="zwei_box" id="col1">
                     <p>
                         <img src="img/victor-freitas-WvDYdXDzkhs-unsplash.jpg" alt="Kreuzheben.jpg" width="720"
@@ -54,7 +49,6 @@
                     </p>
                 </div>
                  <div id="col_b1"></div>
-                <!--<div id="col_b2"></div> -->
                 <div class="zwei_box" id="col2">
                     <p>
                         <img src="img/samuel-girven-VJ2s0c20qCo-unsplash.jpg" alt="Hanteln" width="320" height="480">
