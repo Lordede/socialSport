@@ -198,6 +198,7 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	 * @param ArrayList<ExerciseBean> arr: summe aller Übungen
 	 * {@summary: verwandelung der Nutzerdaten in einen String um ihn dann als Antwort an den 
 	 * Client weiterzuleiten}
+	 * @return jsonString: Rückgabe für den Client
 	 * */
 	private String convertListToJson(ArrayList<ExerciseBean> arr) {
 		StringBuilder jsonString = new StringBuilder();

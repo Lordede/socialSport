@@ -142,8 +142,8 @@ function sendTrainingDB(inputField) {
 
 /**
  * hier wird geprüft ob es sich bei dem mitgegebenen String um einen handelt, welcher ein Leerzeichen enthält
- * @param {String} s 
- * @returns {boolean}
+ * @param {String} s: übergebener String 
+ * @returns {boolean}: boolean value
  */
 function hasWhiteSpace(s) {
     return s.indexOf(' ') >= 0;
