@@ -153,8 +153,14 @@ public class UserUpdateServlet extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		deleteUser(Long.parseLong(request.getParameter("id")));
-		response.getWriter().write("ok");
+		HttpSession session = request.getSession();
+		UserBean user = (UserBean) session.getAttribute("userData");
+		if(user.getId() != Long.parseLong(request.getParameter("id"))) {
+			deleteUser(Long.parseLong(request.getParameter("id")));
+			response.getWriter().write("ok");
+		}
+		else throw new ServletException("man kann sich nicht selbst löschen");
+		
 	}
 
 	/**
@@ -286,6 +292,7 @@ public class UserUpdateServlet extends HttpServlet {
 								+ "(SELECT id FROM trainings WHERE userId = ?)");
 				PreparedStatement delTrainingsSessions = bondTrainings.prepareStatement("DELETE FROM trainingsessions "
 						+ "WHERE trainingId = " + "(SELECT id FROM trainings WHERE userId = ?)")) {
+			
 			delSetofTraining.setLong(1, id);
 			delTrainingsSessions.setLong(1, id);
 			delExcercisesToTraning.setLong(1, id);
