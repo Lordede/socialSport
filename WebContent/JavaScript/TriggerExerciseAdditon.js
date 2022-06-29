@@ -24,7 +24,6 @@ function toggleExerciseSearchbar()
     });
 })
 
-//Aus optischen Gründen ~Hubertus Seitz
 document.getElementById("addButton").style.visibility = "hidden"
 
 }
@@ -138,7 +137,7 @@ function extractExercises(jsonString)
         const header = result.querySelector('.searchExerciseName');
         header.addEventListener("click", () => onExerciseClick(exercise))
         const body = result.querySelector('.searchMuscleGroup');
-        header.textContent = exercise.name; //set.rep
+        header.textContent = exercise.name; 
         body.textContent = exercise.muscleGroup;
         console.log(exercise);
         

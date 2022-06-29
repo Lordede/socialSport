@@ -457,19 +457,16 @@
                                 </article>
                                 <%@ include file="fragments/footer.jspf" %>
                                     <script>
-                                        const favButtons = document.querySelectorAll("button");
-                                        favButtons.forEach(button => button.addEventListener("click", event => {
-                                            console.log(button.dataset.exercise);
-                                            dbCall(button.dataset.exercise);
-                                        }));
+                                        
 
-                                        // Hubertus Seitz
+                                        
                                         document.addEventListener("DOMContentLoaded", init);
 
                                         function init() {
-                                            checkForCookie()
+                                            checkForCookie();
+                                            callButtons()
                                         }
-            // ---
+
                                     </script>
     </body>
 

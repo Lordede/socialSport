@@ -1,5 +1,12 @@
 //Cem Durmus
-
+function callButtons()
+{
+    const favButtons = document.querySelectorAll("button");
+    favButtons.forEach(button => button.addEventListener("click", event => {
+        console.log(button.dataset.exercise);
+        dbCall(button.dataset.exercise);
+    }));
+}
 /**
  * 
  * @param {event} event: getriggertes Event um die Übung auszuwählen zur favorisierung
