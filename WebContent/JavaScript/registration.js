@@ -7,9 +7,10 @@
  */
 
 
+// Die Funktion gibt ein Zeichen neben dem Eingabefeld aus je nachdem, ob eine E-Mailadresse verfübar ist oder nicht.
 function emailAvailable() {
 
-    var searchURL = "../CheckAvailabilityServlet"; //TODO: Hinzufügen
+    var searchURL = "../CheckAvailabilityServlet";
     var email = document.getElementById("emailInput").value;
 
     // https://stackoverflow.com/questions/42982005/email-address-regular-expression-rfc-5322-passed-in-to-match-does-not-work
@@ -52,9 +53,10 @@ function emailAvailable() {
 
 }
 
+// Die Funktion gibt ein Zeichen neben dem Eingabefeld aus je nachdem, ob ein Username verfübar ist oder nicht.
 function usernameAvailable() {
 
-    var searchURL = "../CheckAvailabilityServlet"; //TODO: Hinzufügen
+    var searchURL = "../CheckAvailabilityServlet";
     var username = document.getElementById("userName").value;
     var check = document.getElementById("usernamecheck");
 
@@ -66,7 +68,7 @@ function usernameAvailable() {
 
 
     xmlhttp.addEventListener("load", function () {    //Ausführen einer anonymen Funktion, sobald eine Antwort vom Server gekommen ist
-        var availability = xmlhttp.response;            // JSON to JS Object!
+        var availability = xmlhttp.response;          // JSON to JS Object!
 
         if (username.length < 2) {
             check.innerHTML = "";

@@ -1,6 +1,7 @@
+// Autor: Lukas Edmüller
+
 package servlets;
 
-//von Lukas Edm�ller
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,21 +39,11 @@ public class JoinServlet extends HttpServlet {
 		super();
 
 	}
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
-		/*
-		 * UserBean userBean = (UserBean) session.getAttribute("userData");
-		 * 
-		 * List<JoinBean> joins = read(userBean.getId());
-		 * 
-		 * session.setAttribute("set", joins);
-		 */
-
 		Enumeration<String> params = request.getParameterNames();
 		while (params.hasMoreElements()) {
 			String paramNames = params.nextElement();
@@ -60,15 +51,13 @@ public class JoinServlet extends HttpServlet {
 			switch (paramNames) {
 			case "getLeaderboard":
 				List<LeaderboardBean> leaderboard = getLeaderboard();
-				session.setAttribute("leaderboard", leaderboard); // <- das muss eine List sein
+				session.setAttribute("leaderboard", leaderboard);
 				RequestDispatcher disp = request.getRequestDispatcher("html/leaderboardAusgabe.jsp");
 				disp.forward(request, response);
 
 				break;
 			}
-			// --- Hier weitere Cases einfügen
 		}
-
 	}
 
 	/**
@@ -134,8 +123,6 @@ public class JoinServlet extends HttpServlet {
 	private List<LeaderboardBean> getLeaderboard() throws ServletException {
 		List<LeaderboardBean> leaderboardBean = new ArrayList<LeaderboardBean>();
 		
-		
-
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
 						"SELECT users.username, users.id, SUM(trainings.points) as points FROM users JOIN trainings ON trainings.userId = users.id GROUP BY ID ORDER BY points DESC;")) {
@@ -147,9 +134,7 @@ public class JoinServlet extends HttpServlet {
 					leaderboard.setUsername(rs.getString("username"));
 					leaderboard.setId(rs.getLong("id"));
 					
-					leaderboardBean.add(leaderboard);
-					
-
+					leaderboardBean.add(leaderboard);	
 				}
 				
 			} catch (Exception ex) {
@@ -160,6 +145,5 @@ public class JoinServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 		return leaderboardBean;
-		
 	}
 }

@@ -1,3 +1,5 @@
+// Autor Lukas Edmüller
+
 package servlets;
 
 import java.io.IOException;
@@ -109,8 +111,6 @@ public class ExerciseToTrainingServlet extends HttpServlet {
 		return jsonString.toString();
 	}
 
-	
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -141,7 +141,6 @@ public class ExerciseToTrainingServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-
 	
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
@@ -172,7 +171,6 @@ public class ExerciseToTrainingServlet extends HttpServlet {
 			} catch (Exception ex) {
 				throw new ServletException(ex.getMessage());
 			}
-		
 	}
 
 }

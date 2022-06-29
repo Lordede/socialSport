@@ -1,5 +1,8 @@
+/**
+ * @author Hubertus Seitz
+ **/
+
 "use strict";
-// author: Hubertus
 
 /*
 addExercise fügt eine neue Übung ein, bei der man dann x belibige Setze trainieren kann
@@ -23,12 +26,7 @@ function addExercise(exercise, isLoadExercise) {
     container.setAttribute("class", "setContainer");
     if(isLoadExercise){ //Trainingsansicht
         container.style.visibility = "visible";
-        removeExerciseButton.style.visibility = "hidden";
-        // Unnötig, wohl noch vom Testen
-        // for(let i = 0; i < imgs.length; i++){
-        //     imgs.item(i).style.visibility = "visible";
-        //     }
-        
+        removeExerciseButton.style.visibility = "hidden";      
     }
     else
     {                   // Bearbeitungsansicht
@@ -104,8 +102,8 @@ function getExerciseReference() {
     ---
     */
 
-    var callingTable = document.getElementsByName(NameOfcallingExercise);   //Liste der Übungen mit dem Namen
-    var callingTable = callingTable[0];// Verweis auf Article                //Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
+    var callingTable = document.getElementsByName(NameOfcallingExercise);   // Liste der Übungen mit dem Namen
+    var callingTable = callingTable[0];// Verweis auf Article               // Da aber jede Übung pro Training nur einmal auftauchen darf, kann man einfach immer die erste nehmen
     var callingTable = callingTable.children[3].children[0]; // -> table!
 
     addSet(callingTable)
@@ -156,12 +154,13 @@ function addSet(callingTable) {
 }
 
 
-
+// Diese Funktion wird aufgerufen, wenn ein Satz als fertig markiert wird.
+// Es sollen keine Veränderungen mehr am Satz möglich sein, nachem dieser an den Server übermittelt wurde 
 function disableSet() {
 
-    let exerciseid = this.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute("id");   // Smell
+    let exerciseid = this.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute("id");    // Smell?
     let idOfTraining = document.getElementsByTagName("header");
-    idOfTraining = idOfTraining[0].getAttribute("id");              // id des Trainings
+    idOfTraining = idOfTraining[0].getAttribute("id");                                                  // id des Trainings
 
     /*
         notwendig um vom aufrufgenden Element zu den jeweiligen Elementen zu navigieren
@@ -177,7 +176,7 @@ function disableSet() {
         if (sendSet(kginput.value, whdinput.value, exerciseid)) {    // nur sperren, wenn auch gesendet wurde
 
             //sperren der Eingabefelder
-            this.checked = true;                         //nur optisch schöner // Warum geht das nicht mit this.setAttribute?
+            this.checked = true; // Warum geht das nicht mit this.setAttribute?
             this.setAttribute("disabled", "true");
             kginput.setAttribute("disabled", "true");
             whdinput.setAttribute("disabled", "true");
@@ -188,6 +187,7 @@ function disableSet() {
 
 }
 
+// Diese Funktion sendet über einen AJAX aufruf den jeweiligen Satz an den Server
 function sendSet(kginput, whdinput, exerciseid) {
 
     var xmlhttp = new XMLHttpRequest;
@@ -196,24 +196,13 @@ function sendSet(kginput, whdinput, exerciseid) {
     xmlhttp.addEventListener("load", function () {
 
         var response = xmlhttp.response;
-        console.log("Der Ajax Aufruf gibt zurück"+response);
-
-        /* 
-        TODO:
-        Überprüfen, ob die Antwort vom Server auf Erfolg hinweist oder nicht
-        Erfolg -> return true
-        Errror -> return false
-
-        Das ist wichtig, da das UI darauf reagiert
-        
-        */
-   
+        console.log("Der Ajax Aufruf gibt zurück"+response);   
     });
     
     xmlhttp.open("POST", url, true)
     xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlhttp.send("rep="+whdinput+"&kg="+kginput+"&exerciseid="+exerciseid);
-    return true; // TODO:
+    return true;
 }
 
 

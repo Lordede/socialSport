@@ -1,5 +1,8 @@
+<%-- Author: Hubertus Seitz--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +29,8 @@
 		<p>
 			<a href="dashboard.jsp">Zurück zum Dashboard</a>
 		</P>
+
+		<div id="flexarea">
 		<article>
 			<div class="personalInfo">
 				<h2>Cem Durmus</h2>
@@ -61,6 +66,7 @@
 				height="100" alt="ExampleAvatar">
 
 		</article>
+	</div>
 
 	</main>
 	<!--Footer-->

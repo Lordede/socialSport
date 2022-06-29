@@ -21,9 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import utilities.HashPassword;
 
-/**
- * Servlet implementation class LoginServlet
- * 
+/*
  * @author Hubertus Seitz
  */
 
@@ -49,24 +47,23 @@ public class LoginServlet extends HttpServlet {
 
 		final String username = request.getParameter("userName");
 		final String password = HashPassword.hashPassword(request.getParameter("password")); // erledigen?
-		if (UserExists(username, password)) {
+		if (UserExists(username, password)) {//Überprüft, ob es den User überhaubt gibt
 
-			UserBean userData = readUserData(username, password); // UserData Anhand der von Username und Passwort
-																	// auslesen
-
+			UserBean userData = readUserData(username, password); // UserData in Bean laden
 			HttpSession session = request.getSession();
 			session.setAttribute("userData", userData); // UserData in Session Scope hinterlegen
 
-			// forward to HomePage
-			RequestDispatcher disp = request.getRequestDispatcher("html/dashboard.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("html/dashboard.jsp"); // Zum Dashboard forwarden
 			disp.forward(request, response);
 		} else {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED); // TODO: Fail more userfriendly
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED); // TODO: Fail more userfriendly?
 		}
 
 	}
 
-	// Logout
+	/*
+	 * Diese Methode wird nur über AJAX angesprochen und dient dazu, dass sich der User ausloggen kann.
+	 * */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -84,22 +81,21 @@ public class LoginServlet extends HttpServlet {
 				break;
 			}
 		}
-
-		//Nicht notwendig bei einem Ajax aufruf
-		//RequestDispatcher disp = request.getRequestDispatcher("html/login.html");
-		//disp.forward(request, response);
-
 	}
 
+	/*
+	 * Diese Methode checkt, ob es den übergebenen user gibt, bzw. ob die Kombination von Username und Paswwort plausibel ist.
+	 * */
+	
 	private boolean UserExists(String username, String password) throws ServletException {
 
-		try (Connection con = ds.getConnection(); // Querry erstellen
+		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM users WHERE username = ? AND pwd = ?")) {
 
-			pstmt.setString(1, username); //
+			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 
-			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
+			try (ResultSet rs = pstmt.executeQuery()) {
 				return rs.next();
 			}
 		}
@@ -109,11 +105,16 @@ public class LoginServlet extends HttpServlet {
 		}
 	}
 
+	/*
+	 * Diese Methode ist dafür da, dass die user Daten nach dem Einloggen in den Sessionscope geschrieben werden können.
+	 * Es werden die Userdaten zu einer gegebenen Username-Passwort-Kombination zurückgegen
+	 * */
+	
 	private UserBean readUserData(String username, String password) throws ServletException {
 
 		UserBean userData = new UserBean();
 
-		try (Connection con = ds.getConnection(); // Querry erstellen
+		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM users WHERE username = ? AND pwd = ?")) {
 
 			pstmt.setString(1, username);

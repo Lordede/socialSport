@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CheckAvailabilityServlet
+ * @author Hubertus Seitz
  */
 @WebServlet("/CheckAvailabilityServlet")
 public class CheckAvailabilityServlet extends HttpServlet {
@@ -32,6 +33,11 @@ public class CheckAvailabilityServlet extends HttpServlet {
 
 	}
 
+	
+	/* Die doGet Methode nimmt sowohl Username als auch E-Mailadressen entgegen und überprüft,
+	 * ob diese noch verfügbar sind
+	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,7 +58,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
 				request.setAttribute("availability", availability);
 				
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher("html/availabilityAusgabe.jsp"); //hier liegt wahrscheinlich der fehler
+			RequestDispatcher dispatcher = request.getRequestDispatcher("html/availabilityAusgabe.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
@@ -75,11 +81,26 @@ public class CheckAvailabilityServlet extends HttpServlet {
 
 	}
 
+	/*
+	 * DoPost darf hier nicht aufgerufen werden
+	 * 
+	 * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+
+		response.sendError(HttpServletResponse.SC_FORBIDDEN);
 	}
 
+	/*
+	 * Diese Methode gibt zurück, ob eine E-Mail verfügabar ist (es diese Email also noch nicht
+	 * in der DB gibt)
+	 * 
+	 * true = Email ist verfügbar
+	 * 
+	 * false = Email ist bereits vergeben
+	 * 
+	 * */
+	
 	public boolean getEmailAvailability(String email) throws ServletException {
 
 		try (Connection con = ds.getConnection(); // Querry erstellen
@@ -99,6 +120,17 @@ public class CheckAvailabilityServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
+	
+	/*
+	 * Diese Methode gibt zurück, ob ein Username verfügabar ist (es diesen Username also noch nicht
+	 * in der DB gibt)
+	 * 
+	 * true = Username ist verfügbar
+	 * 
+	 * false = Username ist bereits vergeben
+	 * 
+	 * */
+	
 
 	public boolean getUsernameAvailability(String username) throws ServletException {
 

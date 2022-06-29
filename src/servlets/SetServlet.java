@@ -1,3 +1,5 @@
+//Autor: Lukas Edmüller
+
 package servlets;
 
 import java.io.IOException;
@@ -22,8 +24,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//von Lukas Edm�ller
-
 /**
  * Servlet implementation class SatzServlet
  */
@@ -40,15 +40,12 @@ public class SetServlet extends HttpServlet {
      */
     public SetServlet() {
         super();
-        
     }
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//Long id = Long.parseLong(request.getParameter("id"));
 		HttpSession session = request.getSession();
 		ExerciseBean exercise = (ExerciseBean)session.getAttribute("exercise");
 		TrainingBean training = (TrainingBean)session.getAttribute("training");
@@ -56,12 +53,7 @@ public class SetServlet extends HttpServlet {
 		List<SetBean>sets = readSets(exercise.getId(), training.getId());
 		
 		session.setAttribute("sets", sets);
-				
-		//TODO: read muss über id erfolgen
-		//TODO: search muss über exerciseId erfolgen
 	}
-	
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -109,7 +101,6 @@ public class SetServlet extends HttpServlet {
 
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		Long id = Long.parseLong(request.getParameter("id"));
 		delete(id);
 	}
@@ -161,8 +152,6 @@ public class SetServlet extends HttpServlet {
 		return form;
 	}
 
-	
-	
 	private List<SetBean> readSets(Long exerciseId, Long trainingIdInput) throws ServletException{
 		List<SetBean> sets = new ArrayList<SetBean>();
 		
@@ -240,10 +229,8 @@ public class SetServlet extends HttpServlet {
 								
 				pstmt.executeUpdate();
 				
-				
 			} catch (Exception ex) {
 				throw new ServletException(ex.getMessage());
 			}
 	}
-
 }

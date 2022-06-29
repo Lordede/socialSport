@@ -1,4 +1,5 @@
-//Cem Durmus
+
+// Autor: Lukas Edmüller
 function callButtons()
 {
     const favButtons = document.querySelectorAll("button");
@@ -7,6 +8,7 @@ function callButtons()
         dbCall(button.dataset.exercise);
     }));
 }
+
 /**
  * 
  * @param {event} event: getriggertes Event um die Übung auszuwählen zur favorisierung
@@ -21,7 +23,6 @@ function senseEvent(event) {
 }
 
 //Anlage Exercise als Favorit
-//GET Aufruf von Lukas Edmüller
 function dbCall(exerciseName) {
   /*
     Ruft FavoriteExercise ab
