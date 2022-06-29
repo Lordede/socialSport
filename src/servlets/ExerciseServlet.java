@@ -181,6 +181,7 @@ public class ExerciseServlet extends HttpServlet {
 	/**
 	 * {@summary: extraktion aller Übungen, welche in der Datenbank gespeichert
 	 * sind}
+	 * @return ArrayList<ExerciseBean> exercises: Liste an Exercises welche in der Datenbank gespeichert sind
 	 */
 	private ArrayList<ExerciseBean> getListOfExercises() throws ServletException {
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
@@ -299,6 +300,7 @@ public class ExerciseServlet extends HttpServlet {
 	}
 
 	/**
+	 * @param
 	 * @param ArrayList<ExerciseToTrainingBean> arr: summe aller exercises mit
 	 *                                          bestimmter id {@summary: zum
 	 *                                          extrahieren der summe aller Übungen

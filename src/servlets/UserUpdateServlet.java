@@ -47,12 +47,13 @@ public class UserUpdateServlet extends HttpServlet {
 	 * 
 	 * @param request:  beinhaltet übergebene Parameterwerte
 	 * @param response: sendet die Antwort vom Servlet zurück an den Client
-	 *                  {@summary: Bearbeitet Nutzeranfragen einerseits von
-	 *                  accountSetting.jsp & administrationsInterface, diese Methode
-	 *                  dient dabei aktuelle Werte des users an den Server
-	 *                  zurückzugeben, oder auch den Benutzer zu löschen
-	 *                  (HTTP-Methode DELETE hat denselben Funktionsaufruf, kann
-	 *                  aber nicht aus HTML vom Servlet angesprochen werden)}
+	 *                  
+	 {@summary: Bearbeitet Nutzeranfragen einerseits von
+	 *          accountSetting.jsp & administrationsInterface, diese Methode
+	 *          dient dabei aktuelle Werte des users an den Server
+	 *          zurückzugeben, oder auch den Benutzer zu löschen
+	 *          (HTTP-Methode DELETE hat denselben Funktionsaufruf, kann
+	 *          aber nicht aus HTML vom Servlet angesprochen werden)}
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -88,9 +89,9 @@ public class UserUpdateServlet extends HttpServlet {
 	 * 
 	 * @param request:  beinhaltet übergebene Parameterwerte
 	 * @param response: sendet die Antwort vom Servlet zurück an den Client
-	 *                  {@summary: Bearbeitet Nutzeranfragen von accountSetting.jsp,
-	 *                  welche durch den Nutzer in den Forms gestellt werden können
-	 *                  und dem zweck dienen die Nutzerdaten zu bearbeiten}
+	 *{@summary: Bearbeitet Nutzeranfragen von accountSetting.jsp,
+	 *           welche durch den Nutzer in den Forms gestellt werden können
+	 *           und dem Zweck dienen die Nutzerdaten zu bearbeiten}
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -146,9 +147,9 @@ public class UserUpdateServlet extends HttpServlet {
 	 * 
 	 * @param request:  beinhaltet übergebene Parameterwerte
 	 * @param response: sendet die Antwort vom Servlet zurück an den Client
-	 *                  {@summary: Bearbeitet Nutzeranfragen von
-	 *                  administrationsInteface.jsp, welche durch einen Admin einen
-	 *                  Benutzer löschen kann.}
+	 * {@summary: Bearbeitet Nutzeranfragen von
+	 *            administrationsInteface.jsp, welche durch einen Admin einen
+	 *            Benutzer löschen kann.}
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -166,8 +167,9 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @param user:  um extrahierte id aus dem Session-Scope zu verwenden welche den
 	 *               expliziten User anspricht
 	 * @param eMail: aus dem Request-Scope übergebene Parameter zur Aktualisierung
-	 *               in der Datenbank {@summary: Änderung der E-mail durch den
-	 *               Nutzer}
+	 *               in der Datenbank 
+	 *               
+	 *{@summary: Änderung der E-mail durch den Nutzer}
 	 */
 	public void updateEmail(UserBean user, String eMail) throws ServletException {
 		try (Connection con = ds.getConnection();
@@ -187,8 +189,8 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @param user:    um extrahierte id aus dem Session-Scope zu verwenden welche
 	 *                 den expliziten User anspricht
 	 * @param newName: aus dem Request-Scope übergebene Parameter zur Aktualisierung
-	 *                 in der Datenbank {@summary: Änderung des Benutuzernamens
-	 *                 durch den Nutzer}
+	 *                 in der Datenbank 
+	 *{@summary: Änderung des Benutuzernamens durch den Nutzer}
 	 */
 	public void updateUsername(UserBean user, String newName) throws ServletException {
 		try (Connection con = ds.getConnection();
@@ -204,7 +206,8 @@ public class UserUpdateServlet extends HttpServlet {
 
 	/**
 	 * @param id: extrahierte id aus dem Request-Scope welche den expliziten User
-	 *            anspricht {@summary: Änderung der Nutzer-Status durch den Admin}
+	 *            anspricht 
+	 *{@summary: Änderung der Nutzer-Status durch den Admin}
 	 */
 	public void setAdmin(Long id) throws ServletException {
 		try (Connection con = ds.getConnection();
@@ -222,8 +225,8 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @param user:      um extrahierte id aus dem Session-Scope zu verwenden welche
 	 *                   den expliziten User anspricht
 	 * @param firstName: aus dem Request-Scope übergebene Parameter zur
-	 *                   Aktualisierung in der Datenbank {@summary: Änderung des
-	 *                   Vornamen durch den Nutzer}
+	 *                   Aktualisierung in der Datenbank 
+	 *{@summary: Änderung des Vornamen durch den Nutzer}
 	 */
 	private void updateFirstName(UserBean user, String firstName) throws ServletException {
 		try (Connection con = ds.getConnection();
@@ -241,8 +244,8 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @param user:     um extrahierte id aus dem Session-Scope zu verwenden welche
 	 *                  den expliziten User anspricht
 	 * @param lastName: aus dem Request-Scope übergebene Parameter zur
-	 *                  Aktualisierung in der Datenbank {@summary: Änderung des
-	 *                  Nachnamen durch den Nutzer}
+	 *                  Aktualisierung in der Datenbank 
+	 *{@summary: Änderung des Nachnamen durch den Nutzer}
 	 */
 	private void updateLastName(UserBean user, String lastName) throws ServletException {
 		try (Connection con = ds.getConnection();
@@ -260,9 +263,9 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @param user:      um extrahierte id aus dem Session-Scope zu verwenden welche
 	 *                   den expliziten User anspricht
 	 * @param firstName: aus dem Request-Scope übergebene Parameter zur
-	 *                   Aktualisierung in der Datenbank {@summary: Änderung des
-	 *                   Passwortes mit zusätzlichem Hashen des neuen Passwortes
-	 *                   durch den Nutzer}
+	 *                   Aktualisierung in der Datenbank 
+	 *{@summary: Änderung des Passwortes mit zusätzlichem Hashen des neuen Passwortes
+	 *           durch den Nutzer}
 	 */
 	private void updatePassword(UserBean user, String password) throws ServletException {
 		try (Connection conDs = ds.getConnection();
@@ -279,7 +282,8 @@ public class UserUpdateServlet extends HttpServlet {
 
 	/**
 	 * @param id: extrahierte id aus dem Request-Scope welche den expliziten User
-	 *            anspricht {@summary: Löschen des Nutzer mit allen dazu verbundenen
+	 *            anspricht 
+	 * {@summary: Löschen des Nutzer mit allen dazu verbundenen
 	 *            Daten aus der Datenbank, durch den Nutzer selbst oder den Admin}
 	 */
 	private void deleteUser(Long id) throws ServletException {
@@ -346,6 +350,7 @@ public class UserUpdateServlet extends HttpServlet {
 	}
 
 	/*
+	 * @return ArrayList<UserBean> userList: gibt alle Nutzer aus der Datenbank als Liste zurück
 	 * {@summary: Extraktion aller Nutzer zur weiteren Verarbeitung}
 	 */
 	private ArrayList<UserBean> listOfAllUsers() throws ServletException {
@@ -371,8 +376,10 @@ public class UserUpdateServlet extends HttpServlet {
 	}
 
 	/**
-	 * @param username: extrahierter username aus dem Request-Scope {@summary: suche
-	 *                  eines spezifischen users aus der Datenbank}
+	 * @param username: extrahierter username aus dem Request-Scope 
+	 * {@summary: suche eines spezifischen users aus der Datenbank}
+	 * @return ArrayList<UserBean> users: gibt alle Nutzer aus der Datenbank als Liste zurück
+	 * 									  welche mit den Suchkriterien übereinstimmen.
 	 */
 	private ArrayList<UserBean> search(String username) throws ServletException {
 		username = (username == null || username == "") ? "%" : "%" + username + "%";
@@ -404,6 +411,7 @@ public class UserUpdateServlet extends HttpServlet {
 	 * @param ArrayList<UserBean> arr: summe aller user {@summary: verwandelung der
 	 *                            Nutzerdaten in einen String um ihn dann als
 	 *                            Antwort an den Client weiterzuleiten}
+	 * @return jsonString: gibt eine Zeichenkette zurück, welcher einem Json Array mit Objekten entspricht
 	 */
 	private String convertListToJson(ArrayList<UserBean> arr) {
 		StringBuilder jsonString = new StringBuilder();
