@@ -1,3 +1,5 @@
+//Autor: Lukas Edmüller
+
 package servlets;
 
 import java.io.IOException;
@@ -23,7 +25,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-
 /**
  * Servlet implementation class TrainingServlet
  */
@@ -40,31 +41,24 @@ public class TrainingServlet extends HttpServlet {
      */
     public TrainingServlet() {
         super();
-        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-    	//Long id = Long.parseLong(request.getParameter("id"));
-    	HttpSession session = request.getSession();
+	   	HttpSession session = request.getSession();
     	UserBean user = (UserBean) session.getAttribute("userData");
     	//Cem Durmus
     	Enumeration<String> params = request.getParameterNames();
 		while(params.hasMoreElements()) 
 		{
 			String paramNames = params.nextElement();
-//			System.out.println(paramNames);
 			switch(paramNames) 
 			{
 			case "loadTrainings":
 				ArrayList<TrainingBean> allTrainings = listAllTrainings(user.getId());
 				String json = convertListToJson(allTrainings);
-//				System.out.println(json);	
 				response.getWriter().write(json);
 				break;
 			case "exerciseInputField":
@@ -77,31 +71,19 @@ public class TrainingServlet extends HttpServlet {
 				if(session.getAttribute("training") != null) 
 				{
 					session.removeAttribute("training");
-//					System.out.println("mehr als ein attriubt");
-					
 				}
 				session.setAttribute("training", training);
-				
-
 				
 				response.getWriter().write("ok");
 //				Ende Cem Durmus
 			}
 		}
-		
-		//TrainingBean training = read(userBean.getId());
-	
-		//TODO: read muss �ber TrainingId erfolgen
-		//TODO: search muss �ber trainingsplanId erfolgen
-
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		HttpSession session = request.getSession();
 		String name = request.getParameter("name");
 		double points = 0.00;
@@ -115,26 +97,24 @@ public class TrainingServlet extends HttpServlet {
 		training.setUserId(userId);
 		training.setCreationDate(date);
 		
-//		TrainingBean training = create(name, points, userid, date);
 		create(training);
+		
 		session.setAttribute("training", training);
 		System.out.println(training.getId().toString());
 		response.getWriter().append(training.getId().toString());
-		//response.sendRedirect("html/training.jsp");
-		//doGet(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		TrainingBean training = new TrainingBean();
 		training.setId(Long.parseLong(request.getParameter("id")));
 		training.setName(request.getParameter("name"));
 		training.setPoints(Double.parseDouble(request.getParameter("points")));
 				
 		update(training);
+		
 		request.setAttribute("training", training);
 		doGet(request, response);
 	}
@@ -143,7 +123,6 @@ public class TrainingServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		Long id = Long.parseLong(request.getParameter("id")) ;
 		delete(id);
 	}
@@ -187,7 +166,6 @@ public class TrainingServlet extends HttpServlet {
 					form.setPoints(rs.getDouble("points"));
 					form.setUserId(rs.getLong("userId"));
 					form.setCreationDate(rs.getDate("creationDate"));
-					
 				}
 			}
 		} catch (Exception ex) {
@@ -202,7 +180,6 @@ public class TrainingServlet extends HttpServlet {
 		try(Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trainings WHERE name LIKE ? AND userId = ?")) 
 		{
-			
 			pstmt.setString(1, input);
 			pstmt.setLong(2, userId);
 			try(ResultSet rs = pstmt.executeQuery()){
@@ -218,11 +195,9 @@ public class TrainingServlet extends HttpServlet {
 					trainings.add(training);
 				}
 			}
-			
 		}catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
-		
 		return trainings;
 	}
 	
@@ -254,7 +229,6 @@ public class TrainingServlet extends HttpServlet {
 		}catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
-		
 		return trainings;
 	}
 	

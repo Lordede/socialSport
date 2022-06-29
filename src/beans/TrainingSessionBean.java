@@ -1,3 +1,4 @@
+// Autor: Lukas Edmüller
 package beans;
 
 import java.io.Serializable;
@@ -29,7 +30,4 @@ public class TrainingSessionBean implements Serializable
 	public void setTrainingId(Long trainingId) {
 		this.trainingId = trainingId;
 	}
-
-	
-	
 }

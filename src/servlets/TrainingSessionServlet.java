@@ -1,3 +1,4 @@
+//Autor: Lukas Edmüller
 package servlets;
 
 import java.io.IOException;
@@ -55,7 +56,6 @@ public class TrainingSessionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		TrainingSessionBean trainingSession = new TrainingSessionBean();
 		TrainingBean training =(TrainingBean) session.getAttribute("training");
@@ -63,20 +63,15 @@ public class TrainingSessionServlet extends HttpServlet {
 		trainingSession.setTrainingId(Long.parseLong(request.getParameter("trainingId")));
 		
 		create(trainingSession);
-//		System.out.println("TS Id: " + trainingSession.getId());
 		
 		if(session.getAttribute("trainingSession") != null) 
 		{
 			session.removeAttribute("trainingSession");
-//			System.out.println("ts war vorhanden");
 			
 		}
 		session.setAttribute("trainingSession", trainingSession);
 		
 		response.getWriter().write(trainingSession.getId().toString());
-		
-		
-		
 		
 		//doGet(request, response);
 	}
@@ -122,6 +117,4 @@ public class TrainingSessionServlet extends HttpServlet {
 		}
 		return form;
 	}
-	
-
 }

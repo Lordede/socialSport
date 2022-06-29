@@ -1,5 +1,9 @@
 
-//Lukas Edmüller
+// Autor: Lukas Edmüller
+
+// Funktion wird bei training.jsp klick auf Bearbeitungsansichts- Trainingsansichtsbutton ausgeführt.
+// Bearbeitungsansicht: Löschung und Hinzufügen von Übungen möglich
+// Trainingsansicht: Erfassung von Sets möglich
 function toogleView()
 {
     var settingButtons = document.getElementById("toggleExerciseAddition");
@@ -47,6 +51,8 @@ function toogleView()
     init();
 }
 
+// Bei Auswahl einer Übung in Bearbeitungsansicht wird diese dem Traininig in der DB mittels exercisesToTraining-Table hinzugefügt.
+// Diese wird anschließend bei der Übersicht der Übungen angezeigt
 function onExerciseClick(exercise)
 {
 	var check = document.getElementsByName(exercise.name)
@@ -74,6 +80,7 @@ function onExerciseClick(exercise)
     // searchItems.style.display = "none";
 }
 
+// Laden der zum Training hinterlegten Übungen zur Ansicht als json
 function loadSavedExercises(){
     var headerElement = document.getElementsByTagName("header");
     var trainingId = headerElement[0].id;
@@ -89,6 +96,7 @@ function loadSavedExercises(){
 
 }
 
+//Filterung der Übungen aus übergebenen Json
 function loadExercises(json)
 {
     let parseString = JSON.parse(json);
@@ -97,6 +105,7 @@ function loadExercises(json)
     });
 }
 
+//Löschung der Übung aus dem ausgewählten Training -> Löschung aus exerciseToTraining-Table / Nicht die Übung selbst!
 function removeExercise(){
     let exerciseId = this.parentNode.getAttribute("id"); 
     let header = document.getElementsByTagName("header");
@@ -105,10 +114,6 @@ function removeExercise(){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("DELETE", "../ExerciseToTrainingServlet?trainingId=" + trainingId + "&exerciseId=" + exerciseId, true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xmlhttp.onload = function ()
-    // {
-        
-    // }
     xmlhttp.send();
     let exercises = document.getElementsByClassName("exercise elements");
         for(let i = 0; i < exercises.length; i++){
