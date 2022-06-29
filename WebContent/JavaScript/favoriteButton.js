@@ -1,4 +1,4 @@
-//Cem Durmus
+// Autor: Lukas Edmüller
 
 /**
  * 
@@ -14,7 +14,6 @@ function senseEvent(event) {
 }
 
 //Anlage Exercise als Favorit
-//GET Aufruf von Lukas Edmüller
 function dbCall(exerciseName) {
   /*
     Ruft FavoriteExercise ab
