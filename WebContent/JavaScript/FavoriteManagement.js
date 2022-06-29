@@ -37,7 +37,7 @@ function extractFavorites(jsonString)
         const result = searchResults.content.cloneNode(true).children[0];
         toggleContainer.appendChild(result);
         const header = result.querySelector('.searchExerciseName');
-        header.addEventListener("click", () => onExerciseClick(exercise))
+        header.addEventListener("click", function(){onExerciseClick(exercise),header.remove()} )
         header.textContent = exercise.name; //set.rep
         console.log(exercise);
    });
