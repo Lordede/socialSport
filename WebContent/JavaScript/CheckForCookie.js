@@ -1,4 +1,6 @@
-// Hubertus Seitz
+/**
+ * @author Hubertus Seitz
+ **/
 
 function checkForCookie (){
 

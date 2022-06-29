@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
 import utilities.HashPassword;
 
 /**
- * @author Cem Hubertus Lukas
+ * @author Hubertus Seitz
  */
 @WebServlet("/registrationServlet")
 @SessionScoped
@@ -36,7 +36,7 @@ public class RegistrationServlet extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) // doGet ist hier verboten
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) // doGet darf hier nicht aufgerufen werden
 			throws ServletException, IOException {
 
 		response.sendError(HttpServletResponse.SC_FORBIDDEN);
@@ -64,16 +64,13 @@ public class RegistrationServlet extends HttpServlet {
 		//https://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
 		final java.sql.Date creationDate = new java.sql.Date(new java.util.Date().getTime());
 		form.setCreationDate(creationDate);
-		//final String password = request.getParameter("password");
-		//form.setPassword(password);
 
 		final String password = HashPassword.hashPassword(request.getParameter("password")); // Passwort als hash abspeichern
 		boolean errorFound = false;
 
 		session.setAttribute("form", form); // Bean in Session abspeichern
-											// TODO: Macht man das tats�chlich so oder besser in der Bean mit @SessionScoped?
 
-		// �berpr�fung ob eines der �bergebenen Paramter entweder NULL oder Leer ist.
+		// Überprüfung ob eines der übergebenen Paramter entweder NULL oder Leer ist.
 
 		while (formInputs.hasMoreElements()) {
 			String inputName = (String) formInputs.nextElement();
@@ -88,8 +85,8 @@ public class RegistrationServlet extends HttpServlet {
 		{
 
 			createNewUser(eMail, userName, firstName, lastName, password, creationDate); 	// User in Datenbank schreiben
-			form.setId(getUserId(form.getUsername()));						// generierte id aus Datenbank auslesen
-			response.sendRedirect("html/registrationSuccsess.jsp");			// Redirect richtig, da auf DB schreibend zugegriffen wird.
+			form.setId(getUserId(form.getUsername()));										// generierte id aus Datenbank auslesen (damals war uns das mit den generated Keys noch nicht bewusst)   
+			response.sendRedirect("html/registrationSuccsess.jsp");							// Redirect, da auf DB schreibend zugegriffen wird.
 			
 		}
 
@@ -97,22 +94,19 @@ public class RegistrationServlet extends HttpServlet {
 
 
 
-	/**
-	 * @author Hubertus Seitz
-	 */
+
 	public Long getUserId(String username) throws ServletException { // Funktion zum auslesen der id eines Users
 
-		try (Connection con = ds.getConnection(); // Querry erstellen
+		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement("SELECT id FROM users WHERE username = ?")) {
 
 			pstmt.setString(1, username); // id anhand des username holen
 			
 			Long id = 0L;
 			
-			try (ResultSet rs = pstmt.executeQuery()) { // Result auslesen
-				if (rs.next()) { // Anscheinend ganz wichtig
-				id = (rs.getLong("id")); // id in Bean schreiben
-				System.out.println(id);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) { 
+				id = (rs.getLong("id"));
 				}
 				return id;
 			}
@@ -122,10 +116,6 @@ public class RegistrationServlet extends HttpServlet {
 			throw new ServletException(ex.getMessage());
 		}
 	}
-	
-	/**
-	 * @author Hubertus Seitz
-	 */
 	
 	public void createNewUser(String eMail, String userName, String firstName, String lastName, String password, Date creationDate ) throws ServletException { // Funktion zum anlegen eines Users
 		try (Connection con = ds.getConnection();
@@ -143,11 +133,7 @@ public class RegistrationServlet extends HttpServlet {
 			
 
 		} catch (Exception ex) {
-
 			throw new ServletException(ex.getMessage());
-//			if (ex.getMessage().contains("Duplicate entry")) { 	// TODO: Fehlerausgeben bei nicht verf�gbarer E-Mail oder Username
-//																// W�re es m�glich bei der Eingabe schon die Verf�gbarkeit zu testen?
-//			}
 		}
 		
 		

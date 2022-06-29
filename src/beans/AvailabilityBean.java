@@ -1,4 +1,6 @@
-//@author Hubertus Seitz
+/*
+ * @author Hubertus Seitz
+ */
 
 package beans;
 

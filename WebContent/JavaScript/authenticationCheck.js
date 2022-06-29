@@ -1,13 +1,15 @@
-//Hubertus Seitz
-
+/**
+ * @author Hubertus Seitz
+ **/
 "use strict"
 
 
 
-//Vermutlich so in Produktivumgebungen nicht machbar da Clientseitige Auswertung
+//Vermutlich so in Produktivumgebungen nicht machbar, da Clientseitige Auswertung
+//Anderesrseits kann eigentlich nicht viel gemacht werden ohne das der Server die Userdaten in den SessionScope geschrieben hat-
 function authenticationCheck(userData) { 
 
-	if (userData === "") { // Kann man das so auswerten?
+	if (userData === "") {
 
 		alert("Bitte einloggen!");
 		window.location.replace("login.html");
@@ -18,6 +20,8 @@ function authenticationCheck(userData) {
 	}
 }
 
+
+// Diese Funktion sendet einen AJAX-Aufruf an das LoginServlet mit der HTTP Delete methode. Dadruch wird der Nutzer ausgeloggt.
 function logout() {
 
 	var xmlhttp = new XMLHttpRequest;
