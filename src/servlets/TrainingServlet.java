@@ -49,7 +49,7 @@ public class TrainingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   	HttpSession session = request.getSession();
     	UserBean user = (UserBean) session.getAttribute("userData");
-    	//Cem Durmus
+    	
     	Enumeration<String> params = request.getParameterNames();
 		while(params.hasMoreElements()) 
 		{
@@ -75,7 +75,7 @@ public class TrainingServlet extends HttpServlet {
 				session.setAttribute("training", training);
 				
 				response.getWriter().write("ok");
-//				Ende Cem Durmus
+
 			}
 		}
 	}
