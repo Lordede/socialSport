@@ -69,43 +69,4 @@
     justify-content:center;
     align-items:center;
 }
-.fav-button:active i {
-    
-    animation: item 1s ease-in forwards;
-}
-.fav-button i{
-    position:absolute;
-    left:70px;
-}
-@keyframes item {
-    0% {
-        
-        top: 20%;
-        color:#000;
-        
-    }
 
-    25% {
-        top: 60%;
-        color:#000;
-        
-    }
-
-    50% {
-        
-        top: 100%;
-        
-     
-    }
-
-    75% {
-        
-        top: 60%;
-    
-    
-    }
-
-    0% {
-        top:0%;
-    }
-}
