@@ -22,6 +22,9 @@
 			alt="Bild der Übung" width="180" height="180">
 	</div>
 
+	<form>
+		<button formaction="administrationInterface.jsp">Zurück zur Adminverwaltung</button>
+	</form>
 </body>
 </html>
 

@@ -55,6 +55,7 @@ function onExerciseClick(exercise) {
   var check = document.getElementsByName(exercise.name);
   if (check.length === 0) {
     addExercise(exercise, false); // HTML DOM Manipulation
+
     var headerElement = document.getElementsByTagName("header");
     var trainingId = headerElement[0].id;
     console.log(trainingId);
@@ -74,15 +75,6 @@ function onExerciseClick(exercise) {
     );
     xmlhttpExerciseToTraining.send();
   }
-  // var xmlhttp = new XMLHttpRequest();
-  // xmlhttp.open("GET", "../ExerciseServlet?selectedExercise="+exercise.id, true);
-  // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  // xmlhttp.send();
-
-  // var insertableSearchbar = document.getElementById("searchBar");
-  // insertableSearchbar.setAttribute("type", "hidden");
-  // var searchItems = document.getElementById("searchResultContainer");
-  // searchItems.style.display = "none";
 }
 
 // Laden der zum Training hinterlegten Übungen zur Ansicht als json

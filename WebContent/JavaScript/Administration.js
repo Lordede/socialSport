@@ -189,32 +189,3 @@ function listAllExercises(jsonString) {
         //exercise.image = exercise.image;
     });
 }
-/**
- * Zur erstellung von neuen Exercises können hier Parameter ausgewählt werden, welche dann in die Datenbank übernommen werden.
- * Dabei wir die FormData methode verwendet, welche in der lage ist verschiedene Input-Typen an den Server zu übermitteln.
- */
-function createNewExercise() {
-
-    let inputImage = document.querySelector("#image");
-    let buttonSubmission = document.querySelector("#submitExercise");
-    let inputName = document.querySelector(".nameExercise");
-    let idListOfRadioBox = ['c1', 'c2', 'c3', 'c4', 'c5'];
-    idListOfRadioBox.forEach(listItem => {
-        let radioBox = document.getElementById(listItem);
-        if (!inputName) {
-            alert("keine gültige Eingaben");
-        }
-
-        if (!radioBox.value) {
-            let formData = new FormData();
-            formData.append("exerciseName=", inputName.value);
-            formData.append("muscleGroup", radioBox.value);
-            formData.append("image", inputImage.files[0]);
-            fetch("ExerciseServlet",
-            {
-                method: "POST",
-                body: formData
-            });
-        }
-    });
-}
