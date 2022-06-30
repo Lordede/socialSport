@@ -86,19 +86,16 @@ function hideSearch() {
     let button = document.getElementById("sendTraining");
     let hidden = label.getAttribute("hidden");
     var inputField = document.getElementById("nameOfTrainingInput");
+    let createTraining = document.getElementById("addNewTraining");
     inputField.setAttribute("type", "text");
     if (hidden) {
         label.removeAttribute("hidden");
         inputField.removeAttribute("hidden");
         button.removeAttribute("hidden");
-    }
-    else {
-        label.setAttribute("hidden", "hidden");
-        inputField.setAttribute("hidden", "hidden");
-        button.setAttribute("hidden", "hidden");
+        createTraining.setAttribute("hidden", "hidden");
     }
     button.addEventListener("click", () => sendTrainingDB(inputField));
-
+    
 }
 /**
  * in dieser Funktion wird ein AJAX aufruf gestartet, wo im voraus geprüft wird ob es 
@@ -124,9 +121,6 @@ function sendTrainingDB(inputField) {
                 window.location = "training.jsp";
             }
             xmlhttpTrainingSessionPost.send();
-
-            xmlhttp.send();
-            //window.location = "training.jsp";
         }
         xmlhttp.send("name=" + input.value);
 

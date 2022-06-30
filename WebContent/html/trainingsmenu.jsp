@@ -33,7 +33,7 @@ pageEncoding="UTF-8"%>
             <button id="addNewTraining">Training hinzufügen</button>
             <br />
             <label id="nameOfTrainingLabel" hidden="hidden"
-              >Name des Traings</label
+              >Name des Trainigs</label
             >
             <input id="nameOfTrainingInput" type="hidden" />
             <button id="sendTraining" hidden="hidden">
