@@ -47,7 +47,11 @@ function createUserElements(jsonString) {
         firstname.textContent = user.vorname;
         lastname.textContent = user.nachname;
         email.textContent = user.eMail;
-        templateRow.addEventListener("click", () => selectUser(user));
+        templateRow.addEventListener("click", function()
+        {
+            selectUser(user);
+            templateRow.remove();
+        });
     });
 }
 
