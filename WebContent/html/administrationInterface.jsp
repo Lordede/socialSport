@@ -56,12 +56,12 @@
                 accept-charset="utf-8" enctype="multipart/form-data">
                 <div class="nameExercise">
                     <p>Name der Übung:</p>
-                    <input type="text" name="exerciseName" size="30" maxlength="50"><br>
+                    <input type="text" name="exerciseName" size="30" maxlength="50" required><br>
                 </div>
                 <div>
 				<fieldset>
 					<legend>Muskelgruppe wählen: </legend>
-					<input type="radio" name="muscleGroup" value="Beinmuskulatur" id="c1"> 
+					<input type="radio" name="muscleGroup" value="Beinmuskulatur" id="c1" required> 
                     <label for="c1">Beinmuskulatur</label> 
                     <input type="radio" name="muscleGroup" value="Rückenmuskulatur" id="c2">
                     <label for="c2">Rückenmuskulatur</label> 
