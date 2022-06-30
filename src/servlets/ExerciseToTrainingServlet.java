@@ -51,8 +51,6 @@ public class ExerciseToTrainingServlet extends HttpServlet {
 		ArrayList<ExerciseBean> exercises = exerciseServlet.getExercisesById(exercisesToTraining, this.ds);
 		String jsonExercises = convertListToJson(exercises);
 		response.getWriter().write(jsonExercises);
-		System.out.println(jsonExercises);
-		
 		
 	}
 	
