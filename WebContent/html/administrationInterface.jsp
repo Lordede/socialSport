@@ -93,13 +93,10 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", init);
-        window.onload = function(){
+              
+        function init() {
             readExercises();
             readUsers();
-        };
-        
-        function init() {
-            
             
         }
         
