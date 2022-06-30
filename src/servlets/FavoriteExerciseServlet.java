@@ -1,5 +1,7 @@
 
-//Cem Durmus
+/**
+ * @author Cem Durmus
+ * */
 package servlets;
 
 import java.io.IOException;
@@ -37,16 +39,16 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	 */
 	public FavoriteExerciseServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * Servlet  durch Servlet Mapping im Webcontainer angesprochen
-	 * @param request: beinhaltet übergebene Parameterwerte
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
 	 * @param response: sendet die Antwort vom Servlet zurück an den Client
-	 * {@summary: angesprochen aus der dashboard.jsp, zum überprüfen ob Exercise 
-	 * schon ausgewählt wurde}
-	 * */
+	 *                  {@summary: angesprochen aus der dashboard.jsp, zum
+	 *                  überprüfen ob Exercise schon ausgewählt wurde}
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -66,11 +68,13 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * Servlet  durch Servlet Mapping im Webcontainer angesprochen
-	 * @param request: beinhaltet übergebene Parameterwerte
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
 	 * @param response: sendet die Antwort vom Servlet zurück an den Client
-	 * {@summary: angesprochen aus der dashboard.jsp, hinzufügen von Lieblingsübungen}
-	 * */
+	 *                  {@summary: angesprochen aus der dashboard.jsp, hinzufügen
+	 *                  von Lieblingsübungen}
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name = request.getParameter("name");
@@ -80,27 +84,29 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * Servlet  durch Servlet Mapping im Webcontainer angesprochen
-	 * @param request: beinhaltet übergebene Parameterwerte
+	 * Servlet durch Servlet Mapping im Webcontainer angesprochen
+	 * 
+	 * @param request:  beinhaltet übergebene Parameterwerte
 	 * @param response: sendet die Antwort vom Servlet zurück an den Client
-	 * {@summary: angesprochen aus der accountSetting.jsp, zum entfernen der Lieblingsexercises
-	 * aus der Datenbank}
-	 * */
+	 *                  {@summary: angesprochen aus der accountSetting.jsp, zum
+	 *                  entfernen der Lieblingsexercises aus der Datenbank}
+	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
-		delFavoriteExercise(name);
+		UserBean user = (UserBean) request.getSession().getAttribute("userData");
+		delFavoriteExercise(name, user.getId());
 		response.getWriter().write("ok");
 	}
 
 	/**
-	 * Servlet  durch Servlet Mapping im Webcontainer angesprochen
-	 * @param userId: zum Ansprechen eines expliziten Users zur Überprüfung ob Exercise schon favorisiert
-	 * @param response: sendet die Antwort vom Servlet zurück an den Client
-	 * {@summary: angesprochen aus der dashboard.jsp, zum überprüfen ob Exercise 
-	 * schon ausgewählt wurde}
-	 * */
+	 * 
+	 * @param userId:   zum Ansprechen eines expliziten Users zur Überprüfung ob
+	 *                  Exercise schon favorisiert
+	 * @param exerciseName: enthält die den Input für den Namen der Exercise
+	 *                  {@summary: angesprochen aus der dashboard.jsp, zum
+	 *                  überprüfen ob Exercise schon ausgewählt wurde}
+	 */
 	private boolean checkExistingExercise(Long userId, String exerciseName) throws ServletException {
 
 		try (Connection con = ds.getConnection();
@@ -123,9 +129,10 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * @param id: extrahierte id aus dem Session-Scope, welche den expliziten User anspricht
-	 * {@summary: extraktion aller Liebiningsübungen eines spezifischen Users}
-	 * */
+	 * @param id: extrahierte id aus dem Session-Scope, welche den expliziten User
+	 *            anspricht {@summary: extraktion aller Liebiningsübungen eines
+	 *            spezifischen Users}
+	 */
 	private ArrayList<ExerciseBean> getFavoriteExercises(Long id) throws ServletException {
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
 
@@ -160,9 +167,12 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * @param id: extrahierte id aus dem Session-Scope welche den expliziten User anspricht
-	 * {@summary: setzen einer Liebiningsübungen in der Datenbank}
-	 * */
+	 * @param name: extrahierter name aus dem Request-Scope, welcher eine explizite
+	 *              Übung anspricht
+	 * @param id:   extrahierte id aus dem Session-Scope, welche den expliziten User
+	 *              anspricht {@summary: setzen einer Liebiningsübungen in der
+	 *              Datenbank}
+	 */
 	private void setFavoriteExercise(String name, Long id) throws ServletException {
 		ExerciseBean exercise = new ExerciseBean();
 		System.out.print("istDrin1");
@@ -179,14 +189,19 @@ public class FavoriteExerciseServlet extends HttpServlet {
 	}
 
 	/**
-	 * @param id: extrahierte id aus dem Session-Scope welche den expliziten User anspricht
-	 * {@summary: entfernen einer Liebiningsübungen in der Datenbank}
-	 * */
-	private void delFavoriteExercise(String name) throws ServletException {
+	 * @param name: extrahierte name aus dem Request-Scope, welche die explizite
+	 *              Übung anspricht
+	 * @param id:   extrahierte id des Users aus dem Session-Scope, zur
+	 *              identifikation der Lieblingsübungen eines spezifischen Users
+	 *              {@summary: entfernen einer Liebiningsübungen durch den namen der
+	 *              Übung angesprochen in der Datenbank}
+	 */
+	private void delFavoriteExercise(String name, Long id) throws ServletException {
 		try (Connection con = ds.getConnection();
 				PreparedStatement favCon = con.prepareStatement(
-						"DELETE FROM favoriteexercises WHERE exerciseId = (SELECT id From exercises WHERE name = ?)")) {
+						"DELETE FROM favoriteexercises WHERE exerciseId = (SELECT id From exercises WHERE name = ?) AND userId=?")) {
 			favCon.setString(1, name);
+			favCon.setLong(2, id);
 			favCon.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -196,10 +211,11 @@ public class FavoriteExerciseServlet extends HttpServlet {
 
 	/**
 	 * @param ArrayList<ExerciseBean> arr: summe aller Übungen
-	 * {@summary: verwandelung der Nutzerdaten in einen String um ihn dann als Antwort an den 
-	 * Client weiterzuleiten}
+	 *                                {@summary: verwandelung der Nutzerdaten in
+	 *                                einen String um ihn dann als Antwort an den
+	 *                                Client weiterzuleiten}
 	 * @return jsonString: Rückgabe für den Client
-	 * */
+	 */
 	private String convertListToJson(ArrayList<ExerciseBean> arr) {
 		StringBuilder jsonString = new StringBuilder();
 		ArrayList<ExerciseBean> exercises = arr;

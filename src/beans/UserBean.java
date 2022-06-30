@@ -3,8 +3,14 @@ package beans;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+
+import jakarta.servlet.annotation.WebServlet;
+
 import java.awt.Image;
-//Erstellt von Cem Durmus
+/**
+ * @author Cem Durmus
+ * */
+
 public class UserBean implements Serializable 
 {
 	private static final long serialVersionID = 1L;

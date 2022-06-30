@@ -63,8 +63,6 @@ function selectTraining(training) {
         // window.location = "training.jsp";
     }
     xmlhttp.send();
-
-    //Edmüller Lukas
     var responsePost;
     var xmlhttpTrainingSessionPost = new XMLHttpRequest();
     xmlhttpTrainingSessionPost.open("POST", "../TrainingSessionServlet?trainingId=" + training.id, true);
@@ -74,7 +72,6 @@ function selectTraining(training) {
         window.location = "training.jsp";
     }
     xmlhttpTrainingSessionPost.send();
-    //Ende Edmüller Lukas
     xmlhttp.send();
 
 }
@@ -119,8 +116,6 @@ function sendTrainingDB(inputField) {
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function () {
             var trainingId = xmlhttp.responseText;
-
-            //Edmüller Lukas
             var xmlhttpTrainingSessionPost = new XMLHttpRequest();
             xmlhttpTrainingSessionPost.open("POST", "../TrainingSessionServlet?trainingId=" + trainingId, true);
             xmlhttpTrainingSessionPost.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

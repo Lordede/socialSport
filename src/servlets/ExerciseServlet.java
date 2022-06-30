@@ -24,10 +24,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
-//Cem Durmus
 /**
- * Servlet implementation class ExerciseServlet
- */
+ * @author Cem Durmus
+ * */
+
 @WebServlet("/ExerciseServlet")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 10
 		* 10, location = "/tmp", fileSizeThreshold = 1024 * 1024)
@@ -181,6 +181,7 @@ public class ExerciseServlet extends HttpServlet {
 	/**
 	 * {@summary: extraktion aller Übungen, welche in der Datenbank gespeichert
 	 * sind}
+	 * @return ArrayList<ExerciseBean> exercises: Liste an Exercises welche in der Datenbank gespeichert sind
 	 */
 	private ArrayList<ExerciseBean> getListOfExercises() throws ServletException {
 		ArrayList<ExerciseBean> exercises = new ArrayList<>();
@@ -299,6 +300,7 @@ public class ExerciseServlet extends HttpServlet {
 	}
 
 	/**
+	 * @param
 	 * @param ArrayList<ExerciseToTrainingBean> arr: summe aller exercises mit
 	 *                                          bestimmter id {@summary: zum
 	 *                                          extrahieren der summe aller Übungen

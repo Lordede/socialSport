@@ -3,7 +3,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-//Erstellt von Cem Durmus
+/**
+ * @author Cem Durmus
+ * */
 public class TrainingBean implements Serializable 
 {
 	private static final long serialVersionID = 1L;

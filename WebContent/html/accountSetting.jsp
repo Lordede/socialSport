@@ -40,7 +40,7 @@
 				method="post" accept-charset="utf-8">
 				<p>Ihr aktueller Username ist:</p>
 				<p>${userData.username}</p>
-				<input type="text" name="changeUsername" size="30" maxlength="35"><br>
+				<input type="text" name="changeUsername" size="30" maxlength="35" minlength="3"><br>
 				<Button type="submit" value="changeUsername">Benutzernamen
 					ändern</Button>
 			</form>
@@ -50,7 +50,7 @@
 				accept-charset="utf-8">
 				<label for="changeFirstName"> Vorname: ${userData.firstName}</label><br>
 				<input type="text" size="30" id="changeFirstName"
-					name="changeFirstName" maxlength="35"><br>
+					name="changeFirstName" maxlength="35" minlength="3"><br>
 				<Button value="changeFirstName" type="submit">Vornamen
 					ändern</Button>
 				<br>
@@ -59,7 +59,7 @@
 				accept-charset="utf-8">
 				<label for="changeLastName">Nachname: ${userData.lastName}</label><br>
 				<input type="text" size="30" id="changeLastName"
-					name="changeLastName" maxlength="35"><br>
+					name="changeLastName" maxlength="35" minlength="3"><br>
 				<Button value="changeLastName" type="submit">Nachnamen
 					ändern</Button>
 			</form>
@@ -69,7 +69,7 @@
 				accept-charset="utf-8">
 				<label for="password">Passwort: </label><br> <input
 					type="password" id="password" name="password" size="30"
-					maxlength="35"><br>
+					maxlength="35" minlength="3"><br>
 				<Button type="submit" name="password" value="password"
 					formaction="../UserUpdateServlet" formmethod="post">
 					Passwort ändern</Button>
@@ -80,7 +80,7 @@
 				accept-charset="utf-8">
 				<label for="changeMail"> E-Mail: ${userData.eMail}</label><br>
 				<input type="email" id="changeMail" name="changeMail" size="30"
-					maxlength="35"><br>
+					maxlength="35" minlength="5"><br>
 				<Button type="submit" value="changeMail">
 					<!-- formaction="../UserUpdateServlet" formmethod="post"> -->
 					E-Mail ändern
@@ -104,13 +104,20 @@
 				</template>
 				<div id="favoritesContainer"></div>
 				<div id="handleExercise">
-					<button id="delExercise" hidden="hidden">Übung aus
-						Favoriten Löschen</Button>
+					<button id="delExercise" hidden="hidden">
+					Ausgewählte	Favoriten Löschen</Button>
+					<button id="abbrechen" hidden="hidden">abbrechen</button>
 					<div id="exerciseContainer"></div>
 				</div>
 				<script>
 					document.addEventListener("DOMContentLoaded",
-							readFavoriteExercises);
+							init);
+							
+						function init()
+						{
+							readFavoriteExercises();
+
+						}
 					// var buttons = document.querySelectorAll("Button");
 					// buttons.forEach(button => button.addEventListener("click", event => {window.location.reload(true)}));
 				</script>
